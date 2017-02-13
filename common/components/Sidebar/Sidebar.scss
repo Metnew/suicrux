@@ -1,0 +1,47 @@
+@import '~scss_vars';
+
+.ui.sidebar {
+    z-index: 5;
+    // overwrite semantic-ui undocumented styles
+    visibility: visible!important;
+    overflow-x: hidden;
+    will-change: transform;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-property: transform;
+    // overwrite semantic-ui undocumented styles
+    &.closed {
+        transform: translate3d($sidebar-size, 0, 0)!important;
+    }
+    &.open {
+        z-index: 11111;
+        transform: translate3d(0, 0, 0)!important;
+    }
+    @include respond-to('sm', 'xs') {
+        z-index: 10000;
+        transform: translate3d(-#{$sidebar-size}, 0, 0)!important;
+    }
+    @include respond-to('lg') {
+        transform: translate3d(0, 0, 0)!important;
+    }
+    .logo {
+        // height: 100px;
+        padding: 18px 5px;
+        background-color: #f5f5f5;
+    }
+    .logout {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        cursor: pointer;
+    }
+    .item {
+        // min-height: 60px;
+        // display: flex!important;
+        align-items: center;
+        font-size: 16px;
+        // i {
+        //     margin-right: 8px;
+        // }
+    }
+}

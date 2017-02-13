@@ -1,0 +1,65 @@
+@import '~scss_vars';
+
+
+// App layout
+// It's simple as that, really
+// Sidebar === fixed
+// Header === fixed
+// Main === absolute with margin and padding
+// Footer(sticky) === just (bottom:0px) inside Main(position:absolute;)
+
+#app {
+    color: #333;
+    background-color: #fafbfc;
+    width: 100%;
+    height: 100%;
+    .page-layout {
+        main {
+            z-index: 1;
+            overflow-x: auto;
+            height: 100%;
+            padding-top: 90px;
+            position: absolute;
+            transition: translate3d 2s cubic-bezier(.4,0,.2,1) ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition-property: transform;
+            @include respond-to('sm', 'xs') {
+                width: 100%;
+                transform: translate3d(0, 0, 0)!important;
+            }
+            @include respond-to('lg') {
+                width: calc(100% - #{$sidebar-size}); //
+                transform: translate3d($sidebar-size, 0, 0)!important; //
+            }
+            &.no_sidebar {
+                width: 100%;
+                transform: translate3d(0, 0, 0)!important; //
+            }
+            .main-content {
+                min-height: calc(100% - 120px);
+                width: 100%;
+                @include respond-to('sm', 'xs') {
+                    margin: 0 auto;
+                    // width: 100%;
+                    // transform: translate3d(-$sidebar-size, 0, 0)!important;
+                }
+                @include respond-to('md', 'lg') {
+                    margin: 0;
+                    // width: calc(100% - #{$sidebar-size});
+                    // transform: translate3d($sidebar-size, 0, 0)!important;
+                }
+                .container {
+                    margin-top: 0;
+                    > div:first-child {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+ .hidden {
+     display: none;
+ }
