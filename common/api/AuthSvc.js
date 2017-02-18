@@ -33,11 +33,3 @@ export async function refreshToken() {
 export async function login_API(data) {
     return await post('/auth', data)
 }
-
-export async function recoverPassword_API(data) {
-    return await post('/auth/recover', data)
-}
-
-export async function register_API(data) {
-    return await post('/auth/register', data)
-}

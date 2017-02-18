@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
-import DashboardComponent from './components/DashboardComponent'
-import {Message, Statistic, Image} from 'semantic-ui-react'
+import {Statistic} from 'semantic-ui-react'
 import {GET_STATISTICS} from 'actions/dashboard'
 
 @connect(mapStateToProps, mapDispatchToProps)
-class Dashboard extends Component {
+export default class Dashboard extends Component {
     constructor(props) {
         super(props)
     }
@@ -20,14 +18,13 @@ class Dashboard extends Component {
         getProfile: React.PropTypes.func
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getStatistics()
     }
 
     render() {
 
         let {statistics} = this.props
-        console.log(statistics)
         let statistic_components
         if (statistics) {
             statistic_components = statistics.map((obj, i) => {
@@ -56,5 +53,3 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
-
-export default Dashboard;

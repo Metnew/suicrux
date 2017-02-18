@@ -5,11 +5,11 @@ import {App, Inbox, Dashboard, Login} from './containers';
 const Routing = (
     <Router history={browserHistory}>
         <Route name="App" path="/" component={App}>
-            <IndexRoute component={Login} />
+            <IndexRoute name="Dashboard" component={Dashboard} />
             <Route name="Login" path="/auth" component={Login}/>
             <Route name="Dashboard" path="/" component={Dashboard}/>
             <Route name="Inbox" path="inbox" component={Inbox}/>
-            <Redirect from="*" to="/auth" />
+            <Redirect from="/*" to="/" />
         </Route>
     </Router>
 )

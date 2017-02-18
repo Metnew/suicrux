@@ -17,14 +17,6 @@ export default class Sidebar extends Component {
                 name: 'Inbox',
                 href: '/inbox',
                 icon: 'mail'
-            }, {
-                name: 'Profile',
-                href: '/profile',
-                icon: 'user'
-            }, {
-                name: 'Payments',
-                href: '/payments',
-                icon: 'payment'
             }
         ]
     }
@@ -38,18 +30,13 @@ export default class Sidebar extends Component {
         isLoggedIn: React.PropTypes.bool,
         logout: React.PropTypes.func
     }
-    //
-    // static contextTypes = {
-    //     router: React.PropTypes.object.isRequired
-    // }
-    //
 
     render() {
         const {
             open,
             isLoggedIn
         } = this.props;
-        // const style = this.getStyles();
+
         let routes = this.sidebarRouting.map((route, i) =>
         <Menu.Item as={Link} to={route.href} key={i} icon activeClassName='active'>
             <Icon name={route.icon} />
@@ -65,7 +52,7 @@ export default class Sidebar extends Component {
             <Menu vertical fixed='left' className={sidebarStyles}>
                 <Logo/>
                 {isLoggedIn && routes}
-                { isLoggedIn && <Menu.Item className="logout" onClick={this.props.logout}>
+                {isLoggedIn && <Menu.Item className="logout" onClick={this.props.logout}>
                     <Icon name='sign out' />
                     Logout
                 </Menu.Item>}

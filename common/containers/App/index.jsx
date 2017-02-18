@@ -8,7 +8,6 @@ import {push} from 'react-router-redux'
 import cx from 'classnames';
 require('./App.scss')
 
-//:BUG: change styles/index.scss import, its incorrect
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
     constructor(props) {
@@ -26,9 +25,8 @@ export default class App extends Component {
         handleWindowResize: React.PropTypes.func,
         logout: React.PropTypes.func,
         toggleSidebar: React.PropTypes.func,
-        onHeaderInboxClick: React.PropTypes.func
+        onHeaderBtnClick: React.PropTypes.func
     }
-    // componentWillMount() {}
 
     checkAppLoggedIn() {
         let {checkLoggedIn, isLoggedIn, router} = this.props;
@@ -52,7 +50,7 @@ export default class App extends Component {
     }
 
     render() {
-        let {children, sidebarOpened, closeSidebar, obfuscatorActive, isLoggedIn, logout, onHeaderInboxClick, toggleSidebar} = this.props;
+        let {children, sidebarOpened, closeSidebar, obfuscatorActive, isLoggedIn, logout, onHeaderBtnClick, toggleSidebar} = this.props;
         console.log('isLoggedIn(App)', isLoggedIn)
         let title = children.props.route.name;
         let mainBlockStyles = cx({
@@ -62,7 +60,7 @@ export default class App extends Component {
             <div className="page-layout">
                 {/* component will be rendered only if isLoggedIn === true, so isLoggedIn in sidebar is always true */}
                 {isLoggedIn && <Sidebar open={sidebarOpened} isLoggedIn={isLoggedIn} logout={logout} />}
-                <Header toggleSidebar={toggleSidebar} onInboxClick={onHeaderInboxClick} title={title} isLoggedIn={isLoggedIn}/>
+                <Header toggleSidebar={toggleSidebar} onHeaderBtnClick={onHeaderBtnClick} title={title} isLoggedIn={isLoggedIn}/>
                 <main className={mainBlockStyles}>
                     <div className="main-content">
                         <div className="ui grid container">
@@ -77,7 +75,7 @@ export default class App extends Component {
     }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
     return {
         sidebarOpened: state.layout.sidebarOpened,
         obfuscatorActive: state.layout.obfuscatorActive,
@@ -120,9 +118,7 @@ function mapDispatchToProps(dispatch) {
         toggleSidebar: () => {
             dispatch(OPEN_SIDEBAR())
         },
-        onHeaderInboxClick: () => {
-            // dispatch()
-        },
+        onHeaderBtnClick: () => {},
         handleWindowResize: () => {
             dispatch(WINDOW_RESIZE())
         }

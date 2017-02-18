@@ -11,12 +11,12 @@ export const GET_INBOX = ()  => {
         if (!resultOK(result)) {
             return {
                 type: GET_INBOX_FAIL,
-                error: result
+                error: result.data
             }
         }
         return {
             type: GET_INBOX_SUCCESS,
-            result: result
+            result: result.data
         }
 
     }

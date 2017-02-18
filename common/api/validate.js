@@ -16,7 +16,6 @@ export function noSpace(str, field) {
 }
 
 export function isRequired(str, field) {
-    console.log('isRequired call')
     if (str && str.length === 0) {
         return `Please, enter your ${field}`
     }

@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
-import {Button, Form, Message, Grid, TextArea} from 'semantic-ui-react';
-import {Link} from 'react-router';
+import React, {Component} from 'react'
+import {Button, Form, Message, Grid} from 'semantic-ui-react'
 import InputComponent from 'components/common/InputComponent'
-import {isRequired, maxSize, latin, noSpace, composition} from 'api/validate';
+import {isRequired, maxSize, latin, noSpace, composition} from 'api/validate'
 
 export default class LoginComponent extends Component {
 
@@ -26,7 +25,6 @@ export default class LoginComponent extends Component {
             }, {
                 validate: composition([isRequired, maxSize(36), noSpace]),
                 value: '',
-                // as: 'TextArea',
                 placeholder: 'Password',
                 type: 'password',
                 name: 'password',
@@ -67,6 +65,7 @@ export default class LoginComponent extends Component {
         })
         // make request
         let result = await login(data)
+        console.log(result)
         if (result.error) {
             //  reset loading state
             this.setState({
@@ -94,7 +93,7 @@ export default class LoginComponent extends Component {
     }
 
     render() {
-        let {username, password, btn_loading} = this.state;
+        let {btn_loading} = this.state;
         let {componentState} = this.props;
         // error from server
         let {loginError} = componentState;

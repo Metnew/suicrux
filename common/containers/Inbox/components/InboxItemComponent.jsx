@@ -4,10 +4,8 @@ import {
     Icon,
     Item,
     Label,
-    Divider,
-    Segment
+    Divider
 } from 'semantic-ui-react'
-import {Link} from 'react-router';
 import DateInboxItemComponent from './DateItemComponent'
 
 export default class InboxItemComponent extends Component {
@@ -21,35 +19,23 @@ export default class InboxItemComponent extends Component {
 
     render() {
         let {item} = this.props;
-        let link = '/inbox/' + item.id;
-        if (!item.id) {
-            item = {
-                client: {},
-                vacancy: {
-                    event: {
-                        date: {},
-                        city: {}
-                    }
-                }
-            }
-        }
 
         return (
             <Item className="align-row">
-                <DateInboxItemComponent date={item.vacancy.event.date}/>
+                <DateInboxItemComponent date={item.date}/>
                 <Item.Content>
-                    <Item.Header as={Link} to={link}>{item.client.name}</Item.Header>
+                    <Item.Header>{item.name} "{item.username}"</Item.Header>
                     <Item.Meta>
-                        <span>{item.vacancy.event.city}</span>
+                        <span>{item.phone}</span>
                     </Item.Meta>
-                    <Item.Description>{item.vacancy.event.city.name}</Item.Description>
+                    <Item.Description>{item.address.city} {item.address.street}</Item.Description>
                     <Item.Extra>
-                        <Button as={Link} to={link} primary floated='right'>
+                        <Button primary floated='right' disabled>
                             Edit
                             <Icon name='right chevron'></Icon>
                         </Button>
-                        {/* <Label>{obj.vacancy.event.event_type}</Label> */}
-                        <Label>{item.vacancy.event.eventtype}</Label>
+                        <Label>{item.email}</Label>
+                        <Label>{item.website}</Label>
                     </Item.Extra>
                 </Item.Content>
                 <Divider horizontal/>

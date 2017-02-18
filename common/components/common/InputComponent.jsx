@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Input, Button, Form, Label, Divider} from 'semantic-ui-react';
+import {Input, Form, Label} from 'semantic-ui-react';
 import {omit} from 'lodash';
 
+//
 export default class InputComponent extends Component {
 
     constructor(props) {
@@ -91,7 +92,7 @@ export default class InputComponent extends Component {
 
 
         return (
-            
+
             // in semantic if input is a part of form, we can make it error-visible
             // only throught the Form.Field error
             <Form.Field {...propsForField}>

@@ -12,7 +12,7 @@ export default class Login extends Component {
         login: React.PropTypes.func,
         register: React.PropTypes.func,
         forgetPassword: React.PropTypes.func,
-        componentState: React.PropTypes.object //it is login component state
+        componentState: React.PropTypes.object // login component state
     }
 
     componentWillMount() {}

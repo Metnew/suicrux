@@ -3,11 +3,7 @@ import {isLoggedIn} from 'api/AuthSvc';
 import {
     LOGIN_AUTH_FAIL,
     LOGIN_AUTH_SUCCESS,
-    LOGOUT_AUTH_SUCCESS,
-    REGISTER_AUTH_FAIL,
-    REGISTER_AUTH_SUCCESS,
-    RECOVER_PASSWORD_AUTH_FAIL,
-    RECOVER_PASSWORD_AUTH_SUCCESS
+    LOGOUT_AUTH_SUCCESS
 } from 'actions/auth'
 
 let initialState = {
@@ -40,7 +36,6 @@ export function auth(state = initialState, action) {
             }
 
         case LOGOUT_AUTH_SUCCESS:
-        console.log('LOGOUT')
             {
                 return {
                     ...state,
@@ -56,37 +51,6 @@ export function auth(state = initialState, action) {
                 }
             }
         case LOGIN_AUTH_SUCCESS:
-            {
-                return {
-                    ...state,
-                    loggedIn: true
-                }
-            }
-
-        case REGISTER_AUTH_FAIL:
-            {
-                return {
-                    ...state,
-                    loggedIn: true
-                }
-            }
-        case REGISTER_AUTH_SUCCESS:
-            {
-                return {
-                    ...state,
-
-                    loggedIn: true
-                }
-            }
-
-        case RECOVER_PASSWORD_AUTH_FAIL:
-            {
-                return {
-                    ...state,
-                    loggedIn: true
-                }
-            }
-        case RECOVER_PASSWORD_AUTH_SUCCESS:
             {
                 return {
                     ...state,

@@ -24,14 +24,17 @@
             transform-style: preserve-3d;
             will-change: transform;
             transition-property: transform;
+
             @include respond-to('sm', 'xs') {
                 width: 100%;
                 transform: translate3d(0, 0, 0)!important;
             }
+
             @include respond-to('lg') {
                 width: calc(100% - #{$sidebar-size}); //
                 transform: translate3d($sidebar-size, 0, 0)!important; //
             }
+
             &.no_sidebar {
                 width: 100%;
                 transform: translate3d(0, 0, 0)!important; //
@@ -59,7 +62,3 @@
         }
     }
 }
-
- .hidden {
-     display: none;
- }
