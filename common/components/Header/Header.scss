@@ -1,5 +1,6 @@
 @import '~scss_vars';
 header {
+    display: flex;
     z-index: 6;
     background: #fff;
     border-bottom: 1px solid $grey;

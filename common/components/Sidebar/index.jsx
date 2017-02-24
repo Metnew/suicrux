@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import {Menu, Icon} from 'semantic-ui-react'
 import Logo from './Logo.jsx';
 import cx from 'classnames'
-require('./Sidebar.scss');
+import './Sidebar.scss';
 
 export default class Sidebar extends Component {
     constructor(props) {

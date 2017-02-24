@@ -113,7 +113,6 @@ export function resultOK(result) {
     if (result) {
         let ok = result.ok
         delete result.ok
-        result = result.data
         return ok //look at parseJSON
     } else {
         return false

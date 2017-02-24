@@ -6,7 +6,7 @@ import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'; //act
 import {LOGOUT_AUTH} from 'actions/auth'
 import {push} from 'react-router-redux'
 import cx from 'classnames';
-require('./App.scss')
+import './App.scss'
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
@@ -59,7 +59,7 @@ export default class App extends Component {
         return (
             <div className="page-layout">
                 {/* component will be rendered only if isLoggedIn === true, so isLoggedIn in sidebar is always true */}
-                {isLoggedIn && <Sidebar open={sidebarOpened} isLoggedIn={isLoggedIn} logout={logout} />}
+                {isLoggedIn && <Sidebar id="sidebar"  open={sidebarOpened} isLoggedIn={isLoggedIn} logout={logout} />}
                 <Header toggleSidebar={toggleSidebar} onHeaderBtnClick={onHeaderBtnClick} title={title} isLoggedIn={isLoggedIn}/>
                 <main className={mainBlockStyles}>
                     <div className="main-content">

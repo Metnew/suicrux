@@ -1,4 +1,4 @@
-import {GET_STATISTICS_SUCCESS /*GET_STATISTICS_FAIL*/} from 'actions/dashboard'
+import {GET_STATISTICS_SUCCESS, GET_STATISTICS_FAIL} from 'actions/dashboard'
 
 const initial_state = {
     statistics: []
@@ -11,13 +11,8 @@ export function dashboard(state = initial_state, action) {
                 ...state,
                 statistics: action.result
             }
-        // ERRORS NOT IMPLEMENTED IN COMPONENT
-        // case GET_STATISTICS_FAIL:
-        //     return {
-        //         ...state,
-        //         getStatisticsErro
-        //         statistics: action.result
-        //     }
+        case GET_STATISTICS_FAIL:
+            return state
         default:
             return state
     }

@@ -1,4 +1,13 @@
 {
-    "plugins": ["lodash", "transform-regenerator", "transform-decorators-legacy"],
+    "plugins": ["lodash",
+        [
+            "transform-runtime", {
+                "helpers": false,
+                "polyfill": false,
+                "regenerator": true,
+                "moduleName": "babel-runtime"
+            }
+        ],
+    "transform-decorators-legacy", "react-hot-loader/babel"],
     "presets": ["es2015", "react", "stage-0"]
 }

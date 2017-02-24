@@ -8,7 +8,7 @@ import {
 // import {Link} from 'react-router';
 import {GET_INBOX} from 'actions/inbox';
 import InboxItemComponent from './components/InboxItemComponent';
-require('./Inbox.scss');
+// require('./Inbox.scss');
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Inbox extends Component {

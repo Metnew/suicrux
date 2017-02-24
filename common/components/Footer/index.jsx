@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Grid} from 'semantic-ui-react';
-require('./Footer.scss')
+import './Footer.scss'
 export default class Footer extends Component {
     constructor(props) {
         super(props)

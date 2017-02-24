@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Icon, Button, Popup} from 'semantic-ui-react'
 import Logo from 'components/Sidebar/Logo'
 import cx from 'classnames'
-require('./Header.scss')
+import './Header.scss'
 
 export default class Header extends Component {
     constructor(props) {

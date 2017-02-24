@@ -17,6 +17,12 @@ export const GET_STATISTICS = () => {
 				error: result.data
 			}
 		}
+
+		if (!result) {
+			result = {
+				data: {lol:'lol'}
+			}
+		}
 		return {
 			type: GET_STATISTICS_SUCCESS,
 			result: result.data
