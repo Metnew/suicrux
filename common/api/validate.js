@@ -1,3 +1,6 @@
+// Functions for <InputComponent /> validation,
+// feel free to remove this file and InputComponent.jsx,
+// if you dont like to work with forms using this approach.
 export function maxSize(num, error='Value is too long') {
     return function(value, field) {
         if (value) {

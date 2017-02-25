@@ -6,16 +6,15 @@ export function getLocalToken() {
 }
 
 export function resetLocalToken() {
-    console.log('remove local token')
+    // console.log('remove local token')
     store.remove('auth_token')
 }
 export function setLocalToken(token) {
-    console.log('set new local token')
+    // console.log('set new local token')
     store.set('auth_token', token)
 }
 
 export function isLoggedIn() {
-    console.log('local token is null:', getLocalToken() === null)
     let localToken = getLocalToken()
     if (localToken === null) {
         return false

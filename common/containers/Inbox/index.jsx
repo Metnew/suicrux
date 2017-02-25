@@ -5,10 +5,9 @@ import {
     Item,
     Grid
 } from 'semantic-ui-react'
-// import {Link} from 'react-router';
 import {GET_INBOX} from 'actions/inbox';
 import InboxItemComponent from './components/InboxItemComponent';
-// require('./Inbox.scss');
+import './Inbox.scss';
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Inbox extends Component {
@@ -22,27 +21,23 @@ export default class Inbox extends Component {
         isMobile: React.PropTypes.bool
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getConversations()
     }
 
     render() {
         let {conversations} = this.props;
-        let noConversations = conversations.length == 0
-        let conversations_components
-        if (!noConversations) {
-            conversations_components = conversations.map((obj, i) => {
-                return (<InboxItemComponent key={i} item={obj}/>)
-            })
-        }
+        let noConversations = !conversations || conversations.length == 0
         return (
             <Grid reversed="mobile vertically" stackable className="inbox-list-container">
                 <Grid.Column width={16}>
                     {!noConversations
                         ? <Item.Group divided>
-                                {conversations_components}
+                                {conversations.map((obj, i) => {
+                                    return (<InboxItemComponent key={i} item={obj}/>)
+                                })}
                             </Item.Group>
-                        : <Loader active={true}>Loading...</Loader>}
+                        : <Loader active={true}>Loading...</Loader> }
                 </Grid.Column>
             </Grid>
 

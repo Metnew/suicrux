@@ -34,7 +34,7 @@ export default class Dashboard extends Component {
 
         return (
             <div>
-                <h3>ndl"</h3>
+                <h3>Dashboard</h3>
                 {statistic_components}
             </div>
         )

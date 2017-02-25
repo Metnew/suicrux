@@ -1,3 +1,4 @@
+// Request utils, feel free to replace with your code (get, post are used in ApiServices) 
 import {getLocalToken} from 'api/AuthSvc';
 import _ from 'lodash';
 import config from 'config'
@@ -65,10 +66,10 @@ async function parseJSON(res) {
     try {
         json = await res.json()
     } catch (e) {
-        return {ok: false}
+        return {data: {}, ok: false}
     }
-    // @Metnew: have to add error handling for 404, 403
-    // Also json must be  {code: 404, data: ${errors from server}}
+
+    // simplest validation ever, ahah :)
     if (!res.ok) {
         return {data: json, ok:false}
     }

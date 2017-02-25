@@ -9,12 +9,13 @@ const initialState = {
 
 export function inbox(state = initialState, action) {
     switch (action.type) {
-        case LOCATION_CHANGE:
-        // look at Header Inbox icon
+        case LOCATION_CHANGE: {
             if (action.payload.pathname === '/inbox') {
-                return {...state}
+                return state
+            } else {
+                return initialState
             }
-            return initialState
+        }
         case GET_INBOX_SUCCESS:
             return {
                 ...state,

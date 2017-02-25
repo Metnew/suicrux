@@ -12,9 +12,9 @@ const app = express()
 
 const port = config.port
 webpackConfig.entry.client = [
-    // `webpack-hot-middleware/client?reload=true`,
+    'react-hot-loader/patch',
     `webpack-hot-middleware/client?reload=true`,
-    // 'webpack-dev-server/client?http://localhost:4000',
+     'webpack/hot/only-dev-server',
     webpackConfig.entry.client
 ]
 

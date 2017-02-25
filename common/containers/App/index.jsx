@@ -32,7 +32,6 @@ export default class App extends Component {
         let {checkLoggedIn, isLoggedIn, router} = this.props;
         let path = router.getCurrentLocation().pathname;
         // check is user allowed to visit this path
-        console.log('checkAppLoggedIn: isLoggedIn + path', isLoggedIn, path, Date.now())
         checkLoggedIn(isLoggedIn, path)
     }
 
@@ -51,7 +50,6 @@ export default class App extends Component {
 
     render() {
         let {children, sidebarOpened, closeSidebar, obfuscatorActive, isLoggedIn, logout, onHeaderBtnClick, toggleSidebar} = this.props;
-        console.log('isLoggedIn(App)', isLoggedIn)
         let title = children.props.route.name;
         let mainBlockStyles = cx({
             no_sidebar: !isLoggedIn
@@ -59,7 +57,7 @@ export default class App extends Component {
         return (
             <div className="page-layout">
                 {/* component will be rendered only if isLoggedIn === true, so isLoggedIn in sidebar is always true */}
-                {isLoggedIn && <Sidebar id="sidebar"  open={sidebarOpened} isLoggedIn={isLoggedIn} logout={logout} />}
+                {isLoggedIn && <Sidebar id="sidebar" open={sidebarOpened} isLoggedIn={isLoggedIn} logout={logout} />}
                 <Header toggleSidebar={toggleSidebar} onHeaderBtnClick={onHeaderBtnClick} title={title} isLoggedIn={isLoggedIn}/>
                 <main className={mainBlockStyles}>
                     <div className="main-content">
@@ -94,7 +92,6 @@ function mapDispatchToProps(dispatch) {
         },
         checkLoggedIn: function(isLoggedIn, path) {
             // allowed pathes to visit
-            console.log('check logged in', isLoggedIn, path)
             let authPath = '/auth'
             let homePath = ''
             let allowedWithoutCredentialsPaths = [authPath]
@@ -102,15 +99,12 @@ function mapDispatchToProps(dispatch) {
                 // if user is logged in, but is going to visit auth path
                 // then push him to homePath
                 if (path === authPath) {
-                    console.log('redirect from Login to Dashboard')
                     dispatch(push(homePath))
                 }
             } else {
                 // if user isnt logged in
-                console.log('USER ISNT LOGGED IN(APP.checkLoggedIn)')
                 // if user is trying to visit not allowed without credentials path
                 if (allowedWithoutCredentialsPaths.indexOf(path) === -1) {
-                    console.log('redirect to Login')
                     dispatch(push(authPath))
                 }
             }

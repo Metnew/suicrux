@@ -40,8 +40,6 @@ export default class LoginComponent extends Component {
         componentState: React.PropTypes.object
     }
 
-    componentWillMount() {}
-
     invalidExists() {
         for (let key in this.state.invalid) {
             if (this.state.invalid[key]) {
@@ -51,8 +49,6 @@ export default class LoginComponent extends Component {
         }
         return false
     }
-
-    componentWillReceiveProps() {}
 
     async login(e) {
         e.preventDefault()

@@ -1,5 +1,5 @@
 import {UI_OPEN_SIDEBAR, UI_CLOSE_SIDEBAR, UI_WINDOW_RESIZE} from 'actions/layout'
-// import {LOCATION_CHANGE} from 'actions/common';
+import {LOCATION_CHANGE} from 'actions/common';
 // UI_ACTIVATE_OBFUSCATOR, UI_DEACTIVATE_OBFUSCATOR
 const initialState = {
     sidebarOpened: false,
@@ -18,7 +18,6 @@ export function layout(state = initialState, action) {
                     isMobile
                 }
             }
-
         case UI_OPEN_SIDEBAR:
             return {
                 ...state,
@@ -26,6 +25,12 @@ export function layout(state = initialState, action) {
                 obfuscatorActive: true
             }
         case UI_CLOSE_SIDEBAR:
+            return {
+                ...state,
+                sidebarOpened: false,
+                obfuscatorActive: false
+            }
+        case LOCATION_CHANGE:
             return {
                 ...state,
                 sidebarOpened: false,

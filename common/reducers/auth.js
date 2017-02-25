@@ -20,13 +20,11 @@ export function auth(state = initialState, action) {
                     }
                 }
                 if (loggedIn) {
-                    console.log('USER IS LOGGED IN')
                     return {
                         ...state,
                         loggedIn: true
                     }
                 } else {
-                    console.log('USER IS NOT LOGGED IN')
                     return {
                         ...state,
                         loggedIn: false
