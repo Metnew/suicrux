@@ -1,7 +1,5 @@
 # Reatty
 
-## Demo: <https://metnew.github.io/reatty>
-
 ## Out-of-box:
 
 <img src="https://github.com/Metnew/reatty/blob/gh-pages/screen.gif" />
