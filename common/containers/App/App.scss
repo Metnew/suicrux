@@ -45,13 +45,9 @@
                 width: 100%;
                 @include respond-to('sm', 'xs') {
                     margin: 0 auto;
-                    // width: 100%;
-                    // transform: translate3d(-$sidebar-size, 0, 0)!important;
                 }
                 @include respond-to('md', 'lg') {
                     margin: 0;
-                    // width: calc(100% - #{$sidebar-size});
-                    // transform: translate3d($sidebar-size, 0, 0)!important;
                 }
                 .container {
                     margin-top: 0;

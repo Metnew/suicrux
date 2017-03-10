@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Statistic} from 'semantic-ui-react'
 import {GET_STATISTICS} from 'actions/dashboard'
-
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Dashboard extends Component {
     constructor(props) {

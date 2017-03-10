@@ -9,7 +9,7 @@ module.exports = class LogPlugin {
 
   apply(compiler) {
     compiler.plugin('done', () => {
-      console.log(`> VuePack is running at ${chalk.yellow(`http://localhost:${this.port}`)}\n`)
+      console.log(`> App is running at ${chalk.yellow(`http://localhost:${this.port}`)}\n`)
     })
   }
 }
