@@ -3,7 +3,7 @@ const pkg = require('../package')
 const path = require('path')
 
 module.exports = {
-  port: 5433,
+  port: 3000,
   title: 'reatty',
   publicPath: '/',
   srcPath: path.join(__dirname, './../common'),

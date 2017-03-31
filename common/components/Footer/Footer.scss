@@ -9,4 +9,7 @@ footer {
     margin-top: 30px;
     height: 90px;
     box-shadow: inset 0 0 0 0 $grey,0 2px 1px 0 rgba(47,61,73,.05);
+    .footer-inner {
+        padding: 0 1rem;
+    }
 }
