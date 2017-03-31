@@ -18,11 +18,6 @@ export const GET_STATISTICS = () => {
 			}
 		}
 
-		if (!result) {
-			result = {
-				data: {lol:'lol'}
-			}
-		}
 		return {
 			type: GET_STATISTICS_SUCCESS,
 			result: result.data
