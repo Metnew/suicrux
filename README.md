@@ -4,6 +4,9 @@
 
 <img src="https://github.com/Metnew/reatty/blob/gh-pages/screen.gif" />
 
+#### DEMO: [You can find it here](https://metnew.github.io/reatty/)
+> But Reatty requires at least mock DB, so gh-pages demo doesn't work without mock data
+
 ### What is it?
 
 Simple, but robust boilerplate.
@@ -19,8 +22,9 @@ Many templates currently aren't 100% ready - some setups have old dependencies v
 #### Pros:
 
 - You have already some code pre-written.
-- Code was written following React&Redux concepts.
+- Code was written following React&Redux concepts (containers/components).
 - Latest dependencies.
+- Few webpack chunks + App is ready for offline.
 
 #### Cons:
 
