@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 // application styles
 import 'styles/index.scss';
-
+import 'semantic-ui-css/semantic.css';
 import {browserHistory} from 'react-router';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
