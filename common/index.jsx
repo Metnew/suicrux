@@ -2,8 +2,6 @@ import React from 'react';
 import {render} from 'react-dom';
 // application styles
 import 'styles/index.scss';
-// also, semantic already has normalize.css 3.0.1 (I'm not sure)
-import 'semantic-ui-css/semantic.css';
 
 import {browserHistory} from 'react-router';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';

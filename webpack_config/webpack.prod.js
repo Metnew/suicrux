@@ -8,14 +8,19 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 // const OfflinePlugin = require('offline-plugin')
 const base = require('./webpack.base')
-const pkg = require('../package')
 const _ = require('./utils')
 const config = require('./config')
 
 
 exec('rm -rf dist/')
 base.devtool = 'source-map'
-
+base.module.loaders.push({
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader"})
+},{
+    test: /\.scss$/,
+    use: ExtractTextPlugin.extract({fallback: "style-loader", use: ['css-loader', 'sass-loader']})
+})
 // a white list to add dependencies to vendor chunk
 base.entry.vendor = config.vendor
 // use hash filename to support long-term caching
@@ -23,9 +28,10 @@ base.output.filename = '[name].[chunkhash:8].js'
 // add webpack plugins
 base.plugins.push(
   new ProgressPlugin(),
-  new ExtractTextPlugin('styles.[contenthash:8].css'),
+  new ExtractTextPlugin('[name].[chunkhash:8].css'),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production')
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    'process.env.BUILD_GH_PAGES': JSON.stringify(!!process.env.BUILD_GH_PAGES)
   }),
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,

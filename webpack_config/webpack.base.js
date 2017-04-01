@@ -50,18 +50,9 @@ module.exports = {
             }, {
                 test: /\.(ico|jpg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
                 loader: 'file-loader?limit=100000'
-                // query: {
-                //   name: 'static/media/[name].[hash:8].[ext]'
-                // }
             }, {
                 test: /\.svg$/,
                 loader: 'file-loader'
-            }, {
-                test: /\.css$/,
-                loaders: ['style-loader', 'css-loader', 'resolve-url-loader']
-            }, {
-                test: /\.scss$/,
-                loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
             }
         ]
     },

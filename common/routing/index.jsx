@@ -2,9 +2,11 @@ import React from 'react';
 import {Route, Redirect, IndexRoute, Router, browserHistory} from 'react-router';
 import {App, Inbox, Dashboard, Login} from 'containers';
 
+const basePath = process.env.BUILD_GH_PAGES ? '/reatty' : '/'
+
 const Routing = (
     <Router history={browserHistory}>
-        <Route name="App" path="/" component={App}>
+        <Route name="App" path={basePath} component={App}>
             <IndexRoute name="Dashboard" component={Dashboard} />
             <Route name="Login" path="/auth" component={Login}/>
             <Route name="Dashboard" path="/" component={Dashboard}/>
