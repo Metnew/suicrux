@@ -16,7 +16,7 @@ export default class App extends Component {
 
     static propTypes = {
         children: React.PropTypes.node.isRequired,
-        router: React.PropTypes.object,
+        location: React.PropTypes.object,
         sidebarOpened: React.PropTypes.bool,
         obfuscatorActive: React.PropTypes.bool,
         closeSidebar: React.PropTypes.func,
@@ -50,7 +50,7 @@ export default class App extends Component {
 
     render() {
         let {children, sidebarOpened, closeSidebar, obfuscatorActive, isLoggedIn, logout, onHeaderBtnClick, toggleSidebar} = this.props;
-        let title = children.props.route.name;
+        let title = children.props.route.name
         let mainBlockStyles = cx({
             no_sidebar: !isLoggedIn
         })

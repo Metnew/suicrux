@@ -3,19 +3,18 @@ import {render} from 'react-dom';
 // application styles
 import 'styles/index.scss';
 import 'semantic-ui-css/semantic.css';
-import {browserHistory} from 'react-router';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk';
 import RootReducer from './reducers'
 import {Root} from 'components'
-import routes from './routing';
+import {Routing, history} from './routing';
 
 
 function configureStore(initialState) {
     // Add initialState handler
-    let middleware = applyMiddleware(routerMiddleware(browserHistory));
+    let middleware = applyMiddleware(routerMiddleware(history));
     let store = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)), middleware);
 
     if (module.hot) {
@@ -31,8 +30,8 @@ function configureStore(initialState) {
 const renderRoot = (Root) => {
     let preloadedState = window.__PRELOADED_STATE__
     let store = configureStore(preloadedState);
-    let history = syncHistoryWithStore(browserHistory, store);
-    render(<Root routes={routes} history={history} store={store}/>, document.getElementById('app'));
+    let syncedHistory = syncHistoryWithStore(history, store);
+    render(<Root routes={Routing} history={syncedHistory} store={store}/>, document.getElementById('app'));
 }
 
 renderRoot(Root)

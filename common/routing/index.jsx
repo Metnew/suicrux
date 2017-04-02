@@ -1,19 +1,22 @@
 import React from 'react';
-import {Route, Redirect, IndexRoute, Router, browserHistory} from 'react-router';
+import {Route, Redirect, Router, browserHistory, IndexRoute} from 'react-router';
+import {useBasename} from 'history'
 import {App, Inbox, Dashboard, Login} from 'containers';
 
-const basePath = process.env.BUILD_GH_PAGES ? '/reatty' : '/'
+export const history = getHistory()
 
-const Routing = (
-    <Router history={browserHistory}>
-        <Route name="App" path={basePath} component={App}>
+export const Routing = (
+        <Route name="App" path='' component={App}>
             <IndexRoute name="Dashboard" component={Dashboard} />
-            <Route name="Login" path="/auth" component={Login}/>
+            <Route name="Login" exact path="/auth" component={Login}/>
+            <Route name="Inbox" exact path="/inbox" component={Inbox}/>
             <Route name="Dashboard" path="/" component={Dashboard}/>
-            <Route name="Inbox" path="inbox" component={Inbox}/>
             <Redirect from="/*" to="/" />
         </Route>
-    </Router>
 )
 
-export default Routing;
+
+function getHistory() {
+    const basename = process.env.BUILD_GH_PAGES ? '/reatty' : ''
+    return useBasename(() => browserHistory)({basename})
+}

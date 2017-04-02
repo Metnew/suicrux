@@ -17,7 +17,8 @@ base.module.loaders.push({
 })
 base.plugins.push(
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('development')
+    'process.env.NODE_ENV': JSON.stringify('development'),
+    'process.env.BUILD_GH_PAGES': JSON.stringify(!!process.env.BUILD_GH_PAGES),
   }),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),

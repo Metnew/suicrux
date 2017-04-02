@@ -10,7 +10,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
-    "react-router": "^4.0.0",
+    "react-router": "^3.0.0",
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
@@ -66,7 +66,7 @@
     "db": "nodemon ./db",
     "build": "webpack --config webpack_config/webpack.prod.js",
     "build:demo": "BUILD_GH_PAGES=true webpack --config webpack_config/webpack.prod.js",
-    "dev": "node webpack_config/server.js"
+    "dev": "BUILD_GH_PAGES=true node webpack_config/server.js"
   },
   "author": "Vladimir Metnew <vladimirmetnew@gmail.com>",
   "license": "MIT",
