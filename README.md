@@ -9,6 +9,8 @@
 > But Reatty requires at least mock DB, so gh-pages demo doesn't work without mock data
 
 [![David](https://img.shields.io/david/Metnew/reatty.svg)]() [![David](https://img.shields.io/david/dev/Metnew/reatty.svg)]()
+[![Known Vulnerabilities](https://snyk.io/test/github/metnew/reatty/badge.svg)](https://snyk.io/test/github/metnew/reatty)
+[![Code Climate](https://codeclimate.com/github/Metnew/reatty/badges/gpa.svg)](https://codeclimate.com/github/Metnew/reatty)
 
 ### What is it?
 
