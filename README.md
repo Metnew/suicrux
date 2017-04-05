@@ -16,13 +16,18 @@
 
 Simple, but robust boilerplate.
 
-### Why I need it?
+### "Create-react-app/Next.js are better! Why you created this stuff?"
+Yeah, I know, they are better :wink:   
+Personally, I spent more time on customizing *Next.js* than was spent on implementation of this starter.    
 
-You don't need to debug or write webpack configs for new project anymore.
+I like *Create-react-app* and *Next*, but for me - these "template-killers" aren't always the best solution.
+
+### Why I need it?
 
 Many templates currently aren't 100% ready - some setups have old dependencies versions (boilerplates with webpack v1.* is a good example), other templates are too small and you have to write setup code by yourself.
 
 > Also, this setup isn't a "template-killer", it's just a robust setup that works.
+
 
 #### Pros:
 
