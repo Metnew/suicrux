@@ -45,6 +45,12 @@ module.exports = {
         loaders: [
             {
                 test: /\.(js|jsx)$/,
+                enforce: 'pre',
+                loaders: ['eslint-loader'],
+                exclude: [/node_modules/]
+            },
+            {
+                test: /\.(js|jsx)$/,
                 loaders: ['babel-loader'],
                 exclude: [/node_modules/]
             }, {
@@ -57,6 +63,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+          'process.env.BUILD_GH_PAGES': JSON.stringify(!!process.env.BUILD_GH_PAGES)
+        }),
         new HtmlWebpackPlugin({
             title: config.title,
             template: path.resolve(__dirname, '../common/index.html'),

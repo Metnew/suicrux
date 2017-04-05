@@ -12,8 +12,7 @@ import {Root} from 'components'
 import {Routing, history} from './routing';
 
 
-function configureStore(initialState) {
-    // Add initialState handler
+function configureStore() {
     let middleware = applyMiddleware(routerMiddleware(history));
     let store = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)), middleware);
 
@@ -28,10 +27,15 @@ function configureStore(initialState) {
     return store;
 }
 const renderRoot = (Root) => {
-    let preloadedState = window.__PRELOADED_STATE__
-    let store = configureStore(preloadedState);
+    let store = configureStore();
     let syncedHistory = syncHistoryWithStore(history, store);
     render(<Root routes={Routing} history={syncedHistory} store={store}/>, document.getElementById('app'));
 }
 
 renderRoot(Root)
+
+if (module.hot) {
+    module.hot.accept('./components/Root', () => {
+        renderRoot(Root)
+    })
+}

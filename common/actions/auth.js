@@ -21,7 +21,7 @@ export function LOGIN_AUTH(data) {
     }
 }
 
-export function LOGOUT_AUTH(data) {
+export function LOGOUT_AUTH() {
     resetLocalToken()
     return {type: LOGOUT_AUTH_SUCCESS}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect, Router, browserHistory, IndexRoute} from 'react-router';
+import {Route, Redirect, browserHistory, IndexRoute} from 'react-router';
 import {useBasename} from 'history'
 import {App, Inbox, Dashboard, Login} from 'containers';
 

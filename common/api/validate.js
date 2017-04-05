@@ -1,15 +1,14 @@
 // Functions for <InputComponent /> validation,
-// feel free to remove this file and InputComponent.jsx,
-// if you dont like to work with forms using this approach.
+// FEEL FREE TO REMOVE THIS FILE AND components/InputComponent.jsx,
 export function maxSize(num, error='Value is too long') {
-    return function(value, field) {
+    return function(value) {
         if (value) {
             return value.length > num ? error : true
         }
     }
 }
 
-export function noSpace(str, field) {
+export function noSpace(str) {
     // trully can't get why do we need this check,
     // but without it on /profile/settings page we get error
     if (str !== undefined) {
@@ -25,11 +24,11 @@ export function isRequired(str, field) {
     return true
 }
 
-export function latin(str, field) {
+export function latin(str) {
     return str.match(/[a-zA-Z0-9]+/g)? true : false
 }
 
-export function number(str, field) {
+export function number(str) {
     return str.match(/\d+/g)? true : false
 }
 

@@ -2,7 +2,6 @@
 import {getLocalToken} from 'api/AuthSvc';
 import _ from 'lodash';
 import config from 'config'
-import {THROW_ERROR} from 'actions/error'
 
 window.BASE_API = config.BASE_API
 
@@ -21,7 +20,7 @@ function requestWrapper(method) {
             throw new Error(`XHR invalid, check ${method} for url ${url}`)
         }
 
-        // default params to fetch = method + (Content-Type for lulz)
+        // default params for fetch = method + (Content-Type)
         let defaults = {
             method: method,
             headers: {
@@ -48,13 +47,12 @@ function requestWrapper(method) {
         }
 
         let paramsObj = {...defaults, headers: {...params, ...defaults.headers}}
-        console.log(paramsObj)
+
         return await fetch(url, paramsObj)
                         .then(checkStatus)
                         .then(parseJSON)
                         .catch((err) => {
                             console.error(err)
-                            // return THROW_ERROR(err);
                         });
     }
 }

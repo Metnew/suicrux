@@ -25,7 +25,8 @@ export default class App extends Component {
         handleWindowResize: React.PropTypes.func,
         logout: React.PropTypes.func,
         toggleSidebar: React.PropTypes.func,
-        onHeaderBtnClick: React.PropTypes.func
+        onHeaderBtnClick: React.PropTypes.func,
+        router: React.PropTypes.object
     }
 
     checkAppLoggedIn() {

@@ -14,7 +14,8 @@
     "browser": true,
     "amd": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "rules": {
     "comma-dangle": 1,

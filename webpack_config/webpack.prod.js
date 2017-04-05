@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 // const OfflinePlugin = require('offline-plugin')
 const base = require('./webpack.base')
-const _ = require('./utils')
 const config = require('./config')
 
 
@@ -30,8 +29,7 @@ base.plugins.push(
   new ProgressPlugin(),
   new ExtractTextPlugin('[name].[chunkhash:8].css'),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production'),
-    'process.env.BUILD_GH_PAGES': JSON.stringify(!!process.env.BUILD_GH_PAGES)
+    'process.env.NODE_ENV': JSON.stringify('production')
   }),
   new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
