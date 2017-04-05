@@ -7,6 +7,9 @@
 #### DEMO: [You can find it here](https://metnew.github.io/reatty/)
 > But Reatty requires at least mock DB, so gh-pages demo doesn't work without mock data
 
+[![David](https://img.shields.io/david/Metnew/reatty.svg)]()
+[![David](https://img.shields.io/david/dev/Metnew/reatty.svg)]()
+
 ### What is it?
 
 Simple, but robust boilerplate.
