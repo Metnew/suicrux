@@ -43,7 +43,8 @@ Many templates currently aren't 100% ready - some setups have old dependencies v
 - **[Fetch polyfill](https://github.com/github/fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** and normalize.css for UI
 - **[Store2](https://github.com/nbubna/store)** - LocalStorage access
-- **[Webpack 2](https://webpack.js.org)**, babel (stage-0 + decorators), Redux-dev-tools and testing utils: Karma, Chai, Phantom
+- **[Webpack 2](https://webpack.js.org)**, babel (stage-0 + decorators), Redux-dev-tools
+- **[Jest](https://facebook.github.io/jest/)** - awesome library for easy testing.
 
 ### Usage
 
@@ -66,7 +67,13 @@ npm run db  # run mock db for app(from another process)
 npm run build
 ```
 
-It will generate "dist" folder with app.
+It will generate `dist` folder.
+
+#### Test:
+
+npm run test
+
+# You can take a look at more advanced example of testing [here](https://github.com/Metnew/react-scale).
 
 ## Folder structure:
 
