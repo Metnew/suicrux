@@ -73,7 +73,7 @@ It will generate `dist` folder.
 
 npm run test
 
-# You can take a look at more advanced example of testing [here](https://github.com/Metnew/react-scale).
+##### You can take a look at more advanced example of testing [here](https://github.com/Metnew/react-scale).
 
 ## Folder structure:
 
