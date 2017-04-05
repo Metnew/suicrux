@@ -16,10 +16,10 @@ exec('rm -rf dist/')
 base.devtool = 'source-map'
 base.module.loaders.push({
     test: /\.css$/,
-    use: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader"})
+    use: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'})
 },{
     test: /\.scss$/,
-    use: ExtractTextPlugin.extract({fallback: "style-loader", use: ['css-loader', 'sass-loader']})
+    use: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
 })
 // a white list to add dependencies to vendor chunk
 base.entry.vendor = config.vendor

@@ -1,4 +1,4 @@
-// Request utils, feel free to replace with your code (get, post are used in ApiServices) 
+// Request utils, feel free to replace with your code (get, post are used in ApiServices)
 import {getLocalToken} from 'api/AuthSvc';
 import _ from 'lodash';
 import config from 'config'
@@ -73,7 +73,7 @@ async function parseJSON(res) {
     if (!res.ok) {
         return {data: json, ok:false}
     }
-    // XXX: be carefull, resultOK - is a function with side effects
+    // resultOK - is a function with side effects
     // It removes ok property from result object
     return {data: json, ok: true}
 }

@@ -1,7 +1,5 @@
 'use strict'
-const fs = require('fs')
 const path = require('path')
-const chalk = require('chalk')
 const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
@@ -13,8 +11,8 @@ const app = express()
 const port = config.port
 webpackConfig.entry.client = [
     'react-hot-loader/patch',
-    `webpack-hot-middleware/client?reload=true`,
-     'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client?reload=true',
+    'webpack/hot/only-dev-server',
     webpackConfig.entry.client
 ]
 
@@ -34,9 +32,9 @@ const devMiddleWare = require('webpack-dev-middleware')(compiler, {
     quiet: false,
     inline: true,
     headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Headers": "*"
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': '*'
     }
 })
 app.use(devMiddleWare)

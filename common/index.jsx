@@ -35,17 +35,3 @@ const renderRoot = (Root) => {
 }
 
 renderRoot(Root)
-
-
-// if (module.hot) {
-//     module.hot.accept();
-//     // renderRoot(Root)
-// }
-
-// FIXME: SSR!!!
-// match({history: browserHistory, routes}, (error, redirectLocation, renderProps) => {
-//     render(
-//         <Provider store={store}>
-//             <Router {...renderProps} />
-//         </Provider>, document.getElementById('app'))
-// })
