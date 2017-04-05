@@ -2,13 +2,13 @@
 
 ## Out-of-box:
 
-<img src="https://github.com/Metnew/reatty/blob/gh-pages/screen.gif" />
+![](https://github.com/Metnew/reatty/blob/gh-pages/screen.gif)
 
-#### DEMO: [You can find it here](https://metnew.github.io/reatty/)
+### DEMO: [You can find it here](https://metnew.github.io/reatty/)
+
 > But Reatty requires at least mock DB, so gh-pages demo doesn't work without mock data
 
-[![David](https://img.shields.io/david/Metnew/reatty.svg)]()
-[![David](https://img.shields.io/david/dev/Metnew/reatty.svg)]()
+[![David](https://img.shields.io/david/Metnew/reatty.svg)]() [![David](https://img.shields.io/david/dev/Metnew/reatty.svg)]()
 
 ### What is it?
 
@@ -56,24 +56,26 @@ npm install
 
 #### Run:
 
-```
+```bash
 npm run dev # run app in dev mode
 npm run db  # run mock db for app(from another process)
 ```
 
 #### Build:
 
-```
-npm run build
+```bash
+npm run build # build app
 ```
 
-It will generate `dist` folder.
+It generates `dist` folder.
 
 #### Test:
 
-npm run test
+```bash
+npm run test # run tests with Jest
+```
 
-##### You can take a look at more advanced example of testing [here](https://github.com/Metnew/react-scale).
+> You can take a look at more advanced example of testing [here.](https://github.com/Metnew/react-scale)
 
 ## Folder structure:
 
