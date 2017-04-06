@@ -2,6 +2,7 @@
   "name": "reatty",
   "version": "1.0.0",
   "main": "common/index.jsx",
+  "description": "React/Redux/Jest/Webpack/Semantic.UI boilerplate/example.",
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
