@@ -1,8 +1,8 @@
-import {getInbox_API} from 'api/InboxSvc';
-import {resultOK} from 'api/utils';
+import {resultOK} from 'api/utils'
+import {getInbox_API} from 'api/InboxSvc'
 
-export const GET_INBOX_SUCCESS = 'GET_INBOX_SUCCESS';
-export const GET_INBOX_FAIL = 'GET_INBOX_FAIL';
+export const GET_INBOX_SUCCESS = 'GET_INBOX_SUCCESS'
+export const GET_INBOX_FAIL = 'GET_INBOX_FAIL'
 
 
 export const GET_INBOX = ()  => {
