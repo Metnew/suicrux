@@ -1,6 +1,6 @@
 {
   "name": "reatty",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "common/index.jsx",
   "description": "React/Redux/Jest/Webpack/Semantic.UI boilerplate/example.",
   "dependencies": {
