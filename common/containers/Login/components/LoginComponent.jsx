@@ -43,7 +43,6 @@ export default class LoginComponent extends Component {
     invalidExists() {
         for (let key in this.state.invalid) {
             if (this.state.invalid[key]) {
-                console.log(key + ' IS INVALID, DUDE')
                 return true
             }
         }
@@ -52,8 +51,8 @@ export default class LoginComponent extends Component {
 
     async login(e) {
         e.preventDefault()
-        let {login} = this.props;
-        let {username, password} = this.state;
+        let {login} = this.props
+        let {username, password} = this.state
         let data = {username, password}
         // set loading state
         this.setState({
@@ -70,34 +69,41 @@ export default class LoginComponent extends Component {
         }
     }
 
-    makePrettyError(err) {
-        //will be fired twice
+    getPrettyError() {
+        // will be fired twice
         // first render - result of LOGIN_AUTH,
         // second - change btn_loading state
-        if (err && err['non_field_errors']) {
-            return {
-                header: 'Invalid credentials',
-                content: err['non_field_errors'][0]
-            }
+
+        // we must return formatted error from server,
+        // but it's just a boilerplate
+        return {
+            header: 'Invalid credentials',
+            content: 'Please, check your credentials'
         }
     }
 
-    makePrettyLoginError(err) {
-        for (let key in err) {
-            return err[key][0]
-        }
+    connectInputToParent (inputReceivedState) {
+        let {state} = this // current state before receiving child state
+        let {name, error, value} = inputReceivedState // receive child state
+        state.invalid[name] = error // get child error
+        state[name] = value // get child value
+        this.setState(state) // update state
     }
 
     render() {
-        let {btn_loading} = this.state;
-        let {componentState} = this.props;
+        let {btn_loading} = this.state
+        let {componentState} = this.props
+
         // error from server
-        let {loginError} = componentState;
-        // props for form error state
+        let {loginError} = componentState
+
+        // props for form
         let loginFormProps = {error: !!loginError}
-        // login form error
-        let prettyLoginError = this.makePrettyError(loginError)
-        // btn props
+
+        // login form error message
+        let prettyLoginError = this.getPrettyError(loginError)
+
+        // submit btn props
         let loginBtnProps = {
             disabled: this.invalidExists(),
             content: 'Login',
@@ -105,23 +111,24 @@ export default class LoginComponent extends Component {
             loading: btn_loading
         }
 
-        let connectToParent = function(inputReceivedState) {
-            let state = {...this.state} // current state before receiving child state
-            let {name, error, value} = inputReceivedState // receive child state
-            state.invalid[name] = error // get child error
-            state[name] = value // get child value
-            this.setState(state) // update state
-        }
 
         let inputComponents = this.state.form.map((a, i) => {
-            let error = loginError[a.name] ? loginError[a.name][0] : null
-            return <InputComponent as={a.as} connectToParent={connectToParent.bind(this)} validate={a.validate} labelText={a.labelText} type={a.type} key={i} value={a.value} placeholder={a.placeholder} error={error} name={a.name}/>
+            let inputName = a.name
+            let error = loginError[inputName] ? loginError[inputName][0] : null
+
+            let inputComponentProps = {
+                ...a,
+                error,
+                key: i,
+                connectToParent: ::this.connectInputToParent
+            }
+            return <InputComponent {...inputComponentProps}/>
         })
 
         return (
             <Grid verticalAlign='middle' centered columns={1}>
                 <Grid.Column tablet={10} mobile={16} computer={6}>
-                    <Form onSubmit={this.login.bind(this)}{...loginFormProps}>
+                    <Form onSubmit={::this.login} {...loginFormProps}>
                         {prettyLoginError && <Message error header={prettyLoginError.header} content={prettyLoginError.content}/>}
                         {inputComponents}
                         <div className='form-actions'>

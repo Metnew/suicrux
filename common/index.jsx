@@ -35,7 +35,7 @@ const renderRoot = (Root) => {
 renderRoot(Root)
 
 if (module.hot) {
-    module.hot.accept('./components/Root', () => {
+    module.hot.accept('./containers/App', () => {
         renderRoot(Root)
     })
 }

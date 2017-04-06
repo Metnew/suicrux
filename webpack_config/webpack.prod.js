@@ -12,7 +12,7 @@ const config = require('./config')
 
 
 exec('rm -rf dist/')
-base.devtool = 'source-map'
+base.devtool = 'cheap-source-map'
 base.module.loaders.push({
     test: /\.css$/,
     use: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'})
