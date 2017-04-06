@@ -105,9 +105,14 @@ npm run test # run tests with Jest
 ├── webpack_config - Webpack configuration scripts
 ```
 
-### Also:
 
-PRs, questions and issues are welcome)
+### Also:
+> Have a question? Ask it. :wink:
+
+PRs, and issues are welcome :smiling_imp:
+
+### Author
+Vladimir Metnew <vladimirmetnew@gmail.com>
 
 ### LICENSE
 
