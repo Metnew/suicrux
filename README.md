@@ -6,9 +6,9 @@
 
 #### DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
-[![David](https://img.shields.io/david/Metnew/reatty.svg)]() [![David](https://img.shields.io/david/dev/Metnew/reatty.svg)]()
-[![Known Vulnerabilities](https://snyk.io/test/github/metnew/reatty/badge.svg)](https://snyk.io/test/github/metnew/reatty)
-[![Code Climate](https://codeclimate.com/github/Metnew/reatty/badges/gpa.svg)](https://codeclimate.com/github/Metnew/reatty)
+[![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]() [![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]()
+[![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter)
+[![Code Climate](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/gpa.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter)
 
 ### What is it?
 
