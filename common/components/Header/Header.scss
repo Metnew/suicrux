@@ -1,7 +1,6 @@
 @import '~scss_vars';
+
 header {
-    display: flex;
-    z-index: 6;
     background: #fff;
     border-bottom: 1px solid $grey;
     box-shadow: inset 0 0 0 0 $grey,0 2px 1px 0 rgba(47,61,73,.05);
@@ -9,28 +8,14 @@ header {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    position: fixed;
-    transition: transform 2s cubic-bezier(.4,0,.2,1) ease;
-    transform-style: preserve-3d;
-    will-change: transform;
-    transition-duration: .2s;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
-    transition-property: transform;
+    width: 100%;
 
     @include respond-to('sm', 'xs') {
         height: 65px;
-        width: 100%;
-        transform: translate3d(0, 0, 0)!important;
-    }
-    @include respond-to('lg') {
-        height: 70px;
-        width: calc(100% - #{$sidebar-size});
-        transform: translate3d($sidebar-size, 0, 0)!important;
     }
 
-    &.no_sidebar {
-        transform: translate3d(0, 0, 0)!important;
-        width: 100%;
+    @include respond-to('lg') {
+        height: 70px;
     }
 
     .header-inner {
@@ -50,8 +35,5 @@ header {
                 margin-right: 8px;
             }
         }
-    }
-    .logo {
-        padding-right: 12px;
     }
 }

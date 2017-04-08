@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Statistic} from 'semantic-ui-react'
 
-export default class DateItemComponent extends Component {
+export default class DateItemComponent extends PureComponent {
     constructor(props) {
         super(props)
     }
@@ -11,7 +11,10 @@ export default class DateItemComponent extends Component {
     }
 
     render() {
-        const {date} = this.props
+        let {date} = this.props
+        if (!date) {
+            date = '1900-01-01'
+        }
         const dateStr = date.split('-')
         const monthNames = [
             'January',

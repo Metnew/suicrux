@@ -2,26 +2,23 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {LOGIN_AUTH, RECOVER_PASSWORD_AUTH, REGISTER_AUTH} from 'actions/auth'
 import LoginComponent from './components/LoginComponent'
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Login extends Component {
+
+class Login extends Component {
     constructor(props){
         super(props)
     }
 
     static propTypes = {
-        login: React.PropTypes.func,
-        register: React.PropTypes.func,
-        forgetPassword: React.PropTypes.func,
-        componentState: React.PropTypes.object // login component state
+        login: React.PropTypes.func.isRequired,
+        register: React.PropTypes.func.isRequired,
+        forgetPassword: React.PropTypes.func.isRequired,
+        componentState: React.PropTypes.object.isRequired // login component state
     }
 
-    componentWillMount() {}
-
     render() {
-        let {login, forgetPassword, register, componentState} = this.props;
-
+        let props = this.props
         return (
-            <LoginComponent login={login} componentState={componentState}  forgetPassword={forgetPassword} register={register}/>
+            <LoginComponent {...props}/>
         )
     }
 }
@@ -50,3 +47,5 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

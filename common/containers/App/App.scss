@@ -1,60 +1,53 @@
 @import '~scss_vars';
-
-
-// App layout
-// It's simple as that, really
-// Sidebar === fixed
-// Header === fixed
-// Main === absolute with margin and padding
-// Footer(sticky) === just (bottom:0px) inside Main(position:absolute;)
-
+// App's layout
 #app {
     color: #333;
-    background-color: #fafbfc;
+    background-color: #f7f7f7;
     width: 100%;
     height: 100%;
+
     .page-layout {
-        main {
-            z-index: 1;
-            overflow-x: auto;
+        height: 100%;
+
+        // patch Semantic-UI .pusher
+        .pusher {
             height: 100%;
-            padding-top: 90px;
-            position: absolute;
-            transition: translate3d 2s cubic-bezier(.4,0,.2,1) ease;
-            transform-style: preserve-3d;
-            will-change: transform;
-            transition-property: transform;
+            overflow: scroll;
+        }
 
-            @include respond-to('sm', 'xs') {
-                width: 100%;
-                transform: translate3d(0, 0, 0)!important;
-            }
+        main {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
 
-            @include respond-to('lg') {
-                width: calc(100% - #{$sidebar-size}); //
-                transform: translate3d($sidebar-size, 0, 0)!important; //
+        // limit max-width of the .pusher class -> main is limited too
+        .ui.visible.thin.left.sidebar ~ .pusher {
+            @include respond-to('lg'){
+                max-width: calc(100% - #{$sidebar-size})
             }
+        }
 
-            &.no_sidebar {
-                width: 100%;
-                transform: translate3d(0, 0, 0)!important; //
-            }
-            .main-content {
-                // 120px = footer margin-top + footer height
-                min-height: calc(100% - 120px);
-                width: 100%;
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            padding-top: 25px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+
+            .ui.container {
+                @include respond-to('xs') {
+                    // margin - just to fill exmpty space
+                    margin: 0 auto!important;
+                }
                 @include respond-to('sm', 'xs') {
-                    margin: 0 auto;
+                    width: 100%!important;
                 }
-                @include respond-to('md', 'lg') {
-                    margin: 0;
-                }
-                .container {
-                    margin-top: 0;
-                    margin-bottom: 0;
-                    > div:first-child {
-                        width: 100%;
-                    }
+
+                .grid {
+                    position: relative;
+                    min-width: 100%;
+                    min-height: 100%;
                 }
             }
         }

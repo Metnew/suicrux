@@ -3,8 +3,8 @@ const path = require('path')
 
 module.exports = {
   port: 3000,
-  title: 'reatty',
-  publicPath:  process.env.BUILD_GH_PAGES ? '/reatty' : '/',
+  title: 'React-Semantic.UI-starter',
+  publicPath:  process.env.BUILD_GH_PAGES ? '/react-semantic.ui-starter' : '/',
   srcPath: path.join(__dirname, './../common'),
   // add these dependencies to a standalone vendor bundle
   vendor: [

@@ -60,7 +60,7 @@ export default class LoginComponent extends Component {
         })
         // make request
         let result = await login(data)
-        console.log(result)
+
         if (result.error) {
             //  reset loading state
             this.setState({
@@ -70,7 +70,7 @@ export default class LoginComponent extends Component {
     }
 
     getPrettyError() {
-        // will be fired twice
+        // fires twice
         // first render - result of LOGIN_AUTH,
         // second - change btn_loading state
 
@@ -126,12 +126,12 @@ export default class LoginComponent extends Component {
         })
 
         return (
-            <Grid verticalAlign='middle' centered columns={1}>
+            <Grid verticalAlign='middle' centered columns={1} textAlign="center">
                 <Grid.Column tablet={10} mobile={16} computer={6}>
                     <Form onSubmit={::this.login} {...loginFormProps}>
                         {prettyLoginError && <Message error header={prettyLoginError.header} content={prettyLoginError.content}/>}
                         {inputComponents}
-                        <div className='form-actions'>
+                        <div className='text-center'>
                             <Button {...loginBtnProps}/>
                         </div>
                     </Form>

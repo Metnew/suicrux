@@ -1,45 +1,44 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Dimmer} from 'semantic-ui-react';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Dimmer, Sidebar as SidebarSemantic, Container} from 'semantic-ui-react'
 import {Header, Sidebar, Footer} from 'components'
-import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'; //activateObfuscator, deactivateObfuscator
+import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {push} from 'react-router-redux'
-import cx from 'classnames';
+import {sidebarRouting} from 'routing'
 import './App.scss'
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     static propTypes = {
         children: React.PropTypes.node.isRequired,
         location: React.PropTypes.object,
         sidebarOpened: React.PropTypes.bool,
-        obfuscatorActive: React.PropTypes.bool,
         closeSidebar: React.PropTypes.func,
         isLoggedIn: React.PropTypes.bool,
         checkLoggedIn: React.PropTypes.func,
         handleWindowResize: React.PropTypes.func,
         logout: React.PropTypes.func,
         toggleSidebar: React.PropTypes.func,
-        onHeaderBtnClick: React.PropTypes.func,
-        router: React.PropTypes.object
+        onHeaderInboxClick: React.PropTypes.func,
+        router: React.PropTypes.object,
+        isMobile: React.PropTypes.bool
     }
 
     checkAppLoggedIn() {
-        let {checkLoggedIn, isLoggedIn, router} = this.props;
-        let path = router.getCurrentLocation().pathname;
+        let {checkLoggedIn, isLoggedIn, router} = this.props
+        let path = router.getCurrentLocation().pathname
         // check is user allowed to visit this path
         checkLoggedIn(isLoggedIn, path)
     }
 
     componentWillMount() {
-        let {handleWindowResize} = this.props;
+        let {handleWindowResize} = this.props
         this.checkAppLoggedIn()
-        window.addEventListener('resize', handleWindowResize);
+        window.addEventListener('resize', handleWindowResize)
     }
 
     componentWillReceiveProps() {
@@ -50,40 +49,70 @@ export default class App extends Component {
     }
 
     render() {
-        let {children, sidebarOpened, closeSidebar, obfuscatorActive, isLoggedIn, logout, onHeaderBtnClick, toggleSidebar} = this.props;
+        let {
+            children,
+            sidebarOpened,
+            closeSidebar,
+            isLoggedIn,
+            logout,
+            onHeaderInboxClick,
+            toggleSidebar,
+            isMobile
+        } = this.props
+
         let title = children.props.route.name
-        let mainBlockStyles = cx({
-            no_sidebar: !isLoggedIn
-        })
+
+        let sidebarProps = {
+            isMobile,
+            logout,
+            open: sidebarOpened,
+            routing: sidebarRouting
+        }
+
+        let headerProps = {
+            toggleSidebar,
+            title,
+            isLoggedIn,
+            onHeaderInboxClick
+        }
+
+        let dimmerProps = {
+            active: sidebarOpened,
+            onClick: closeSidebar
+        }
+
         return (
             <div className="page-layout">
-                {/* component will be rendered only if isLoggedIn === true, so isLoggedIn in sidebar is always true */}
-                {isLoggedIn && <Sidebar id="sidebar" open={sidebarOpened} isLoggedIn={isLoggedIn} logout={logout} />}
-                <Header toggleSidebar={toggleSidebar} onHeaderBtnClick={onHeaderBtnClick} title={title} isLoggedIn={isLoggedIn}/>
-                <main className={mainBlockStyles}>
-                    <div className="main-content">
-                        <div className="ui grid container">
-                            {children}
-                        </div>
-                    </div>
-                    <Footer/>
-                </main>
-                <Dimmer active={obfuscatorActive} onClick={closeSidebar} />
+                <SidebarSemantic.Pushable>
+                    {isLoggedIn && <Sidebar {...sidebarProps}/>}
+                    <SidebarSemantic.Pusher>
+                        <main>
+                            <Header {...headerProps}/>
+                            <div className="main-content">
+                                <Container>
+                                    {children}
+                                </Container>
+                            </div>
+                            <Footer/>
+                            <Dimmer {...dimmerProps}/>
+                        </main>
+                    </SidebarSemantic.Pusher>
+                </SidebarSemantic.Pushable>
             </div>
-        );
+        )
     }
 }
 
 function mapStateToProps(state) {
     return {
         sidebarOpened: state.layout.sidebarOpened,
-        obfuscatorActive: state.layout.obfuscatorActive,
         isMobile: state.layout.isMobile,
         isLoggedIn: state.auth.loggedIn
     }
 }
 
 function mapDispatchToProps(dispatch) {
+    let resizer
     return {
         closeSidebar: () => {
             dispatch(CLOSE_SIDEBAR())
@@ -113,9 +142,12 @@ function mapDispatchToProps(dispatch) {
         toggleSidebar: () => {
             dispatch(OPEN_SIDEBAR())
         },
-        onHeaderBtnClick: () => {},
+        onHeaderInboxClick: () => {},
         handleWindowResize: () => {
-            dispatch(WINDOW_RESIZE())
+            clearTimeout(resizer)
+            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 150)
         }
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

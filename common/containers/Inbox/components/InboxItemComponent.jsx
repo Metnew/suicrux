@@ -1,41 +1,42 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react'
 import {
-    Button,
-    Icon,
     Item,
     Label,
     Divider
 } from 'semantic-ui-react'
 import DateInboxItemComponent from './DateItemComponent'
 
-export default class InboxItemComponent extends Component {
+export default class InboxItemComponent extends PureComponent {
     constructor(props) {
         super(props)
     }
 
     static propTypes = {
+        date: React.PropTypes.string,
+        name: React.PropTypes.string,
+        username: React.PropTypes.string,
+        address: React.PropTypes.object,
+        email: React.PropTypes.string,
+        website: React.PropTypes.string,
+        phone: React.PropTypes.string,
         item: React.PropTypes.object
     }
 
     render() {
-        let {item} = this.props;
+        let {date, name, username, address, email, website, phone} = this.props
 
         return (
             <Item className="align-row">
-                <DateInboxItemComponent date={item.date}/>
+                <DateInboxItemComponent date={date}/>
                 <Item.Content>
-                    <Item.Header>{item.name} "{item.username}"</Item.Header>
+                    <Item.Header>{name} "{username}"</Item.Header>
                     <Item.Meta>
-                        <span>{item.phone}</span>
+                        <span>{phone}</span>
                     </Item.Meta>
-                    <Item.Description>{item.address.city} {item.address.street}</Item.Description>
+                    <Item.Description>{address.city} {address.street}</Item.Description>
                     <Item.Extra>
-                        <Button primary floated='right' disabled>
-                            Edit
-                            <Icon name='right chevron'></Icon>
-                        </Button>
-                        <Label>{item.email}</Label>
-                        <Label>{item.website}</Label>
+                        <Label>{email}</Label>
+                        <Label>{website}</Label>
                     </Item.Extra>
                 </Item.Content>
                 <Divider horizontal/>

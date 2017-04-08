@@ -44,9 +44,8 @@ base.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     filename: 'vendor.[chunkhash:8].js'
-  })
-  // progressive web app
-  // it uses the publicPath in webpack config
+  }),
+  // For progressive web apps
   // new OfflinePlugin({
   //   relativePaths: false,
   //   AppCache: false,

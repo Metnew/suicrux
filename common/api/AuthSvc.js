@@ -1,4 +1,4 @@
-import {post, get} from './utils';
+import {post} from './utils';
 import * as store from 'store2'
 
 export function getLocalToken() {
@@ -15,20 +15,15 @@ export function setLocalToken(token) {
 }
 
 export function isLoggedIn() {
-    let localToken = getLocalToken()
-    if (localToken === null) {
-        return false
-    }
-    return true
-}
-
-export async function verifyToken() {
-    return await get('/auth/verify')
-}
-export async function refreshToken() {
-    return await get('/auth/refresh')
+    return getLocalToken() === null ? false : true
 }
 
 export async function login_API(data) {
+    if (process.env.BUILD_GH_PAGES) {
+        return {
+            ok: true,
+            token: 'Just_for_demo'
+        }
+    }
     return await post('/auth', data)
 }

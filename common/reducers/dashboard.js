@@ -1,10 +1,11 @@
 import {GET_STATISTICS_SUCCESS, GET_STATISTICS_FAIL} from 'actions/dashboard'
+import {LOCATION_CHANGE} from 'actions/common'
 
-const initial_state = {
+const initialState = {
     statistics: []
 }
 
-export function dashboard(state = initial_state, action) {
+export function dashboard(state = initialState, action) {
     switch (action.type) {
         case GET_STATISTICS_SUCCESS:
             return {
@@ -13,6 +14,12 @@ export function dashboard(state = initial_state, action) {
             }
         case GET_STATISTICS_FAIL:
             return state
+        case LOCATION_CHANGE:{
+            if (action.payload.pathname !== '/') {
+                return initialState
+            }
+            return state
+        }
         default:
             return state
     }

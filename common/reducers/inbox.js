@@ -9,13 +9,6 @@ const initialState = {
 
 export function inbox(state = initialState, action) {
     switch (action.type) {
-        case LOCATION_CHANGE: {
-            if (action.payload.pathname === '/inbox') {
-                return state
-            } else {
-                return initialState
-            }
-        }
         case GET_INBOX_SUCCESS:
             return {
                 ...state,
@@ -27,6 +20,12 @@ export function inbox(state = initialState, action) {
                 errorLoadingConversations: true,
                 conversations: []
             }
+        case LOCATION_CHANGE: {
+            if (action.payload.pathname !== '/inbox') {
+                return initialState
+            }
+            return state
+        }
         default:
             return state
     }

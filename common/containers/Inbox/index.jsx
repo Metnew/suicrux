@@ -1,24 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {
-    Loader,
-    Item,
-    Grid
-} from 'semantic-ui-react'
 import {GET_INBOX} from 'actions/inbox';
-import InboxItemComponent from './components/InboxItemComponent';
+import InboxComponent from './components/InboxComponent'
 import './Inbox.scss';
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class Inbox extends Component {
+class Inbox extends Component {
     constructor(props) {
         super(props)
     }
 
     static propTypes = {
         conversations: React.PropTypes.array,
-        getConversations: React.PropTypes.func,
-        isMobile: React.PropTypes.bool
+        getConversations: React.PropTypes.func
     }
 
     componentDidMount() {
@@ -26,37 +19,25 @@ export default class Inbox extends Component {
     }
 
     render() {
-        let {conversations} = this.props;
-        let noConversations = !conversations || conversations.length == 0
+        let {conversations} = this.props
+        let props = {conversations}
         return (
-            <Grid reversed="mobile vertically" stackable className="inbox-list-container">
-                <Grid.Column width={16}>
-                    {!noConversations
-                        ? <Item.Group divided>
-                                {conversations.map((obj, i) => {
-                                    return (<InboxItemComponent key={i} item={obj}/>)
-                                })}
-                            </Item.Group>
-                        : <Loader active={true}>Loading...</Loader> }
-                </Grid.Column>
-            </Grid>
-
+            <InboxComponent {...props} />
         )
     }
 }
 
 function mapStateToProps(state) {
-    return {
-        conversations: state.inbox.conversations,
-        isMobile: state.layout.isMobile
-    }
+    return {conversations: state.inbox.conversations}
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         getConversations: async() => {
-            let result = await dispatch(GET_INBOX())
+            let result = await dispatch(GET_INBOX)
             dispatch(result)
         }
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Inbox)

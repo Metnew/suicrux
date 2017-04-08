@@ -15,8 +15,19 @@ export const Routing = (
         </Route>
 )
 
+export const sidebarRouting = [
+    {
+        name: 'Dashboard',
+        href: '/',
+        icon: 'newspaper'
+    }, {
+        name: 'Inbox',
+        href: '/inbox',
+        icon: 'comments outline'
+    }
+]
 
 function getHistory() {
-    const basename = process.env.BUILD_GH_PAGES ? '/reatty' : ''
+    const basename = process.env.BUILD_GH_PAGES ? '/react-semantic.ui-starter' : ''
     return useBasename(() => browserHistory)({basename})
 }

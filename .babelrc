@@ -1,5 +1,5 @@
 {
-    "plugins": ["lodash",
+    "plugins": [
         [
             "transform-runtime", {
                 "helpers": false,
@@ -8,6 +8,6 @@
                 "moduleName": "babel-runtime"
             }
         ],
-    "transform-decorators-legacy", "react-hot-loader/babel"],
+    "react-hot-loader/babel"],
     "presets": ["es2015", "react", "stage-0"]
 }

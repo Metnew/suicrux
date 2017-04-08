@@ -38,12 +38,15 @@ export default class InputComponent extends Component {
         this.setState(state)
     }
 
+    // We have similar code in `handleChange()`
     componentWillMount() {
-        if (this.props.validate) {
-            this.setState({
-                error: this.props.validate(this.props.value, this.props.name)
-            })
+        let {validate, value, name} = this.props
+        let error;
+        if (validate) {
+            error = validate(value, name)
         }
+
+        this.setState({...this.state, error, value})
     }
 
     componentWillReceiveProps() {
@@ -58,7 +61,9 @@ export default class InputComponent extends Component {
 
     render() {
         // STATE ERROR
-        let {error, value} = this.state;
+        let {error, value} = this.state
+        let {as} = this.props
+        // prop `as`
         let propsToOmit = ['validate', 'error', 'connectToParent', 'as']
 
         let propsForInput = {
@@ -67,14 +72,15 @@ export default class InputComponent extends Component {
             value
         }
 
-        let RenderComponentAsProp;
-        let propAsElemExists = false;
-        if (this.props.as) {
-            propAsElemExists = true;
-            RenderComponentAsProp = this.props.as;
+        let RenderComponentAsProp
+        let propAsElemExists = false
+
+        if (as) {
+            propAsElemExists = true
+            RenderComponentAsProp = as
         }
 
-        let propsForField;
+        let propsForField
         if (error) {
             propsForField = {error:true}
         }
@@ -96,13 +102,7 @@ export default class InputComponent extends Component {
             // in semantic if input is a part of form, we can make it error-visible
             // only throught the Form.Field error
             <Form.Field {...propsForField}>
-                {/* <label> analog */}
                 {labelTextComponent}
-                {/* Input, checkbox, textarea, etc. */}
-                {/*//
-                    REVIEW: @Metnew 8.02 10:00, still have questions about correctness of this
-                    implementation, due to <Form.Group> component probable incompability
-                    */}
 
                 {propAsElemExists ?
                     <RenderComponentAsProp {...propsForInput} /> :
