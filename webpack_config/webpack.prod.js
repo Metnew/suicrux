@@ -44,7 +44,7 @@ base.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     filename: 'vendor.[chunkhash:8].js'
-  }),
+})
   // For progressive web apps
   // new OfflinePlugin({
   //   relativePaths: false,

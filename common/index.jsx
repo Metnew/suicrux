@@ -11,17 +11,21 @@ import RootReducer from './reducers'
 import {Root} from 'components'
 import {Routing, history} from './routing'
 
-
 const configureStore = () => {
     let middleware = applyMiddleware(routerMiddleware(history))
-    let store = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)), middleware)
+    let thunkApplied = applyMiddleware(thunk)
+    if (process.env.NODE_ENV === 'production') {
+        thunkApplied = composeWithDevTools(thunkApplied)
+    }
+    let store = createStore(RootReducer, thunkApplied, middleware)
     return store
 }
 
 const renderRoot = (Root) => {
     let store = configureStore()
     let syncedHistory = syncHistoryWithStore(history, store)
-    render(<Root routes={Routing} history={syncedHistory} store={store}/>, document.getElementById('app'))
+    render(
+        <Root routes={Routing} history={syncedHistory} store={store}/>, document.getElementById('app'))
 }
 
 renderRoot(Root)
