@@ -1,10 +1,10 @@
-# Reatty
+# React-Semantic.UI-Starter
 
 #### Out-of-box:
 
-![](https://github.com/Metnew/reatty/blob/gh-pages/screen.gif)
+![](https://github.com/Metnew/react-semantic.ui-starter/blob/gh-pages/screen.gif)
 
-#### DEMO: [You can find it here](https://metnew.github.io/reatty/)
+#### DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
 [![David](https://img.shields.io/david/Metnew/reatty.svg)]() [![David](https://img.shields.io/david/dev/Metnew/reatty.svg)]()
 [![Known Vulnerabilities](https://snyk.io/test/github/metnew/reatty/badge.svg)](https://snyk.io/test/github/metnew/reatty)
@@ -29,8 +29,8 @@ Production-ready, robust, full-featured boilerplate/example.
 ### Usage
 
 ```bash
-git clone https://github.com/Metnew/reatty.git reatty
-cd reatty && rm -rf .git  
+git clone https://github.com/Metnew/react-semantic.ui-starter.git
+cd react-semantic.ui-starter && rm -rf .git  
 npm install
 ```
 
