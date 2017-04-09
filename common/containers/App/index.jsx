@@ -19,33 +19,36 @@ class App extends Component {
         sidebarOpened: React.PropTypes.bool,
         closeSidebar: React.PropTypes.func,
         isLoggedIn: React.PropTypes.bool,
-        checkLoggedIn: React.PropTypes.func,
         handleWindowResize: React.PropTypes.func,
         logout: React.PropTypes.func,
+        checkAuthLogic: React.PropTypes.func,
         toggleSidebar: React.PropTypes.func,
-        onHeaderInboxClick: React.PropTypes.func,
+        onHeaderRightButtonClick: React.PropTypes.func,
         router: React.PropTypes.object,
         isMobile: React.PropTypes.bool
     }
 
-    checkAppLoggedIn() {
-        let {checkLoggedIn, isLoggedIn, router} = this.props
-        let path = router.getCurrentLocation().pathname
-        // check is user allowed to visit this path
-        checkLoggedIn(isLoggedIn, path)
-    }
 
     componentWillMount() {
-        let {handleWindowResize} = this.props
-        this.checkAppLoggedIn()
+        let {handleWindowResize, isLoggedIn} = this.props
         window.addEventListener('resize', handleWindowResize)
+        this.checkAppAuthLogic(isLoggedIn)
     }
 
-    componentWillReceiveProps() {
-        this.checkAppLoggedIn()
+    /**
+     * Call checkAuthLogic
+     * @param  {Bool} loggedIn state.auth.loggedIn, current prop
+     * @return {Bool} Nothing
+     */
+    checkAppAuthLogic(loggedIn) {
+        let {router, checkAuthLogic} = this.props
+        let path = router.getCurrentLocation().pathname
+        checkAuthLogic(path, loggedIn)
+        return false
     }
-    componentDidUpdate() {
-        this.checkAppLoggedIn()
+
+    componentWillReceiveProps(nextProps) {
+        this.checkAppAuthLogic(nextProps.isLoggedIn)
     }
 
     render() {
@@ -55,7 +58,7 @@ class App extends Component {
             closeSidebar,
             isLoggedIn,
             logout,
-            onHeaderInboxClick,
+            onHeaderRightButtonClick,
             toggleSidebar,
             isMobile
         } = this.props
@@ -73,7 +76,7 @@ class App extends Component {
             toggleSidebar,
             title,
             isLoggedIn,
-            onHeaderInboxClick
+            onHeaderRightButtonClick
         }
 
         let dimmerProps = {
@@ -90,13 +93,13 @@ class App extends Component {
                             <Header {...headerProps}/>
                             <div className="main-content">
                                 <Container>
-                                    {children}
+                                    { children}
                                 </Container>
                             </div>
                             <Footer/>
                         </main>
                     </SidebarSemantic.Pusher>
-                    <Dimmer {...dimmerProps}/>
+                    {isLoggedIn && <Dimmer {...dimmerProps}/>}
                 </SidebarSemantic.Pushable>
             </div>
         )
@@ -119,33 +122,32 @@ function mapDispatchToProps(dispatch) {
         },
         logout: () => {
             dispatch(LOGOUT_AUTH())
-        },
-        checkLoggedIn: function(isLoggedIn, path) {
-            // allowed pathes to visit
-            let authPath = '/auth'
-            let homePath = ''
-            let allowedWithoutCredentialsPaths = [authPath]
-            if (isLoggedIn) {
-                // if user is logged in, but is going to visit auth path
-                // then push him to homePath
-                if (path === authPath) {
-                    dispatch(push(homePath))
-                }
-            } else {
-                // if user isnt logged in
-                // if user is trying to visit not allowed without credentials path
-                if (allowedWithoutCredentialsPaths.indexOf(path) === -1) {
-                    dispatch(push(authPath))
-                }
-            }
+            dispatch(push('/auth'))
         },
         toggleSidebar: () => {
             dispatch(OPEN_SIDEBAR())
         },
-        onHeaderInboxClick: () => {},
+        onHeaderRightButtonClick: () => {},
+        /**
+         * Immediately push to homePath('/'), if user is logged.
+         * Can be used for other auth logic checks.
+         * Useful, because we don't need to dispatch `push(homePath)` action
+         * from `Login` container after LOGIN_AUTH_SUCCESS action
+         * @param  {String}  path       [current location path]
+         * @param  {Boolean} isLoggedIn [is user logged in?]
+         * @return {[type]}             [description]
+         */
+        checkAuthLogic: (path, isLoggedIn) => {
+            console.log('checkAuthLogic', path, isLoggedIn)
+            let authPath = '/auth'
+            let homePath = '/'
+            if (isLoggedIn && path === authPath) {
+                dispatch(push(homePath))
+            }
+        },
         handleWindowResize: () => {
             clearTimeout(resizer)
-            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 100)
+            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 200)
         }
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {Icon, Button, Popup} from 'semantic-ui-react'
+import {Icon} from 'semantic-ui-react'
 import './Header.scss'
+import HeaderRightButton from './HeaderRightButton'
 
 export default class Header extends Component {
     constructor(props) {
@@ -10,12 +11,12 @@ export default class Header extends Component {
     static propTypes = {
         title: React.PropTypes.string,
         toggleSidebar: React.PropTypes.func,
-        onHeaderInboxClick: React.PropTypes.func,
+        onHeaderRightButtonClick: React.PropTypes.func,
         isLoggedIn: React.PropTypes.bool
     }
 
     render() {
-        let {title, toggleSidebar, isLoggedIn, onHeaderInboxClick} = this.props
+        let {title, toggleSidebar, isLoggedIn, onHeaderRightButtonClick} = this.props
 
         return (
             <header>
@@ -25,7 +26,7 @@ export default class Header extends Component {
                         {title}
                     </span>
                     <span className="spacer"></span>
-                    {isLoggedIn && <Popup trigger={<Button icon onClick={onHeaderInboxClick} basic color = "black"> <Icon name='inbox' size="large"/> </Button>} content="Action with smth."/>}
+                    {isLoggedIn && <HeaderRightButton onHeaderRightButtonClick={onHeaderRightButtonClick}/>}
                 </div>
             </header>
         )

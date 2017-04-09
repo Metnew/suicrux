@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router'
-import {Menu, Icon, Sidebar} from 'semantic-ui-react'
-import Logo from './Logo'
+import {Menu, Sidebar} from 'semantic-ui-react'
 import './Sidebar.scss'
+import SidebarInnerComponent from './SidebarInnerComponent'
 
 export default class SidebarComponent extends Component {
     constructor(props) {
@@ -19,22 +18,6 @@ export default class SidebarComponent extends Component {
     render() {
         const {open, logout, routing, isMobile} = this.props
 
-        let routes = routing.map((route, i) => {
-            let {external, href, icon, name} = route
-            let propsMenuItem = {
-                as: external ? 'a' : Link,
-                link: true,
-                key: i,
-                [external ? 'href' : 'to']: href
-            }
-
-            return (
-                <Menu.Item {...propsMenuItem} icon>
-                    <Icon name={icon}/> {name}
-                </Menu.Item>
-            )
-        })
-
         let sidebarProps = {
             visible: open || !isMobile,
             as: Menu,
@@ -44,13 +27,14 @@ export default class SidebarComponent extends Component {
             width: 'thin'
         }
 
+        let sidebarInnerComponentProps = {
+            logout,
+            routing
+        }
+
         return (
             <Sidebar {...sidebarProps}>
-                <Logo centered/> {routes}
-                <Menu.Item className="logout" onClick={logout}>
-                    <Icon name='sign out'/>
-                    Logout
-                </Menu.Item>
+                <SidebarInnerComponent {...sidebarInnerComponentProps} />
             </Sidebar>
         )
     }

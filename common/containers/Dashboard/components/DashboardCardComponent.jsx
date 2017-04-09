@@ -17,7 +17,7 @@ export default class DashboardCardComponent extends PureComponent {
         let {title, body, id, userId} = this.props
 
         return (
-            <Card>
+            <Card raised>
                 <Image src='http://react.semantic-ui.com/assets/images/wireframe/image.png'/>
                 <Card.Content>
                     <Card.Header>

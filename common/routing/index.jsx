@@ -5,14 +5,18 @@ import {App, Inbox, Dashboard, Login} from 'containers';
 
 export const history = getHistory()
 
-export const Routing = (
-        <Route name="App" path='' component={App}>
-            <IndexRoute name="Login" component={Login} />
-            <Route name="Login" exact path="/auth" component={Login}/>
-            <Route name="Inbox" exact path="/inbox" component={Inbox}/>
-            <Route name="Dashboard" path="/" component={Dashboard}/>
-            <Redirect from="/*" to="/" />
-        </Route>
+/**
+ * Returns application routing with protected by AuthCheck func routes
+ * @param {Function} AuthCheck checks is user logged in
+ */
+export const Routing = (AuthCheck) => (
+    <Route name="App" path='' component={App}>
+        <IndexRoute name="Login" component={Login}/>
+        <Route name="Login" path="/auth" component={Login}/>
+        <Route name="Inbox" path="/inbox" onEnter={AuthCheck} component={Inbox}/>
+        <Route name="Dashboard" path="/" onEnter={AuthCheck} component={Dashboard}/>
+        <Redirect from="/*" to="/"/>
+    </Route>
 )
 
 export const sidebarRouting = [
@@ -33,6 +37,8 @@ export const sidebarRouting = [
 ]
 
 function getHistory() {
-    const basename = process.env.BUILD_GH_PAGES ? '/react-semantic.ui-starter/' : ''
+    const basename = process.env.BUILD_GH_PAGES
+        ? '/react-semantic.ui-starter'
+        : ''
     return useBasename(() => browserHistory)({basename})
 }

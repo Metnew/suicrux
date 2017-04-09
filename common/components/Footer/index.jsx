@@ -7,6 +7,10 @@ export default class Footer extends Component {
         super(props)
     }
 
+    shouldComponentUpdate() {
+        return false
+    }
+
     render() {
         return (
             <footer>

@@ -27,7 +27,7 @@ const renderRoot = (Root) => {
     let store = configureStore()
     let syncedHistory = syncHistoryWithStore(history, store)
     render(
-        <Root routes={Routing} history={syncedHistory} store={store}/>, document.getElementById('app'))
+        <Root key={Math.random()} routes={Routing} history={syncedHistory} store={store}/>, document.getElementById('app'))
 }
 
 renderRoot(Root)

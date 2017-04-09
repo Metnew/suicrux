@@ -11,7 +11,7 @@ class Logo extends Component {
     }
 
     render() {
-        let url = 'https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png'
+        let url = 'http://react.semantic-ui.com/logo.png'
         return (
             <div className="logo">
                 <Image src={url} centered height="34px"/>
