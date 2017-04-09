@@ -138,7 +138,6 @@ function mapDispatchToProps(dispatch) {
          * @return {[type]}             [description]
          */
         checkAuthLogic: (path, isLoggedIn) => {
-            console.log('checkAuthLogic', path, isLoggedIn)
             let authPath = '/auth'
             let homePath = '/'
             if (isLoggedIn && path === authPath) {
@@ -147,7 +146,7 @@ function mapDispatchToProps(dispatch) {
         },
         handleWindowResize: () => {
             clearTimeout(resizer)
-            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 200)
+            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 100)
         }
     }
 }
