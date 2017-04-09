@@ -94,9 +94,9 @@ class App extends Component {
                                 </Container>
                             </div>
                             <Footer/>
-                            <Dimmer {...dimmerProps}/>
                         </main>
                     </SidebarSemantic.Pusher>
+                    <Dimmer {...dimmerProps}/>
                 </SidebarSemantic.Pushable>
             </div>
         )
@@ -145,7 +145,7 @@ function mapDispatchToProps(dispatch) {
         onHeaderInboxClick: () => {},
         handleWindowResize: () => {
             clearTimeout(resizer)
-            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 150)
+            resizer = setTimeout((() => dispatch(WINDOW_RESIZE())), 100)
         }
     }
 }

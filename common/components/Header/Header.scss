@@ -9,6 +9,8 @@ header {
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    position: fixed;
+    z-index: 444;
 
     @include respond-to('sm', 'xs') {
         height: 65px;

@@ -7,7 +7,7 @@ export const history = getHistory()
 
 export const Routing = (
         <Route name="App" path='' component={App}>
-            <IndexRoute name="Dashboard" component={Dashboard} />
+            <IndexRoute name="Login" component={Login} />
             <Route name="Login" exact path="/auth" component={Login}/>
             <Route name="Inbox" exact path="/inbox" component={Inbox}/>
             <Route name="Dashboard" path="/" component={Dashboard}/>
@@ -24,10 +24,15 @@ export const sidebarRouting = [
         name: 'Inbox',
         href: '/inbox',
         icon: 'comments outline'
+    }, {
+        name: 'Github',
+        external: true,
+        href: 'https://github.com/Metnew/react-semantic.ui-starter',
+        icon: 'github'
     }
 ]
 
 function getHistory() {
-    const basename = process.env.BUILD_GH_PAGES ? '/react-semantic.ui-starter' : ''
+    const basename = process.env.BUILD_GH_PAGES ? '/react-semantic.ui-starter/' : ''
     return useBasename(() => browserHistory)({basename})
 }

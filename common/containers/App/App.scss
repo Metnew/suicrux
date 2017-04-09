@@ -23,15 +23,18 @@
 
         // limit max-width of the .pusher class -> main is limited too
         .ui.visible.thin.left.sidebar ~ .pusher {
-            @include respond-to('lg'){
+            @include respond-to('lg') {
                 max-width: calc(100% - #{$sidebar-size})
+            }
+            @include respond-to('only-sm', 'only-md', 'xs'){
+                overflow: hidden;
             }
         }
 
         .main-content {
             display: flex;
             flex-grow: 1;
-            padding-top: 25px;
+            padding-top: 100px;
             padding-left: 1rem;
             padding-right: 1rem;
 

@@ -5,6 +5,7 @@ import 'styles/index.scss'
 import 'semantic-ui-css/semantic.css'
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import Perf from 'react-addons-perf'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import RootReducer from './reducers'
@@ -14,7 +15,8 @@ import {Routing, history} from './routing'
 const configureStore = () => {
     let middleware = applyMiddleware(routerMiddleware(history))
     let thunkApplied = applyMiddleware(thunk)
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV !== 'production') {
+        window.Perf = Perf
         thunkApplied = composeWithDevTools(thunkApplied)
     }
     let store = createStore(RootReducer, thunkApplied, middleware)

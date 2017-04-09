@@ -12,7 +12,7 @@
 
 ### What is it?
 
-Production-ready, robust, full-featured boilerplate/example.
+Production-ready, optimized, robust, fully-featured boilerplate/example.
 
 #### Includes:
 
@@ -23,8 +23,9 @@ Production-ready, robust, full-featured boilerplate/example.
 - **[Fetch polyfill](https://github.com/github/fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** -  UI components.
 - **[Store2](https://github.com/nbubna/store)** - LocalStorage access.
-- **[Webpack 2](https://webpack.js.org)** - babel (stage-0), **HMR**, build.
+- **[Webpack 2](https://webpack.js.org)** - babel (stage-0), **HMR**, build, devServer, hotMiddleware.
 - **[Jest](https://facebook.github.io/jest/)** - awesome library for easy testing.
+- **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
 
 ### Usage
 

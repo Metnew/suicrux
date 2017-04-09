@@ -17,19 +17,23 @@ export default class SidebarComponent extends Component {
     }
 
     render() {
-        const {
-            open,
-            logout,
-            routing,
-            isMobile
-        } = this.props
+        const {open, logout, routing, isMobile} = this.props
 
-        let routes = routing.map((route, i) =>
-            <Menu.Item as={Link} key={i} link={true} to={route.href} icon>
-                <Icon name={route.icon} />
-                {route.name}
-            </Menu.Item>
-        )
+        let routes = routing.map((route, i) => {
+            let {external, href, icon, name} = route
+            let propsMenuItem = {
+                as: external ? 'a' : Link,
+                link: true,
+                key: i,
+                [external ? 'href' : 'to']: href
+            }
+
+            return (
+                <Menu.Item {...propsMenuItem} icon>
+                    <Icon name={icon}/> {name}
+                </Menu.Item>
+            )
+        })
 
         let sidebarProps = {
             visible: open || !isMobile,
@@ -42,10 +46,9 @@ export default class SidebarComponent extends Component {
 
         return (
             <Sidebar {...sidebarProps}>
-                <Logo centered/>
-                {routes}
+                <Logo centered/> {routes}
                 <Menu.Item className="logout" onClick={logout}>
-                    <Icon name='sign out' />
+                    <Icon name='sign out'/>
                     Logout
                 </Menu.Item>
             </Sidebar>
