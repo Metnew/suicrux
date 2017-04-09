@@ -9,42 +9,26 @@ import {
 let initialState = {
     loggedIn: isLoggedIn()
 }
+
 export function auth(state = initialState, action) {
     switch (action.type) {
         case APP_INIT: {
             let loggedIn = isLoggedIn()
-            if (loggedIn) {
-                return {
-                    ...state,
-                    loggedIn: true
-                }
-            } else {
-                return {
-                    ...state,
-                    loggedIn: false
-                }
+            return {
+                ...state,
+                loggedIn: loggedIn ? true : false
             }
         }
         case LOCATION_CHANGE:
             {
                 let loggedIn = isLoggedIn()
                 if (action.payload === '/auth') {
-                    return {
-                        ...state
-                    }
+                    return state
                 }
-                if (loggedIn) {
-                    return {
-                        ...state,
-                        loggedIn: true
-                    }
-                } else {
-                    return {
-                        ...state,
-                        loggedIn: false
-                    }
+                return {
+                    ...state,
+                    loggedIn: loggedIn ? true : false
                 }
-
             }
 
         case LOGOUT_AUTH_SUCCESS:
