@@ -1,5 +1,4 @@
-import {APP_INIT} from 'actions/common';
-import {isLoggedIn} from 'api/AuthSvc';
+import {isLoggedIn} from 'api/AuthSvc'
 import {
     LOGIN_AUTH_FAIL,
     LOGIN_AUTH_SUCCESS,
@@ -12,13 +11,6 @@ let initialState = {
 
 export function auth(state = initialState, action) {
     switch (action.type) {
-        case APP_INIT: {
-            let loggedIn = isLoggedIn()
-            return {
-                ...state,
-                loggedIn: loggedIn ? true : false
-            }
-        }
         case LOGOUT_AUTH_SUCCESS:
             {
                 return {
