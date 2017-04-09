@@ -1,4 +1,4 @@
-import {LOCATION_CHANGE, APP_INIT} from 'actions/common';
+import {APP_INIT} from 'actions/common';
 import {isLoggedIn} from 'api/AuthSvc';
 import {
     LOGIN_AUTH_FAIL,
@@ -19,18 +19,6 @@ export function auth(state = initialState, action) {
                 loggedIn: loggedIn ? true : false
             }
         }
-        case LOCATION_CHANGE:
-            {
-                let loggedIn = isLoggedIn()
-                if (action.payload === '/auth') {
-                    return state
-                }
-                return {
-                    ...state,
-                    loggedIn: loggedIn ? true : false
-                }
-            }
-
         case LOGOUT_AUTH_SUCCESS:
             {
                 return {
