@@ -21,7 +21,7 @@ export function inbox(state = initialState, action) {
                 conversations: []
             }
         case LOCATION_CHANGE: {
-            if (action.payload.pathname !== 'inbox') {
+            if (action.payload.pathname !== '/inbox') {
                 return initialState
             }
             return state
