@@ -6,7 +6,9 @@
 
 #### DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
-[![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]() [![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]()
+[![Travis branch](https://img.shields.io/Metnew/react-semantic.ui-starter/dev.svg)]()
+[![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]() 
+[![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]()
 [![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter)
 [![Code Climate](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/gpa.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter)
 
