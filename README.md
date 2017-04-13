@@ -6,7 +6,7 @@
 
 #### DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
-[![Travis branch](https://img.shields.io/Metnew/react-semantic.ui-starter/dev.svg)]()
+[![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=dev)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
 [![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]() 
 [![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]()
 [![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter)
