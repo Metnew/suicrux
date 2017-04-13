@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {Image} from 'semantic-ui-react'
 
 class Logo extends Component {

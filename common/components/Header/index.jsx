@@ -1,18 +1,25 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Icon} from 'semantic-ui-react'
-import './Header.scss'
 import HeaderRightButton from './HeaderRightButton'
+import _ from 'lodash'
+import './Header.scss'
 
 export default class Header extends Component {
     constructor(props) {
         super(props)
     }
 
+
+    shouldComponentUpdate(nextProps) {
+        return !_.isEqual(nextProps, this.props)
+    }
+
     static propTypes = {
-        title: React.PropTypes.string,
-        toggleSidebar: React.PropTypes.func,
-        onHeaderRightButtonClick: React.PropTypes.func,
-        isLoggedIn: React.PropTypes.bool
+        title: PropTypes.string,
+        toggleSidebar: PropTypes.func,
+        onHeaderRightButtonClick: PropTypes.func,
+        isLoggedIn: PropTypes.bool
     }
 
     render() {

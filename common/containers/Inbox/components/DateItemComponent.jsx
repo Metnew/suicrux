@@ -1,4 +1,5 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import {Statistic} from 'semantic-ui-react'
 
 export default class DateItemComponent extends PureComponent {
@@ -7,7 +8,7 @@ export default class DateItemComponent extends PureComponent {
     }
 
     static propTypes = {
-        date: React.PropTypes.string
+        date: PropTypes.string
     }
 
     render() {

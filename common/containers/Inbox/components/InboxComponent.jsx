@@ -1,6 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import {Loader, Item, Grid} from 'semantic-ui-react'
-import InboxItemComponent from './InboxItemComponent';
+import InboxItemComponent from './InboxItemComponent'
 
 export default class InboxComponent extends PureComponent {
     constructor(props) {
@@ -8,7 +9,7 @@ export default class InboxComponent extends PureComponent {
     }
 
     static propTypes = {
-        conversations: React.PropTypes.array
+        conversations: PropTypes.array
     }
 
     render() {

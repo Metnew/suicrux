@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Link} from 'react-router'
 import {Menu, Icon} from 'semantic-ui-react'
 import Logo from './Logo'
@@ -10,15 +11,13 @@ export default class SidebarInnerComponent extends Component {
     }
 
     static propTypes = {
-        logout: React.PropTypes.func,
-        routing: React.PropTypes.array
+        logout: PropTypes.func,
+        routing: PropTypes.array
     }
 
     shouldComponentUpdate() {
         return false
     }
-
-
 
     render() {
         const {logout, routing} = this.props

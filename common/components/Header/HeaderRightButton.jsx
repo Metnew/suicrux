@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Icon, Button, Popup} from 'semantic-ui-react'
 import './Header.scss'
 
@@ -8,7 +9,7 @@ export default class Header extends Component {
     }
 
     static propTypes = {
-        onHeaderRightButtonClick: React.PropTypes.func
+        onHeaderRightButtonClick: PropTypes.func
     }
 
     shouldComponentUpdate() {

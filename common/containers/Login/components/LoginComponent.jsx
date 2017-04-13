@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Button, Form, Message, Grid} from 'semantic-ui-react'
 import InputComponent from 'components/common/InputComponent'
 import {isRequired, maxSize, latin, noSpace, composition} from 'api/validate'
@@ -34,10 +35,10 @@ export default class LoginComponent extends Component {
     }
 
     static propTypes = {
-        login: React.PropTypes.func,
-        forgetPassword: React.PropTypes.func,
-        register: React.PropTypes.func,
-        componentState: React.PropTypes.object
+        login: PropTypes.func,
+        forgetPassword: PropTypes.func,
+        register: PropTypes.func,
+        componentState: PropTypes.object
     }
 
     invalidExists() {

@@ -88,3 +88,6 @@ Vladimir Metnew <vladimirmetnew@gmail.com>
 
 ### LICENSE
 MIT
+
+
+> semantic has lodash as dependency, so it makes sense to add lodash to dependencies

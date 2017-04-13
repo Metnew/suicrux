@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router'
 
 export default class Root extends Component {
     static propTypes = {
-        store: React.PropTypes.object,
-        history: React.PropTypes.object,
-        routes: React.PropTypes.func
+        store: PropTypes.object,
+        history: PropTypes.object,
+        routes: PropTypes.func
     }
 
     authCheck(nextState, replace, callback) {

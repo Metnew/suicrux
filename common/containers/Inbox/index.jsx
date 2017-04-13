@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {GET_INBOX} from 'actions/inbox';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import {GET_INBOX} from 'actions/inbox'
 import InboxComponent from './components/InboxComponent'
 import './Inbox.scss';
 
@@ -10,8 +11,8 @@ class Inbox extends Component {
     }
 
     static propTypes = {
-        conversations: React.PropTypes.array,
-        getConversations: React.PropTypes.func
+        conversations: PropTypes.array,
+        getConversations: PropTypes.func
     }
 
     componentDidMount() {

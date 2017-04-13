@@ -1,4 +1,5 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import {Card, Image} from 'semantic-ui-react'
 
 export default class DashboardCardComponent extends PureComponent {
@@ -7,10 +8,10 @@ export default class DashboardCardComponent extends PureComponent {
     }
 
     static propTypes = {
-        title: React.PropTypes.string,
-        body: React.PropTypes.string,
-        userId: React.PropTypes.number,
-        id: React.PropTypes.number
+        title: PropTypes.string,
+        body: PropTypes.string,
+        userId: PropTypes.number,
+        id: PropTypes.number
     }
 
     render() {

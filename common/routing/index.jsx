@@ -37,7 +37,7 @@ export const sidebarRouting = [
 ]
 
 function getHistory() {
-    const basename = process.env.BUILD_GH_PAGES
+    const basename = process.env.BUILD_DEMO
         ? '/react-semantic.ui-starter'
         : ''
     return useBasename(() => browserHistory)({basename})

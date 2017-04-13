@@ -30,6 +30,7 @@ try {
 const devMiddleWare = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: false,
+    hot: true,
     inline: true,
     headers: {
         'Access-Control-Allow-Origin': '*',

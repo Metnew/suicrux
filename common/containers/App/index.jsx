@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+// Accessing PropTypes via the main React package is deprecated.
+// Use the prop-types package from npm instead.
+import PropTypes from 'prop-types'
+import {push} from 'react-router-redux'
 import {Dimmer, Sidebar as SidebarSemantic, Container} from 'semantic-ui-react'
 import {Header, Sidebar, Footer} from 'components'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
-import {push} from 'react-router-redux'
 import {sidebarRouting} from 'routing'
 import './App.scss'
 
@@ -14,18 +17,18 @@ class App extends Component {
     }
 
     static propTypes = {
-        children: React.PropTypes.node.isRequired,
-        location: React.PropTypes.object,
-        sidebarOpened: React.PropTypes.bool,
-        closeSidebar: React.PropTypes.func,
-        isLoggedIn: React.PropTypes.bool,
-        handleWindowResize: React.PropTypes.func,
-        logout: React.PropTypes.func,
-        checkAuthLogic: React.PropTypes.func,
-        toggleSidebar: React.PropTypes.func,
-        onHeaderRightButtonClick: React.PropTypes.func,
-        router: React.PropTypes.object,
-        isMobile: React.PropTypes.bool
+        children: PropTypes.node.isRequired,
+        location: PropTypes.object,
+        sidebarOpened: PropTypes.bool,
+        closeSidebar: PropTypes.func,
+        isLoggedIn: PropTypes.bool,
+        handleWindowResize: PropTypes.func,
+        logout: PropTypes.func,
+        checkAuthLogic: PropTypes.func,
+        toggleSidebar: PropTypes.func,
+        onHeaderRightButtonClick: PropTypes.func,
+        router: PropTypes.object,
+        isMobile: PropTypes.bool
     }
 
 
@@ -89,8 +92,8 @@ class App extends Component {
                 <SidebarSemantic.Pushable>
                     {isLoggedIn && <Sidebar {...sidebarProps}/>}
                     <SidebarSemantic.Pusher>
+                        <Header {...headerProps}/>
                         <main>
-                            <Header {...headerProps}/>
                             <div className="main-content">
                                 <Container>
                                     { children}
