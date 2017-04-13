@@ -1,12 +1,12 @@
-import * as layout from './layout';
-import * as inbox from './inbox'
-import * as auth from './auth'
-import * as loginCR from './login_component_reducer'
-import * as dashboard from './dashboard'
+export * as layout from './layout';
+export * as inbox from './inbox'
+export * as auth from './auth'
+export * as loginCR from './login_component_reducer'
+export * as dashboard from './dashboard'
 
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux'
 import {routerReducer} from 'react-router-redux'
-export default combineReducers({
+export const rootReducer = combineReducers({
     ...layout,
     ...inbox,
     ...auth,

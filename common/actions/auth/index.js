@@ -2,8 +2,8 @@ import {
     login_API,
     setLocalToken,
     resetLocalToken
-} from 'api/AuthSvc';
-import {resultOK} from 'api/utils';
+} from 'api/AuthSvc'
+import {resultOK} from 'api/utils'
 
 export const LOGIN_AUTH_SUCCESS = 'LOGIN_AUTH_SUCCESS'
 export const LOGIN_AUTH_FAIL = 'LOGIN_AUTH_FAIL'

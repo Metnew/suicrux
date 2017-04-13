@@ -10,7 +10,7 @@ import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
-import RootReducer from './reducers'
+import {rootReducer} from './reducers'
 import {Root} from 'components'
 import {Routing, history} from './routing'
 import config from 'config'
@@ -25,8 +25,6 @@ export const configureStore = (initialState) => {
 
     return createStore(RootReducer, thunkApplied, middleware, initialState)
 }
-
-require( 'semantic-ui-css/semantic.css')
 
 export const configureRootComponent = (store) => {
     let syncedHistory = syncHistoryWithStore(history, store)

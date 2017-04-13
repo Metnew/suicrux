@@ -60,6 +60,7 @@
     "react-addons-perf": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux-devtools-extension": "^2.13.0",
+    "redux-mock-store": "^1.2.3",
     "resolve-url-loader": "^2.0.2",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
@@ -75,6 +76,7 @@
     "db": "nodemon ./db",
     "build": "webpack --config webpack_config/webpack.prod.js",
     "build:demo": "BUILD_GH_PAGES=true webpack --config webpack_config/webpack.prod.js",
+    "jest": "jest",
     "test": "jest --config=jest_config/jest.config.json --coverage",
     "dev": "node webpack_config/server.js",
     "ssr": "nodemon --exec REACT_WEBPACK_ENV='dev' babel-node ./common/server"
