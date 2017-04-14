@@ -13,6 +13,14 @@ const LOCATION_CHANGE = {
     type: actions.LOCATION_CHANGE
 }
 
+const UI_WINDOW_RESIZE = {
+    type: actions.UI_WINDOW_RESIZE
+}
+
+const APP_INIT = {
+    type: actions.APP_INIT
+}
+
 const initialState = {
     sidebarOpened: false,
     obfuscatorActive: false,
@@ -29,6 +37,22 @@ describe('LAYOUT REDUCER', () => {
             ...initialState,
             sidebarOpened: true,
             obfuscatorActive: true
+        })
+    })
+
+    it('should handle APP_INIT', () => {
+        expect(reducer(initialState, APP_INIT)).toEqual({
+            ...initialState,
+            isMobile: true
+            // `window.innerWidth` is 1024px in test env
+        })
+    })
+
+    it('should handle WINDOW_RESIZE', () => {
+        expect(reducer(initialState, UI_WINDOW_RESIZE)).toEqual({
+            ...initialState,
+            isMobile: true
+            // `window.innerWidth` is 1024px in test env
         })
     })
 
