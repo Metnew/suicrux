@@ -12,9 +12,9 @@ describe('Layout actions', () => {
         }
 
         const store = mockStore({})
-        return store.dispatch(actions.CLOSE_SIDEBAR).then((res) => {
-            expect(res).toEqual(expectedAction)
-        })
+        const result = store.dispatch(actions.CLOSE_SIDEBAR)
+
+        expect(result).toEqual(expectedAction)
     })
 
     it('creates UI_OPEN_SIDEBAR after OPEN_SIDEBAR was dispatched', () => {
@@ -23,9 +23,9 @@ describe('Layout actions', () => {
         }
 
         const store = mockStore({})
-        return store.dispatch(actions.OPEN_SIDEBAR).then((res) => {
-            expect(res).toEqual(expectedAction)
-        })
+        const result = store.dispatch(actions.OPEN_SIDEBAR)
+
+        expect(result).toEqual(expectedAction)
     })
 
     it('creates UI_WINDOW_RESIZE after WINDOW_RESIZE was dispatched', () => {
@@ -34,8 +34,7 @@ describe('Layout actions', () => {
         }
 
         const store = mockStore({})
-        return store.dispatch(actions.WINDOW_RESIZE).then((res) => {
-            expect(res).toEqual(expectedAction)
-        })
+        const result = store.dispatch(actions.WINDOW_RESIZE)
+        expect(result).toEqual(expectedAction)
     })
 })

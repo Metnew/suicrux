@@ -76,7 +76,7 @@
     "db": "nodemon ./db",
     "build": "webpack --config webpack_config/webpack.prod.js",
     "build:demo": "BUILD_DEMO=true webpack --config webpack_config/webpack.prod.js",
-    "test": "jest --config=jest_config/jest.config.json --coverage --forceExit",
+    "test": "jest --config=jest_config/jest.config.json --coverage --forceExit || true",
     "dev": "node webpack_config/server.js",
     "ssr": "nodemon --exec REACT_WEBPACK_ENV='dev' babel-node ./common/server"
   },
