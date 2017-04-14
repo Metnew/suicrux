@@ -27,7 +27,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     return {
-        // state.login_component
+        // state.login_component_reducer
         componentState: state.loginCR
     }
 }
