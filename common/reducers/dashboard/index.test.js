@@ -3,7 +3,8 @@ import * as actions from 'actions'
 
 
 const GET_STATISTICS_SUCCESS = {
-    type: actions.GET_STATISTICS_SUCCESS
+    type: actions.GET_STATISTICS_SUCCESS,
+    result: ["hello"]
 }
 
 const GET_STATISTICS_FAIL = {
@@ -23,7 +24,10 @@ describe('DASHBOARD REDUCER', () => {
     })
 
     it('should handle GET_STATISTICS_SUCCESS', () => {
-        expect(reducer(initialState, GET_STATISTICS_SUCCESS)).toEqual(initialState)
+        expect(reducer(initialState, GET_STATISTICS_SUCCESS)).toEqual({
+            ...initialState,
+            statistics: ["hello"]
+        })
     })
 
     it('should handle GET_STATISTICS_FAIL', () => {

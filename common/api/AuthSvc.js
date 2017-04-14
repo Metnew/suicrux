@@ -6,11 +6,9 @@ export function getLocalToken() {
 }
 
 export function resetLocalToken() {
-    // console.log('remove local token')
     store.remove('auth_token')
 }
 export function setLocalToken(token) {
-    // console.log('set new local token')
     store.set('auth_token', token)
 }
 
