@@ -8,6 +8,6 @@ script:
 addons:
     codeclimate:
         repo_token: "5ec4b0e880d65561a20f43673221a18971b20a5bd21899429161868ee7cb7338"
-after_success:
+after_script:
   - npm install -g codeclimate-test-reporter
   - codeclimate-test-reporter < ./coverage/lcov.info
