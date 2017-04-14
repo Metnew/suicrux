@@ -6,9 +6,6 @@ const mockStore = configureMockStore(middlewares)
 
 describe('Auth actions', () => {
 
-    // With Travic-ci we can test only actions that make requests to remote json APIs
-    // You can uncomment tests below and test it locally
-
     it('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', (done) => {
 
         const expectedActions = {
@@ -23,17 +20,18 @@ describe('Auth actions', () => {
         })
     })
 
-    it('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was failed', (done) => {
-
-        const expectedActions = {
-            type: actions.LOGIN_AUTH_FAIL,
-            error: {}
-        }
-
-        const store = mockStore({})
-        return store.dispatch(actions.LOGIN_AUTH({})).then((res) => {
-            expect(res).toEqual(expectedActions)
-            done()
-        })
-    })
+    // JSON DB should handle it too.
+    // it('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was failed', (done) => {
+    //
+    //     const expectedActions = {
+    //         type: actions.LOGIN_AUTH_FAIL,
+    //         error: {}
+    //     }
+    //
+    //     const store = mockStore({})
+    //     return store.dispatch(actions.LOGIN_AUTH({})).then((res) => {
+    //         expect(res).toEqual(expectedActions)
+    //         done()
+    //     })
+    // })
 })
