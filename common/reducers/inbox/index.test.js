@@ -1,38 +1,38 @@
-import {inbox as reducer} from 'reducers'
+import {inbox as reducer, initialState} from 'reducers/inbox'
 import * as actions from 'actions'
 
 describe('INBOX REDUCER', () => {
     it('should return the initial state', () => {
-        expect(reducer(undefined, {x:'string'})).toEqual({loggedIn:false})
+        expect(reducer(undefined, {x: 'string'})).toEqual(initialState)
     })
 
-    it('should handle LOGOUT_AUTH_SUCCESS', () => {
-        expect(reducer({
-            loggedIn: true
-        }, {
-            type: actions.LOGOUT_AUTH_SUCCESS
+    it('should handle GET_INBOX_SUCCESS', () => {
+        expect(reducer(initialState, {
+            type: actions.GET_INBOX_SUCCESS,
+            result: ["lol"]
         })).toEqual({
-            loggedIn: false
+            ...initialState,
+            conversations: ["lol"]
         })
     })
 
-    it('should handle LOGIN_AUTH_FAIL', () => {
-        expect(reducer({
-            loggedIn: false
-        }, {
-            type: actions.LOGIN_AUTH_FAIL
-        })).toEqual({
-            loggedIn: false
+    it('should handle GET_INBOX_FAIL', () => {
+        expect(reducer(initialState, {type: actions.GET_INBOX_FAIL})).toEqual({
+            ...initialState,
+            errorLoadingConversations: true,
+            conversations: []
         })
     })
 
-    it('should handle LOGIN_AUTH_SUCCESS', () => {
-        expect(reducer({
-            loggedIn: false
-        }, {
-            type: actions.LOGIN_AUTH_SUCCESS
-        })).toEqual({
-            loggedIn: true
-        })
+    it('should return same state if LOCATION_CHANGE navigates to same route', () => {
+        let state = {
+            lol: 1
+        }
+        expect(reducer(state, {
+            type: actions.LOGIN_AUTH_SUCCESS,
+            payload: {
+                pathname: '/inbox'
+            }
+        })).toEqual(state)
     })
 })

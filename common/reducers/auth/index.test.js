@@ -1,4 +1,4 @@
-import {auth as reducer} from 'reducers'
+import {auth as reducer} from 'reducers/auth'
 import * as actions from 'actions'
 
 describe('AUTH REDUCER', () => {

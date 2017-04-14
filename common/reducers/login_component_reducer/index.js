@@ -1,6 +1,6 @@
 import {LOGIN_AUTH_FAIL, LOGIN_AUTH_SUCCESS} from 'actions/auth';
 
-const initialState = {
+export const initialState = {
     loginError: false,
     loginSuccess: false
 }

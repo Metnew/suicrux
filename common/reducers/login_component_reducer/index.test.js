@@ -1,4 +1,4 @@
-import {loginCR as reducer} from 'reducers'
+import {loginCR as reducer} from 'reducers/login_component_reducer'
 import * as actions from 'actions'
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
 }
 
 const LOGIN_AUTH_FAIL = {
+    error: ["error"],
     type: actions.LOGIN_AUTH_FAIL
 }
 
@@ -22,7 +23,7 @@ describe('LOGIN_COMPONENT REDUCER', () => {
     it('should handle LOGIN_AUTH_FAIL', () => {
         expect(reducer(initialState, LOGIN_AUTH_FAIL)).toEqual({
             ...initialState,
-            loginError: true,
+            loginError: ["error"],
             loginSuccess: false
         })
     })

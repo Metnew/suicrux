@@ -5,7 +5,7 @@ import {
     LOGOUT_AUTH_SUCCESS
 } from 'actions/auth'
 
-let initialState = {
+export const initialState = {
     loggedIn: isLoggedIn()
 }
 

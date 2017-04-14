@@ -1,38 +1,26 @@
-import {dashboard as reducer} from 'reducers'
+import {dashboard as reducer, initialState} from 'reducers/dashboard'
 import * as actions from 'actions'
 
 describe('DASHBOARD REDUCER', () => {
     it('should return the initial state', () => {
-        expect(reducer(undefined, {x:'string'})).toEqual({loggedIn:false})
+        expect(reducer(undefined, {x:'string'})).toEqual(initialState)
     })
 
     it('should handle LOGOUT_AUTH_SUCCESS', () => {
-        expect(reducer({
-            loggedIn: true
-        }, {
+        expect(reducer(initialState, {
             type: actions.LOGOUT_AUTH_SUCCESS
-        })).toEqual({
-            loggedIn: false
-        })
+        })).toEqual(initialState)
     })
 
     it('should handle LOGIN_AUTH_FAIL', () => {
-        expect(reducer({
-            loggedIn: false
-        }, {
+        expect(reducer(initialState, {
             type: actions.LOGIN_AUTH_FAIL
-        })).toEqual({
-            loggedIn: false
-        })
+        })).toEqual(initialState)
     })
 
     it('should handle LOGIN_AUTH_SUCCESS', () => {
-        expect(reducer({
-            loggedIn: false
-        }, {
+        expect(reducer(initialState, {
             type: actions.LOGIN_AUTH_SUCCESS
-        })).toEqual({
-            loggedIn: true
-        })
+        })).toEqual(initialState)
     })
 })

@@ -1,9 +1,8 @@
-import {layout as reducer} from 'reducers'
+import {layout as reducer} from 'reducers/layout'
 import * as actions from 'actions'
 
-
 const UI_CLOSE_SIDEBAR = {
-    type: actions.UI_OPEN_SIDEBAR
+    type: actions.UI_CLOSE_SIDEBAR
 }
 
 const UI_OPEN_SIDEBAR = {
@@ -34,9 +33,7 @@ describe('LAYOUT REDUCER', () => {
     })
 
     it('should handle UI_CLOSE_SIDEBAR', () => {
-        expect(reducer({
-            loggedIn: false
-        }, UI_CLOSE_SIDEBAR)).toEqual({
+        expect(reducer(initialState, UI_CLOSE_SIDEBAR)).toEqual({
             ...initialState,
             sidebarOpened: false,
             obfuscatorActive: false
@@ -44,9 +41,7 @@ describe('LAYOUT REDUCER', () => {
     })
 
     it('should handle LOCATION_CHANGE', () => {
-        expect(reducer({
-            loggedIn: false
-        }, LOCATION_CHANGE)).toEqual({
+        expect(reducer(initialState, LOCATION_CHANGE)).toEqual({
             ...initialState,
             sidebarOpened: false,
             obfuscatorActive: false
