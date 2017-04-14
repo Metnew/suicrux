@@ -23,7 +23,7 @@ export const configureStore = (initialState) => {
         thunkApplied = composeWithDevTools(thunkApplied)
     }
 
-    return createStore(RootReducer, thunkApplied, middleware, initialState)
+    return createStore(rootReducer, thunkApplied, middleware, initialState)
 }
 
 export const configureRootComponent = (store) => {

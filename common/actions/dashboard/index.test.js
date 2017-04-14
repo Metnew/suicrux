@@ -5,43 +5,17 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Dashboard actions', () => {
-
-    it('creates GET_STATISTICS_SUCCESS when GET_STATISTICS was successful', () => {
-        let result = {
-            data: {
-                token: 'string'
-            }
-        }
-
-        const expectedActions = [
-            {
-                type: actions.LOGIN_AUTH_SUCCESS,
-                ...result.data
-            }
-        ]
-
+    it('creates GET_STATISTICS_SUCCESS when GET_STATISTICS was successful', (done) => {
         const store = mockStore({})
-        return store.dispatch(actions.LOGIN_AUTH({})).then(() => {
-            let dispatched = store.getActions()
-            expect(dispatched).toEqual(expectedActions)
-        })
-    })
+        return store.dispatch(actions.GET_STATISTICS).then((res) => {
+            const {result} = res
+            const expectedAction = {
+                type: actions.GET_STATISTICS_SUCCESS,
+                result
+            }
 
-    it('creates GET_STATISTICS_FAIL when GET_STATISTICS was failed', () => {
-        let result = {
-            data: {
-                errors: ['array']
-            }
-        }
-        const expectedActions = [
-            {
-                type: actions.LOGIN_AUTH_FAIL,
-                ...result.data
-            }
-        ]
-        const store = mockStore({})
-        return store.dispatch(actions.LOGIN_AUTH({})).then((res) => {
-            expect(store.getActions()).toEqual(expectedActions)
+            expect(res).toEqual(expectedAction)
+            done()
         })
     })
 })
