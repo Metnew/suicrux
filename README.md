@@ -7,7 +7,7 @@
 #### DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
 [![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=dev)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
-[![Test Coverage](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/coverage.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/coverage)
+[![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/dev/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter)
 [![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]()
 [![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]()
 [![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter)
