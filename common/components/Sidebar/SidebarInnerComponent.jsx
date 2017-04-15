@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {Menu, Icon} from 'semantic-ui-react'
 import Logo from './Logo'
 import './Sidebar.scss'
@@ -23,23 +23,20 @@ export default class SidebarInnerComponent extends Component {
         const {logout, routing} = this.props
 
         let routes = routing.map((route, i) => {
-            let {external, href, icon, name} = route
+            let {external, path, icon, name} = route
             let propsMenuItem = {
-                as: external ? 'a' : Link,
+                as: external ? 'a' : NavLink,
                 link: true,
                 key: i,
-                [external ? 'href' : 'to']: href
+                [external ? 'href' : 'to']: path
             }
-
             return (
                 <Menu.Item {...propsMenuItem} icon>
                     <Icon name={icon}/> {name}
                 </Menu.Item>
             )
         })
-
-
-
+        
         return (
             <div>
                 <Logo centered/>

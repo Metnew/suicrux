@@ -10,6 +10,11 @@ export default class Root extends Component {
         routes: PropTypes.func
     }
 
+    /**
+     * Checks Auth logic. Is user allowed to visit certain path?
+     * @param  {String} path next path to visit
+     * @return {Bool}      Is allowed to visit?
+     */
     authCheck(path) {
         let {store} = this.props
         let {loggedIn} = store.getState().auth

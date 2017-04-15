@@ -9,7 +9,7 @@ import {Dimmer, Sidebar as SidebarSemantic, Container} from 'semantic-ui-react'
 import {Header, Sidebar, Footer} from 'components'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
-import {sidebarRouting} from 'routing'
+import {appRouting} from 'routing'
 import './App.scss'
 
 class App extends Component {
@@ -22,7 +22,6 @@ class App extends Component {
         // react-router `withRouter` props
         location: PropTypes.object,
         history: PropTypes.object,
-        match: PropTypes.object,
 
         sidebarOpened: PropTypes.bool,
         closeSidebar: PropTypes.func,
@@ -66,10 +65,20 @@ class App extends Component {
             logout,
             onHeaderRightButtonClick,
             toggleSidebar,
+            location,
             isMobile
         } = this.props
 
-        let title = ''// || children.props.route.name
+        // must be refactored, if one of your route looks like `/api/users/:id`
+        // get Title for Header
+        let title = appRouting.filter(a => a.path === location.pathname)[0].name
+
+        // routing for sidebar menu
+        let sidebarRouting = appRouting.filter(a => a.sidebarVisible).map((a) => {
+            let {path, name, icon} = a
+            let b = {path, name, icon}
+            return b
+        })
 
         let sidebarProps = {
             isMobile,
