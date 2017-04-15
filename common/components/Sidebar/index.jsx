@@ -17,9 +17,10 @@ export default class SidebarComponent extends Component {
         isMobile: PropTypes.bool
     }
 
-    shouldComponentUpdate(nextProps) {
-        return !_.isEqual(nextProps, this.props)
-    }
+    // shouldComponentUpdate(nextProps) {
+    //     console.log(!_.isEqual(nextProps, this.props))
+    //     return !_.isEqual(nextProps, this.props)
+    // }
 
     render() {
         const {open, logout, routing, isMobile} = this.props
