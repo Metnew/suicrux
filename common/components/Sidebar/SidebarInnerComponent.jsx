@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {NavLink} from 'react-router-dom'
 import {Menu, Icon} from 'semantic-ui-react'
 import Logo from './Logo'
+import _ from 'lodash'
 import './Sidebar.scss'
 
 export default class SidebarInnerComponent extends Component {
@@ -15,9 +16,10 @@ export default class SidebarInnerComponent extends Component {
         routing: PropTypes.array
     }
 
-    shouldComponentUpdate() {
-        return false
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log(nextProps.routing, this.props.routing)
+    //     return !_.isEqual(nextProps.routing, this.props.routing)
+    // }
 
     render() {
         const {logout, routing} = this.props
@@ -30,13 +32,18 @@ export default class SidebarInnerComponent extends Component {
                 key: i,
                 [external ? 'href' : 'to']: path
             }
+
+            if (!external) {
+                propsMenuItem.activeClassName = 'active'
+            }
+
             return (
                 <Menu.Item {...propsMenuItem} icon>
                     <Icon name={icon}/> {name}
                 </Menu.Item>
             )
         })
-        
+
         return (
             <div>
                 <Logo centered/>
