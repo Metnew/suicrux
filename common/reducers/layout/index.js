@@ -30,20 +30,17 @@ export function layout(state = initialState, action) {
         case UI_OPEN_SIDEBAR:
             return {
                 ...state,
-                sidebarOpened: true,
-                obfuscatorActive: true
+                sidebarOpened: true
             }
         case UI_CLOSE_SIDEBAR:
             return {
                 ...state,
-                sidebarOpened: false,
-                obfuscatorActive: false
+                sidebarOpened: false
             }
         case LOCATION_CHANGE:
             return {
                 ...state,
-                sidebarOpened: false,
-                obfuscatorActive: false
+                sidebarOpened: false
             }
         default:
             return state

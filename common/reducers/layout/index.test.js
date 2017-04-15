@@ -23,7 +23,6 @@ const APP_INIT = {
 
 const initialState = {
     sidebarOpened: false,
-    obfuscatorActive: false,
     isMobile: false
 }
 
@@ -35,8 +34,7 @@ describe('LAYOUT REDUCER', () => {
     it('should handle UI_OPEN_SIDEBAR', () => {
         expect(reducer(initialState, UI_OPEN_SIDEBAR)).toEqual({
             ...initialState,
-            sidebarOpened: true,
-            obfuscatorActive: true
+            sidebarOpened: true
         })
     })
 
@@ -59,16 +57,14 @@ describe('LAYOUT REDUCER', () => {
     it('should handle UI_CLOSE_SIDEBAR', () => {
         expect(reducer(initialState, UI_CLOSE_SIDEBAR)).toEqual({
             ...initialState,
-            sidebarOpened: false,
-            obfuscatorActive: false
+            sidebarOpened: false
         })
     })
 
     it('should handle LOCATION_CHANGE', () => {
         expect(reducer(initialState, LOCATION_CHANGE)).toEqual({
             ...initialState,
-            sidebarOpened: false,
-            obfuscatorActive: false
+            sidebarOpened: false
         })
     })
 })
