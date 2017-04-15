@@ -12,7 +12,6 @@ const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const OfflinePlugin = require('offline-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const base = require('./webpack.base')
 const config = require('./config')
 const _ = require('./utils')
@@ -40,7 +39,6 @@ base.plugins.push(
     new ProgressPlugin(),
     new ExtractTextPlugin('[name].[chunkhash:8].css'),
     new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')}),
-    new LodashModuleReplacementPlugin,
     new webpack.optimize.UglifyJsPlugin({
         sourceMap: true,
         compress: {
@@ -72,7 +70,7 @@ base.plugins.push(
     new OfflinePlugin({
         relativePaths: false,
         safeToUseOptionalCaches: true,
-        //    publicPath: '/',
+        publicPath: '/',
         caches: {
             main: [
                 'vendor.*.css', 'vendor.*.js'
@@ -83,6 +81,7 @@ base.plugins.push(
         excludes: ['.htaccess'],
         AppCache: false,
         ServiceWorker: {
+            navigateFallbackURL: '/',
             events: true
         }
     })
