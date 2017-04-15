@@ -25,11 +25,13 @@ export default class SidebarInnerComponent extends Component {
         const {logout, routing} = this.props
 
         let routes = routing.map((route, i) => {
-            let {external, path, icon, name} = route
+            let {external, path, icon, name, strict, exact} = route
             let propsMenuItem = {
                 as: external ? 'a' : NavLink,
                 link: true,
                 key: i,
+                strict,
+                exact,
                 [external ? 'href' : 'to']: path
             }
 
