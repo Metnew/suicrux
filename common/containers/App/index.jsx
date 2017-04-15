@@ -6,7 +6,7 @@ import _ from 'lodash'
 // Use the prop-types package from npm instead.
 import PropTypes from 'prop-types'
 import {push} from 'react-router-redux'
-import {Sidebar as SidebarSemantic, Container} from 'semantic-ui-react'
+import {Dimmer, Sidebar as SidebarSemantic, Container} from 'semantic-ui-react'
 import {Header, Sidebar, Footer} from 'components'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
@@ -68,7 +68,6 @@ class App extends Component {
             closeSidebar,
             isLoggedIn,
             logout,
-            onHeaderRightButtonClick,
             toggleSidebar,
             location,
             isMobile
@@ -79,8 +78,8 @@ class App extends Component {
         let title = appRouting.filter(a => a.path === location.pathname)[0].name
         // routing for sidebar menu
         let sidebarRouting = appRouting.filter(a => a.sidebarVisible).map((a) => {
-            let {path, name, icon, external} = a
-            let b = {path, name, icon, external}
+            let {path, name, icon, external, strict, exact} = a
+            let b = {path, name, icon, external, strict, exact}
             return b
         })
 
@@ -94,15 +93,22 @@ class App extends Component {
         let headerProps = {
             toggleSidebar,
             title,
-            isLoggedIn,
-            onHeaderRightButtonClick
+            isLoggedIn
+        }
+
+        let dimmerProps = {
+            active: sidebarOpened,
+            onClick: closeSidebar
         }
 
         return (
             <div className="page-layout">
                 <SidebarSemantic.Pushable>
                     {isLoggedIn && <Sidebar {...sidebarProps}/>}
-                    <SidebarSemantic.Pusher dimmed={sidebarOpened}>
+                    <SidebarSemantic.Pusher>
+                    {/* Semantic ui currently(16.04.16) doesn't have closeDimmerOnClick or smth else
+                        So, instead of it, we can use simple <Dimmer> component*/}
+                    {/* <SidebarSemantic.Pusher dimmed={sidebarOpened}> */}
                         <Header {...headerProps}/>
                         <main>
                             <div className="main-content">
@@ -113,6 +119,7 @@ class App extends Component {
                             <Footer/>
                         </main>
                     </SidebarSemantic.Pusher>
+                    {isLoggedIn && <Dimmer {...dimmerProps}/>}
                 </SidebarSemantic.Pushable>
             </div>
         )
@@ -140,7 +147,6 @@ function mapDispatchToProps(dispatch) {
         toggleSidebar: () => {
             dispatch(OPEN_SIDEBAR())
         },
-        onHeaderRightButtonClick: () => {},
         /**
          * Immediately push to homePath('/'), if user is logged.
          * Can be used for other auth logic checks.
