@@ -56,36 +56,23 @@ export const Routing = (AuthCheck) => {
     let routesRendered = routes.map((a, i) => {
         // get tag for Route. is it RouteAuth `protected route` or Route?
         let Tag = a.tag
-        delete a.tag
-        return (<Tag key={Math.random()} {...a}/>)
+        let {path, exact, component} = a
+        // can visitor access this route?
+        let canAccess = AuthCheck(path)
+        // select only props that we need
+        let b = {path, exact, component, canAccess}
+        return (<Tag key={i} {...b}/>)
     })
 
     return (
         <App>
             <Switch>
-                {rot}
+                {routesRendered}
                 <Redirect from="*" to="/"/>
             </Switch>
         </App>
     )
 }
-
-export const sidebarRouting = [
-    {
-        name: 'Dashboard',
-        href: '/',
-        icon: 'newspaper'
-    }, {
-        name: 'Inbox',
-        href: '/inbox',
-        icon: 'comments outline'
-    }, {
-        name: 'Github',
-        external: true,
-        href: 'https://github.com/Metnew/react-semantic.ui-starter',
-        icon: 'github'
-    }
-]
 
 function getHistory() {
     const basename = process.env.BUILD_DEMO
