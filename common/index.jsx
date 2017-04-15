@@ -5,6 +5,7 @@ import 'styles/index.scss'
 import 'semantic-ui-css/semantic.css'
 // Redux
 import {composeWithDevTools} from 'redux-devtools-extension'
+import {whyDidYouUpdate} from 'why-did-you-update'
 import Perf from 'react-addons-perf'
 import {routerMiddleware} from 'react-router-redux'
 import {createStore, applyMiddleware} from 'redux'
@@ -44,8 +45,7 @@ if (process.env.NODE_ENV === 'production') {
     require('./pwa')
 } else if(process.env.NODE_ENV === 'development') {
     window.Perf = Perf
-    // const {whyDidYouUpdate} = require('why-did-you-update')
-    // whyDidYouUpdate(React)
+    whyDidYouUpdate(React)
 }
 
 const preloadedState = window.__PRELOADED_STATE__ || {}
