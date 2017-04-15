@@ -16,10 +16,9 @@ export default class SidebarInnerComponent extends Component {
         routing: PropTypes.array
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log(nextProps.routing, this.props.routing)
-    //     return !_.isEqual(nextProps.routing, this.props.routing)
-    // }
+    shouldComponentUpdate(nextProps) {
+        return !_.isEqual(nextProps.routing, this.props.routing)
+    }
 
     render() {
         const {logout, routing} = this.props
@@ -30,13 +29,16 @@ export default class SidebarInnerComponent extends Component {
                 as: external ? 'a' : NavLink,
                 link: true,
                 key: i,
-                strict,
-                exact,
                 [external ? 'href' : 'to']: path
             }
 
             if (!external) {
-                propsMenuItem.activeClassName = 'active'
+                propsMenuItem = {
+                    ...propsMenuItem,
+                    strict,
+                    exact,
+                    activeClassName: 'active'
+                }
             }
 
             return (
