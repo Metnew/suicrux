@@ -10,7 +10,7 @@
 
 ### What is it?
 
-Production-ready, optimized, robust, fully-featured boilerplate/example.
+Production-ready, optimized, robust, fully-featured boilerplate/example for your new PWA.
 
 #### Includes:
 
