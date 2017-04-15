@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.css'
 // Redux
 import {composeWithDevTools} from 'redux-devtools-extension'
 import Perf from 'react-addons-perf'
-import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
+import {routerMiddleware} from 'react-router-redux'
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
@@ -27,10 +27,9 @@ export const configureStore = (initialState) => {
 }
 
 export const configureRootComponent = (store) => {
-    let syncedHistory = syncHistoryWithStore(history, store)
     let propsRoot = {
         routes: Routing,
-        history: syncedHistory,
+        history,
         store,
         key: Math.random()
     }
@@ -45,8 +44,8 @@ if (process.env.NODE_ENV === 'production') {
     require('./pwa')
 } else if(process.env.NODE_ENV === 'development') {
     window.Perf = Perf
-    const {whyDidYouUpdate} = require('why-did-you-update')
-    whyDidYouUpdate(React)
+    // const {whyDidYouUpdate} = require('why-did-you-update')
+    // whyDidYouUpdate(React)
 }
 
 const preloadedState = window.__PRELOADED_STATE__ || {}

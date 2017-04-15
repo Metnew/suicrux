@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Provider} from 'react-redux'
-import {Router} from 'react-router'
+import {ConnectedRouter as Router} from 'react-router-redux'
 
 export default class Root extends Component {
     static propTypes = {
@@ -10,15 +10,17 @@ export default class Root extends Component {
         routes: PropTypes.func
     }
 
-    authCheck(nextState, replace, callback) {
+    authCheck(path) {
         let {store} = this.props
         let {loggedIn} = store.getState().auth
         let authPath = '/auth'
-        if (!loggedIn) {
-            replace(authPath)
+        let allowedToVisitPath = [authPath]
+        if (loggedIn && path === authPath) {
+            return false
+        } else if(!loggedIn && !allowedToVisitPath.includes(path)){
+            return false
         }
-
-        callback()
+        return true
     }
 
     render() {

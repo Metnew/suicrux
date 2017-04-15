@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 // Accessing PropTypes via the main React package is deprecated.
 // Use the prop-types package from npm instead.
 import PropTypes from 'prop-types'
@@ -18,7 +19,11 @@ class App extends Component {
 
     static propTypes = {
         children: PropTypes.node.isRequired,
+        // react-router `withRouter` props
         location: PropTypes.object,
+        history: PropTypes.object,
+        match: PropTypes.object,
+
         sidebarOpened: PropTypes.bool,
         closeSidebar: PropTypes.func,
         isLoggedIn: PropTypes.bool,
@@ -27,7 +32,6 @@ class App extends Component {
         checkAuthLogic: PropTypes.func,
         toggleSidebar: PropTypes.func,
         onHeaderRightButtonClick: PropTypes.func,
-        router: PropTypes.object,
         isMobile: PropTypes.bool
     }
 
@@ -44,10 +48,9 @@ class App extends Component {
      * @return {Bool} Nothing
      */
     checkAppAuthLogic(loggedIn) {
-        let {router, checkAuthLogic} = this.props
-        let path = router.getCurrentLocation().pathname
+        let {location, checkAuthLogic} = this.props
+        let path = location.pathname
         checkAuthLogic(path, loggedIn)
-        return false
     }
 
     componentWillReceiveProps(nextProps) {
@@ -66,7 +69,7 @@ class App extends Component {
             isMobile
         } = this.props
 
-        let title = children.props.route.name
+        let title = ''// || children.props.route.name
 
         let sidebarProps = {
             isMobile,
@@ -154,4 +157,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

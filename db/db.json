@@ -1,3 +1,6 @@
 {
-  "auth": {}
+  "auth": {
+    "username": "",
+    "password": ""
+  }
 }

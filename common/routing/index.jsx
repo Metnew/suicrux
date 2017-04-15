@@ -1,6 +1,6 @@
 import React from 'react';
-import {Route, Redirect, browserHistory, IndexRoute} from 'react-router';
-import {useBasename} from 'history'
+import {Route, Redirect, Switch} from 'react-router';
+import {createBrowserHistory} from 'history'
 import {App, Inbox, Dashboard, Login} from 'containers';
 
 export const history = getHistory()
@@ -9,15 +9,46 @@ export const history = getHistory()
  * Returns application routing with protected by AuthCheck func routes
  * @param {Function} AuthCheck checks is user logged in
  */
-export const Routing = (AuthCheck) => (
-    <Route name="App" path='' component={App}>
-        <IndexRoute name="Login" component={Login}/>
-        <Route name="Login" path="/auth" component={Login}/>
-        <Route name="Inbox" path="/inbox" onEnter={AuthCheck} component={Inbox}/>
-        <Route name="Dashboard" path="/" onEnter={AuthCheck} component={Dashboard}/>
-        <Redirect from="/*" to="/"/>
-    </Route>
-)
+export const Routing = (AuthCheck) => {
+    let routes = [
+        {
+            name: 'Login',
+            path: '/auth',
+            tag: Route,
+            component: Login
+        }, {
+            name: 'Dashboard',
+            path: '/',
+            tag: Route,
+            component: Dashboard,
+            exact: true
+        }, {
+            name: 'Inbox',
+            path: '/inbox',
+            tag: Route,
+            component: Inbox
+        }
+    ]
+
+    let rot = routes
+    // .filter((a) => {
+    //     return AuthCheck(a.path)
+    // })
+        .map((a) => {
+        let Tag = a.tag
+        delete a.tag
+        return (<Tag key={Math.random()} {...a}/>)
+    })
+
+    return (
+        <App>
+            <Switch>
+                {rot}
+                <Redirect from="*" to="/"/>
+            </Switch>
+        </App>
+    )
+}
 
 export const sidebarRouting = [
     {
@@ -40,5 +71,6 @@ function getHistory() {
     const basename = process.env.BUILD_DEMO
         ? '/react-semantic.ui-starter'
         : ''
-    return useBasename(() => browserHistory)({basename})
+
+    return createBrowserHistory({basename})
 }
