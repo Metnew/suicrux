@@ -23,6 +23,7 @@ class App extends Component {
         // react-router `withRouter` props
         location: PropTypes.object,
         history: PropTypes.object,
+        match: PropTypes.object,
 
         sidebarOpened: PropTypes.bool,
         closeSidebar: PropTypes.func,
@@ -33,6 +34,17 @@ class App extends Component {
         toggleSidebar: PropTypes.func,
         onHeaderRightButtonClick: PropTypes.func,
         isMobile: PropTypes.bool
+    }
+
+
+    shouldComponentUpdate(nextProps) {
+        let {match} = this.props
+        let nextMatch = nextProps.match
+        // is match is the same
+        if (_.isEqual(match, nextMatch)) {
+            return false
+        }
+        return true
     }
 
 
@@ -97,7 +109,7 @@ class App extends Component {
         }
 
         let dimmerProps = {
-            active: sidebarOpened,
+            active: true,
             onClick: closeSidebar
         }
 
@@ -119,7 +131,10 @@ class App extends Component {
                             <Footer/>
                         </main>
                     </SidebarSemantic.Pusher>
-                    {isLoggedIn && <Dimmer {...dimmerProps}/>}
+                    {/* show dimmer only if:
+                        1. isLoggedIn, elsewhere sidebar isn't visible
+                        2. if sidebar is opened  */}
+                    {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps}/>}
                 </SidebarSemantic.Pushable>
             </div>
         )
