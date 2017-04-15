@@ -12,6 +12,8 @@
 
 Production-ready, optimized, robust, fully-featured boilerplate/example for your new PWA.
 
+#### Lighthouse result - [you can find it here](https://googlechrome.github.io/lighthouse/viewer/?gist=60153b9fc8eda65c8f7de6e110abf5ba)
+
 #### Includes:
 
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
@@ -24,8 +26,8 @@ Production-ready, optimized, robust, fully-featured boilerplate/example for your
 - **[Webpack 2](https://webpack.js.org)** - babel (stage-0), **HMR**, build, devServer, hotMiddleware, better code optimization **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)**.
 - **[Jest](https://facebook.github.io/jest/)** - awesome library for easy testing.
 - **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
-- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking (and additional plugins) you import in your bundle only functions that you use.
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your progressive app.
+- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking you import in your bundle only code that you use.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your progressive app.
 
 ### Usage
 
@@ -79,6 +81,8 @@ npm run test # run tests with Jest
 ```
 
 ### Also:
+
+[Unstable branch with **latest features**.](https://github.com/Metnew/react-semantic.ui-starter/tree/dev)
 
 > Have a question? Ask it. :wink:
 
