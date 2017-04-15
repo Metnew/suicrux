@@ -1,18 +1,12 @@
 # React-Semantic.UI-Starter
 
-#### Out-of-box:
+## Out-of-box:
 
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/gh-pages/screen.gif)
 
-#### DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
+## DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
-[![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=dev)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
-[![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/dev/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter)
-[![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]()
-[![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]()
-[![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter)
-[![Issue Count](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/issue_count.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter)
-[![Code Climate](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/gpa.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter)
+[![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=dev)](https://travis-ci.org/Metnew/react-semantic.ui-starter) [![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/dev/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter) [![David](https://img.shields.io/david/Metnew/react-semantic.ui-starter.svg)]() [![David](https://img.shields.io/david/dev/Metnew/react-semantic.ui-starter.svg)]() [![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter) [![Issue Count](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/issue_count.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter) [![Code Climate](https://codeclimate.com/github/Metnew/react-semantic.ui-starter/badges/gpa.svg)](https://codeclimate.com/github/Metnew/react-semantic.ui-starter)
 
 ### What is it?
 
@@ -21,15 +15,17 @@ Production-ready, optimized, robust, fully-featured boilerplate/example.
 #### Includes:
 
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
-- **[React-Router](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux](https://github.com/reactjs/react-router-redux)**
+- **[React-Router v4(!)](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5(!)](https://github.com/reactjs/react-router-redux)**
 - **[JSON-server](https://github.com/typicode/json-server)** - mock db.
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)** and **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
 - **[Fetch polyfill](https://github.com/github/fetch)**
-- **[Semantic-ui-react](http://react.semantic-ui.com/)** -  UI components.
+- **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** - LocalStorage access.
 - **[Webpack 2](https://webpack.js.org)** - babel (stage-0), **HMR**, build, devServer, hotMiddleware.
 - **[Jest](https://facebook.github.io/jest/)** - awesome library for easy testing.
-- **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
+- **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)**, **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
+- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking (and additional plugins) you import in your bundle only functions that you use.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your progressive app.
 
 ### Usage
 
@@ -50,6 +46,7 @@ npm run db  # run mock db for app(from another process)
 
 ```bash
 npm run build # build app
+npm run build:demo # build with process.env.BUILD_DEMO = true
 ```
 
 It generates app in `dist` folder.
@@ -65,7 +62,7 @@ npm run test # run tests with Jest
 ```
 │ Reatty
 ├── common - Your App
-│   └── actions - application actions
+│   ├── actions - application actions
 │   ├── api - Services and XHR utils(also custom form validation, see InputComponent from components/common)
 │   ├── components - components according to "Redux philosophy"
 │   ├── config - frontend config depending on REACT_WEBPACK_ENV
@@ -74,24 +71,23 @@ npm run test # run tests with Jest
 │   ├── routing - application routing
 │   ├── styles - styles folder with scss vars, mixins, etc.
 │   ├── index.jsx - entry
-│   ├── index.html
+│   └── index.html
 ├── db // mock db
 ├── static - static assets(imgs, media)
 ├── webpack_config - Webpack configuration
 ├── jest_config - Jest configuration
 ```
 
-
 ### Also:
+
 > Have a question? Ask it. :wink:
 
 PRs, and issues are welcome :smiling_imp:
 
 ### Author
+
 Vladimir Metnew <vladimirmetnew@gmail.com>
 
 ### LICENSE
+
 MIT
-
-
-> semantic has lodash as dependency, so it makes sense to add lodash to dependencies
