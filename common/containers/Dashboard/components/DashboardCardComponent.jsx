@@ -19,7 +19,7 @@ export default class DashboardCardComponent extends PureComponent {
 
         return (
             <Card raised>
-                <Image src='http://react.semantic-ui.com/assets/images/wireframe/image.png'/>
+                <Image alt="Dummy image" src='http://react.semantic-ui.com/assets/images/wireframe/image.png'/>
                 <Card.Content>
                     <Card.Header>
                         {title}
