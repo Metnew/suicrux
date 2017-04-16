@@ -133,11 +133,11 @@ class App extends Component {
                             </div>
                             <Footer/>
                         </main>
+                        {/* show dimmer only if:
+                            1. isLoggedIn, elsewhere sidebar isn't visible
+                            2. if sidebar is opened  */}
+                        {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps}/>}
                     </SidebarSemantic.Pusher>
-                    {/* show dimmer only if:
-                        1. isLoggedIn, elsewhere sidebar isn't visible
-                        2. if sidebar is opened  */}
-                    {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps}/>}
                 </SidebarSemantic.Pushable>
             </div>
         )
