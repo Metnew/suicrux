@@ -11,6 +11,11 @@ class Inbox extends Component {
     }
 
     static propTypes = {
+        // react-router `Route` component's props
+        location: PropTypes.object,
+        history: PropTypes.object,
+        // match can force component to re-render
+        match: PropTypes.object,
         conversations: PropTypes.array,
         getConversations: PropTypes.func
     }
