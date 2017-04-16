@@ -10,9 +10,10 @@
 
 ### What is it?
 
-Production-ready, optimized, robust, fully-featured boilerplate/example for your new PWA.
+Production-ready, optimized, robust, fully-featured boilerplate/example for your **new Progressive Web App**.
 
 #### Lighthouse result - [you can find it here](https://googlechrome.github.io/lighthouse/viewer/?gist=60153b9fc8eda65c8f7de6e110abf5ba)
+86/100 - because of no https and http 1.1 on localhost
 
 #### Includes:
 
