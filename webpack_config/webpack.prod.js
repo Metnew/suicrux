@@ -68,9 +68,7 @@ base.plugins.push(
     new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
     // AppCache + ServiceWorkers
     new OfflinePlugin({
-        relativePaths: false,
         safeToUseOptionalCaches: true,
-        publicPath: '/',
         caches: {
             main: [
                 'vendor.*.css', 'vendor.*.js'
