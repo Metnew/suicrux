@@ -11,10 +11,10 @@
 ### What is it?
 Production-ready, performance-first, optimized, robust, fully-featured boilerplate/example for your **new Progressive Web App**.
 
-##### Lighthouse result - [you can find it here](https://googlechrome.github.io/lighthouse/viewer/?gist=cd19fc335d4dc2abfbba10ee550bd0c8)
+#### Lighthouse result - [you can find it here](https://googlechrome.github.io/lighthouse/viewer/?gist=cd19fc335d4dc2abfbba10ee550bd0c8)
 SPOILER: 97/100. It might be better/worse in your browser.
 
-##### DOMContentLoaded, and etc:
+#### DOMContentLoaded, and etc:
 When app is cached with Service Workers:
 <img src="https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/after-cached.png" />
 
@@ -34,13 +34,15 @@ When app is cached with Service Workers:
     - **HMR**, devServer, hotMiddleware,
     - better code optimization with **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)**,
     - Remove unused css with **[purifycss-webpack](https://github.com/webpack-contrib/purifycss-webpack)**
-- **[Jest](https://facebook.github.io/jest/)** - awesome library for easy testing.
+- **[Jest](https://facebook.github.io/jest/)** and **[Enzyme](https://github.com/airbnb/enzyme)** - awesome libraries for testing.
 - **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
-- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking you import in your bundle only code that you use.
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your progressive app.
+- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking and **[lodash-webpack-plugin](https://github.com/lodash/lodash-webpack-plugin)** you import in your bundle only code that you use.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your next progressive app.
+- [And more tools for building and testing...](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/package.json)
 
 ### Usage
 
+#### Install:
 ```bash
 git clone https://github.com/Metnew/react-semantic.ui-starter.git
 cd react-semantic.ui-starter && rm -rf .git  
@@ -84,9 +86,6 @@ Performance-first.
 ##### Is it official starter from semantic-ui-react ?
 No, (currently no, but maybe... :wink:).
 
-##### JSON-server? Why?
-Maybe it will be useful for some purposes in your project.
-
 ##### "You have a components folder and containers folder..and in the container you have another components folder?"
 
 Components inside `containers/**/components` are components that are required by container.     
@@ -98,6 +97,9 @@ Components in components are components that:
 2. Aren't "isolated".(!)
 
 As your app will increase in size, it can be refactored to similar structure that currently implemented in - [semantic-ui-react]( https://github.com/Semantic-Org/Semantic-UI-React/tree/master/src).
+
+##### JSON-server? Why?
+Maybe it will be useful for some purposes in your project.
 
 ### Where are tests?
 There are tests for actions and for reducers.    
