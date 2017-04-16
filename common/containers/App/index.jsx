@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
-import _ from 'lodash'
 // Accessing PropTypes via the main React package is deprecated.
 // Use the prop-types package from npm instead.
 import PropTypes from 'prop-types'
@@ -89,8 +88,10 @@ class App extends Component {
         } = this.props
 
         // must be refactored, if one of your route looks like `/api/users/:id`
-        // get Title for Header
-        let title = appRouting.filter(a => a.path === location.pathname)[0].name
+        // get currentRoute
+        let currentRoute = appRouting.filter(a => a.path === location.pathname)[0] || {}
+        // title for Header
+        let title = currentRoute.name || '404'
         // routing for sidebar menu
         let sidebarRouting = appRouting.filter(a => a.sidebarVisible).map((a) => {
             let {path, name, icon, external, strict, exact} = a

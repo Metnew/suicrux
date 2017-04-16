@@ -13,7 +13,8 @@ export default class Root extends Component {
     /**
      * Checks Auth logic. Is user allowed to visit certain path?
      * @param  {String} path next path to visit
-     * @return {Bool}      Is allowed to visit?
+     * @return {Boll} is user allowed to visit next location?
+     * check RouteAuth component.
      */
     authCheck(path) {
         let {store} = this.props
@@ -22,7 +23,7 @@ export default class Root extends Component {
         let allowedToVisitPath = [authPath]
         if (loggedIn && path === authPath) {
             return false
-        } else if(!loggedIn && !allowedToVisitPath.includes(path)){
+        } else if (!loggedIn && !allowedToVisitPath.includes(path)) {
             return false
         }
         return true
@@ -34,7 +35,7 @@ export default class Root extends Component {
         return (
             <Provider store={store} key={Math.random()}>
                 <Router history={history} key={Math.random()}>
-                    {routes(::this.authCheck)}
+                    {routes(:: this.authCheck)}
                 </Router>
             </Provider>
         );

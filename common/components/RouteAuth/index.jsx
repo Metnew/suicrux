@@ -12,7 +12,7 @@ class RouteAuth extends Component {
     }
 
     static propTypes = {
-        canAccess: PropTypes.bool,
+        canAccess: PropTypes.func,
         component: PropTypes.func,
         path: PropTypes.string,
         exact: PropTypes.bool,
@@ -28,7 +28,7 @@ class RouteAuth extends Component {
             strict
         }
 
-        return canAccess ? <Route {...routeProps} /> : <Redirect to="/auth" />
+        return canAccess(path) ? <Route {...routeProps} /> : <Redirect to="/auth" />
     }
 }
 

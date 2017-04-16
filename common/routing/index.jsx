@@ -38,9 +38,9 @@ export const appRouting = [
 
 /**
  * Returns application routing with protected by AuthCheck func routes
- * @param {Function} AuthCheck checks is user logged in
+ * @param {Function} authCheck checks is user logged in
  */
-export const Routing = (AuthCheck) => {
+export const Routing = (authCheck) => {
     // remove components that aren't application routes, (e.g. github link in sidebar)
     let routes = appRouting.filter(a => a.tag || a.component)
     // render components that are inside Switch (main view)
@@ -49,7 +49,7 @@ export const Routing = (AuthCheck) => {
         let Tag = a.tag
         let {path, exact, strict, component} = a
         // can visitor access this route?
-        let canAccess = AuthCheck(path)
+        let canAccess = authCheck
         // select only props that we need
         let b = {path, exact, strict, component, canAccess}
         return (<Tag key={i} {...b}/>)
@@ -59,7 +59,7 @@ export const Routing = (AuthCheck) => {
         <App>
             <Switch>
                 {routesRendered}
-                <Redirect from="*" to="/"/>
+                <Redirect to="/"/>
             </Switch>
         </App>
     )
