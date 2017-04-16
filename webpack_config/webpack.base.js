@@ -74,7 +74,6 @@ module.exports = {
             title: config.title,
             template: path.resolve(__dirname, '../common/index.html'),
             filename: _.outputIndexPath
-            // favicon: ,
         }),
         new webpack.DefinePlugin({
             'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
