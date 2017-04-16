@@ -15,17 +15,15 @@ class RouteAuth extends Component {
         canAccess: PropTypes.bool,
         component: PropTypes.func,
         path: PropTypes.string,
-        name: PropTypes.string,
         exact: PropTypes.bool,
         strict: PropTypes.bool
     }
 
     render() {
-        let {canAccess, component, path, name, exact, strict} = this.props
+        let {canAccess, component, path, exact, strict} = this.props
         let routeProps = {
             path,
             component,
-            name,
             exact,
             strict
         }

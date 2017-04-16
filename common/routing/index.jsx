@@ -42,25 +42,16 @@ export const appRouting = [
  */
 export const Routing = (AuthCheck) => {
     // remove components that aren't application routes, (e.g. github link in sidebar)
-    let routes = appRouting.filter(a => a.tag || a.component).map(a => {
-        let {tag, path, exact, component} = a
-        let b = {
-            tag,
-            path,
-            exact,
-            component
-        }
-        return b
-    })
+    let routes = appRouting.filter(a => a.tag || a.component)
     // render components that are inside Switch (main view)
     let routesRendered = routes.map((a, i) => {
         // get tag for Route. is it RouteAuth `protected route` or Route?
         let Tag = a.tag
-        let {path, exact, component} = a
+        let {path, exact, strict, component} = a
         // can visitor access this route?
         let canAccess = AuthCheck(path)
         // select only props that we need
-        let b = {path, exact, component, canAccess}
+        let b = {path, exact, strict, component, canAccess}
         return (<Tag key={i} {...b}/>)
     })
 
