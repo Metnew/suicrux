@@ -11,7 +11,7 @@ class Logo extends Component {
     }
 
     render() {
-        let url = '/images/logo.png'
+        let url = './images/logo.png'
         return (
             <div className="logo">
                 <Image src={url} centered height="34px"/>
