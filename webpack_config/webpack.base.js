@@ -56,7 +56,15 @@ module.exports = {
                 use: 'file-loader?limit=100000'
             }, {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                use: ['file-loader?limit=100000', 'img-loader']
+                use: [
+                    'file-loader?limit=100000', {
+                        loader: 'img-loader',
+                        options: {
+                            enabled: true,
+                            optipng: true
+                        }
+                    }
+                ]
             }
         ]
     },
