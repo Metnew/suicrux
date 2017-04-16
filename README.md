@@ -83,7 +83,7 @@ npm run test # run tests with Jest
 
 ### Also:
 
-[Unstable branch with **latest features**.](https://github.com/Metnew/react-semantic.ui-starter/tree/dev)
+[Unstable branch with **latest features.**](https://github.com/Metnew/react-semantic.ui-starter/tree/dev)
 
 > Have a question? Ask it. :wink:
 
