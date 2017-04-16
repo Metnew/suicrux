@@ -26,6 +26,7 @@ module.exports = {
     babel: {
         babelrc: true
     },
+    // your web app's manifest.json
     manifest: {
         name: 'React-Semantic.UI-Starter',
         short_name: 'RSUIS',
