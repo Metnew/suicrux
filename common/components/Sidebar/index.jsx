@@ -18,13 +18,16 @@ export default class SidebarComponent extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
+        let {open, isMobile, routing} = this.props
         // re-render on isMobile changed
-        if (nextProps.isMobile !== this.props.isMobile) {
+        if (nextProps.isMobile !== isMobile) {
+            return true
+        }
+        if (nextProps.open !== open) {
             return true
         }
         // maybe routing isn't the same
-        let routingSame = !_.isEqual(nextProps.routing, this.props.routing)
-        return routingSame
+        return !_.isEqual(nextProps.routing, routing)
     }
 
     render() {
