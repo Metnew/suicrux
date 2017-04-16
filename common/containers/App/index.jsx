@@ -39,16 +39,16 @@ class App extends Component {
         isMobile: PropTypes.bool
     }
 
-
-    shouldComponentUpdate(nextProps) {
-        let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
-        let matchSame = _.isEqual(nextProps.match, match)
-        let isMobileSame = _.isEqual(nextProps.isMobile, isMobile)
-        let isLoggedInSame = _.isEqual(nextProps.isLoggedIn, isLoggedIn)
-        let sidebarOpenedSame = _.isEqual(nextProps.sidebarOpened, sidebarOpened)
-        // return props that can force us aren't the same
-        return !(matchSame && isMobileSame && isLoggedInSame && sidebarOpenedSame)
-    }
+    // XXX: fix it, I'm tired of this.
+    // shouldComponentUpdate(nextProps) {
+    //     let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
+    //     let matchSame = _.isEqual(nextProps.match, match)
+    //     let isMobileSame = _.isEqual(nextProps.isMobile, isMobile)
+    //     let isLoggedInSame = _.isEqual(nextProps.isLoggedIn, isLoggedIn)
+    //     let sidebarOpenedSame = _.isEqual(nextProps.sidebarOpened, sidebarOpened)
+    //     // return props that can force us aren't the same
+    //     return !(matchSame && isMobileSame && isLoggedInSame && sidebarOpenedSame)
+    // }
 
 
     componentWillMount() {
