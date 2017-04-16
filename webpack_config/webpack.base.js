@@ -47,17 +47,16 @@ module.exports = {
                 enforce: 'pre',
                 use: 'eslint-loader',
                 exclude: [/node_modules/]
-            },
-            {
+            }, {
                 test: /\.(js|jsx)$/,
                 use: 'babel-loader',
                 exclude: [/node_modules/]
             }, {
-                test: /\.(ico|jpg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
+                test: /\.(ico|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
                 use: 'file-loader?limit=100000'
             }, {
-                test: /\.svg$/,
-                use: 'file-loader'
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: ['file-loader?limit=100000', 'img-loader']
             }
         ]
     },
@@ -70,7 +69,7 @@ module.exports = {
             // favicon: ,
         }),
         new webpack.DefinePlugin({
-          'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
+            'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
         }),
         new webpack.LoaderOptionsPlugin(_.loadersOptions()),
         new CopyWebpackPlugin([
