@@ -15,7 +15,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.10",
-    "semantic-ui-react": "^0.67.2",
+    "semantic-ui-react": "^0.68.0",
     "store2": "^2.5.1",
     "whatwg-fetch": "^2.0.3"
   },
