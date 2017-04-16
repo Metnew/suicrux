@@ -8,6 +8,7 @@ const glob = require('glob')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const OfflinePlugin = require('offline-plugin')
@@ -39,18 +40,6 @@ base.plugins.push(
     new ProgressPlugin(),
     new ExtractTextPlugin('[name].[chunkhash:8].css'),
     new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('production')}),
-    new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-            warnings: false
-        },
-        output: {
-            comments: false
-        }
-    }),
-    // extract vendor chunks
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash:8].js'}),
-    new PreloadWebpackPlugin({rel: 'preload', as: 'script', include: 'all'}),
     // remove unused css
     new PurifyCSSPlugin({
         // Give paths to parse for rules. These should be absolute!
@@ -63,6 +52,19 @@ base.plugins.push(
             path.join(__dirname, 'node_modules/semantic-ui-react/dist/**/*.js')
         )
     }),
+    new OptimizeCssAssetsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+            warnings: false
+        },
+        output: {
+            comments: false
+        }
+    }),
+    // extract vendor chunks
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash:8].js'}),
+    new PreloadWebpackPlugin({rel: 'preload', as: 'script', include: 'all'}),
     // For progressive web apps
     // create manifest
     new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
