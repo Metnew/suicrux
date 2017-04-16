@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import {Loader, Item, Grid} from 'semantic-ui-react'
+import _ from 'lodash'
 import InboxItemComponent from './InboxItemComponent'
 
 export default class InboxComponent extends PureComponent {
@@ -10,6 +11,12 @@ export default class InboxComponent extends PureComponent {
 
     static propTypes = {
         conversations: PropTypes.array
+    }
+
+    shouldComponentUpdate(nextProps) {
+        let {conversations} = this.props
+        let nextConversations = nextProps.conversations
+        return !(_.isEqual(conversations, nextConversations))
     }
 
     render() {

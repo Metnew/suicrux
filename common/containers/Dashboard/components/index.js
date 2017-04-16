@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Card, Loader, Grid} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 import DashboardCardComponent from './DashboardCardComponent'
 
 export default class DashboardComponent extends Component {
@@ -10,6 +11,12 @@ export default class DashboardComponent extends Component {
 
     static propTypes = {
         statistics: PropTypes.array
+    }
+
+    shouldComponentUpdate(nextProps) {
+        let {statistics} = this.props
+        let nextStatistics = nextProps.statistics
+        return !(_.isEqual(statistics, nextStatistics))
     }
 
     render() {
