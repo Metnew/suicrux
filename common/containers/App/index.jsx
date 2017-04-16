@@ -23,28 +23,31 @@ class App extends Component {
         // react-router `withRouter` props
         location: PropTypes.object,
         history: PropTypes.object,
+        // match can force component to re-render
         match: PropTypes.object,
 
+        // sidebarOpened can force component to re-render
         sidebarOpened: PropTypes.bool,
         closeSidebar: PropTypes.func,
+        // isLoggedIn can force component to re-render
         isLoggedIn: PropTypes.bool,
         handleWindowResize: PropTypes.func,
         logout: PropTypes.func,
         checkAuthLogic: PropTypes.func,
         toggleSidebar: PropTypes.func,
-        onHeaderRightButtonClick: PropTypes.func,
+        // isMobile can force component to re-render
         isMobile: PropTypes.bool
     }
 
 
     shouldComponentUpdate(nextProps) {
-        let {match} = this.props
-        let nextMatch = nextProps.match
-        // is match is the same
-        if (_.isEqual(match, nextMatch)) {
-            return false
-        }
-        return true
+        let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
+        let matchSame = _.isEqual(nextProps.match, match)
+        let isMobileSame = _.isEqual(nextProps.isMobile, isMobile)
+        let isLoggedInSame = _.isEqual(nextProps.isLoggedIn, isLoggedIn)
+        let sidebarOpenedSame = _.isEqual(nextProps.sidebarOpened, sidebarOpened)
+        // return props that can force us aren't the same
+        return !(matchSame && isMobileSame && isLoggedInSame && sidebarOpenedSame)
     }
 
 
