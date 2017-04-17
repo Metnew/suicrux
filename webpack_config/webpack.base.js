@@ -37,45 +37,52 @@ module.exports = {
         modules: [
             // places where to search for required modules
             _.cwd('common'),
-            _.cwd('node_modules'),
-            _.cwd('./')
+            _.cwd('node_modules')
         ]
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(js|jsx)$/,
                 enforce: 'pre',
-                loaders: ['eslint-loader'],
+                use: 'eslint-loader',
                 exclude: [/node_modules/]
-            },
-            {
+            }, {
                 test: /\.(js|jsx)$/,
-                loaders: ['babel-loader'],
+                use: 'babel-loader',
                 exclude: [/node_modules/]
             }, {
-                test: /\.(ico|jpg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
-                loader: 'file-loader?limit=100000'
+                test: /\.(ico|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
+                use: 'file-loader?limit=100000'
             }, {
-                test: /\.svg$/,
-                loader: 'file-loader'
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    'file-loader?limit=100000', {
+                        loader: 'img-loader',
+                        options: {
+                            enabled: true,
+                            optipng: true
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({
-          'process.env.BUILD_GH_PAGES': JSON.stringify(!!process.env.BUILD_GH_PAGES)
-        }),
+        // add index.html
         new HtmlWebpackPlugin({
             title: config.title,
             template: path.resolve(__dirname, '../common/index.html'),
             filename: _.outputIndexPath
         }),
+        new webpack.DefinePlugin({
+            'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
+        }),
         new webpack.LoaderOptionsPlugin(_.loadersOptions()),
         new CopyWebpackPlugin([
             {
                 from: _.cwd('./static'),
-                // to the root of dist path
+                // to the root of the dist path
                 to: './'
             }
         ])

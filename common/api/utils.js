@@ -4,9 +4,6 @@
 
 
 import {getLocalToken} from 'api/AuthSvc';
-import config from 'config'
-
-window.BASE_API = config.BASE_API
 
 function requestWrapper(method) {
     return async function(url, data = null, params = {}) {

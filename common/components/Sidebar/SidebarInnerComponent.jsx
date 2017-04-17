@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import {NavLink} from 'react-router-dom'
 import {Menu, Icon} from 'semantic-ui-react'
 import Logo from './Logo'
+import _ from 'lodash'
 import './Sidebar.scss'
 
 export default class SidebarInnerComponent extends Component {
@@ -10,26 +12,33 @@ export default class SidebarInnerComponent extends Component {
     }
 
     static propTypes = {
-        logout: React.PropTypes.func,
-        routing: React.PropTypes.array
+        logout: PropTypes.func,
+        routing: PropTypes.array
     }
 
-    shouldComponentUpdate() {
-        return false
+    shouldComponentUpdate(nextProps) {
+        return !_.isEqual(nextProps.routing, this.props.routing)
     }
-
-
 
     render() {
         const {logout, routing} = this.props
 
         let routes = routing.map((route, i) => {
-            let {external, href, icon, name} = route
+            let {external, path, icon, name, strict, exact} = route
             let propsMenuItem = {
-                as: external ? 'a' : Link,
+                as: external ? 'a' : NavLink,
                 link: true,
                 key: i,
-                [external ? 'href' : 'to']: href
+                [external ? 'href' : 'to']: path
+            }
+
+            if (!external) {
+                propsMenuItem = {
+                    ...propsMenuItem,
+                    strict,
+                    exact,
+                    activeClassName: 'active'
+                }
             }
 
             return (
@@ -38,8 +47,6 @@ export default class SidebarInnerComponent extends Component {
                 </Menu.Item>
             )
         })
-
-
 
         return (
             <div>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {Image} from 'semantic-ui-react'
 
 class Logo extends Component {
@@ -11,7 +11,7 @@ class Logo extends Component {
     }
 
     render() {
-        let url = 'http://react.semantic-ui.com/logo.png'
+        let url = './images/logo.png'
         return (
             <div className="logo">
                 <Image src={url} centered height="34px"/>

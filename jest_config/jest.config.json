@@ -5,8 +5,22 @@
     "automock": false,
     "moduleNameMapper": {
         "^actions$": "<rootDir>/common/actions",
+        "^actions/auth$": "<rootDir>/common/actions/auth",
+        "^actions/common$": "<rootDir>/common/actions/common",
+        "^actions/dashboard$": "<rootDir>/common/actions/dashboard",
+        "^actions/inbox$": "<rootDir>/common/actions/inbox",
+        "^actions/layout$": "<rootDir>/common/actions/layout",
+
         "^api": "<rootDir>/common/api",
+
         "^reducers$": "<rootDir>/common/reducers",
+        "^reducers/auth$": "<rootDir>/common/reducers/auth",
+        "^reducers/common$": "<rootDir>/common/reducers/common",
+        "^reducers/dashboard$": "<rootDir>/common/reducers/dashboard",
+        "^reducers/inbox$": "<rootDir>/common/reducers/inbox",
+        "^reducers/layout$": "<rootDir>/common/reducers/layout",
+        "^reducers/login_component_reducer$": "<rootDir>/common/reducers/login_component_reducer",
+
         "^routing": "<rootDir>/common/routing",
         "^components$": "<rootDir>/common/components",
         "^containers$": "<rootDir>/common/containers",

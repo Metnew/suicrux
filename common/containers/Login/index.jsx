@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import {LOGIN_AUTH, RECOVER_PASSWORD_AUTH, REGISTER_AUTH} from 'actions/auth'
 import LoginComponent from './components/LoginComponent'
 
@@ -9,10 +10,10 @@ class Login extends Component {
     }
 
     static propTypes = {
-        login: React.PropTypes.func.isRequired,
-        register: React.PropTypes.func.isRequired,
-        forgetPassword: React.PropTypes.func.isRequired,
-        componentState: React.PropTypes.object.isRequired // login component state
+        login: PropTypes.func.isRequired,
+        register: PropTypes.func.isRequired,
+        forgetPassword: PropTypes.func.isRequired,
+        componentState: PropTypes.object.isRequired // login component state
     }
 
     render() {
@@ -26,7 +27,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     return {
-        // state.login_component
+        // state.login_component_reducer
         componentState: state.loginCR
     }
 }

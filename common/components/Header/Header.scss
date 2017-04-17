@@ -17,25 +17,29 @@ header {
     }
 
     @include respond-to('lg') {
-        height: 70px;
+        height: 72px;
     }
 
     .header-inner {
         display: flex;
         padding: 0 15px;
 
+        .navicon {
+            width: 48px;
+            height: 48px;
+            padding: 12px;
+            line-height: 1;
+            font-size: 24px;
+            @include respond-to('lg') {
+                display: none;
+            }
+        }
+
         span.title {
             line-height: 1;
             font-size: 24px;
             align-items: center;
             display: flex;
-
-            i {
-                @include respond-to('lg') {
-                    display: none;
-                }
-                margin-right: 8px;
-            }
         }
     }
 }

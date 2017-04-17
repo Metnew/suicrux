@@ -1,7 +1,7 @@
 import {GET_STATISTICS_SUCCESS, GET_STATISTICS_FAIL} from 'actions/dashboard'
 import {LOCATION_CHANGE} from 'actions/common'
 
-const initialState = {
+export const initialState = {
     statistics: []
 }
 

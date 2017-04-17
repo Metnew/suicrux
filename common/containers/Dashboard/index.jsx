@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 import DashboardComponent from './components'
 import {GET_STATISTICS} from 'actions/dashboard'
 
@@ -9,8 +10,8 @@ class Dashboard extends Component {
     }
 
     static propTypes = {
-        statistics: React.PropTypes.array,
-        getStatistics: React.PropTypes.func.isRequired
+        statistics: PropTypes.array,
+        getStatistics: PropTypes.func.isRequired
     }
 
     componentDidMount() {

@@ -1,6 +1,7 @@
 import {resultOK} from 'api/utils'
 import {getInbox_API} from 'api/InboxSvc'
 
+// define action types
 export const GET_INBOX_SUCCESS = 'GET_INBOX_SUCCESS'
 export const GET_INBOX_FAIL = 'GET_INBOX_FAIL'
 

@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "7"
+install:
+    - npm install -g codecov
+    - npm install -g codeclimate-test-reporter
+    - "npm install"
+script:
+    - "npm run db & npm run test"
+after_script:
+    - codecov

@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import {
     Item,
     Label,
@@ -12,14 +13,14 @@ export default class InboxItemComponent extends PureComponent {
     }
 
     static propTypes = {
-        date: React.PropTypes.string,
-        name: React.PropTypes.string,
-        username: React.PropTypes.string,
-        address: React.PropTypes.object,
-        email: React.PropTypes.string,
-        website: React.PropTypes.string,
-        phone: React.PropTypes.string,
-        item: React.PropTypes.object
+        date: PropTypes.string,
+        name: PropTypes.string,
+        username: PropTypes.string,
+        address: PropTypes.object,
+        email: PropTypes.string,
+        website: PropTypes.string,
+        phone: PropTypes.string,
+        item: PropTypes.object
     }
 
     render() {

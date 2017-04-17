@@ -1,9 +1,7 @@
-'use strict';
-
-import baseConfig from './base';
+import baseConfig from './base'
 
 let config = {
-    BASE_API: 'http://localhost:3333/api/v1'
-};
+    BASE_API: 'http://localhost:4000/api/v1'
+}
 
-export default Object.freeze(Object.assign({}, baseConfig, config));
+export default Object.freeze(Object.assign({}, baseConfig, config))

@@ -1,11 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
+// Accessing PropTypes via the main React package is deprecated.
+// Use the prop-types package from npm instead.
+import PropTypes from 'prop-types'
+import {push} from 'react-router-redux'
 import {Dimmer, Sidebar as SidebarSemantic, Container} from 'semantic-ui-react'
 import {Header, Sidebar, Footer} from 'components'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
-import {push} from 'react-router-redux'
-import {sidebarRouting} from 'routing'
+import {appRouting} from 'routing'
 import './App.scss'
 
 class App extends Component {
@@ -14,19 +18,36 @@ class App extends Component {
     }
 
     static propTypes = {
-        children: React.PropTypes.node.isRequired,
-        location: React.PropTypes.object,
-        sidebarOpened: React.PropTypes.bool,
-        closeSidebar: React.PropTypes.func,
-        isLoggedIn: React.PropTypes.bool,
-        handleWindowResize: React.PropTypes.func,
-        logout: React.PropTypes.func,
-        checkAuthLogic: React.PropTypes.func,
-        toggleSidebar: React.PropTypes.func,
-        onHeaderRightButtonClick: React.PropTypes.func,
-        router: React.PropTypes.object,
-        isMobile: React.PropTypes.bool
+        children: PropTypes.node.isRequired,
+        // react-router `withRouter` props
+        location: PropTypes.object,
+        history: PropTypes.object,
+        // match can force component to re-render
+        match: PropTypes.object,
+
+        // sidebarOpened can force component to re-render
+        sidebarOpened: PropTypes.bool,
+        closeSidebar: PropTypes.func,
+        // isLoggedIn can force component to re-render
+        isLoggedIn: PropTypes.bool,
+        handleWindowResize: PropTypes.func,
+        logout: PropTypes.func,
+        checkAuthLogic: PropTypes.func,
+        toggleSidebar: PropTypes.func,
+        // isMobile can force component to re-render
+        isMobile: PropTypes.bool
     }
+
+    // XXX: fix it, I'm tired of this.
+    // shouldComponentUpdate(nextProps) {
+    //     let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
+    //     let matchSame = _.isEqual(nextProps.match, match)
+    //     let isMobileSame = _.isEqual(nextProps.isMobile, isMobile)
+    //     let isLoggedInSame = _.isEqual(nextProps.isLoggedIn, isLoggedIn)
+    //     let sidebarOpenedSame = _.isEqual(nextProps.sidebarOpened, sidebarOpened)
+    //     // return props that can force us aren't the same
+    //     return !(matchSame && isMobileSame && isLoggedInSame && sidebarOpenedSame)
+    // }
 
 
     componentWillMount() {
@@ -35,16 +56,19 @@ class App extends Component {
         this.checkAppAuthLogic(isLoggedIn)
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return !_.isEqual(this.props, nextProps) && !_.isEqual(nextState, this.state)
+    // }
+
     /**
      * Call checkAuthLogic
      * @param  {Bool} loggedIn state.auth.loggedIn, current prop
      * @return {Bool} Nothing
      */
     checkAppAuthLogic(loggedIn) {
-        let {router, checkAuthLogic} = this.props
-        let path = router.getCurrentLocation().pathname
+        let {location, checkAuthLogic} = this.props
+        let path = location.pathname
         checkAuthLogic(path, loggedIn)
-        return false
     }
 
     componentWillReceiveProps(nextProps) {
@@ -58,12 +82,22 @@ class App extends Component {
             closeSidebar,
             isLoggedIn,
             logout,
-            onHeaderRightButtonClick,
             toggleSidebar,
+            location,
             isMobile
         } = this.props
 
-        let title = children.props.route.name
+        // must be refactored, if one of your route looks like `/api/users/:id`
+        // get currentRoute
+        let currentRoute = appRouting.filter(a => a.path === location.pathname)[0] || {}
+        // title for Header
+        let title = currentRoute.name || '404'
+        // routing for sidebar menu
+        let sidebarRouting = appRouting.filter(a => a.sidebarVisible).map((a) => {
+            let {path, name, icon, external, strict, exact} = a
+            let b = {path, name, icon, external, strict, exact}
+            return b
+        })
 
         let sidebarProps = {
             isMobile,
@@ -75,12 +109,11 @@ class App extends Component {
         let headerProps = {
             toggleSidebar,
             title,
-            isLoggedIn,
-            onHeaderRightButtonClick
+            isLoggedIn
         }
 
         let dimmerProps = {
-            active: sidebarOpened,
+            active: true,
             onClick: closeSidebar
         }
 
@@ -89,8 +122,11 @@ class App extends Component {
                 <SidebarSemantic.Pushable>
                     {isLoggedIn && <Sidebar {...sidebarProps}/>}
                     <SidebarSemantic.Pusher>
+                    {/* Semantic ui currently(16.04.16) doesn't have closeDimmerOnClick or smth else
+                        So, instead of it, we can use simple <Dimmer> component*/}
+                    {/* <SidebarSemantic.Pusher dimmed={sidebarOpened}> */}
+                        <Header {...headerProps}/>
                         <main>
-                            <Header {...headerProps}/>
                             <div className="main-content">
                                 <Container>
                                     { children}
@@ -98,8 +134,11 @@ class App extends Component {
                             </div>
                             <Footer/>
                         </main>
+                        {/* show dimmer only if:
+                            1. isLoggedIn, elsewhere sidebar isn't visible
+                            2. if sidebar is opened  */}
+                        {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps}/>}
                     </SidebarSemantic.Pusher>
-                    {isLoggedIn && <Dimmer {...dimmerProps}/>}
                 </SidebarSemantic.Pushable>
             </div>
         )
@@ -127,7 +166,6 @@ function mapDispatchToProps(dispatch) {
         toggleSidebar: () => {
             dispatch(OPEN_SIDEBAR())
         },
-        onHeaderRightButtonClick: () => {},
         /**
          * Immediately push to homePath('/'), if user is logged.
          * Can be used for other auth logic checks.
@@ -151,4 +189,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
