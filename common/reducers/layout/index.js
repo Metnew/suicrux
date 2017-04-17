@@ -3,7 +3,6 @@ import {LOCATION_CHANGE, APP_INIT} from 'actions/common'
 
 export const initialState = {
     sidebarOpened: false,
-    obfuscatorActive: false,
     isMobile: false
 }
 
