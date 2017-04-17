@@ -7,11 +7,7 @@ server.use(middlewares);
 server.use('fake_api_that_you_may_use_one_day/v1', router)
 
 server.post('/api/v1/auth', function(req, res) {
-    res.json({
-        data: {
-            token: 'nothing'
-        }
-    })
+    res.json({token: 'nothing'})
 })
 
 server.listen(4000, function() {
