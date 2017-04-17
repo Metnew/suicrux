@@ -15,7 +15,6 @@ const OfflinePlugin = require('offline-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const base = require('./webpack.base')
 const config = require('./config')
-const _ = require('./utils')
 
 exec('rm -rf dist/')
 base.devtool = 'cheap-source-map'

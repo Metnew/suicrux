@@ -2,12 +2,9 @@
 process.env.NODE_ENV = 'development'
 process.env.REACT_WEBPACK_ENV = 'dev'
 
-const path = require('path')
 const webpack = require('webpack')
 const base = require('./webpack.base')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
-const config = require('./config')
-const _ = require('./utils')
 
 base.devtool = 'eval-source-map'
 base.module.rules.push({
