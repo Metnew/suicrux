@@ -38,7 +38,7 @@ When app is cached with Service Workers:
     - Remove unused css with **[purifycss-webpack](https://github.com/webpack-contrib/purifycss-webpack)**
 - **[Jest](https://facebook.github.io/jest/)** and **[Enzyme](https://github.com/airbnb/enzyme)** - awesome libraries for testing.
 - **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
-- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking and **[lodash-webpack-plugin](https://github.com/lodash/lodash-webpack-plugin)** you import in your bundle only code that you use.
+- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react, but with tree-shaking you import in bundle only code that you use.
 - **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your next progressive app.
 - [And more tools for building and testing...](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/package.json)
 
