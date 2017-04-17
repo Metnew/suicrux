@@ -10,7 +10,9 @@ describe('Auth actions', () => {
 
         const expectedActions = {
             type: actions.LOGIN_AUTH_SUCCESS,
-            result: {}
+            result: {
+                token: 'nothing'
+            }
         }
 
         const store = mockStore({})
