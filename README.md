@@ -110,8 +110,8 @@ Each reducer/action has own folder, where you can find:
 2. Tests for it.
 
 ### How to write tests?
-You can find [action testing example here](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/actions/auth/index.test.js)         
-It uses [redux-mock-store](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/actions/auth/index.test.js)
+You can find [action testing example here.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/actions/auth/index.test.js)         
+It uses [redux-mock-store.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/actions/auth/index.test.js)
 
 ### How Auth works?
 Migration from React-Router v3 to v4 may cause some problems.     
