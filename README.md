@@ -6,11 +6,13 @@
 
 ## DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
 
-[![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=master)](https://travis-ci.org/Metnew/react-semantic.ui-starter) 
+[![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=master)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
 [![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter)
-[![David](https://img.shields.io/david/metnew/react-semantic.ui-starter.svg)]() 
-[![David](https://img.shields.io/david/dev/metnew/react-semantic.ui-starter.svg)]() 
-[![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter) 
+[![David](https://img.shields.io/david/metnew/react-semantic.ui-starter.svg)]()
+[![David](https://img.shields.io/david/dev/metnew/react-semantic.ui-starter.svg)]()
+[![Known Vulnerabilities](https://snyk.io/test/github/metnew/react-semantic.ui-starter/badge.svg)](https://snyk.io/test/github/metnew/react-semantic.ui-starter)
+[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ### What is it?
 Production-ready, performance-first, optimized, robust, fully-featured boilerplate/example for your **new Progressive Web App**.
@@ -98,10 +100,7 @@ Components in components are components that:
 1. Don't have own logic and connection with state (as opposite to containers)
 2. Aren't "isolated".(!)
 
-As your app's components will increase in size, it can be refactored to similar structure that currently implemented in - [semantic-ui-react]( https://github.com/Semantic-Org/Semantic-UI-React/tree/master/src).
-
-#### JSON-server? Why?
-Maybe it will be useful for some purposes in your project.
+As your app's components will increase in size, it can be refactored to similar structure that implemented in - [semantic-ui-react]( https://github.com/Semantic-Org/Semantic-UI-React/tree/master/src).
 
 #### Where are tests?
 There are tests for actions and for reducers.    
@@ -117,18 +116,22 @@ It uses [redux-mock-store.](https://github.com/Metnew/react-semantic.ui-starter/
 Migration from React-Router v3 to v4 may cause some problems.     
 There is no `onEnter` props in `Route` component.    
 
-So, we can solve it that way:
-1. Implement [global routing object.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/routing/index.jsx#L9)
-2. Implement [RouteAuth](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/components/RouteAuth/index.jsx) component that protects child component from unauthorized users.
+But we still can solve it:
+1. Create [global routing object.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/routing/index.jsx#L9)
+2. Create [RouteAuth](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/components/RouteAuth/index.jsx) component that protects child component from unauthorized users.
 3. Pass function that checks is user allowed to visit route as prop [in every `RouteAuth` component.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/routing/index.jsx#L52)
 4. When RouteAuth renders [it calls that function.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/routing/index.jsx#L52)
 5. As [`authCheck` function can call redux store](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/components/Root/index.jsx#L19-L30), we can access redux's state before `Route` is rendered.
 6. Profit!!!!!
 7. We have access to redux state in function that allows `Route` to be rendered.
-8. Also, there is an additional handler for [auth logic in App container.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/containers/App/index.jsx#L178-L184)
+8. Also, there is a handler for [auth logic in App container.](https://github.com/Metnew/react-semantic.ui-starter/blob/dev/common/containers/App/index.jsx#L178-L184)
 
 #### How built app looks?
 **[Like this.](https://github.com/Metnew/react-semantic.ui-starter/tree/gh-pages)**
+
+#### Your code doesn't follow Standard.js!
+Yes, because of tabs.     
+You can remove `rules` property from `.eslinrc.json` and it will follow. Also eslint `--fix` is active, you can change it in `/webpack_config/webpack.base.js`
 
 ### Also:
 
