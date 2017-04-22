@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {loginCR as reducer} from 'reducers/login_component_reducer'
 import * as actions from 'actions'
 

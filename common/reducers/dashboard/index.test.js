@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {dashboard as reducer, initialState} from 'reducers/dashboard'
 import * as actions from 'actions'
 

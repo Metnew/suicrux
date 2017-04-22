@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {inbox as reducer, initialState} from 'reducers/inbox'
 import * as actions from 'actions'
 

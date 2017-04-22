@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {layout as reducer} from 'reducers/layout'
 import * as actions from 'actions'
 

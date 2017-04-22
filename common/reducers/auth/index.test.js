@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {auth as reducer, initialState} from 'reducers/auth'
 import * as actions from 'actions'
 
