@@ -45,7 +45,15 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 enforce: 'pre',
-                use: 'eslint-loader',
+                use: [
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            // be carefull
+                            fix: true
+                        }
+                    }
+                ],
                 exclude: [/node_modules/]
             }, {
                 test: /\.(js|jsx)$/,
@@ -78,7 +86,6 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
         }),
-        new webpack.LoaderOptionsPlugin(_.loadersOptions()),
         new CopyWebpackPlugin([
             {
                 from: _.cwd('./static'),

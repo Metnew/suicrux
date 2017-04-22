@@ -22,10 +22,6 @@ module.exports = {
         'offline-plugin/runtime',
         'prop-types'
     ],
-    // enable babelrc
-    babel: {
-        babelrc: true
-    },
     // your web app's manifest.json
     manifest: {
         name: 'React-Semantic.UI-Starter',
@@ -54,6 +50,5 @@ module.exports = {
         display: 'standalone',
         background_color: '#f7f7f7',
         theme_color: '#1b1c1d'
-    },
-    cssModules: true
+    }
 }
