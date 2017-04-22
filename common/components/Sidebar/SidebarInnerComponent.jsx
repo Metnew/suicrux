@@ -2,61 +2,53 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {NavLink} from 'react-router-dom'
 import {Menu, Icon} from 'semantic-ui-react'
-import Logo from './Logo'
-import _ from 'lodash'
+import {Logo} from 'components'
+// import _ from 'lodash'
 import './Sidebar.scss'
 
 export default class SidebarInnerComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+	static propTypes = {
+		logout: PropTypes.func,
+		routing: PropTypes.array
+	}
 
-    static propTypes = {
-        logout: PropTypes.func,
-        routing: PropTypes.array
-    }
+	render () {
+		const {logout, routing} = this.props
 
-    shouldComponentUpdate(nextProps) {
-        return !_.isEqual(nextProps.routing, this.props.routing)
-    }
+		let routes = routing.map((route, i) => {
+			let {external, path, icon, name, strict, exact} = route
+			let propsMenuItem = {
+				as: external ? 'a' : NavLink,
+				link: true,
+				key: i,
+				[external ? 'href' : 'to']: path
+			}
 
-    render() {
-        const {logout, routing} = this.props
+			if (!external) {
+				propsMenuItem = {
+					...propsMenuItem,
+					strict,
+					exact,
+					activeClassName: 'active'
+				}
+			}
 
-        let routes = routing.map((route, i) => {
-            let {external, path, icon, name, strict, exact} = route
-            let propsMenuItem = {
-                as: external ? 'a' : NavLink,
-                link: true,
-                key: i,
-                [external ? 'href' : 'to']: path
-            }
+			return (
+				<Menu.Item {...propsMenuItem} icon>
+					<Icon name={icon} /> {name}
+				</Menu.Item>
+			)
+		})
 
-            if (!external) {
-                propsMenuItem = {
-                    ...propsMenuItem,
-                    strict,
-                    exact,
-                    activeClassName: 'active'
-                }
-            }
-
-            return (
-                <Menu.Item {...propsMenuItem} icon>
-                    <Icon name={icon}/> {name}
-                </Menu.Item>
-            )
-        })
-
-        return (
-            <div>
-                <Logo centered/>
-                {routes}
-                <Menu.Item className="logout" onClick={logout}>
-                    <Icon name='sign out'/>
-                    Logout
-                </Menu.Item>
-            </div>
-        )
-    }
+		return (
+			<div>
+				<Logo centered />
+				{routes}
+				<Menu.Item className="logout" onClick={logout}>
+					<Icon name="sign out" />
+					Logout
+				</Menu.Item>
+			</div>
+		)
+	}
 }
