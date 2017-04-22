@@ -1,6 +1,5 @@
 import React from 'react'
 import {render} from 'react-dom'
-import 'whatwg-fetch'
 // Styles
 import 'styles/index.scss'
 import 'semantic-ui-css/semantic.css'

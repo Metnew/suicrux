@@ -15,7 +15,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.10",
-    "semantic-ui-react": "^0.68.1",
+    "semantic-ui-react": "^0.68.0",
     "store2": "^2.5.1",
     "whatwg-fetch": "^2.0.3"
   },
@@ -23,7 +23,7 @@
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.2",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^6.4.1",
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-regenerator": "^6.24.1",
@@ -72,7 +72,7 @@
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "2.4.1",
-    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-manifest-plugin": "^1.1.0",
     "why-did-you-update": "0.0.8"
