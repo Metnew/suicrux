@@ -24,6 +24,14 @@ header {
         display: flex;
         padding: 0 15px;
 
+        @include respond-to('sm', 'xs') {
+            padding: 0 5px;
+        }
+
+        @include respond-to('lg') {
+            padding: 0 15px;
+        }
+
         .navicon {
             width: 48px;
             height: 48px;
