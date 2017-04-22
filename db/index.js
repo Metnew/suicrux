@@ -1,7 +1,6 @@
 var jsonServer = require('json-server')
 var server = jsonServer.create()
 var router = jsonServer.router('./db/db.json')
-var path = require('path')
 var middlewares = jsonServer.defaults()
 server.use(middlewares)
 server.use('fake_api_that_you_may_use_one_day/v1', router)

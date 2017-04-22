@@ -1,9 +1,12 @@
 import express from 'express'
-import createMemoryHistory from 'history/lib/createMemoryHistory'
-import {RoutingContext, match} from 'react-router'
+import React from 'react'
 import {renderToString} from 'react-dom'
+// react-router
+// import createMemoryHistory from 'history/lib/createMemoryHistory'
+// import {RoutingContext, match} from 'react-router'
+// Application
 import {configureStore, configureRootComponent} from './index'
-import {Root} from 'components'
+// import {Root} from 'components'
 
 const app = express()
 const port = 8080
