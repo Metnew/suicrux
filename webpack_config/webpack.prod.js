@@ -22,14 +22,14 @@ base.module.rules.push(
 	{
 		test: /\.css$/,
 		use: ExtractTextPlugin.extract({
-			fallback: 'isomorphic-style-loader',
+			fallback: 'style-loader',
 			use: 'css-loader'
 		})
 	},
 	{
 		test: /\.scss$/,
 		use: ExtractTextPlugin.extract({
-			fallback: 'isomorphic-style-loader',
+			fallback: 'style-loader',
 			use: ['css-loader', 'sass-loader']
 		})
 	}
