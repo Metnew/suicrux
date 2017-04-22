@@ -1,5 +1,5 @@
-import {get} from './utils';
+import {get} from './utils'
 
-export async function getInbox_API() {
-    return await get('https://jsonplaceholder.typicode.com/users')
+export async function getInboxAPI () {
+	return get('https://jsonplaceholder.typicode.com/users')
 }
