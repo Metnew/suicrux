@@ -79,6 +79,9 @@ npm run test # run tests with Jest
 
 ### FAQ
 
+#### Where are static assets?
+You can store static assets (images, videos) in `/static` folder.
+
 #### Where is manifest.json?
 You can find it in `webpack_config/config.js`
 
