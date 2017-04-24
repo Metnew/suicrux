@@ -26,6 +26,7 @@ module.exports = {
 			reducers: `${config.srcPath}/reducers/`,
 			components: `${config.srcPath}/components/`,
 			containers: `${config.srcPath}/containers/`,
+			routing: `${config.srcPath}/routing/`,
 			styles: `${config.srcPath}/styles/`,
 			scss_vars: `${config.srcPath}/styles/vars.scss`,
 			config: `${config.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
