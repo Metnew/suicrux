@@ -147,7 +147,6 @@ You can remove `rules` property from `.eslinrc.json` and it will follow. Also es
 PRs, and issues are welcome :smiling_imp:
 
 ### Author
-
 Vladimir Metnew <vladimirmetnew@gmail.com>
 
 ### LICENSE

@@ -13,7 +13,7 @@ export default class Root extends Component {
 	/**
      * Checks Auth logic. Is user allowed to visit certain path?
      * @param  {String} path next path to visit
-     * @return {Boll} is user allowed to visit next location?
+     * @return {Bool} is user allowed to visit next location?
      * check RouteAuth component.
      */
 	authCheck (path) {
