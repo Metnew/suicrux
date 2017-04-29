@@ -1,7 +1,5 @@
 'use strict'
 const path = require('path')
-const config = require('./config')
-
 const _ = (module.exports = {})
 
 _.cwd = file => {
