@@ -134,10 +134,6 @@ But we still can solve it:
 #### How built app looks?
 **[Like this.](https://github.com/Metnew/react-semantic.ui-starter/tree/gh-pages)**
 
-#### Your code doesn't follow Standard.js!
-Yes, because of tabs.     
-You can remove `rules` property from `.eslinrc.json` and it will follow. Also eslint `--fix` is active, you can change it in `/webpack_config/webpack.base.js`
-
 ### Also:
 
 [Unstable branch with **latest features.**](https://github.com/Metnew/react-semantic.ui-starter/tree/dev)
