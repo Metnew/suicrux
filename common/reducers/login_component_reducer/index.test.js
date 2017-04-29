@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {loginCR as reducer} from 'reducers/login_component_reducer'
+import { loginCR as reducer } from 'reducers/login_component_reducer'
 import * as actions from 'actions'
 
 const initialState = {
@@ -18,7 +18,7 @@ const LOGIN_AUTH_SUCCESS = {
 
 describe('LOGIN_COMPONENT REDUCER', () => {
     it('should return the initial state', () => {
-        expect(reducer(undefined, {x:'string'})).toEqual(initialState)
+        expect(reducer(undefined, { x: 'string' })).toEqual(initialState)
     })
 
     it('should handle LOGIN_AUTH_FAIL', () => {

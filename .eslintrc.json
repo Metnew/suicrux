@@ -18,17 +18,5 @@
         "node": true
     },
     "rules": {
-        "comma-dangle": 1,
-        "array-bracket-spacing": ["error", "never"],
-        "babel/object-curly-spacing": 1,
-        "global-strict": 0,
-        "semi": 1,
-        "no-extra-semi": 1,
-        "no-trailing-spaces": [1, {
-            "skipBlankLines": true
-        }],
-        "react/jsx-indent": [2, "tab"],
-        "no-tabs": 0,
-        "indent": ["error", "tab"]
     }
 }

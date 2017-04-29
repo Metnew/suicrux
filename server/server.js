@@ -14,24 +14,24 @@ const port = 8080
 app.get(handleRender)
 
 function handleRender (req, res) {
-	// const params = qs.parse(req.query)
-	// const counter = parseInt(params.counter, 10) || 0
+  // const params = qs.parse(req.query)
+  // const counter = parseInt(params.counter, 10) || 0
 
-	// Compile an initial state
-	let initialState = {lol: 10}
+  // Compile an initial state
+  let initialState = {lol: 10}
 
-	const store = configureStore(initialState)
-	const RootComponent = configureRootComponent(store)
+  const store = configureStore(initialState)
+  const RootComponent = configureRootComponent(store)
 
-	const html = renderToString(<RootComponent />)
+  const html = renderToString(<RootComponent />)
 
-	const finalState = store.getState()
+  const finalState = store.getState()
 
-	res.send(renderFullPage(html, finalState))
+  res.send(renderFullPage(html, finalState))
 }
 
 function renderFullPage (html, preloadedState) {
-	return `
+  return `
     <!doctype html>
     <html>
       <head>
@@ -51,5 +51,5 @@ function renderFullPage (html, preloadedState) {
 }
 
 app.listen(port, () => {
-	console.log(`> App is listening on ${port}.`)
+  console.log(`> App is listening on ${port}.`)
 })
