@@ -19,34 +19,34 @@ import {Routing, history} from 'routing'
 import config from 'config'
 
 export const configureStore = initialState => {
-	let middleware = applyMiddleware(routerMiddleware(history))
-	let thunkApplied = applyMiddleware(thunk)
+  let middleware = applyMiddleware(routerMiddleware(history))
+  let thunkApplied = applyMiddleware(thunk)
 
-	if (process.env.NODE_ENV === 'development') {
-		thunkApplied = composeWithDevTools(thunkApplied)
-	}
+  if (process.env.NODE_ENV === 'development') {
+    thunkApplied = composeWithDevTools(thunkApplied)
+  }
 
-	return createStore(rootReducer, thunkApplied, middleware, initialState)
+  return createStore(rootReducer, thunkApplied, middleware, initialState)
 }
 
 export const configureRootComponent = store => {
-	let propsRoot = {
-		routes: Routing,
-		history,
-		store,
-		key: Math.random()
-	}
+  let propsRoot = {
+    routes: Routing,
+    history,
+    store,
+    key: Math.random()
+  }
 
-	return <Root {...propsRoot} />
+  return <Root {...propsRoot} />
 }
 
 window.BASE_API = config.BASE_API
 
 if (process.env.NODE_ENV === 'production') {
-	require('./pwa')
+  require('./pwa')
 } else if (process.env.NODE_ENV === 'development') {
-	window.Perf = Perf
-	whyDidYouUpdate(React)
+  window.Perf = Perf
+  whyDidYouUpdate(React)
 }
 
 const preloadedState = window.__PRELOADED_STATE__ || {}
@@ -58,5 +58,5 @@ let RootComponent = configureRootComponent(store)
 render(RootComponent, document.getElementById('app'))
 
 if (module.hot) {
-	module.hot.accept()
+  module.hot.accept()
 }
