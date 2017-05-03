@@ -105,7 +105,7 @@ Components in components are components that:
 1. Don't have own logic and connection with state (as opposite to containers)
 2. Aren't "isolated".(!)
 
-As your app's components increase in size, they can be refactored to similar structure that implemented in - [semantic-ui-react]( https://github.com/Semantic-Org/Semantic-UI-React/tree/master/src).
+As your app's `components` folder increases in size, it could be refactored to similar structure that implemented in [semantic-ui-react]( https://github.com/Semantic-Org/Semantic-UI-React/tree/master/src).
 
 #### Where are tests?
 There are tests for actions and for reducers.
