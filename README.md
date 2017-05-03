@@ -92,9 +92,6 @@ It's under active development inside `/server` folder.
 Performance-first.
 **Main purpose - build highly customizable skeleton for PWA, with SSR, following best practices.**
 
-#### Is it official starter from semantic-ui-react ?
-No, (currently no, but maybe... :wink:).
-
 #### "You have a components folder and containers folder..and in the container you have another components folder?"
 
 Components inside `containers/**/components` are components that are required by container.
