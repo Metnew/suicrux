@@ -17,7 +17,8 @@
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.68.3",
     "store2": "^2.5.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "snyk": "^1.30.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -83,7 +84,9 @@
     "build:demo": "BUILD_DEMO=true webpack --config webpack_config/webpack.prod.js",
     "test": "jest --config=jest_config/jest.config.json --coverage --forceExit || true",
     "dev": "node webpack_config/server.js",
-    "ssr": "nodemon --exec REACT_WEBPACK_ENV='dev' babel-node ./common/server"
+    "ssr": "nodemon --exec REACT_WEBPACK_ENV='dev' babel-node ./common/server",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Vladimir Metnew <vladimirmetnew@gmail.com>",
   "license": "MIT",
@@ -96,5 +99,6 @@
     "template",
     "boilerplate",
     "webpack"
-  ]
+  ],
+  "snyk": true
 }
