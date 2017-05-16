@@ -115,10 +115,9 @@ export default class LoginComponent extends Component {
       let inputComponentProps = {
         ...a,
         error,
-        key: i,
         connectToParent: ::this.connectInputToParent
       }
-      return <InputComponent {...inputComponentProps} />
+      return <InputComponent key={i} {...inputComponentProps} />
     })
 
     return (

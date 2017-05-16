@@ -20,7 +20,6 @@ export default class SidebarInnerComponent extends Component {
       let propsMenuItem = {
         as: external ? 'a' : NavLink,
         link: true,
-        key: i,
         [external ? 'href' : 'to']: path
       }
 
@@ -34,7 +33,7 @@ export default class SidebarInnerComponent extends Component {
       }
 
       return (
-        <Menu.Item {...propsMenuItem} icon>
+        <Menu.Item key={i} {...propsMenuItem} icon>
           <Icon name={icon} /> {name}
         </Menu.Item>
       )
