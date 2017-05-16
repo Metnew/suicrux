@@ -16,24 +16,24 @@ export default class DashboardCardComponent extends PureComponent {
     return (
       <Card raised>
           <Image alt="Dummy image" src="./images/dummy.png" />
-          <Card.Content>
-              <Card.Header>
-                  {title}
-              </Card.Header>
-              <Card.Meta>
-                  <span className="date">
-                      Post's "id" is {id}
-                  </span>
-              </Card.Meta>
-              <Card.Description>
-                  {body}
-              </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-              <a>
-                  User's id is "{userId}"
-              </a>
-          </Card.Content>
+        <Card.Content>
+          <Card.Header>
+            {title}
+          </Card.Header>
+          <Card.Meta>
+            <span className="date">
+              Post's "id" is {id}
+            </span>
+          </Card.Meta>
+          <Card.Description>
+            {body}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <a>
+            User's id is "{userId}"
+          </a>
+        </Card.Content>
       </Card>
     )
   }
