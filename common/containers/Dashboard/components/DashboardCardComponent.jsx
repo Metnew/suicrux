@@ -15,7 +15,7 @@ export default class DashboardCardComponent extends PureComponent {
 
     return (
       <Card raised>
-          <Image alt="Dummy image" src="./images/dummy.png" />
+        <Image alt="Dummy image" src="./images/dummy.png" />
         <Card.Content>
           <Card.Header>
             {title}
