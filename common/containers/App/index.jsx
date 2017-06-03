@@ -115,7 +115,7 @@ class App extends Component {
 
     return (
       <div className="page-layout">
-        <Sidebar.Pushable key={random}>
+        <Sidebar.Pushable>
           {isLoggedIn && <SidebarComponent {...sidebarProps} />}
           <Sidebar.Pusher>
             {/* Semantic ui currently(16.04.16) doesn't have closeDimmerOnClick or smth else
