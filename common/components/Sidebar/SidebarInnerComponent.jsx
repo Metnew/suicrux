@@ -15,8 +15,8 @@ export default class SidebarInnerComponent extends Component {
   render () {
     const {logout, routing} = this.props
 
-    let routes = routing.map((route, i) => {
-      let {external, path, icon, name, strict, exact} = route
+    const routes = routing.map((route, i) => {
+      const {external, path, icon, name, strict, exact} = route
       let propsMenuItem = {
         as: external ? 'a' : NavLink,
         link: true,

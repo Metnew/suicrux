@@ -30,7 +30,7 @@ export const configureStore = initialState => {
 }
 
 export const configureRootComponent = store => {
-  let propsRoot = {
+  const propsRoot = {
     routes: Routing,
     history,
     store,
@@ -52,8 +52,8 @@ if (process.env.NODE_ENV === 'production') {
 const preloadedState = window.__PRELOADED_STATE__ || {}
 delete window.__PRELOADED_STATE__
 
-let store = configureStore(preloadedState)
-let RootComponent = configureRootComponent(store)
+const store = configureStore(preloadedState)
+const RootComponent = configureRootComponent(store)
 
 render(RootComponent, document.getElementById('app'))
 

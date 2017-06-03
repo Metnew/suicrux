@@ -88,20 +88,20 @@ export default class LoginComponent extends Component {
   }
 
   render () {
-    let {btn_loading} = this.state
-    let {componentState} = this.props
+    const {btn_loading} = this.state
+    const {componentState} = this.props
 
     // error from server
-    let {loginError} = componentState
+    const {loginError} = componentState
 
     // props for form
-    let loginFormProps = {error: !!loginError}
+    const loginFormProps = {error: !!loginError}
 
     // login form error message
-    let prettyLoginError = this.getPrettyError(loginError)
+    const prettyLoginError = this.getPrettyError(loginError)
 
     // submit btn props
-    let loginBtnProps = {
+    const loginBtnProps = {
       disabled: this.invalidExists(),
       content: 'Login',
       icon: 'sign in',
@@ -109,10 +109,10 @@ export default class LoginComponent extends Component {
     }
 
     let inputComponents = this.state.form.map((a, i) => {
-      let inputName = a.name
-      let error = loginError[inputName] ? loginError[inputName][0] : null
+      const inputName = a.name
+      const error = loginError[inputName] ? loginError[inputName][0] : null
 
-      let inputComponentProps = {
+      const inputComponentProps = {
         ...a,
         error,
         connectToParent: ::this.connectInputToParent
