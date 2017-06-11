@@ -3,7 +3,7 @@
     "parser": "babel-eslint",
     "plugins": [
         "react",
-         "babel"
+        "babel"
     ],
     "parserOptions": {
         "ecmaFeatures": {

@@ -15,7 +15,7 @@
         "ssr": {
             "plugins": [
                 ["babel-plugin-webpack-alias", {
-                    "config": "webpack_config/webpack.base.js"
+                    "config": "./webpack_config/webpack.base.js"
                 }]
             ]
         },
