@@ -8,7 +8,7 @@ const _ = require('./utils')
 
 module.exports = {
   entry: {
-    client: './common/index.jsx'
+    client: path.join(__dirname, '../src/client/index.jsx'),
   },
   output: {
     path: _.outputPath,
@@ -21,19 +21,20 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.json', '.scss'],
     alias: {
-      actions: `${config.srcPath}/actions/`,
-      api: `${config.srcPath}/api/`,
-      reducers: `${config.srcPath}/reducers/`,
-      components: `${config.srcPath}/components/`,
-      containers: `${config.srcPath}/containers/`,
-      routing: `${config.srcPath}/routing/`,
-      styles: `${config.srcPath}/styles/`,
-      scss_vars: `${config.srcPath}/styles/vars.scss`,
-      config: `${config.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
+      actions: `${config.commonFolderPath}/actions/`,
+      api: `${config.commonFolderPath}/api/`,
+      reducers: `${config.commonFolderPath}/reducers/`,
+      components: `${config.commonFolderPath}/components/`,
+      containers: `${config.commonFolderPath}/containers/`,
+      routing: `${config.commonFolderPath}/routing/`,
+      styles: `${config.commonFolderPath}/styles/`,
+      scss_vars: `${config.commonFolderPath}/styles/vars.scss`,
+      config: `${config.commonFolderPath}/config/` + process.env.REACT_WEBPACK_ENV
     },
     modules: [
       // places where to search for required modules
-      _.cwd('common'),
+      _.cwd('src/common'),
+      _.cwd('src'),
       _.cwd('node_modules')
     ]
   },
@@ -80,11 +81,12 @@ module.exports = {
     // add index.html
     new HtmlWebpackPlugin({
       title: config.title,
-      template: path.resolve(__dirname, '../common/index.html'),
+      template: path.resolve(__dirname, '../src/common/index.html'),
       filename: _.outputIndexPath
     }),
     new webpack.DefinePlugin({
-      'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
+      'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO),
+      'process.env.BROWSER': true
     }),
     new CopyWebpackPlugin([
       {

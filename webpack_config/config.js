@@ -5,7 +5,8 @@ module.exports = {
   port: 3000,
   title: 'React-Semantic.UI-Starter',
   publicPath: process.env.BUILD_DEMO ? '/react-semantic.ui-starter/' : '/',
-  srcPath: path.join(__dirname, './../common'),
+  srcPath: path.join(__dirname, '../src/client'),
+  commonFolderPath: path.join(__dirname, '../src/common'),
   // add these dependencies to a standalone vendor bundle
   vendor: [
     'react',
@@ -16,7 +17,7 @@ module.exports = {
     'redux-thunk',
     'semantic-ui-react',
     'whatwg-fetch',
-    'semantic-ui-css/semantic.css',
+    'semantic-ui-css/semantic.min.css',
     'offline-plugin/runtime',
     'prop-types'
   ],
