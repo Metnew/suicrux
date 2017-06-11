@@ -24,14 +24,14 @@ base.module.rules.push(
     test: /\.css$/,
     use: ExtractTextPlugin.extract({
       fallback: 'style-loader',
-      use: 'css-loader'
+      use: ['css-loader', 'postcss-loader']
     })
   },
   {
     test: /\.scss$/,
     use: ExtractTextPlugin.extract({
       fallback: 'style-loader',
-      use: ['css-loader', 'sass-loader']
+      use: ['css-loader', 'postcss-loader', 'sass-loader']
     })
   }
 )
@@ -53,10 +53,10 @@ base.plugins.push(
     // Give paths to parse for rules. These should be absolute!
     moduleExtensions: ['.jsx', '.html', '.js'],
     paths: glob.sync(
-      path.join(__dirname, 'common/*.jsx'),
-      path.join(__dirname, 'common/components/**/*.jsx'),
-      path.join(__dirname, 'common/containers/**/*.jsx'),
-      path.join(__dirname, 'common/containers/**/*.jsx'),
+      path.join(__dirname, 'src/common/*.jsx'),
+      path.join(__dirname, 'src/common/components/**/*.jsx'),
+      path.join(__dirname, 'src/common/containers/**/*.jsx'),
+      path.join(__dirname, 'src/common/containers/**/*.jsx'),
       path.join(__dirname, 'node_modules/semantic-ui-react/dist/**/*.js')
     )
   }),

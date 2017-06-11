@@ -5,16 +5,30 @@ process.env.REACT_WEBPACK_ENV = 'dev'
 const webpack = require('webpack')
 const base = require('./webpack.base')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
+const loaders = {
+  style: {loader: 'style-loader'},
+  css: {loader: 'css-loader', options: {sourceMap: true}},
+  resolve: 'resolve-url-loader',
+  postcss: {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: true
+    }
+  },
+  sass: {loader: 'sass-loader', options: {sourceMap: true}}
+}
 
 base.devtool = 'eval-source-map'
 base.module.rules.push(
   {
     test: /\.css$/,
-    loaders: ['style-loader', 'css-loader', 'resolve-url-loader']
+    loaders: [loaders.style, loaders.css, loaders.postcss, loaders.resolve]
   },
   {
     test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
+    loaders: [
+      loaders.style, loaders.css, loaders.postcss, loaders.resolve, loaders.sass
+    ]
   }
 )
 
