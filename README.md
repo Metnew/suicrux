@@ -40,7 +40,7 @@ When the app is cached with Service Workers:
     - **HMR**, devServer, hotMiddleware,
     - Optimize code with **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)**,
     - Process CSS with **[PostCSS](https://github.com/postcss/postcss)**, **[purifycss-webpack](https://github.com/webpack-contrib/purifycss-webpack)** and other loaders/plugins
-    - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)**
+    - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside postcss.config.js)
 - **[Jest](https://facebook.github.io/jest/)** and **[Enzyme](https://github.com/airbnb/enzyme)** - awesome libraries for testing.
 - **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
 - **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.  With tree-shaking unused code never makes it into the final bundle.
