@@ -19,7 +19,8 @@
     }
 
     .logout {
-        position: absolute;
+        position: absolute!important;
+        border-top: 1px solid rgba(34,36,38,.15);
         bottom: 0;
         width: 100%;
         cursor: pointer;
