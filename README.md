@@ -78,6 +78,11 @@ These commands generate the `dist` folder.
 npm run test # run tests with Jest
 ```
 
+#### Nearest future:
+- Implement **SSR with code-splitting**. See [React Router docs](https://reacttraining.com/react-router/web/guides/code-splitting/code-splitting-server-rendering). This docs say that it's a very hard task. So, maybe let's try to accomplish it? :smiling_imp:
+
+- **Project must be isomorphic**. Code must works with React-Native too. I'll be very happy, if you help me with this task :wink:, or just recommend something.
+
 ### FAQ
 
 #### Where are static assets?
