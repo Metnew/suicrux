@@ -8,7 +8,7 @@ const _ = require('./utils')
 
 module.exports = {
   entry: {
-    client: path.join(__dirname, '../src/client/index.jsx'),
+    client: path.join(__dirname, '../src/client/index.jsx')
   },
   output: {
     path: _.outputPath,
@@ -29,7 +29,8 @@ module.exports = {
       routing: `${config.commonFolderPath}/routing/`,
       styles: `${config.commonFolderPath}/styles/`,
       scss_vars: `${config.commonFolderPath}/styles/vars.scss`,
-      config: `${config.commonFolderPath}/config/` + process.env.REACT_WEBPACK_ENV
+      config:
+        `${config.commonFolderPath}/config/` + process.env.REACT_WEBPACK_ENV
     },
     modules: [
       // places where to search for required modules

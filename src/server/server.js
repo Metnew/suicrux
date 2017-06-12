@@ -6,8 +6,8 @@ import {renderToString} from 'react-dom/server'
 import {StaticRouter} from 'react-router'
 // Application
 import {configureStore, configureRootComponent} from '../common/index'
-const compression = require('compression')
-const Helmet = require('react-helmet')
+// const compression = require('compression')
+// const Helmet = require('react-helmet')
 
 const app = express()
 const port = 8080
@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.get('/', handleRender)
 
 function handleRender (req, res) {
-  const initialState = {auth:{loggedIn:true}}
+  const initialState = {auth: {loggedIn: true}}
   const context = {}
   const store = configureStore(initialState)
   const RootComponent = configureRootComponent(store)
