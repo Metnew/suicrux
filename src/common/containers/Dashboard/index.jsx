@@ -15,8 +15,8 @@ class Dashboard extends Component {
   }
 
   render () {
-    let {statistics} = this.props
-    let props = {statistics}
+    const {statistics} = this.props
+    const props = {statistics}
 
     return <DashboardComponent {...props} />
   }
@@ -29,7 +29,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     getStatistics: async () => {
-      let result = await dispatch(GET_STATISTICS)
+      const result = await dispatch(GET_STATISTICS)
       dispatch(result)
     }
   }

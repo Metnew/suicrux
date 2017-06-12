@@ -10,13 +10,13 @@ export default class DashboardComponent extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    let {statistics} = this.props
-    let nextStatistics = nextProps.statistics
+    const {statistics} = this.props
+    const nextStatistics = nextProps.statistics
     return !_.isEqual(statistics, nextStatistics)
   }
 
   render () {
-    let {statistics} = this.props
+    const {statistics} = this.props
 
     return (
       <div>

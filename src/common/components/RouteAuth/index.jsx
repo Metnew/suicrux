@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Route, Redirect} from 'react-router'
+import {Route, Redirect} from 'react-router-dom'
 
 /**
  * Component that protects route from unauthorized users.
- * @type {Object}
  */
 class RouteAuth extends Component {
   static propTypes = {
@@ -16,8 +15,8 @@ class RouteAuth extends Component {
   }
 
   render () {
-    let {canAccess, component, path, exact, strict} = this.props
-    let routeProps = {
+    const {canAccess, component, path, exact, strict} = this.props
+    const routeProps = {
       path,
       component,
       exact,

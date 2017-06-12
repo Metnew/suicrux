@@ -17,10 +17,10 @@ export default class Root extends Component {
      * check RouteAuth component.
      */
   authCheck (path) {
-    let {store} = this.props
-    let {loggedIn} = store.getState().auth
-    let authPath = '/auth'
-    let allowedToVisitPath = [authPath]
+    const {store} = this.props
+    const {loggedIn} = store.getState().auth
+    const authPath = '/auth'
+    const allowedToVisitPath = [authPath]
     if (loggedIn && path === authPath) {
       return false
     } else if (!loggedIn && !allowedToVisitPath.includes(path)) {
@@ -31,11 +31,14 @@ export default class Root extends Component {
 
   render () {
     const {store, history, routes} = this.props
+    const authProtection = ::this.authCheck
+    const routesWithAuthProtection = routes(authProtection)
+    // console.log(routesWithAuthProtection)
     // key={Math.random()} = hack for HMR from https://github.com/webpack/webpack-dev-server/issues/395
     return (
-      <Provider store={store} key={Math.random()}>
-        <Router history={history} key={Math.random()}>
-          {routes(::this.authCheck)}
+      <Provider store={store}>
+        <Router history={history}>
+          {routesWithAuthProtection}
         </Router>
       </Provider>
     )

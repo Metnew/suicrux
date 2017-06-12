@@ -61,10 +61,10 @@ export default class InputComponent extends Component {
 
   render () {
     // STATE ERROR
-    let {error, value} = this.state
-    let {as} = this.props
+    const {error, value} = this.state
+    const {as} = this.props
     // prop `as`
-    let propsToOmit = ['validate', 'error', 'connectToParent', 'as']
+    const propsToOmit = ['validate', 'error', 'connectToParent', 'as']
 
     let propsForInput = {
       ...this.props,
@@ -91,7 +91,7 @@ export default class InputComponent extends Component {
     // check semantic-react docs
     let labelTextComponent = null
     if (propsForInput.labelText) {
-      labelTextComponent = <label>{propsForInput.labelText}</label>
+      labelTextComponent = <label htmlFor="">{propsForInput.labelText}</label>
       delete propsForInput.labelText
     }
 

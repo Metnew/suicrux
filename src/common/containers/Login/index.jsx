@@ -13,7 +13,7 @@ class Login extends Component {
   }
 
   render () {
-    let props = this.props
+    const {props} = this
     return <LoginComponent {...props} />
   }
 }

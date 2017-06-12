@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+// import {Helmet} from 'react-helmet'
 // Accessing PropTypes via the main React package is deprecated.
 // Use the prop-types package from npm instead.
 import PropTypes from 'prop-types'
@@ -34,7 +35,7 @@ class App extends Component {
     isMobile: PropTypes.bool
   }
 
-  // XXX: fix it, I'm tired of this.
+  // XXX: must be fixed.
   // shouldComponentUpdate(nextProps) {
   //     let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
   //     let matchSame = _.isEqual(nextProps.match, match)
@@ -47,13 +48,11 @@ class App extends Component {
 
   componentWillMount () {
     let {handleWindowResize, isLoggedIn} = this.props
-    window.addEventListener('resize', handleWindowResize)
+    if (process.env.BROWSER) {
+      window.addEventListener('resize', handleWindowResize)
+    }
     this.checkAppAuthLogic(isLoggedIn)
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //     return !_.isEqual(this.props, nextProps) && !_.isEqual(nextState, this.state)
-  // }
 
   /**
      * Check that user is allowed to visit route
@@ -71,7 +70,7 @@ class App extends Component {
   }
 
   render () {
-    let {
+    const {
       children,
       sidebarOpened,
       closeSidebar,
@@ -133,9 +132,10 @@ class App extends Component {
             {/* show dimmer only if:
               1. isLoggedIn, elsewhere sidebar isn't visible
             2. if sidebar is opened  */}
-            {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps} />}
+            {(isLoggedIn && sidebarOpened) && <Dimmer {...dimmerProps} />}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+
       </div>
     )
   }
@@ -157,7 +157,6 @@ function mapDispatchToProps (dispatch) {
     },
     logout: () => {
       dispatch(LOGOUT_AUTH())
-      dispatch(push('/auth'))
     },
     toggleSidebar: () => {
       dispatch(OPEN_SIDEBAR())

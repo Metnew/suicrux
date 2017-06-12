@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Redirect, Switch} from 'react-router'
+import {Route, Redirect, Switch} from 'react-router-dom'
 import {createBrowserHistory} from 'history'
 import {App, Inbox, Dashboard, Login} from 'containers'
 import {RouteAuth} from 'components'
@@ -46,16 +46,17 @@ export const appRouting = [
  */
 export const Routing = authCheck => {
   // remove components that aren't application routes, (e.g. github link in sidebar)
-  let routes = appRouting.filter(a => a.tag || a.component)
+  const routes = appRouting.filter(a => a.tag || a.component)
   // render components that are inside Switch (main view)
-  let routesRendered = routes.map((a, i) => {
+  const routesRendered = routes.map((a, i) => {
     // get tag for Route. is it RouteAuth `protected route` or Route?
-    let Tag = a.tag
-    let {path, exact, strict, component} = a
+    const Tag = a.tag
+    const {path, exact, strict, component} = a
     // can visitor access this route?
-    let canAccess = authCheck
+    const canAccess = authCheck
     // select only props that we need
-    let b = {path, exact, strict, component, canAccess}
+    const b = {path, exact, strict, component, canAccess}
+
     return <Tag key={i} {...b} />
   })
 
@@ -71,6 +72,5 @@ export const Routing = authCheck => {
 
 function getHistory () {
   const basename = process.env.BUILD_DEMO ? '/react-semantic.ui-starter' : ''
-
   return createBrowserHistory({basename})
 }
