@@ -92,11 +92,11 @@ You can store static assets (images, videos) in `/static` folder.
 You can find it in `webpack_config/config.js`
 
 #### Is SSR available?
-It's under active development inside `/server` folder.
+It's under active development inside `/src/server` folder.
 
 #### How it differs from other starters?
 Performance-first.
-**Main purpose - build highly customizable skeleton for PWA, with SSR, following best practices.**
+**Main purpose - build highly customizable isomorphic(!) skeleton for PWA, with SSR, code-splitting, following best practices.**
 
 #### "You have a components folder and containers folder..and in the container you have another components folder?"
 
