@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
+import {withRouter, matchPath} from 'react-router'
 // import {Helmet} from 'react-helmet'
 // Accessing PropTypes via the main React package is deprecated.
 // Use the prop-types package from npm instead.
@@ -69,6 +69,28 @@ class App extends Component {
     this.checkAppAuthLogic(nextProps.isLoggedIn)
   }
 
+  getSidebarRouting () {
+    // routing for sidebar menu
+    const sidebarRouting = appRouting.filter(a => a.sidebarVisible).map(a => {
+      const {path, name, icon, external, strict, exact} = a
+      const b = {path, name, icon, external, strict, exact}
+      return b
+    })
+    return sidebarRouting
+  }
+
+  /**
+  * returns title for header
+  * @param  {String} pathname - location.pathname
+  * @return {String} page title
+  */
+  getPageTitle (pathname) {
+    const matchedRoutes = appRouting.filter(a => matchPath(pathname, a))
+    const currentRoute = matchedRoutes[0] || {}
+    const title = currentRoute.name || '404'
+    return title
+  }
+
   render () {
     const {
       children,
@@ -81,18 +103,9 @@ class App extends Component {
       isMobile
     } = this.props
 
-    // must be refactored, if one of your route looks like `/api/users/:id`
-    // get currentRoute
-    const matchedRoutes = appRouting.filter(a => a.path === location.pathname)
-    const currentRoute = matchedRoutes[0] || {}
-    // title for Header
-    const title = currentRoute.name || '404'
     // routing for sidebar menu
-    const sidebarRouting = appRouting.filter(a => a.sidebarVisible).map(a => {
-      let {path, name, icon, external, strict, exact} = a
-      let b = {path, name, icon, external, strict, exact}
-      return b
-    })
+    const sidebarRouting = this.getSidebarRouting()
+    const title = this.getPageTitle(location.pathname)
 
     const sidebarProps = {
       isMobile,
@@ -132,7 +145,7 @@ class App extends Component {
             {/* show dimmer only if:
               1. isLoggedIn, elsewhere sidebar isn't visible
             2. if sidebar is opened  */}
-            {(isLoggedIn && sidebarOpened) && <Dimmer {...dimmerProps} />}
+            {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps} />}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
 
