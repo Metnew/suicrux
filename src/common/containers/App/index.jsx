@@ -19,9 +19,7 @@ class App extends Component {
     // react-router `withRouter` props
     location: PropTypes.object,
     history: PropTypes.object,
-    // match can force component to re-render
-    match: PropTypes.object,
-
+  
     // sidebarOpened can force component to re-render
     sidebarOpened: PropTypes.bool,
     closeSidebar: PropTypes.func,
