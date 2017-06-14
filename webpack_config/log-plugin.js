@@ -1,6 +1,6 @@
 'use strict'
 const chalk = require('chalk')
-const open = require('open');
+const open = require('open')
 
 // this plugin if for loggin url after each time the compilation is done.
 module.exports = class LogPlugin {
