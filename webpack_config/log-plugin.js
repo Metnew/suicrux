@@ -1,7 +1,7 @@
 'use strict'
 const chalk = require('chalk')
 
-// Just print APP is running, after every compilation
+// Just prints `App is running...` after every compilation
 module.exports = class LogPlugin {
   constructor (port) {
     this.port = port
