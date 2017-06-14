@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 import {render} from 'react-dom'
 import {configureStore, configureRootComponent} from 'common'
 // Styles
 import 'semantic-ui-css/semantic.css'
 import 'styles/index.scss'
 // Performance and Devtools
-import {whyDidYouUpdate} from 'why-did-you-update'
+// import {whyDidYouUpdate} from 'why-did-you-update'
 import Perf from 'react-addons-perf'
 import config from 'config'
 
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   require('common/pwa')
 } else if (process.env.NODE_ENV === 'development') {
   window.Perf = Perf
-  whyDidYouUpdate(React)
+  // whyDidYouUpdate(React)
 }
 
 const preloadedState = window.__PRELOADED_STATE__ || {}
