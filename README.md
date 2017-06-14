@@ -31,6 +31,7 @@ When the app is cached with Service Workers:
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
 - **[JSON-server](https://github.com/typicode/json-server)** - mock db.
+- **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)** and **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
 - **[Fetch polyfill](https://github.com/github/fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
@@ -76,6 +77,11 @@ These commands generate the `dist` folder.
 
 ```bash
 npm run test # run tests with Jest
+```
+
+#### Docs:
+```bash
+npm run docs # generate docs and `serve`
 ```
 
 #### Nearest future:
