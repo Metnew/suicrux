@@ -17,7 +17,6 @@ module.exports = {
     'redux-thunk',
     'semantic-ui-react',
     'whatwg-fetch',
-    'semantic-ui-css/semantic.min.css',
     'offline-plugin/runtime',
     'prop-types'
   ],
