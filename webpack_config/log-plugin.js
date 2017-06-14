@@ -1,6 +1,5 @@
 'use strict'
 const chalk = require('chalk')
-const open = require('open')
 
 // Just print APP is running, after every compilation
 module.exports = class LogPlugin {
@@ -14,7 +13,6 @@ module.exports = class LogPlugin {
       console.log(
         `> App is running at ${chalk.yellow(url)}\n`
       )
-      // open(url)
     })
   }
 }

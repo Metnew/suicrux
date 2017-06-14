@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
 const LogPlugin = require('./log-plugin')
+const open = require('open')
 
 const app = express()
 
@@ -58,3 +59,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(port)
+
+open(`http://localhost:${port}`)
