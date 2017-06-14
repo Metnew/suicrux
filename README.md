@@ -79,7 +79,15 @@ These commands generate the `dist` folder.
 npm run test # run tests with Jest
 ```
 
+#### Lint:
+
+```bash
+npm run lint:styles  # lint styles with Stylelint
+npm run lint:scripts # lint scripts with ESlint
+```
+
 #### Docs:
+
 ```bash
 npm run docs # generate docs and `serve`
 ```
@@ -87,7 +95,7 @@ npm run docs # generate docs and `serve`
 #### Nearest future:
 - Implement **SSR with code-splitting**. See [React Router docs](https://reacttraining.com/react-router/web/guides/code-splitting/code-splitting-server-rendering). This docs say that it's a very hard task. So, maybe let's try to accomplish it? :smiling_imp:
 
-- **Project must be isomorphic**. Code must works with React-Native too. I'll be very happy, if you help me with this task :wink:, or just recommend something.
+- **Project must be isomorphic**. Code must works with React-Native too. I'll be very happy, if you can help me with this task :wink:, or just recommend something.
 
 ### FAQ
 
