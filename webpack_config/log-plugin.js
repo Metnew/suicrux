@@ -2,7 +2,7 @@
 const chalk = require('chalk')
 const open = require('open')
 
-// this plugin if for loggin url after each time the compilation is done.
+// Just print APP is running, after every compilation
 module.exports = class LogPlugin {
   constructor (port) {
     this.port = port
@@ -14,7 +14,7 @@ module.exports = class LogPlugin {
       console.log(
         `> App is running at ${chalk.yellow(url)}\n`
       )
-      open(url)
+      // open(url)
     })
   }
 }
