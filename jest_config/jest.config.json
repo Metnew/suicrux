@@ -1,29 +1,29 @@
 {
     "moduleFileExtensions": ["js", "jsx"],
-    "testPathIgnorePatterns": ["<rootDir>/common/config"],
+    "testPathIgnorePatterns": ["<rootDir>/src/common/config"],
     "setupFiles": ["<rootDir>/jest_config/setupJest.js"],
     "automock": false,
     "moduleNameMapper": {
-        "^actions$": "<rootDir>/common/actions",
-        "^actions/auth$": "<rootDir>/common/actions/auth",
-        "^actions/common$": "<rootDir>/common/actions/common",
-        "^actions/dashboard$": "<rootDir>/common/actions/dashboard",
-        "^actions/inbox$": "<rootDir>/common/actions/inbox",
-        "^actions/layout$": "<rootDir>/common/actions/layout",
+        "^actions$": "<rootDir>/src/common/actions",
+        "^actions/auth$": "<rootDir>/src/common/actions/auth",
+        "^actions/common$": "<rootDir>/src/common/actions/common",
+        "^actions/dashboard$": "<rootDir>/src/common/actions/dashboard",
+        "^actions/inbox$": "<rootDir>/src/common/actions/inbox",
+        "^actions/layout$": "<rootDir>/src/common/actions/layout",
 
-        "^api": "<rootDir>/common/api",
+        "^api": "<rootDir>/src/common/api",
 
-        "^reducers$": "<rootDir>/common/reducers",
-        "^reducers/auth$": "<rootDir>/common/reducers/auth",
-        "^reducers/common$": "<rootDir>/common/reducers/common",
-        "^reducers/dashboard$": "<rootDir>/common/reducers/dashboard",
-        "^reducers/inbox$": "<rootDir>/common/reducers/inbox",
-        "^reducers/layout$": "<rootDir>/common/reducers/layout",
-        "^reducers/login_component_reducer$": "<rootDir>/common/reducers/login_component_reducer",
+        "^reducers$": "<rootDir>/src/common/reducers",
+        "^reducers/auth$": "<rootDir>/src/common/reducers/auth",
+        "^reducers/common$": "<rootDir>/src/common/reducers/common",
+        "^reducers/dashboard$": "<rootDir>/src/common/reducers/dashboard",
+        "^reducers/inbox$": "<rootDir>/src/common/reducers/inbox",
+        "^reducers/layout$": "<rootDir>/src/common/reducers/layout",
+        "^reducers/login_component_reducer$": "<rootDir>/src/common/reducers/login_component_reducer",
 
-        "^routing": "<rootDir>/common/routing",
-        "^components$": "<rootDir>/common/components",
-        "^containers$": "<rootDir>/common/containers",
-        "^config$": "<rootDir>/common/config/test.js"
+        "^routing": "<rootDir>/src/common/routing",
+        "^components$": "<rootDir>/src/common/components",
+        "^containers$": "<rootDir>/src/common/containers",
+        "^config$": "<rootDir>/src/common/config/test.js"
     }
 }
