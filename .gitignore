@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Build
 dist
+esdoc
 
 # Runtime data
 pids
