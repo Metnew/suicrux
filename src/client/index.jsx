@@ -6,7 +6,6 @@ import 'semantic-ui-css/semantic.css'
 import 'styles/index.scss'
 // Performance and Devtools
 // import {whyDidYouUpdate} from 'why-did-you-update'
-import Perf from 'react-addons-perf'
 import config from 'config'
 
 window.BASE_API = config.BASE_API
@@ -14,7 +13,7 @@ window.BASE_API = config.BASE_API
 if (process.env.NODE_ENV === 'production') {
   require('common/pwa')
 } else if (process.env.NODE_ENV === 'development') {
-  window.Perf = Perf
+  window.Perf = require('react-addons-perf')
   // whyDidYouUpdate(React)
 }
 
