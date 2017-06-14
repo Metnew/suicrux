@@ -7,7 +7,7 @@ const path = require('path')
 const glob = require('glob')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const PurifyCSSPlugin = require('purifycss-webpack')
+// const PurifyCSSPlugin = require('purifycss-webpack')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
@@ -49,17 +49,17 @@ base.plugins.push(
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   }),
   // remove unused css
-  new PurifyCSSPlugin({
-    // Give paths to parse for rules. These should be absolute!
-    moduleExtensions: ['.jsx', '.html', '.js'],
-    paths: glob.sync(
-      path.join(__dirname, 'src/common/*.jsx'),
-      path.join(__dirname, 'src/common/components/**/*.jsx'),
-      path.join(__dirname, 'src/common/containers/**/*.jsx'),
-      path.join(__dirname, 'src/common/containers/**/*.jsx'),
-      path.join(__dirname, 'node_modules/semantic-ui-react/dist/**/*.js')
-    )
-  }),
+  // new PurifyCSSPlugin({
+  //   // Give paths to parse for rules. These should be absolute!
+  //   moduleExtensions: ['.jsx', '.html', '.js'],
+  //   paths: glob.sync(
+  //     path.join(__dirname, 'src/common/*.jsx'),
+  //     path.join(__dirname, 'src/common/components/**/*.jsx'),
+  //     path.join(__dirname, 'src/common/containers/**/*.jsx'),
+  //     path.join(__dirname, 'src/common/containers/**/*.jsx'),
+  //     path.join(__dirname, 'node_modules/semantic-ui-react/dist/**/*.js')
+  //   )
+  // }),
   new OptimizeCssAssetsPlugin(),
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
