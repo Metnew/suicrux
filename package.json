@@ -102,7 +102,7 @@
     "dev": "node webpack_config/server.js",
     "ssr": "NODE_ENV=ssr nodemon --exec REACT_WEBPACK_ENV='dev' babel-node ./src/server",
     "precommit": "npm run test",
-    "prepush": "echo \"$(tput bold)$(tput setaf 5)Hello, my name is Mr.PrepushInYourPackageJSON, and I am happy to see that you use this project :) $(tput sgr 0)\""
+    "prepush": "echo \"$(tput bold)$(tput setaf 5)Hello, my name is React-Semantic-UI-Starter, and I am happy to see that you use this project :) $(tput sgr 0)\""
   },
   "author": "Vladimir Metnew <vladimirmetnew@gmail.com>",
   "license": "MIT",
