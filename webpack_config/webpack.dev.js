@@ -27,7 +27,11 @@ base.module.rules.push(
   {
     test: /\.scss$/,
     loaders: [
-      loaders.style, loaders.css, loaders.postcss, loaders.resolve, loaders.sass
+      loaders.style,
+      loaders.css,
+      loaders.postcss,
+      loaders.resolve,
+      loaders.sass
     ]
   }
 )
