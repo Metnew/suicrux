@@ -36,8 +36,8 @@ export default class Root extends Component {
     // console.log(routesWithAuthProtection)
     // key={Math.random()} = hack for HMR from https://github.com/webpack/webpack-dev-server/issues/395
     return (
-      <Provider store={store}>
-        <Router history={history}>
+      <Provider key={Math.random()} store={store}>
+        <Router key={Math.random()} history={history}>
           {routesWithAuthProtection}
         </Router>
       </Provider>
