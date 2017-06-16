@@ -1,6 +1,7 @@
 {
     "moduleFileExtensions": ["js", "jsx"],
     "testPathIgnorePatterns": ["<rootDir>/src/common/config"],
+    "rootDir": "../",
     "setupFiles": ["<rootDir>/jest_config/setupJest.js"],
     "automock": false,
     "moduleNameMapper": {
