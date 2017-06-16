@@ -16,7 +16,7 @@ export function LOGIN_AUTH (data) {
     if (!resultOK(result)) {
       return { type: LOGIN_AUTH_FAIL, error: result.data }
     }
-    setLocalToken(result.token)
+    setLocalToken(result.data.token)
     return { type: LOGIN_AUTH_SUCCESS, result: result.data }
   }
 }
