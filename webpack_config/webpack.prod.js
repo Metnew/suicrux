@@ -85,7 +85,7 @@ base.plugins.push(
   new OfflinePlugin({
     safeToUseOptionalCaches: true,
     caches: {
-      main: ['vendor.*.css', 'vendor.*.js'],
+      main: ['client.*.css', 'vendor.*.js'],
       additional: [':externals:'],
       optional: [':rest:']
     },
