@@ -55,7 +55,7 @@ export default class SidebarComponent extends Component {
     return (
       <Sidebar {...sidebarProps}>
         <div className="logo">
-          <Image src="./images/logo.png" centered height="34px" />
+          <Image src="/images/logo.png" centered height="34px" />
         </div>
         {routes}
         <Menu.Item className="logout" onClick={logout}>
