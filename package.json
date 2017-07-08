@@ -97,6 +97,7 @@
     "why-did-you-update": "^0.0.8"
   },
   "scripts": {
+    "start": "node webpack_config/server.js",
     "db": "nodemon ./db",
     "docs": "esdoc && serve ./esdoc",
     "build": "webpack --config webpack_config/webpack.prod.js",
