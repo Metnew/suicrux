@@ -52,7 +52,7 @@ When the app is cached with Service Workers:
 
 #### Install:
 ```bash
-git clone https://github.com/Metnew/react-semantic.ui-starter.git
+git clone --depth=1 https://github.com/Metnew/react-semantic.ui-starter.git
 cd react-semantic.ui-starter && rm -rf .git
 npm install
 ```
