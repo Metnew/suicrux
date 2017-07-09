@@ -1,31 +1,46 @@
-import { UI_OPEN_SIDEBAR, UI_CLOSE_SIDEBAR, UI_WINDOW_RESIZE } from 'actions/layout'
-import { LOCATION_CHANGE, APP_INIT } from 'actions/common'
+import {
+  UI_OPEN_SIDEBAR,
+  UI_CLOSE_SIDEBAR,
+  UI_WINDOW_RESIZE,
+  LOCATION_CHANGE,
+  APPLICATION_INIT
+} from 'actions'
 
 export const initialState = {
   sidebarOpened: false,
-  isMobile: false
+  isMobile: false,
+  isMobileXS: false,
+  isMobileSM: false
 }
 
 export function layout (state = initialState, action) {
+  const computeMobileStatuses = () => {
+    const {innerWidth} = window
+    const isMobile = innerWidth < 1025 // 1024px - is the main breakpoint in ui
+    const isMobileXS = innerWidth < 481
+    const isMobileSM = innerWidth > 480 && innerWidth < 767
+    return {isMobileSM, isMobileXS, isMobile}
+  }
   switch (action.type) {
-    case APP_INIT:
-      {
-        let { innerWidth } = window
-        let isMobile = innerWidth < 1025 // 1024px - is the main breakpoint in ui
-        return {
-          ...state,
-          isMobile
-        }
+    // FIXME: remove this duplication
+    case APPLICATION_INIT: {
+      const {isMobile, isMobileSM, isMobileXS} = computeMobileStatuses()
+      return {
+        ...state,
+        isMobile,
+        isMobileSM,
+        isMobileXS
       }
-    case UI_WINDOW_RESIZE:
-      {
-        let { innerWidth } = window
-        let isMobile = innerWidth < 1025 // 1024px - is the main breakpoint in ui
-        return {
-          ...state,
-          isMobile
-        }
+    }
+    case UI_WINDOW_RESIZE: {
+      const {isMobile, isMobileSM, isMobileXS} = computeMobileStatuses()
+      return {
+        ...state,
+        isMobile,
+        isMobileSM,
+        isMobileXS
       }
+    }
     case UI_OPEN_SIDEBAR:
       return {
         ...state,
@@ -36,11 +51,12 @@ export function layout (state = initialState, action) {
         ...state,
         sidebarOpened: false
       }
-    case LOCATION_CHANGE:
+    case LOCATION_CHANGE: {
       return {
         ...state,
         sidebarOpened: false
       }
+    }
     default:
       return state
   }

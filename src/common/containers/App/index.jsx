@@ -1,17 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, matchPath} from 'react-router'
-// import {Helmet} from 'react-helmet'
-// Accessing PropTypes via the main React package is deprecated.
-// Use the prop-types package from npm instead.
 import PropTypes from 'prop-types'
 import {push} from 'react-router-redux'
-import {Dimmer, Sidebar, Container} from 'semantic-ui-react'
-import {Header, SidebarComponent, Footer} from 'components'
+import {Header, Sidebar, Footer} from 'components'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {appRouting} from 'routing'
-import './App.scss'
+import {
+  PageLayout,
+  MainLayout,
+  MainContent,
+  SidebarSemanticPusherStyled,
+  SidebarSemanticPushableStyled,
+  MainContainer,
+  StyledDimmer
+} from './style'
 
 class App extends Component {
   static propTypes = {
@@ -30,10 +34,12 @@ class App extends Component {
     checkAuthLogic: PropTypes.func,
     toggleSidebar: PropTypes.func,
     // isMobile can force component to re-render
-    isMobile: PropTypes.bool
+    isMobile: PropTypes.bool,
+    isMobileXS: PropTypes.bool,
+    isMobileSM: PropTypes.bool
   }
 
-  // XXX: must be fixed.
+  // XXX: will be fixed one day.
   // shouldComponentUpdate(nextProps) {
   //     let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
   //     let matchSame = _.isEqual(nextProps.match, match)
@@ -45,11 +51,17 @@ class App extends Component {
   // }
 
   componentWillMount () {
-    let {handleWindowResize, isLoggedIn} = this.props
-    if (process.env.BROWSER) {
-      window.addEventListener('resize', handleWindowResize)
-    }
+    const {handleWindowResize, isLoggedIn} = this.props
+    window.addEventListener('resize', handleWindowResize)
     this.checkAppAuthLogic(isLoggedIn)
+  }
+
+  /**
+   * Checks that user is still allowed to visit path after props changed
+   * @param  {Object} nextProps
+   */
+  componentWillReceiveProps (nextProps) {
+    this.checkAppAuthLogic(nextProps.isLoggedIn)
   }
 
   /**
@@ -63,12 +75,11 @@ class App extends Component {
     checkAuthLogic(path, loggedIn)
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.checkAppAuthLogic(nextProps.isLoggedIn)
-  }
-
+  /**
+   * returns routing for sidebar menu
+   * @return {Array} array of routes that will be rendered in sidebar menu
+   */
   getSidebarRouting () {
-    // routing for sidebar menu
     const sidebarRouting = appRouting.filter(a => a.sidebarVisible).map(a => {
       const {path, name, icon, external, strict, exact} = a
       const b = {path, name, icon, external, strict, exact}
@@ -115,7 +126,8 @@ class App extends Component {
     const headerProps = {
       toggleSidebar,
       title,
-      isLoggedIn
+      isLoggedIn,
+      isMobile
     }
 
     const dimmerProps = {
@@ -123,40 +135,50 @@ class App extends Component {
       onClick: closeSidebar
     }
 
-    return (
-      <div className="page-layout">
-        <Sidebar.Pushable>
-          {isLoggedIn && <SidebarComponent {...sidebarProps} />}
-          <Sidebar.Pusher>
-            {/* Semantic ui currently(16.04.16) doesn't have closeDimmerOnClick or smth else
-            So, instead of it, we can use simple <Dimmer> component */}
-            {/* <SidebarSemantic.Pusher dimmed={sidebarOpened}> */}
-            <Header {...headerProps} />
-            <main>
-              <div className="main-content">
-                <Container>
-                  {children}
-                </Container>
-              </div>
-              <Footer />
-            </main>
-            {/* show dimmer only if:
-              1. isLoggedIn, elsewhere sidebar isn't visible
-            2. if sidebar is opened  */}
-            {isLoggedIn && sidebarOpened && <Dimmer {...dimmerProps} />}
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
+    // FIXME: ASAP: remove !isLoggedIn, replace it with variable from state.layout
+    // {/* XXX: There is an issue with props and styled-components, so we're using .extend and re-render the component when isMobile/isLoggedIn change triggered. Using `style` attribute isn't a good solution.
+    //   Please, check: https://github.com/styled-components/styled-components/issues/439 */}
+    //   {/* <SidebarSemanticPusherStyled style={SidebarSemanticPusherStyleProps}> */}
+    const SidebarSemanticPusherStyledPatch =
+      !isMobile && isLoggedIn
+        ? SidebarSemanticPusherStyled.extend`
+            max-width: calc(100% - 150px);
+          `
+        : SidebarSemanticPusherStyled
 
-      </div>
+    return (
+      <PageLayout>
+        <SidebarSemanticPushableStyled>
+          {isLoggedIn && <Sidebar {...sidebarProps} />}
+          <SidebarSemanticPusherStyledPatch>
+            <Header {...headerProps} />
+            <MainLayout>
+              <MainContent>
+                <MainContainer id="main-container">
+                  {children}
+                </MainContainer>
+              </MainContent>
+              <Footer />
+            </MainLayout>
+          </SidebarSemanticPusherStyledPatch>
+          {/* NOTE:  show dimmer only if:
+						//1. isLoggedIn, elsewhere sidebar isn't visible
+					// 2. if sidebar is opened  */}
+          {isLoggedIn && sidebarOpened && <StyledDimmer {...dimmerProps} />}
+        </SidebarSemanticPushableStyled>
+      </PageLayout>
     )
   }
 }
 
 function mapStateToProps (state) {
+  const {sidebarOpened, isMobile, isMobileXS, isMobileSM} = state.layout
   return {
-    sidebarOpened: state.layout.sidebarOpened,
-    isMobile: state.layout.isMobile,
-    isLoggedIn: state.auth.loggedIn
+    sidebarOpened,
+    isMobile,
+    isMobileXS,
+    isMobileSM,
+    isLoggedIn: state.me.auth.loggedIn
   }
 }
 
@@ -189,7 +211,7 @@ function mapDispatchToProps (dispatch) {
     },
     handleWindowResize: () => {
       clearTimeout(resizer)
-      resizer = setTimeout(() => dispatch(WINDOW_RESIZE()), 100)
+      resizer = setTimeout(() => dispatch(WINDOW_RESIZE()), 150)
     }
   }
 }

@@ -18,6 +18,11 @@
         "node": true
     },
     "rules": {
-        "react/no-unescaped-entities": 0
+        "react/no-unescaped-entities": 0,
+        "no-unused-vars": 1,
+        "no-tabs": 0
+    },
+    "globals": {
+      "i18n": true
     }
 }

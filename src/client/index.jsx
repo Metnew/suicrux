@@ -1,20 +1,18 @@
-// import React from 'react'
-import {render} from 'react-dom'
-import {configureStore, configureRootComponent} from 'common'
 // Styles
 import 'semantic-ui-css/semantic.css'
-import 'styles/index.scss'
-// Performance and Devtools
-// import {whyDidYouUpdate} from 'why-did-you-update'
-import config from 'config'
-
-window.BASE_API = config.BASE_API
+import 'styles/global'
+// Application
+import {render} from 'react-dom'
+import {configureStore, configureRootComponent} from 'common/index.jsx'
 
 if (process.env.NODE_ENV === 'production') {
   require('common/pwa')
 } else if (process.env.NODE_ENV === 'development') {
-  window.Perf = require('react-addons-perf')
+  // Devtools
+  // whyDidYouUpdate package is temporary broken, waiting for a patch
+  // const {whyDidYouUpdate} = require('why-did-you-update')
   // whyDidYouUpdate(React)
+  window.Perf = require('react-addons-perf')
 }
 
 const preloadedState = window.__PRELOADED_STATE__ || {}

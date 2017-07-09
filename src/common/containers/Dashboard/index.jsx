@@ -1,36 +1,64 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {Loader} from 'semantic-ui-react'
+import {Helmet} from 'react-helmet'
+//
 import DashboardComponent from './components'
-import {GET_STATISTICS} from 'actions/dashboard'
+import {GET_POSTS} from 'actions'
 
 class Dashboard extends Component {
   static propTypes = {
-    statistics: PropTypes.array,
-    getStatistics: PropTypes.func.isRequired
+    posts: PropTypes.object,
+    postsLoaded: PropTypes.bool,
+    postsLoading: PropTypes.bool,
+    count: PropTypes.number,
+    getPosts: PropTypes.func.isRequired
   }
 
-  componentDidMount () {
-    this.props.getStatistics()
+  componentWillMount () {
+    this.props.getPosts()
   }
 
   render () {
-    const {statistics} = this.props
-    const props = {statistics}
+    const {posts, postsLoaded, postsLoading, count} = this.props
 
-    return <DashboardComponent {...props} />
+    return (
+      <div>
+        <Helmet>
+          <title>Dashboard</title>
+        </Helmet>
+        {postsLoaded
+          // is postsLoaded => component, else Loader
+          ? <DashboardComponent
+            {...{posts, postsLoaded, postsLoading, count}}
+          />
+          : <Loader active={true}>Loading...</Loader>}
+      </div>
+    )
   }
 }
 
 function mapStateToProps (state) {
-  return {statistics: state.dashboard.statistics}
+  const {posts} = state.entities
+  const postsLoaded = posts.isLoaded
+  const postsLoading = posts.isLoading
+  const items = posts.entities
+  const {count} = posts
+
+  return {
+    posts: items,
+    postsLoading,
+    postsLoaded,
+    count
+  }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    getStatistics: async () => {
-      const result = await dispatch(GET_STATISTICS)
-      dispatch(result)
+    getPosts: async () => {
+      const result = await GET_POSTS()
+      return dispatch(result)
     }
   }
 }

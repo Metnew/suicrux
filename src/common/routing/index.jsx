@@ -1,10 +1,17 @@
 import React from 'react'
 import {Route, Redirect, Switch} from 'react-router-dom'
-import {createBrowserHistory} from 'history'
-import {App, Inbox, Dashboard, Login} from 'containers'
+import {App, Users, Dashboard, Login} from 'containers'
 import {RouteAuth} from 'components'
+import {createBrowserHistory, createMemoryHistory} from 'history'
 
 export const history = getHistory()
+
+const loadLazyComponent = url => {
+  return async cb => {
+    const loadComponent = await import(/* webpackMode: "lazy-once", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
+    return loadComponent
+  }
+}
 
 export const appRouting = [
   {
@@ -17,13 +24,13 @@ export const appRouting = [
     component: Dashboard
   },
   {
-    path: '/inbox',
-    name: 'Inbox',
+    path: '/users',
+    name: 'Users',
     exact: true,
-    icon: 'comments outline',
+    icon: 'users',
     sidebarVisible: true,
     tag: RouteAuth,
-    component: Inbox
+    component: Users
   },
   {
     external: true,
@@ -37,6 +44,15 @@ export const appRouting = [
     name: 'Auth',
     tag: Route,
     component: Login
+  },
+  {
+    path: '/users/:id',
+    name: 'User',
+    lazy: true,
+    exact: true,
+    strict: true,
+    tag: RouteAuth,
+    component: loadLazyComponent('UsersItem')
   }
 ]
 
@@ -46,16 +62,19 @@ export const appRouting = [
  */
 export const Routing = authCheck => {
   // remove components that aren't application routes, (e.g. github link in sidebar)
-  const routes = appRouting.filter(a => a.tag || a.component)
+  const routes = appRouting.filter(
+    a => a.tag || a.component || a.lazy || !a.external
+  )
   // render components that are inside Switch (main view)
   const routesRendered = routes.map((a, i) => {
-    // get tag for Route. is it RouteAuth `protected route` or Route?
+    // get tag for Route.
+    // is it "RouteAuth" `protected route` or "Route"?
     const Tag = a.tag
-    const {path, exact, strict, component} = a
+    const {path, exact, strict, component, lazy} = a
     // can visitor access this route?
     const canAccess = authCheck
     // select only props that we need
-    const b = {path, exact, strict, component, canAccess}
+    const b = {path, exact, strict, component, canAccess, lazy}
 
     return <Tag key={i} {...b} />
   })
@@ -72,5 +91,8 @@ export const Routing = authCheck => {
 
 function getHistory () {
   const basename = process.env.BUILD_DEMO ? '/react-semantic.ui-starter' : ''
+  if (process.env.BABEL_ENV === 'ssr') {
+    return createMemoryHistory()
+  }
   return createBrowserHistory({basename})
 }

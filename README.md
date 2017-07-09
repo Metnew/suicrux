@@ -13,39 +13,33 @@
 [![bitHound Code](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/code.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
 [![bitHound Overall Score](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/score.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-<!-- [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard) -->
-<!-- [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate) -->
 
 ### What is it?
-Production-ready, performance-first, optimized, robust, fully-featured boilerplate/example for your **new Progressive Web App**.
+Production-ready, performance-first, optimized, robust, fully-featured boilerplate/example with **Server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
 #### Lighthouse result - [you can find it here](https://googlechrome.github.io/lighthouse/viewer/?gist=cd19fc335d4dc2abfbba10ee550bd0c8)
 SPOILER: 97/100. It might be better/worse in your browser.
 
-#### DOMContentLoaded, and etc:
-When the app is cached with Service Workers:
-<img src="https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/after-cached.png" />
-
 #### Includes:
-
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
+- **SASS**, **[PostCSS](https://github.com/postcss/postcss)**,  and **[styled-components](https://github.com/styled-components/styled-components)** support.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
 - **[JSON-server](https://github.com/typicode/json-server)** - mock db.
+- **[rapscallion](https://github.com/FormidableLabs/rapscallion)** - async server-side rendering.
 - **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
-- **[Redux-thunk](https://github.com/gaearon/redux-thunk)** and **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
-- **[Fetch polyfill](https://github.com/github/fetch)**
+- **[Redux-thunk](https://github.com/gaearon/redux-thunk)**,  **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
+- **[Fetch polyfill](https://github.com/github/fetch)** and **[normalizr](https://github.com/paularmstrong/normalizr)**(api response normalization)
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
-- **[Store2](https://github.com/nbubna/store)** - LocalStorage access.
-- **[Webpack 2](https://webpack.js.org)**:
+- **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
+- **[Webpack 3](https://webpack.js.org)**:
     - Babel (stage-0),
     - **HMR**, devServer, hotMiddleware,
-    - Optimize code with **[Babel React Optimize](https://github.com/thejameskyle/babel-react-optimize)**,
-    - Process CSS with **[PostCSS](https://github.com/postcss/postcss)**, **[purifycss-webpack](https://github.com/webpack-contrib/purifycss-webpack)** and other loaders/plugins
-    - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside postcss.config.js)
+    - i18n support with **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**
+    - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
 - **[Jest](https://facebook.github.io/jest/)** and **[Enzyme](https://github.com/airbnb/enzyme)** - awesome libraries for testing.
 - **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
-- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.  With tree-shaking unused code never makes it into the final bundle.
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)** for your next progressive app.
+- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)** for your new awesome app.
 - [And more tools for building and testing...](https://github.com/Metnew/react-semantic.ui-starter/blob/master/package.json)
 
 ### Usage
@@ -57,18 +51,31 @@ cd react-semantic.ui-starter && rm -rf .git
 npm install
 ```
 
+#### ENV vars:
+BASE_API - App uses this path for requests with relative urls. By default `http://localhost:4000/api/v1` - json-server.
+BASE_API is required for `npm run ssr`, `npm run dev`, `npm run build`
+
 #### Run:
 
 ```bash
-npm run dev # run app in dev mode
+###############################################################
+npm run dev # run app in dev mode, BASE_API env var is required!
+###############################################################
 npm run db  # run mock db for app(from another process)
+###############################################################
+npm run ssr # run server-side rendering (IT NEEDS already built app) and BASE_API env var is required!
+###############################################################
 ```
 
 #### Build:
 
 ```bash
-npm run build # build app
+###############################################################
+npm run build # build app, accept next env vars:
+# APP_LANGUAGE=ru npm run build - build only selected language, if isn't set, then build app with all i18n languages!
+# ANALYZE_BUNDLE npm run build - add `webpack-bundle-analyzer` to plugins
 npm run build:demo # build with process.env.BUILD_DEMO = true
+###############################################################
 ```
 
 These commands generate the `dist` folder.
@@ -76,7 +83,7 @@ These commands generate the `dist` folder.
 #### Test:
 
 ```bash
-npm run test # run tests with Jest
+npm run test # run tests with Jest, BASE_API env var is required!
 ```
 
 #### Lint:
@@ -93,9 +100,8 @@ npm run docs # generate docs and `serve`
 ```
 
 #### Nearest future:
-- Implement **SSR with code-splitting**. See [React Router docs](https://reacttraining.com/react-router/web/guides/code-splitting/code-splitting-server-rendering). This docs say that it's a very hard task. So, maybe let's try to accomplish it? :smiling_imp:
 
-- **Project must be isomorphic**. Code must works with React-Native too. I'll be very happy, if you can help me with this task :wink:, or just recommend something.
+- **Project must be isomorphic**. Code must somehow works with React-Native too. I'll be very happy, if you can help me with this task :wink:, or just recommend something.
 
 ### FAQ
 
@@ -106,10 +112,16 @@ You can store static assets (images, videos) in `/static` folder.
 You can find it in `webpack_config/config.js`
 
 #### Is SSR available?
-It's under active development inside `/src/server` folder.
+Yes! Check `/src/server/server.js`. App uses rapscallion for async rendering on server.
+
+#### How lazy-loading implemented:
+Check `src/common/routing/index.js`. TL;DR: dynamic `import()`.
+
+#### Is theming available?
+Yes, with styled-components's `<ThemeProvider>` you can specify your own theme. By default, app uses theme from [www.materialpallette.com](https://www.materialpalette.com/).
 
 #### How it differs from other starters?
-Performance-first.
+App is designed for big projects. Personally, I use almost similar boilerplate in production.
 **Main purpose - build highly customizable isomorphic(!) skeleton for PWA, with SSR, code-splitting, following best practices.**
 
 #### "You have a components folder and containers folder..and in the container you have another components folder?"
@@ -122,8 +134,6 @@ Components in components are components that:
 1. Don't have own logic and connection with state (as opposite to containers)
 2. Aren't "isolated".(!)
 
-As your app's `components` folder increases in size, it could be refactored to similar structure that implemented in [semantic-ui-react]( https://github.com/Semantic-Org/Semantic-UI-React/tree/master/src).
-
 #### Where are tests?
 There are tests for actions and for reducers.
 Each reducer/action has own folder, where you can find:
@@ -133,20 +143,6 @@ Each reducer/action has own folder, where you can find:
 #### How to write tests?
 You can find [action testing example here.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js)
 It uses [redux-mock-store.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js)
-
-#### How does Auth work?
-Migration from React-Router v3 to v4 may cause some problems.
-There is no `onEnter` props in `Route` component.
-
-But we can fix this:
-1. Create [global routing object.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/routing/index.jsx#L9)
-2. Create [RouteAuth](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/components/RouteAuth/index.jsx) component that protects child component from unauthorized users.
-3. Pass a function that checks is user allowed to visit route as prop [in every `RouteAuth` component.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/routing/index.jsx#L52)
-4. When RouteAuth renders [it calls that function.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/routing/index.jsx#L52)
-5. As [`authCheck` function can call redux store](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/components/Root/index.jsx#L19-L30), we can access redux's state before `Route` is rendered.
-6. Profit!!!!!
-7. We have access to redux state in the function that allows `Route` to be rendered.
-8. Also, there is a handler for [auth logic in App container.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/containers/App/index.jsx#L178-L184)
 
 #### How does the built app look?
 **[Like this.](https://github.com/Metnew/react-semantic.ui-starter/tree/gh-pages)**

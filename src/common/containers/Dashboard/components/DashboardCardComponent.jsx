@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
-import {Card, Image} from 'semantic-ui-react'
+import {Card, Image, Button} from 'semantic-ui-react'
 
 export default class DashboardCardComponent extends PureComponent {
   static propTypes = {
@@ -11,7 +11,7 @@ export default class DashboardCardComponent extends PureComponent {
   }
 
   render () {
-    let {title, body, id, userId} = this.props
+    const {title, body, id} = this.props
 
     return (
       <Card raised>
@@ -22,7 +22,7 @@ export default class DashboardCardComponent extends PureComponent {
           </Card.Header>
           <Card.Meta>
             <span className="date">
-              Post's "id" is {id}
+              Post `id` is {id}
             </span>
           </Card.Meta>
           <Card.Description>
@@ -30,9 +30,10 @@ export default class DashboardCardComponent extends PureComponent {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a>
-            User's id is "{userId}"
-          </a>
+          <div className='ui two buttons'>
+            <Button basic color='green' disabled>Approve</Button>
+            <Button basic color='red' disabled>Decline</Button>
+          </div>
         </Card.Content>
       </Card>
     )

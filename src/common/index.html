@@ -1,43 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="<%=htmlWebpackPlugin.options.language%>">
 
 <head>
     <meta charset="utf-8">
-    <title>React-Semantic.UI Starter</title>
+    <title><%=htmlWebpackPlugin.options.title%></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
+    <meta name="description" content="Production-ready, performance-first, template built with React/Redux/React-Semantic-UI">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/" />
+    <!--  -->
+    <!-- XXX:FaviconsWebpackPlugin doesn't generate meta content below: -->
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="React-Semantic.UI-Starter">
-    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="React-Semantic.UI-Starter">
-    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#2F3BA2">
-
     <!-- Web Application Manifest -->
     <link rel="manifest" href="manifest.json">
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#1b1c1d">
+    <!--  -->
+    <!-- META TAG THAT IS REPLACED WITH INLINE STYLES IN SSR -->
+    <meta name="ssr-styles"/>
 </head>
 
 <body>
     <div id="app"></div>
     <noscript>
-        You are using outdated browser. You can install modern browser here: <a href="http://outdatedbrowser.com/" >http://outdatedbrowser.com</a>.
+      You are using outdated browser. You can install modern browser here: <a href="http://outdatedbrowser.com/" >http://outdatedbrowser.com</a>.
     </noscript>
 </body>
 

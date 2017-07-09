@@ -1,27 +1,28 @@
 import {
   loginAPI,
   setLocalToken,
-  resetLocalToken
-} from 'api/AuthSvc'
-import { resultOK } from 'api/utils'
+  resetLocalToken,
+  resultOK,
+  JWT_TOKEN
+} from 'api'
 
+export const LOGIN_AUTH_PENDING = 'LOGIN_AUTH_PENDING'
 export const LOGIN_AUTH_SUCCESS = 'LOGIN_AUTH_SUCCESS'
 export const LOGIN_AUTH_FAIL = 'LOGIN_AUTH_FAIL'
 
 export const LOGOUT_AUTH_SUCCESS = 'LOGOUT_AUTH_SUCCESS'
 
-export function LOGIN_AUTH (data) {
-  return async () => {
-    let result = await loginAPI(data)
-    if (!resultOK(result)) {
-      return { type: LOGIN_AUTH_FAIL, error: result.data }
-    }
-    setLocalToken(result.data.token)
-    return { type: LOGIN_AUTH_SUCCESS, result: result.data }
+// обобщить функцию хорошая идея для DRY?
+export const LOGIN_AUTH = async data => {
+  let result = await loginAPI(data)
+  if (!resultOK(result)) {
+    return {type: LOGIN_AUTH_FAIL, errors: result.data}
   }
+  setLocalToken(result.data[JWT_TOKEN])
+  return {type: LOGIN_AUTH_SUCCESS, result: result.data}
 }
 
-export function LOGOUT_AUTH () {
+export const LOGOUT_AUTH = () => {
   resetLocalToken()
-  return { type: LOGOUT_AUTH_SUCCESS }
+  return {type: LOGOUT_AUTH_SUCCESS}
 }

@@ -1,18 +1,31 @@
 'use strict'
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const languages = require('../i18n')
 const config = require('./config')
-const _ = require('./utils')
+
+process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
+
+let definePluginArgs = {
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
+  'process.env.BUILD_DEMO': JSON.stringify(process.env.BUILD_DEMO)
+}
+
+if (process.env.NODE_ENV === 'development') {
+  // XXX: don't use i18n plugin in development
+  definePluginArgs['i18n'] = ''
+}
 
 module.exports = {
   entry: {
-    client: path.join(__dirname, '../src/client/index.jsx')
+    client: path.join(config.srcPath, '/client')
   },
   output: {
-    path: _.outputPath,
+    path: path.join(__dirname, '../dist'),
     filename: '[name].js',
+    chunkFilename: '[name].[chunkhash:6].js',
     publicPath: config.publicPath
   },
   performance: {
@@ -21,22 +34,19 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.json', '.scss'],
     alias: {
-      actions: `${config.commonFolderPath}/actions/`,
-      api: `${config.commonFolderPath}/api/`,
-      reducers: `${config.commonFolderPath}/reducers/`,
-      components: `${config.commonFolderPath}/components/`,
-      containers: `${config.commonFolderPath}/containers/`,
-      routing: `${config.commonFolderPath}/routing/`,
-      styles: `${config.commonFolderPath}/styles/`,
-      scss_vars: `${config.commonFolderPath}/styles/vars.scss`,
-      config:
-        `${config.commonFolderPath}/config/` + process.env.REACT_WEBPACK_ENV
+      common: `${config.srcCommonPath}`,
+      actions: `${config.srcCommonPath}/actions/`,
+      api: `${config.srcCommonPath}/api/`,
+      components: `${config.srcCommonPath}/components/`,
+      containers: `${config.srcCommonPath}/containers/`,
+      reducers: `${config.srcCommonPath}/reducers/`,
+      routing: `${config.srcCommonPath}/routing/`,
+      styles: `${config.srcCommonPath}/styles/`
     },
     modules: [
       // places where to search for required modules
-      _.cwd('src/common'),
-      _.cwd('src'),
-      _.cwd('node_modules')
+      config.srcPath,
+      path.join(__dirname, '../node_modules')
     ]
   },
   module: {
@@ -60,42 +70,34 @@ module.exports = {
         exclude: [/node_modules/]
       },
       {
-        test: /\.(ico|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
-        use: 'file-loader?limit=100000'
+        test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
+        use: `file-loader?limit=100000&name=assets/[name].[hash].[ext]`
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
-          'file-loader?limit=100000',
-          {
-            loader: 'img-loader',
-            options: {
-              enabled: true,
-              optipng: true
-            }
-          }
+          `file-loader?limit=100000&name=assets/[name].[hash].[ext]`
+          // NOTE: it looks like there is an issue using img-loader in some environments
+          // {
+          // 	loader: 'img-loader',
+          // 	options: {
+          // 		enabled: true,
+          // 		optipng: true
+          // 	}
+          // }
         ]
       }
     ]
   },
   plugins: [
-    // add index.html
-    new HtmlWebpackPlugin({
-      title: config.title,
-      template: path.resolve(__dirname, '../src/common/index.html'),
-      filename: _.outputIndexPath
-    }),
-    new webpack.DefinePlugin({
-      'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO),
-      'process.env.BROWSER': true
-    }),
+    new webpack.DefinePlugin(definePluginArgs),
     new CopyWebpackPlugin([
       {
-        from: _.cwd('./static'),
-        // to the root of the dist path
+        from: path.join(__dirname, '../static'),
+        // Fix path for demo
         to: './'
       }
     ])
   ],
-  target: _.target
+  target: 'web'
 }

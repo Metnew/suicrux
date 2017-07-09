@@ -1,42 +1,34 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {LOGIN_AUTH, RECOVER_PASSWORD_AUTH, REGISTER_AUTH} from 'actions/auth'
-import LoginComponent from './components/LoginComponent'
+import {LOGIN_AUTH, LOGIN_AUTH_PENDING} from 'actions'
+import LoginComponent from './components'
 
 class Login extends Component {
   static propTypes = {
     login: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired,
-    forgetPassword: PropTypes.func.isRequired,
-    componentState: PropTypes.object.isRequired // login component state
+    errors: PropTypes.object.isRequired
   }
 
   render () {
-    const {props} = this
+    const {login, errors} = this.props
+    const props = {login, errors}
     return <LoginComponent {...props} />
   }
 }
 
 function mapStateToProps (state) {
+  const {errors} = state.me.auth
   return {
-    // state.login_component_reducer
-    componentState: state.loginCR
+    errors
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     login: async data => {
-      let result = await dispatch(LOGIN_AUTH(data))
-      return dispatch(result)
-    },
-    forgetPassword: async data => {
-      let result = await dispatch(RECOVER_PASSWORD_AUTH(data))
-      return dispatch(result)
-    },
-    register: async data => {
-      let result = await dispatch(REGISTER_AUTH(data))
+      dispatch({type: LOGIN_AUTH_PENDING})
+      const result = await LOGIN_AUTH(data)
       return dispatch(result)
     }
   }

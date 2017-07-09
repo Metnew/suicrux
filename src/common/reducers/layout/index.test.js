@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {layout as reducer} from 'reducers/layout'
+import {layout as reducer, initialState} from 'reducers/layout'
 import * as actions from 'actions'
 
 const UI_CLOSE_SIDEBAR = {
@@ -18,13 +18,8 @@ const UI_WINDOW_RESIZE = {
     type: actions.UI_WINDOW_RESIZE
 }
 
-const APP_INIT = {
-    type: actions.APP_INIT
-}
-
-const initialState = {
-    sidebarOpened: false,
-    isMobile: false
+const APPLICATION_INIT = {
+    type: actions.APPLICATION_INIT
 }
 
 describe('LAYOUT REDUCER', () => {
@@ -39,10 +34,12 @@ describe('LAYOUT REDUCER', () => {
         })
     })
 
-    it('should handle APP_INIT', () => {
-        expect(reducer(initialState, APP_INIT)).toEqual({
+    it('should handle APPLICATION_INIT', () => {
+        expect(reducer(initialState, APPLICATION_INIT)).toEqual({
             ...initialState,
-            isMobile: true
+            isMobile: true,
+            isMobileXS: false,
+            isMobileSM: false
             // `window.innerWidth` is 1024px in test env
         })
     })
@@ -50,7 +47,9 @@ describe('LAYOUT REDUCER', () => {
     it('should handle WINDOW_RESIZE', () => {
         expect(reducer(initialState, UI_WINDOW_RESIZE)).toEqual({
             ...initialState,
-            isMobile: true
+            isMobile: true,
+            isMobileXS: false,
+            isMobileSM: false
             // `window.innerWidth` is 1024px in test env
         })
     })

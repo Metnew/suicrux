@@ -15,24 +15,9 @@ describe('Auth actions', () => {
     }
 
     const store = mockStore({})
-    return store.dispatch(actions.LOGIN_AUTH({})).then(res => {
+    return store.dispatch(actions.LOGIN_AUTH).then(res => {
       expect(res).toEqual(expectedActions)
       done()
     })
   })
-
-  // JSON DB should handle it too.
-  // it('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was failed', (done) => {
-  //
-  //     const expectedActions = {
-  //         type: actions.LOGIN_AUTH_FAIL,
-  //         error: {}
-  //     }
-  //
-  //     const store = mockStore({})
-  //     return store.dispatch(actions.LOGIN_AUTH({})).then((res) => {
-  //         expect(res).toEqual(expectedActions)
-  //         done()
-  //     })
-  // })
 })

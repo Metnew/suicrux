@@ -1,4 +1,4 @@
 export * from './AuthSvc'
-export * from './InboxSvc'
-export * from './StatisticsSvc'
+export * from './PostsSvc'
+export * from './UsersSvc'
 export * from './utils'
