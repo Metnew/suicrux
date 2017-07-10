@@ -121,7 +121,7 @@
   "scripts": {
     "db": "nodemon ./db",
     "docs": "esdoc && serve ./esdoc",
-    "serve_dist": "serve -s ./dist",
+    "serve_dist": "serve -s ./dist/$APP_LANGUAGE",
     "build": "webpack --config webpack_config/webpack.prod.js",
     "build:demo": "BUILD_DEMO=true APP_LANGUAGE=en webpack --config webpack_config/webpack.prod.demo.remove.me.please.js",
     "test": "jest --config=jest_config/jest.config.json --coverage --forceExit || true",
