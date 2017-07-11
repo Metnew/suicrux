@@ -98,4 +98,26 @@ base.stats = {
     modules: false
 }
 
-module.exports = base
+const builds = Object.keys(languages).map(language => {
+  let baseConfigForLang = _.cloneDeep(base)
+  baseConfigForLang.output.path = path.join(
+    baseConfigForLang.output.path,
+    language
+  )
+
+  baseConfigForLang.plugins.push(
+    new I18nPlugin(languages[language], {functionName: 'i18n'}),
+    new HtmlWebpackPlugin({
+      title: config.title,
+      language: language,
+      GA_KEY: process.env.GA_KEY,
+      // minify: true,
+      template: path.resolve(config.srcCommonPath, 'index.html'),
+      filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
+      chunksSortMode: 'dependency'
+    })
+  )
+  return baseConfigForLang
+})
+
+module.exports = builds

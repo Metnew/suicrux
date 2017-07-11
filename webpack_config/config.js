@@ -4,9 +4,7 @@ const path = require('path')
 module.exports = {
     port: 3000,
     title: 'React-Semantic.UI-Starter',
-    publicPath: process.env.BUILD_DEMO
-        ? '/react-semantic.ui-starter/'
-        : '/',
+    publicPath: '/',
     srcPath: path.join(__dirname, './../common'),
     // add these dependencies to a standalone vendor bundle
     vendor: [

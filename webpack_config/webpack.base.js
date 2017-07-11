@@ -4,7 +4,18 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const config = require('./config')
-const _ = require('./utils')
+
+process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
+
+let definePluginArgs = {
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  'process.env.BASE_API': JSON.stringify(process.env.BASE_API)
+}
+
+if (process.env.NODE_ENV === 'development') {
+  // XXX: don't use i18n plugin in development
+  definePluginArgs['i18n'] = ''
+}
 
 module.exports = {
     entry: {
