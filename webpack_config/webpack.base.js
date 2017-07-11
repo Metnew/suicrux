@@ -9,8 +9,7 @@ process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
 
 let definePluginArgs = {
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-  'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
-  'process.env.BUILD_DEMO': JSON.stringify(process.env.BUILD_DEMO)
+  'process.env.BASE_API': JSON.stringify(process.env.BASE_API)
 }
 
 if (process.env.NODE_ENV === 'development') {

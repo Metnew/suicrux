@@ -8,4 +8,3 @@ global.window = {
 global.i18n = () => {}
 global.fetch = require('node-fetch')
 require('./server')
-// SSR is under development, be patient :)

@@ -24,6 +24,16 @@
     <noscript>
       You are using outdated browser. You can install modern browser here: <a href="http://outdatedbrowser.com/" >http://outdatedbrowser.com</a>.
     </noscript>
+    <% if (htmlWebpackPlugin.options.GA_KEY) { %>
+      <!-- Google Analytics -->
+      <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', '<%=htmlWebpackPlugin.options.GA_KEY%>', 'auto');
+      ga('send', 'pageview');
+      </script>
+      <script async src='https://www.google-analytics.com/analytics.js'></script>
+      <!-- End Google Analytics -->
+    <% } %>
 </body>
 
 </html>

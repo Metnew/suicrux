@@ -24,13 +24,5 @@ export function isLoggedIn () {
 }
 
 export async function loginAPI (data) {
-  if (process.env.BUILD_DEMO) {
-    return {
-      ok: true,
-      data: {
-        [JWT_TOKEN]: 'Just_for_demo'
-      }
-    }
-  }
   return post('/auth', data)
 }

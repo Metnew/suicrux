@@ -27,7 +27,8 @@ export const MainContent = styled.main`
 
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	height: 100%;
-	overflow: scroll!important;
+  overflow-y: scroll!important;
+  -webkit-overflow-scrolling: touch;
 
 	${'' /* poptop_modules/components/views/AppComponent/index.jsx 65:52   ${media.md`
 		max-width: ${props => props.sidebarOpened && `calc(100% - 150px)`};

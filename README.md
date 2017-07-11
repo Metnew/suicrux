@@ -74,7 +74,6 @@ npm run ssr # run server-side rendering (IT NEEDS already built app) and BASE_AP
 npm run build # build app, accept next env vars:
 # APP_LANGUAGE=ru npm run build - build only selected language, if isn't set, then build app with all i18n languages!
 # ANALYZE_BUNDLE npm run build - add `webpack-bundle-analyzer` to plugins
-npm run build:demo # build with process.env.BUILD_DEMO = true
 ###############################################################
 ```
 

@@ -21,7 +21,7 @@ export default class Footer extends Component {
                     <Header.Content>
                       React-Semantic.UI-Starter
                       <Header.Subheader>
-                        This project is waiting for you!
+                        Semantic.UI is cool, really.
                       </Header.Subheader>
                     </Header.Content>
                   </Header>

@@ -90,7 +90,7 @@ export const Routing = authCheck => {
 }
 
 function getHistory () {
-  const basename = process.env.BUILD_DEMO ? '/react-semantic.ui-starter' : ''
+  const basename = ''
   if (process.env.BABEL_ENV === 'ssr') {
     return createMemoryHistory()
   }

@@ -210,6 +210,7 @@ const builds = Object.keys(languages).map(language => {
     new HtmlWebpackPlugin({
       title: config.title,
       language: language,
+      GA_KEY: process.env.GA_KEY,
       // minify: true,
       template: path.resolve(config.srcCommonPath, 'index.html'),
       filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
