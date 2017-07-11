@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'production'
+
 const exec = require('child_process').execSync
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -7,14 +8,14 @@ const SriPlugin = require('webpack-subresource-integrity')
 const I18nPlugin = require('i18n-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const BabiliPlugin = require('babili-webpack-plugin')
+// const BabiliPlugin = require('babili-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const OfflinePlugin = require('offline-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-// See comments about ShakePlugin below:
-// const ShakePlugin = require('webpack-common-shake').Plugin
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const ShakePlugin = require('webpack-common-shake').Plugin
 
 // const git = require('git-rev-sync')
 let languages = require('../i18n')
@@ -34,6 +35,7 @@ exec('rm -rf dist/')
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
+base.output.crossOriginLoading = 'anonymous'
 base.devtool = 'cheap-source-map'
 base.module.rules.push(
   {
@@ -77,15 +79,11 @@ base.plugins.push(
     allChunks: true
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
-  //
-  // FIXME: I'm getting error from this issue https://github.com/indutny/webpack-common-shake/issues/7
-  // Probably. it's a problem of a plugin, so it's temporarily commented
-  // new ShakePlugin(),
-  //
+  new ShakePlugin(),
   new OptimizeCssAssetsPlugin(),
   // NOTE: Prepack currently in alpha, be carefull with it
   // new PrepackWebpackPlugin(),
-  //
+  // 
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -105,8 +103,7 @@ base.plugins.push(
     name: 'manifest'
   }),
   new webpack.BannerPlugin({
-    banner:
-      'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+    banner: 'React-Semantic.UI-Starter. MIT License. Copyright (c) 2017 Copyright Vladimir Metnew. All Rights Reserved. https://github.com/Metnew/react-semantic.ui-starter'
   }),
   // XXX: this plugin is cool, but there is a one big issue:
   // It sets invalid url to browserconfig.xml and manifest.json in index.html.
@@ -115,7 +112,7 @@ base.plugins.push(
   new FaviconsWebpackPlugin({
     // add theme-color property
     background: config.manifest.theme,
-    prefix: `icons`,
+    prefix: `icons/`,
     logo: path.resolve(__dirname, '../static/images/logo.png'),
     title: config.title,
     // Inject the html into the html-webpack-plugin
@@ -134,32 +131,24 @@ base.plugins.push(
       windows: true
     }
   }),
-  new BabiliPlugin(),
-  // XXX: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
-  // XXX: uglify-js 3.* doesn't working with es6 currently!
-  // new UglifyJsPlugin({
-  // 	sourceMap: true,
-  // 	compress: {
-  // 		warnings: false
-  // 	},
-  // 	output: {
-  // 		comments: false
-  // 	}
-  // }),
-  //
-  //
-  // NOTE: you can uncomment this option.
-  // I think it's unnecessary for small app, because it slows page finish loading.
-  // new PreloadWebpackPlugin({
-  // 	rel: 'preload',
-  // 	as: 'script',
-  // 	include: 'asyncChunks'
-  // }),
-  //
-  //
+  // NOTE: temporarily comment babiliplugin, because it breaks build on Linux Alpine
+  // new BabiliPlugin(),
+  new UglifyJSPlugin({
+    sourceMap: true,
+    compress: {
+      warnings: false
+    },
+    output: {
+      comments: false
+    }
+  }),
+  new PreloadWebpackPlugin({
+    rel: 'preload',
+    as: 'script',
+    include: 'asyncChunks'
+  }),
   // create manifest.json
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
-  //
   // AppCache + ServiceWorkers
   new OfflinePlugin({
     safeToUseOptionalCaches: true,
@@ -177,13 +166,13 @@ base.plugins.push(
   }),
   new CompressionPlugin({
     algorithm: 'gzip'
-  })
+  }),
   // https://caniuse.com/#feat=subresource-integrity
   // NOTE: please, read about SRI before using it!
-  // new SriPlugin({
-  // 	hashFuncNames: ['sha256', 'sha384'],
-  // 	enabled: process.env.NODE_ENV === 'production'
-  // })
+  new SriPlugin({
+  	hashFuncNames: ['sha256', 'sha384'],
+  	enabled: process.env.NODE_ENV === 'production'
+  })
 )
 
 // minimize webpack output
