@@ -1,8 +1,8 @@
 'use strict'
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const languages = require('../i18n')
 const config = require('./config')
 
 process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
@@ -18,85 +18,85 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 module.exports = {
-    entry: {
-        client: './common/index.jsx'
+  entry: {
+    client: path.join(config.srcPath, '/client')
+  },
+  output: {
+    path: path.join(__dirname, '../dist'),
+    filename: '[name].js',
+    chunkFilename: '[name].[chunkhash:6].js',
+    publicPath: config.publicPath
+  },
+  performance: {
+    hints: process.env.NODE_ENV === 'production' ? 'warning' : false
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.css', '.json', '.scss'],
+    alias: {
+      common: `${config.srcCommonPath}`,
+      actions: `${config.srcCommonPath}/actions/`,
+      api: `${config.srcCommonPath}/api/`,
+      components: `${config.srcCommonPath}/components/`,
+      containers: `${config.srcCommonPath}/containers/`,
+      reducers: `${config.srcCommonPath}/reducers/`,
+      routing: `${config.srcCommonPath}/routing/`,
+      styles: `${config.srcCommonPath}/styles/`
     },
-    output: {
-        path: _.outputPath,
-        filename: '[name].js',
-        publicPath: config.publicPath
-    },
-    performance: {
-        hints: process.env.NODE_ENV === 'production'
-            ? 'warning'
-            : false
-    },
-    resolve: {
-        extensions: [
-            '.js', '.jsx', '.css', '.json', '.scss'
+    modules: [
+      // places where to search for required modules
+      config.srcPath,
+      path.join(__dirname, '../node_modules')
+    ]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        enforce: 'pre',
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              fix: true
+            }
+          }
         ],
-        alias: {
-            actions: `${config.srcPath}/actions/`,
-            api: `${config.srcPath}/api/`,
-            reducers: `${config.srcPath}/reducers/`,
-            components: `${config.srcPath}/components/`,
-            containers: `${config.srcPath}/containers/`,
-            styles: `${config.srcPath}/styles/`,
-            scss_vars: `${config.srcPath}/styles/vars.scss`,
-            config: `${config.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
-        },
-        modules: [
-            // places where to search for required modules
-            _.cwd('common'),
-            _.cwd('node_modules')
+        exclude: [/node_modules/]
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
+        exclude: [/node_modules/]
+      },
+      {
+        test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
+        use: `file-loader?limit=100000&name=assets/[name].[hash].[ext]`
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          `file-loader?limit=100000&name=assets/[name].[hash].[ext]`
+          // NOTE: it looks like there is an issue using img-loader in some environments
+          // {
+          // 	loader: 'img-loader',
+          // 	options: {
+          // 		enabled: true,
+          // 		optipng: true
+          // 	}
+          // }
         ]
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                enforce: 'pre',
-                use: 'eslint-loader',
-                exclude: [/node_modules/]
-            }, {
-                test: /\.(js|jsx)$/,
-                use: 'babel-loader',
-                exclude: [/node_modules/]
-            }, {
-                test: /\.(ico|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/,
-                use: 'file-loader?limit=100000'
-            }, {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                use: [
-                    'file-loader?limit=100000', {
-                        loader: 'img-loader',
-                        options: {
-                            enabled: true,
-                            optipng: true
-                        }
-                    }
-                ]
-            }
-        ]
-    },
-    plugins: [
-        // add index.html
-        new HtmlWebpackPlugin({
-            title: config.title,
-            template: path.resolve(__dirname, '../common/index.html'),
-            filename: _.outputIndexPath
-        }),
-        new webpack.DefinePlugin({
-            'process.env.BUILD_DEMO': JSON.stringify(!!process.env.BUILD_DEMO)
-        }),
-        new webpack.LoaderOptionsPlugin(_.loadersOptions()),
-        new CopyWebpackPlugin([
-            {
-                from: _.cwd('./static'),
-                // to the root of the dist path
-                to: './'
-            }
-        ])
-    ],
-    target: _.target
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin(definePluginArgs),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../static'),
+        // Fix path for demo
+        to: './'
+      }
+    ])
+  ],
+  target: 'web'
 }

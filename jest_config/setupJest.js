@@ -1,2 +1,2 @@
 global.fetch = require('node-fetch')
-window.BASE_API = 'http://localhost:4000/api/v1'
+process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'

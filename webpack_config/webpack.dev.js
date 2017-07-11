@@ -1,29 +1,54 @@
 'use strict'
 process.env.NODE_ENV = 'development'
-process.env.REACT_WEBPACK_ENV = 'dev'
-
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const base = require('./webpack.base')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
+
 const config = require('./config')
-const _ = require('./utils')
+const loaders = {
+  style: {loader: 'style-loader'},
+  css: {loader: 'css-loader', options: {sourceMap: true}},
+  resolve: 'resolve-url-loader',
+  postcss: {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: true
+    }
+  },
+  sass: {loader: 'sass-loader', options: {sourceMap: true}}
+}
 
 base.devtool = 'eval-source-map'
-base.module.rules.push({
+base.module.rules.push(
+  {
     test: /\.css$/,
-    loaders: [ 'style-loader', 'css-loader', 'resolve-url-loader']
-}, {
+    loaders: [loaders.style, loaders.css, loaders.postcss, loaders.resolve]
+  },
+  {
     test: /\.scss$/,
-    loaders: [ 'style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader']
-})
+    loaders: [
+      loaders.style,
+      loaders.css,
+      loaders.postcss,
+      loaders.resolve,
+      loaders.sass
+    ]
+  }
+)
 
 // add dev plugins
 base.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('development')}),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new FriendlyErrors()
+  // add index.html
+  new HtmlWebpackPlugin({
+    title: config.title,
+    template: path.resolve(config.srcCommonPath, 'index.html'),
+    filename: path.resolve(config.distPath, 'index.html')
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
+  new FriendlyErrors()
 )
 
 module.exports = base

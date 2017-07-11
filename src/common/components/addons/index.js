@@ -1,0 +1,1 @@
+export RouteAuth from './RouteAuth'

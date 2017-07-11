@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Build
 dist
+esdoc
 
 # Runtime data
 pids
@@ -40,3 +41,4 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+yarn.lock
