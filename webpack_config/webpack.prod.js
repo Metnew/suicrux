@@ -78,12 +78,14 @@ base.plugins.push(
     filename: '[name].[chunkhash:8].css',
     allChunks: true
   }),
-  new webpack.optimize.ModuleConcatenationPlugin(),
+  // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
+  // I got an error trying to deploy this app to zeit's `now` when i use this plugin
+  // new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
   new OptimizeCssAssetsPlugin(),
   // NOTE: Prepack currently in alpha, be carefull with it
   // new PrepackWebpackPlugin(),
-  // 
+  //
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -131,7 +133,7 @@ base.plugins.push(
       windows: true
     }
   }),
-  // NOTE: temporarily comment babiliplugin, because it breaks build on Linux Alpine
+  // NOTE: you can use BabiliPlugin as alternative to UglifyJSPlugin
   // new BabiliPlugin(),
   new UglifyJSPlugin({
     sourceMap: true,
@@ -151,6 +153,7 @@ base.plugins.push(
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
   // AppCache + ServiceWorkers
   new OfflinePlugin({
+    responseStrategy: 'network-first',
     safeToUseOptionalCaches: true,
     caches: {
       main: ['vendor.*.css', 'vendor.*.js'],
@@ -177,6 +180,7 @@ base.plugins.push(
 
 // minimize webpack output
 base.stats = {
+  colors: true,
   // Add children information
   children: false,
   // Add chunk information (setting this to `false` allows for a less verbose output)
@@ -184,7 +188,9 @@ base.stats = {
   // Add built modules information to chunk information
   chunkModules: false,
   chunkOrigins: false,
-  modules: false
+  modules: false,
+  reasons: true,
+  errorDetails: true
 }
 
 const builds = Object.keys(languages).map(language => {
