@@ -9,7 +9,7 @@ import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 // Application
 import {configureStore, configureRootComponent} from 'common'
 import {JWT_TOKEN} from 'api'
-
+//
 const language = process.env.APP_LANGUAGE || 'en'
 const distPath = `../../../dist/${language}`
 // read index.html and assign a variable

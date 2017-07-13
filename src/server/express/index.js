@@ -5,7 +5,7 @@ import compression from 'compression'
 import path from 'path'
 import fs from 'fs'
 import cookieParser from 'cookie-parser'
-
+//
 const language = process.env.APP_LANGUAGE || 'en'
 const distPath = `../../../dist/${language}`
 const app = express()
@@ -20,6 +20,5 @@ app.use(
 )
 app.disable('x-powered-by')
 app.use(expressHelmet())
-
 
 export default app
