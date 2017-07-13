@@ -91,7 +91,7 @@ export const Routing = authCheck => {
 
 function getHistory () {
   const basename = ''
-  if (process.env.BABEL_ENV === 'ssr') {
+  if (process.env.IS_SSR) {
     return createMemoryHistory()
   }
   return createBrowserHistory({basename})
