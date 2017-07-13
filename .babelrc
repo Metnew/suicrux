@@ -12,22 +12,18 @@
     ],
     "react-hot-loader/babel",
     "transform-react-jsx-img-import",
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    [
+      "babel-plugin-webpack-alias",
+      {
+        "config": "./webpack_config/webpack.base.js",
+        "findConfig": true
+      }
+    ],
+    "dynamic-import-node"
   ],
   "presets": ["es2015", "react", "stage-0"],
   "env": {
-    "ssr": {
-      "plugins": [
-        [
-          "babel-plugin-webpack-alias",
-          {
-            "config": "./webpack_config/webpack.base.js",
-            "findConfig": true
-          }
-        ],
-        "dynamic-import-node"
-      ]
-    },
     "production": {
       "presets": ["react-optimize"]
     }
