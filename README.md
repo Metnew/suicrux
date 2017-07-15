@@ -101,7 +101,10 @@ npm run docs # generate docs and `serve`
 
 #### Nearest future:
 
-- **Project must be isomorphic**. Code must somehow works with React-Native too. I'll be very happy, if you can help me with this task :wink:, or just recommend something.
+- **Project must be isomorphic (design in progress)**. Code must somehow works with React-Native too. I'll be very happy, if you can help me with this task :wink:, or just recommend something.
+- **Bundle server-side code with Webpack (testing implementation, in master branch soon)**
+- **SSR with HMR(testing implementation, in master branch soon)**
+- **Improved docs || how-it-works guide || article (in progress)** - project lacks some info about implementation and design.
 
 ### FAQ
 
