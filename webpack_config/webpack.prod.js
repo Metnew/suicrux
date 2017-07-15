@@ -207,7 +207,7 @@ const builds = Object.keys(languages).map(language => {
       language: language,
       GA_KEY: process.env.GA_KEY,
       // minify: true,
-      template: path.resolve(config.srcCommonPath, 'index.html'),
+      template: path.resolve(config.srcCommonPath, 'index.ejs'),
       filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
       chunksSortMode: 'dependency'
     })

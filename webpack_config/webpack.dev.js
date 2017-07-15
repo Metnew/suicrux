@@ -43,7 +43,7 @@ base.plugins.push(
   // add index.html
   new HtmlWebpackPlugin({
     title: config.title,
-    template: path.resolve(config.srcCommonPath, 'index.html'),
+    template: path.resolve(config.srcCommonPath, 'index.ejs'),
     filename: path.resolve(config.distPath, 'index.html')
   }),
   new webpack.HotModuleReplacementPlugin(),
