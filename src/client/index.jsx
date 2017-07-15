@@ -1,6 +1,8 @@
 // Styles
 import 'semantic-ui-css/semantic.css'
 import 'styles/global'
+// polyfill for fetch
+import 'whatwg-fetch'
 // Application
 import {render} from 'react-dom'
 import {configureStore, configureRootComponent} from 'common/index.jsx'
