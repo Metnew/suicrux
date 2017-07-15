@@ -1,14 +1,15 @@
 import path from 'path'
 import fs from 'fs'
-// React stuff
+// React-related stuff
 import React from 'react'
 import {render} from 'rapscallion'
 import Helmet from 'react-helmet'
 import {StaticRouter} from 'react-router'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 // Application
-import {configureStore, configureRootComponent} from 'common'
-import {JWT_TOKEN} from 'api'
+// Do you remember that we use webpack aliases provided by cool babel plugin?
+// (take a look at .babelrc)
+import {configureStore, configureRootComponent} from 'common/index'
 //
 const language = process.env.APP_LANGUAGE || 'en'
 const distPath = `../../../dist/${language}`
@@ -24,17 +25,12 @@ const indexHTMLFileContent = (function () {
 
 
 export default function(req, res) {
-  // Auth stuff
-  const {cookies} = req
-  const token = cookies[JWT_TOKEN]
-  //
-  //
-  // HERE SHOULD BE CHECK THAT TOKEN IS VALID
-  //
-  //
-  const isTokenValid = true
-  const initialState = isTokenValid
-    ? {me: {auth: {token, isLoggedIn: true}}}
+  // Auth-related stuff
+  // NOTE: check `server/express/index.js` for more info
+  const {user} = req
+  const {isLoggedIn, token} = user
+  const initialState = isLoggedIn
+    ? {me: {auth: {isLoggedIn, token}}}
     : {}
   //
   const sheet = new ServerStyleSheet()
