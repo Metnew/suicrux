@@ -78,14 +78,24 @@ base.plugins.push(
     filename: '[name].[chunkhash:8].css',
     allChunks: true
   }),
+  new OptimizeCssAssetsPlugin(),
   // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
   // I got an error trying to deploy this app to zeit's `now` when i use this plugin
   new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
-  new OptimizeCssAssetsPlugin(),
+  // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
+  // new BabiliPlugin(),
+  new UglifyJSPlugin({
+    sourceMap: true,
+    compress: {
+      warnings: false
+    },
+    output: {
+      comments: false
+    }
+  }),
   // NOTE: Prepack is currently in alpha, be carefull with it
   // new PrepackWebpackPlugin(),
-  //
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -107,10 +117,12 @@ base.plugins.push(
   new webpack.BannerPlugin({
     banner: 'React-Semantic.UI-Starter. MIT License. Copyright (c) 2017 Copyright Vladimir Metnew. All Rights Reserved. https://github.com/Metnew/react-semantic.ui-starter'
   }),
-  // XXX: this plugin is cool, but there is a one big issue:
-  // It sets invalid url to browserconfig.xml and manifest.json in index.html.
+  // XXX: this plugin seems cool, but there are few big issues:
+  // 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
   // E.g: in generated index.html you can see:
   // <meta name="msapplication-config" content="browserconfig.xml">
+  // 2. It looks like generated images aren't minified.(not sure)
+  // NOTE: It would be better to generate favicons without this plugin.
   new FaviconsWebpackPlugin({
     // add theme-color property
     background: config.manifest.theme,
@@ -133,49 +145,37 @@ base.plugins.push(
       windows: true
     }
   }),
-  // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
-  // new BabiliPlugin(),
-  new UglifyJSPlugin({
-    sourceMap: true,
-    compress: {
-      warnings: false
-    },
-    output: {
-      comments: false
-    }
-  }),
+  // create manifest.json
+  new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
+  // generate <link rel="preload"> tags for async chunks
   new PreloadWebpackPlugin({
     rel: 'preload',
     as: 'script',
     include: 'asyncChunks'
   }),
-  // create manifest.json
-  new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
-  // plugin for ServiceWorkers
-  new OfflinePlugin({
-    responseStrategy: 'network-first',
-    safeToUseOptionalCaches: true,
-    caches: {
-      main: ['vendor.*.css', 'vendor.*.js'],
-      additional: [':externals:'],
-      optional: [':rest:']
-    },
-    // excludes: ['.htaccess'],
-    AppCache: false,
-    ServiceWorker: {
-      navigateFallbackURL: '/',
-      events: true
-    }
+  // https://caniuse.com/#feat=subresource-integrity
+  // NOTE: please, read about SRI before using it!
+  new SriPlugin({
+    hashFuncNames: ['sha256', 'sha384'],
+    enabled: process.env.NODE_ENV === 'production'
   }),
   new CompressionPlugin({
     algorithm: 'gzip'
   }),
-  // https://caniuse.com/#feat=subresource-integrity
-  // NOTE: please, read about SRI before using it!
-  new SriPlugin({
-  	hashFuncNames: ['sha256', 'sha384'],
-  	enabled: process.env.NODE_ENV === 'production'
-  })
+  // ServiceWorkers
+  new OfflinePlugin({
+    responseStrategy: 'network-first',
+    safeToUseOptionalCaches: false,
+    caches: {
+      main: ['vendor.*.css', 'vendor.*.js']
+    },
+    // excludes: ['.htaccess'],
+    AppCache: false,
+    ServiceWorker: {
+      navigateFallbackURL: '/?offline=true',
+      events: true
+    }
+  }),
 )
 
 // minimize webpack output
