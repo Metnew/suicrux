@@ -1,7 +1,6 @@
 'use strict'
 const path = require('path')
 const webpack = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const languages = require('../i18n')
 const config = require('./config')
 
@@ -40,7 +39,9 @@ module.exports = {
       containers: `${config.srcCommonPath}/containers/`,
       reducers: `${config.srcCommonPath}/reducers/`,
       routing: `${config.srcCommonPath}/routing/`,
-      styles: `${config.srcCommonPath}/styles/`
+      styles: `${config.srcCommonPath}/styles/`,
+      static: path.join(__dirname, '../static'),
+      images: path.join(__dirname, '../static/images')
     },
     modules: [
       // places where to search for required modules
@@ -70,33 +71,39 @@ module.exports = {
       },
       {
         test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
-        use: `file-loader?limit=100000&name=assets/[name].[hash].[ext]`
+        use: `file-loader?limit=100000&name=assets/[name].[hash:8].[ext]`
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg)$/,
         use: [
-          `file-loader?limit=100000&name=assets/[name].[hash].[ext]`
-          // NOTE: it looks like there is an issue using img-loader in some environments
-          // {
-          // 	loader: 'img-loader',
-          // 	options: {
-          // 		enabled: true,
-          // 		optipng: true
-          // 	}
-          // }
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              // path: '/images',
+              name: 'images/[name].[hash:8].[ext]'
+            }
+          },
+          'img-loader'
         ]
       }
+      // NOTE: LQIP loader doesn't work with file-loader and url-loader :(
+      // `npm i --save-dev lqip-loader`
+      // {
+      //   test: /\.(jpe?g|png)$/i,
+      //   enforce: 'pre',
+      //   loaders: [
+      //     {
+      //       loader: 'lqip-loader',
+      //       options: {
+      //         path: '/images-lqip', // your image going to be in media folder in the output dir
+      //         name: '[name]-lqip.[hash:8].[ext]' // you can use [hash].[ext] too if you wish
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin(definePluginArgs),
-    new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, '../static'),
-        // Fix path for demo
-        to: './'
-      }
-    ])
-  ],
+  plugins: [new webpack.DefinePlugin(definePluginArgs)],
   target: 'web'
 }
