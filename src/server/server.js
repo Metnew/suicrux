@@ -9,5 +9,5 @@ app.use(BASE_API, API)
 app.get('*', useSSR)
 // Start server
 app.listen(PORT, () => {
-  console.log(`SSR ON PORT ${httpPort}! SSR!`)
+  console.log(`Server is running on ${PORT} port!`)
 })
