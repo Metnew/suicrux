@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const languages = require('../i18n')
 const config = require('./config')
 
-process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
+process.env.BASE_API = process.env.BASE_API || '/api/v1'
 
 let definePluginArgs = {
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -12,8 +12,10 @@ let definePluginArgs = {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  // XXX: don't use i18n plugin in development
-  definePluginArgs['i18n'] = ''
+  // ignore i18n plugin in development
+  definePluginArgs['i18n'] = (str) => {
+    return str
+  }
 }
 
 module.exports = {
