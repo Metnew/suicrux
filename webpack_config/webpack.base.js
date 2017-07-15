@@ -14,8 +14,10 @@ let definePluginArgs = {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  // XXX: don't use i18n plugin in development
-  definePluginArgs['i18n'] = ''
+  // ignore i18n plugin in development
+  definePluginArgs['i18n'] = (str) => {
+    return str
+  }'
 }
 
 module.exports = {
