@@ -2,7 +2,7 @@ import {post} from 'api/utils'
 import * as store from 'store2'
 import Cookies from 'js-cookie'
 
-const JWT_TOKEN = 'JWT_TOKEN'
+export const JWT_TOKEN = 'JWT_TOKEN'
 
 export function getLocalToken () {
   const token = store.get(JWT_TOKEN) || Cookies.get(JWT_TOKEN)
