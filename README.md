@@ -61,9 +61,11 @@ BASE_API is required for `npm run ssr`, `npm run dev`, `npm run build`
 ###############################################################
 npm run dev # run app in dev mode, BASE_API env var is required!
 ###############################################################
-npm run db  # run mock db for app(from another process)
+npm run start  # run server-side rendering for PRODUCTION
+# (IT NEEDS already built app) BASE_API env var is required!
 ###############################################################
-npm run ssr # run server-side rendering (IT NEEDS already built app) and BASE_API env var is required!
+npm run ssr # run server-side rendering for DEVELOPMENT
+# (IT NEEDS already built app) BASE_API env var is required!
 ###############################################################
 ```
 
@@ -71,13 +73,14 @@ npm run ssr # run server-side rendering (IT NEEDS already built app) and BASE_AP
 
 ```bash
 ###############################################################
-npm run build # build app, accept next env vars:
-# APP_LANGUAGE=ru npm run build - build only selected language, if isn't set, then build app with all i18n languages!
+npm run build # build both frontend and server, accept next env vars:
+###############################################################
+# APP_LANGUAGE=ru npm run build - build only selected language,
+# if wasn't set, every language will be built.
+################################################################
 # ANALYZE_BUNDLE npm run build - add `webpack-bundle-analyzer` to plugins
 ###############################################################
 ```
-
-These commands generate the `dist` folder.
 
 #### Test:
 
@@ -87,12 +90,16 @@ npm run test # run tests with Jest, BASE_API env var is required!
 
 #### Lint:
 
+`eslint-loader` is already included in webpack, but if you want to lint code without webpack:
+
 ```bash
 npm run lint:styles  # lint styles with Stylelint
 npm run lint:scripts # lint scripts with ESlint
 ```
 
 #### Docs:
+
+Powered by ESDoc.
 
 ```bash
 npm run docs # generate docs and `serve`
