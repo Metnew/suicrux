@@ -23,7 +23,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "redux": "^3.7.1",
+    "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.11",
     "semantic-ui-react": "^0.71.0",
@@ -40,7 +40,6 @@
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-react-jsx-img-import": "^0.1.4",
     "babel-plugin-transform-regenerator": "^6.24.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-webpack-alias": "^2.1.2",
@@ -52,7 +51,7 @@
     "babel-register": "6.24.1",
     "babel-runtime": "^6.23.0",
     "babili-webpack-plugin": "^0.1.2",
-    "compression-webpack-plugin": "^0.4.0",
+    "compression-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "enzyme": "^2.9.1",
@@ -75,6 +74,7 @@
     "html-webpack-plugin": "^2.29.0",
     "husky": "^0.14.3",
     "i18n-webpack-plugin": "^1.0.0",
+    "img-loader": "^2.0.0",
     "jest": "^20.0.4",
     "json-server": "^0.11.2",
     "minimist": "^1.2.0",
@@ -102,20 +102,19 @@
     "style-loader": "^0.18.2",
     "stylelint": "^7.13.0",
     "stylelint-config-standard": "^16.0.0",
+    "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony-v2.8.22",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
-    "webpack": "^3.1.0",
-    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack": "^3.3.0",
+    "webpack-bundle-analyzer": "^2.8.3",
     "webpack-common-shake": "^1.5.3",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-manifest-plugin": "^1.1.2",
     "webpack-subresource-integrity": "^1.0.1",
-    "why-did-you-update": "^0.0.8",
-    "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony-v2.8.22",
-    "uglifyjs-webpack-plugin": "^0.4.6"
+    "why-did-you-update": "^0.0.8"
   },
   "optionalDependencies": {
-    "img-loader": "^2.0.0",
     "prepack-webpack-plugin": "^1.1.0"
   },
   "scripts": {
@@ -134,7 +133,7 @@
     "lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config ./db --ignore-pattern dist"
   },
   "engines": {
-    "node": ">=7"
+    "node": ">=6"
   },
   "author": "Vladimir Metnew <vladimirmetnew@gmail.com>",
   "license": "MIT",
