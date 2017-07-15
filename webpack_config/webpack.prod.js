@@ -80,10 +80,10 @@ base.plugins.push(
   }),
   // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
   // I got an error trying to deploy this app to zeit's `now` when i use this plugin
-  // new webpack.optimize.ModuleConcatenationPlugin(),
+  new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
   new OptimizeCssAssetsPlugin(),
-  // NOTE: Prepack currently in alpha, be carefull with it
+  // NOTE: Prepack is currently in alpha, be carefull with it
   // new PrepackWebpackPlugin(),
   //
   // extract vendor chunks
@@ -133,7 +133,7 @@ base.plugins.push(
       windows: true
     }
   }),
-  // NOTE: you can use BabiliPlugin as alternative to UglifyJSPlugin
+  // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
   // new BabiliPlugin(),
   new UglifyJSPlugin({
     sourceMap: true,
@@ -151,7 +151,7 @@ base.plugins.push(
   }),
   // create manifest.json
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
-  // AppCache + ServiceWorkers
+  // plugin for ServiceWorkers
   new OfflinePlugin({
     responseStrategy: 'network-first',
     safeToUseOptionalCaches: true,
