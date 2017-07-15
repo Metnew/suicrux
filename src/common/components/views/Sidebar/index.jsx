@@ -59,7 +59,7 @@ export default class SidebarComponent extends Component {
       <StyledSidebar {...sidebarProps}>
         <SidebarLogoContainer href="https://github.com/Metnew/react-semantic.ui-starter">
           <SidebarLogo
-            src="./images/logo.png"
+            src={require('images/logo.png')}
             alt="logo"
             shape="circular"
             centered
