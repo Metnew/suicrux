@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 const express = require('express')
+const httpProxy = require('http-proxy')
 const webpack = require('webpack')
 const webpackConfig = require('./webpack.dev')
 const config = require('./config')
@@ -8,12 +9,13 @@ const LogPlugin = require('./log-plugin')
 const open = require('open')
 
 const app = express()
+const apiProxy = httpProxy.createProxyServer()
 
 const port = config.port
 webpackConfig.entry.client = [
-	'react-hot-loader/patch',
-	'webpack-hot-middleware/client?reload=true',
-	webpackConfig.entry.client
+  'react-hot-loader/patch',
+  'webpack-hot-middleware/client?reload=true',
+  webpackConfig.entry.client
 ]
 
 webpackConfig.plugins.push(new LogPlugin(port))
@@ -21,28 +23,29 @@ webpackConfig.plugins.push(new LogPlugin(port))
 let compiler
 
 try {
-	compiler = webpack(webpackConfig)
+  compiler = webpack(webpackConfig)
 } catch (err) {
-	console.log(err.message)
-	process.exit(1)
+  console.log(err.message)
+  process.exit(1)
 }
 
 const devMiddleWare = require('webpack-dev-middleware')(compiler, {
-	publicPath: webpackConfig.output.publicPath,
-	quiet: false,
-	hot: true,
-	inline: true,
-	headers: {
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Methods': '*',
-		'Access-Control-Allow-Headers': '*'
-	}
+  publicPath: webpackConfig.output.publicPath,
+  quiet: false,
+  hot: true,
+  inline: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Access-Control-Allow-Headers': '*'
+  }
 })
+
 app.use(devMiddleWare)
 app.use(
-	require('webpack-hot-middleware')(compiler, {
-		log: console.log
-	})
+  require('webpack-hot-middleware')(compiler, {
+    log: console.log
+  })
 )
 
 const mfs = devMiddleWare.fileSystem
@@ -51,10 +54,21 @@ const file = path.join(webpackConfig.output.path, 'index.html')
 devMiddleWare.waitUntilValid()
 
 app.get('*', (req, res) => {
-	devMiddleWare.waitUntilValid(() => {
-		const html = mfs.readFileSync(file)
-		res.end(html)
-	})
+  devMiddleWare.waitUntilValid(() => {
+    const html = mfs.readFileSync(file)
+    res.end(html)
+  })
+})
+
+// Proxy api requests
+app.use(process.env.BASE_API, function (req, res) {
+  req.url = req.baseUrl
+  apiProxy.web(req, res, {
+    target: {
+      port: 4000,
+      host: 'localhost'
+    }
+  })
 })
 
 app.listen(port)
