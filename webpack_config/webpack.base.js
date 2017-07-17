@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   // ignore i18n plugin in development
   definePluginArgs['i18n'] = (str) => {
     return str
-  }'
+  }
 }
 
 module.exports = {
