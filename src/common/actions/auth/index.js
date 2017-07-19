@@ -16,7 +16,7 @@ export const LOGIN_AUTH = async data => {
   if (!resultOK(result)) {
     return {type: LOGIN_AUTH_FAIL, errors: result.data}
   }
-  setLocalToken(result.data.token])
+  setLocalToken(result.data.token)
   return {type: LOGIN_AUTH_SUCCESS, result: result.data}
 }
 
