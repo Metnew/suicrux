@@ -19,6 +19,7 @@ export const appRouting = [
     icon: 'newspaper',
     name: 'Dashboard',
     exact: true,
+    // lazy: true,
     sidebarVisible: true,
     tag: RouteAuth,
     component: Dashboard
@@ -91,7 +92,7 @@ export const Routing = authCheck => {
 
 function getHistory () {
   const basename = ''
-  if (process.env.IS_SSR) {
+  if (process.env.BROWSER !== true) {
     return createMemoryHistory()
   }
   return createBrowserHistory({basename})
