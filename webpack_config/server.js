@@ -3,15 +3,14 @@ const path = require('path')
 const express = require('express')
 const httpProxy = require('http-proxy')
 const webpack = require('webpack')
-const webpackConfig = require('./webpack.dev')
+const webpackConfig = require('./client/webpack.dev')
 const config = require('./config')
 const LogPlugin = require('./log-plugin')
 const open = require('open')
 
-const app = express()
 const apiProxy = httpProxy.createProxyServer()
-
-const port = config.port
+const app = express()
+const {port} = config
 webpackConfig.entry.client = [
   'react-hot-loader/patch',
   'webpack-hot-middleware/client?reload=true',
@@ -31,6 +30,7 @@ try {
 
 const devMiddleWare = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
+  // @Metnew: personally I prefer `quite: "true"`
   quiet: false,
   hot: true,
   inline: true,
@@ -60,9 +60,13 @@ app.get('*', (req, res) => {
   })
 })
 
-// Proxy api requests
+// Proxy api requests to BASE_API
 app.use(process.env.BASE_API, function (req, res) {
-  req.url = req.baseUrl
+  /**
+   * // req.baseUrl - The URL path on which a router instance was mounted.
+   * {@link https://expressjs.com/ru/4x/api.html#req.baseUrl}
+   */
+  req.url = req.baseUrl + req.url
   apiProxy.web(req, res, {
     target: {
       port: 4000,
