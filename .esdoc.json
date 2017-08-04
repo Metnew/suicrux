@@ -1,15 +1,22 @@
 {
-  "source": "./src",
-  "destination": "./esdoc",
-  "excludes": ["dist", "db", "node_modules", "esdoc", "coverage", "jest_config"],
-  "experimentalProposal": {
-    "classProperties": true,
-    "objectRestSpread": true,
-    "decorators": true,
-    "doExpressions": true,
-    "functionBind": true,
-    "asyncGenerators": true,
-    "exportExtensions": true,
-    "dynamicImport": true
-  }
+	"source": "./src",
+	"destination": "./esdoc",
+	"excludes": [
+		"dist",
+		"db",
+		"node_modules",
+		"esdoc",
+		"coverage",
+		"jest_config"
+	],
+	"experimentalProposal": {
+		"classProperties": true,
+		"objectRestSpread": true,
+		"decorators": true,
+		"doExpressions": true,
+		"functionBind": true,
+		"asyncGenerators": true,
+		"exportExtensions": true,
+		"dynamicImport": true
+	}
 }
