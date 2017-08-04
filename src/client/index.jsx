@@ -1,8 +1,9 @@
 // Styles
 import 'semantic-ui-css/semantic.css'
 import 'styles/global'
-// fetch polyfill
-import 'whatwg-fetch'
+// fetch and promise polyfill
+import 'isomorphic-fetch'
+import 'es6-promise'
 // Application
 import {render} from 'react-dom'
 import {configureStore, configureRootComponent} from 'common/index.jsx'
@@ -21,7 +22,7 @@ const preloadedState = window.__PRELOADED_STATE__ || {}
 delete window.__PRELOADED_STATE__
 
 const store = configureStore(preloadedState)
-const RootComponent = configureRootComponent(store)
+const RootComponent = configureRootComponent({store})
 render(RootComponent, document.getElementById('app'))
 
 if (module.hot) {
