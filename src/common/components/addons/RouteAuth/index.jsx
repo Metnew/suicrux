@@ -24,6 +24,7 @@ class RouteAuth extends Component {
   componentWillMount () {
     const {lazy, component} = this.props
     if (lazy) {
+      console.log('Component is lazy, loading...')
       this.load()
     } else {
       this.setState({componentLoaded: true, componentToRender: component})
@@ -48,6 +49,9 @@ class RouteAuth extends Component {
       strict,
       component: componentToRender || null
     }
+
+    console.log(`User has access to "${path}" path: ${canAccess(path) ? 'YES' : 'NO'}`)
+    console.log(`Route's component loaded and ready to be mounted: ${componentLoaded ? 'YES' : 'NO'}`)
 
     if (componentLoaded) {
       return canAccess(path)
