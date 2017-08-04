@@ -4,11 +4,12 @@ const rootPath = path.join(__dirname, '../') // = "/"
 const distPath = path.join(rootPath, './dist') // = "/dist"
 const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
-
+const i18n = require('../i18n')
 module.exports = {
   port: process.env.PORT || 3000,
   title: 'React-Semantic.UI-Starter',
   publicPath: '/',
+  i18n,
   // It's better to define pathes in one file
   // and then use everywhere across app
   srcPath,
