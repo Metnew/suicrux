@@ -16,9 +16,7 @@ const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ShakePlugin = require('webpack-common-shake').Plugin
-
 // const git = require('git-rev-sync')
-let languages = require('../../i18n')
 const _ = require('lodash')
 const path = require('path')
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
@@ -27,6 +25,8 @@ const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const {APP_LANGUAGE, ANALYZE_BUNDLE} = process.env
 let base = require('./webpack.base')
 const config = require('../config')
+let languages = config.i18n
+const languageName = APP_LANGUAGE || 'en'
 
 exec('rm -rf dist/client')
 // NOTE: you can track versions with gitHash and store your build
@@ -60,15 +60,13 @@ if (ANALYZE_BUNDLE) {
 }
 
 // NOTE: if language was set, then build only this language
-if (APP_LANGUAGE) {
-  try {
-    const langText = languages[APP_LANGUAGE]
-    languages = {[APP_LANGUAGE]: langText}
-  } catch (e) {
-    throw new Error(
-      `Something went wrong with your i18n. Check that "${APP_LANGUAGE}" property exists in i18n object. ${e}`
-    )
-  }
+try {
+  const langText = languages[languageName]
+  languages = {[languageName]: langText}
+} catch (e) {
+  throw new Error(
+    `Something went wrong with your i18n. Check that "${APP_LANGUAGE}" property exists in i18n object. ${e}`
+  )
 }
 
 // add webpack plugins
@@ -81,7 +79,7 @@ base.plugins.push(
   new OptimizeCssAssetsPlugin(),
   // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
   // I got an error trying to deploy this app to zeit's `now` when i use this plugin
-  new webpack.optimize.ModuleConcatenationPlugin(),
+  // new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
   // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
   // new BabiliPlugin(),
@@ -116,7 +114,8 @@ base.plugins.push(
     name: 'manifest'
   }),
   new webpack.BannerPlugin({
-    banner: 'React-Semantic.UI-Starter. MIT License. Copyright (c) 2017 Copyright Vladimir Metnew. All Rights Reserved. https://github.com/Metnew/react-semantic.ui-starter'
+    banner:
+   'React-Semantic.UI-Starter. MIT License. Copyright (c) 2017 Copyright Vladimir Metnew. All Rights Reserved. https://github.com/Metnew/react-semantic.ui-starter'
   }),
   // XXX: this plugin seems cool, but there are few big issues:
   // 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
@@ -124,6 +123,8 @@ base.plugins.push(
   // <meta name="msapplication-config" content="browserconfig.xml">
   // 2. It looks like generated images aren't minified.(not sure)
   // NOTE: It would be better to generate favicons without this plugin.
+  //
+  //
   new FaviconsWebpackPlugin({
     // add theme-color property
     background: config.manifest.theme,
@@ -146,6 +147,9 @@ base.plugins.push(
       windows: true
     }
   }),
+  //
+  //
+  //
   // create manifest.json
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
   // generate <link rel="preload"> tags for async chunks
@@ -156,12 +160,21 @@ base.plugins.push(
   }),
   // https://caniuse.com/#feat=subresource-integrity
   // NOTE: please, read about SRI before using it!
-  new SriPlugin({
-    hashFuncNames: ['sha256', 'sha384'],
-    enabled: process.env.NODE_ENV === 'production'
-  }),
+  // new SriPlugin({
+  //   hashFuncNames: ['sha256', 'sha384'],
+  //   enabled: process.env.NODE_ENV === 'production'
+  // }),
   new CompressionPlugin({
     algorithm: 'gzip'
+  }),
+  new I18nPlugin(languages[languageName], {functionName: 'i18n'}),
+  new HtmlWebpackPlugin({
+    title: config.title,
+    language: languageName,
+    // minify: true,
+    template: path.resolve(config.srcCommonPath, 'index.ejs'),
+    filename: path.resolve(base.output.path, languageName, 'index.html'),
+    chunksSortMode: 'dependency'
   }),
   // ServiceWorkers
   new OfflinePlugin({
@@ -194,25 +207,25 @@ base.stats = {
   errorDetails: true
 }
 
-const builds = Object.keys(languages).map(language => {
-  let baseConfigForLang = _.cloneDeep(base)
-  baseConfigForLang.output.path = path.join(
-    baseConfigForLang.output.path,
-    language
-  )
+// const build = Object.keys(languages).map(language => {
+//   let baseConfigForLang = _.cloneDeep(base)
+//   baseConfigForLang.output.path = path.join(
+//     baseConfigForLang.output.path,
+//     language
+//   )
+//
+//   baseConfigForLang.plugins.push(
+//     new I18nPlugin(languages[language], {functionName: 'i18n'}),
+// new HtmlWebpackPlugin({
+//   title: config.title,
+//   language,
+//   // minify: true,
+//   template: path.resolve(config.srcCommonPath, 'index.ejs'),
+//   filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
+//   chunksSortMode: 'dependency'
+// })
+//   )
+//   return baseConfigForLang
+// })
 
-  baseConfigForLang.plugins.push(
-    new I18nPlugin(languages[language], {functionName: 'i18n'}),
-    new HtmlWebpackPlugin({
-      title: config.title,
-      language,
-      // minify: true,
-      template: path.resolve(config.srcCommonPath, 'index.ejs'),
-      filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
-      chunksSortMode: 'dependency'
-    })
-  )
-  return baseConfigForLang
-})
-
-module.exports = builds
+module.exports = base
