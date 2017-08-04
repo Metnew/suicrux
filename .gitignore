@@ -6,7 +6,6 @@ npm-debug.log*
 # Build
 dist
 esdoc
-src/server_build
 
 # Runtime data
 pids
