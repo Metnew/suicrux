@@ -18,7 +18,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ShakePlugin = require('webpack-common-shake').Plugin
 
 // const git = require('git-rev-sync')
-let languages = require('../i18n')
+let languages = require('../../i18n')
 const _ = require('lodash')
 const path = require('path')
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
@@ -26,9 +26,9 @@ const path = require('path')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const {APP_LANGUAGE, ANALYZE_BUNDLE} = process.env
 let base = require('./webpack.base')
-const config = require('./config')
+const config = require('../config')
 
-exec('rm -rf dist/')
+exec('rm -rf dist/client')
 // NOTE: you can track versions with gitHash and store your build
 // in dist folder with path like: /dist/<gitHash>/{yourFilesHere}
 // const gitHash = git.short() //
@@ -88,7 +88,8 @@ base.plugins.push(
   new UglifyJSPlugin({
     sourceMap: true,
     compress: {
-      warnings: false
+      warnings: false,
+      drop_console: true
     },
     output: {
       comments: false
@@ -126,8 +127,8 @@ base.plugins.push(
   new FaviconsWebpackPlugin({
     // add theme-color property
     background: config.manifest.theme,
-    prefix: `icons/`,
-    logo: path.resolve(__dirname, '../static/images/logo.png'),
+    prefix: `favicons/`,
+    logo: path.resolve(config.rootPath, './static/images/logo.png'),
     title: config.title,
     // Inject the html into the html-webpack-plugin
     inject: true,
@@ -175,7 +176,7 @@ base.plugins.push(
       navigateFallbackURL: '/?offline=true',
       events: true
     }
-  }),
+  })
 )
 
 // minimize webpack output
@@ -204,8 +205,7 @@ const builds = Object.keys(languages).map(language => {
     new I18nPlugin(languages[language], {functionName: 'i18n'}),
     new HtmlWebpackPlugin({
       title: config.title,
-      language: language,
-      GA_KEY: process.env.GA_KEY,
+      language,
       // minify: true,
       template: path.resolve(config.srcCommonPath, 'index.ejs'),
       filename: path.resolve(baseConfigForLang.output.path, 'index.html'),

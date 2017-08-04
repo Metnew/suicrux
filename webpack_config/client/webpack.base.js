@@ -1,29 +1,29 @@
 'use strict'
 const path = require('path')
 const webpack = require('webpack')
-const languages = require('../i18n')
-const config = require('./config')
+const config = require('../config')
 
 process.env.BASE_API = process.env.BASE_API || '/api/v1'
 
 let definePluginArgs = {
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-  'process.env.BASE_API': JSON.stringify(process.env.BASE_API)
+  'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
+  'process.env.BROWSER': JSON.stringify(true)
 }
 
 if (process.env.NODE_ENV === 'development') {
   // ignore i18n plugin in development
-  definePluginArgs['i18n'] = (str) => {
+  definePluginArgs['i18n'] = str => {
     return str
   }
 }
 
 module.exports = {
   entry: {
-    client: path.join(config.srcPath, '/client')
+    client: path.join(config.srcPath, './client')
   },
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(config.distPath, './client'),
     filename: '[name].js',
     chunkFilename: '[name].[chunkhash:6].js',
     publicPath: config.publicPath
@@ -33,22 +33,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.json', '.scss'],
-    alias: {
-      common: `${config.srcCommonPath}`,
-      actions: `${config.srcCommonPath}/actions/`,
-      api: `${config.srcCommonPath}/api/`,
-      components: `${config.srcCommonPath}/components/`,
-      containers: `${config.srcCommonPath}/containers/`,
-      reducers: `${config.srcCommonPath}/reducers/`,
-      routing: `${config.srcCommonPath}/routing/`,
-      styles: `${config.srcCommonPath}/styles/`,
-      static: path.join(__dirname, '../static'),
-      images: path.join(__dirname, '../static/images')
-    },
+    alias: config.alias,
     modules: [
       // places where to search for required modules
       config.srcPath,
-      path.join(__dirname, '../node_modules')
+      `${config.rootPath}/node_modules`
     ]
   },
   module: {
