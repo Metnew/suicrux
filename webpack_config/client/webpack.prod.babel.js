@@ -178,6 +178,7 @@ base.plugins.push(
   new HtmlWebpackPlugin({
     title: config.title,
     language: languageName,
+    theme_color: config.manifest.theme_color,
     // minify: true,
     template: path.resolve(config.srcCommonPath, 'index.ejs'),
     filename: path.resolve(base.output.path, 'index.html'),
