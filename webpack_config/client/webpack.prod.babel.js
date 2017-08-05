@@ -76,7 +76,14 @@ base.plugins.push(
     filename: '[name].[chunkhash:8].css',
     allChunks: true
   }),
-  new OptimizeCssAssetsPlugin(),
+  new OptimizeCssAssetsPlugin({
+		cssProcessorOptions: {
+			safe: true,
+			discardComments: {
+				removeAll: true
+			}
+		}
+	}),
   // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
   // I got an error trying to deploy this app to zeit's `now` when i use this plugin
   // new webpack.optimize.ModuleConcatenationPlugin(),
@@ -114,17 +121,15 @@ base.plugins.push(
     name: 'manifest'
   }),
   new webpack.BannerPlugin({
-    banner:
-   'React-Semantic.UI-Starter. MIT License. Copyright (c) 2017 Copyright Vladimir Metnew. All Rights Reserved. https://github.com/Metnew/react-semantic.ui-starter'
+    banner: config.banner
   }),
-  // XXX: this plugin seems cool, but there are few big issues:
+  // XXX: this plugin looks cool, but there are few big issues:
   // 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
   // E.g: in generated index.html you can see:
   // <meta name="msapplication-config" content="browserconfig.xml">
   // 2. It looks like generated images aren't minified.(not sure)
+  // 3. plugin is deprecated (at least look like it's deprecated)!
   // NOTE: It would be better to generate favicons without this plugin.
-  //
-  //
   new FaviconsWebpackPlugin({
     // add theme-color property
     background: config.manifest.theme,
