@@ -135,7 +135,7 @@
 		"precommit": "echo \"$(tput bold)$(tput setaf 5) It'd be better to run tests before commit. $(tput sgr 0)\"t",
 		"prepush": "echo \"$(tput bold)$(tput setaf 5) I hope you tested app. $(tput sgr 0)\"",
 		"lint:styles": "stylelint ./src/common/**/*.scss -s scss --config ./.stylelintrc --fix",
-		"lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config ./db --ignore-pattern dist"
+		"lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist"
 	},
 	"engines": {
 		"node": ">=6"

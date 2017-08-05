@@ -9,6 +9,7 @@ import chalk from 'chalk'
 // Application-related stuff
 import {JWT_TOKEN} from 'common/api'
 
+const {DIST_PATH, JWT_SECRET} = process.env
 const app = express()
 // add express stuff
 app.use(helmet())
@@ -16,7 +17,7 @@ app.use(compression())
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(
-  express.static(process.env.DIST_PATH, {
+  express.static(DIST_PATH, {
     // don't use index.html inside /dist dir
     index: false
   })
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
     return next()
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
       console.log(chalk.red('CANT DECODE JWT TOKEN!', err))
     } else {
