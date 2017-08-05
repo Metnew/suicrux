@@ -155,8 +155,6 @@ base.plugins.push(
     }
   }),
   //
-  //
-  //
   // create manifest.json
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
   // generate <link rel="preload"> tags for async chunks
@@ -184,19 +182,8 @@ base.plugins.push(
     filename: path.resolve(base.output.path, 'index.html'),
     chunksSortMode: 'dependency'
   }),
-  // ServiceWorkers
   new OfflinePlugin({
-    responseStrategy: 'network-first',
-    safeToUseOptionalCaches: false,
-    caches: {
-      main: ['vendor.*.css', 'vendor.*.js']
-    },
-    // excludes: ['.htaccess'],
-    AppCache: false,
-    ServiceWorker: {
-      navigateFallbackURL: '/?offline=true',
-      events: true
-    }
+    AppCache: false
   })
 )
 
