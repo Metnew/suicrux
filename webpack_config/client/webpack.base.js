@@ -8,6 +8,7 @@ process.env.BASE_API = process.env.BASE_API || '/api/v1'
 let definePluginArgs = {
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
+  'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(process.env.SENTRY_PUBLIC_DSN),
   'process.env.BROWSER': JSON.stringify(true)
 }
 

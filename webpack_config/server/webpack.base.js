@@ -9,7 +9,8 @@ exec(`rm -rf ${config.distPath}/server`)
 
 const {
   BASE_API,
-  SENTRY_ID,
+  SENTRY_DSN,
+  SENTRY_PUBLIC_DSN,
   NODE_ENV,
   DIST_PATH,
   APP_LANGUAGE,
@@ -26,7 +27,8 @@ const definePluginArgs = {
   'process.env.APP_LANGUAGE': JSON.stringify(language),
   'process.env.NODE_ENV': JSON.stringify(NODE_ENV || 'development'),
   'process.env.BASE_API': JSON.stringify(BASE_API || '/api/v1'),
-  'process.env.SENTRY_ID': JSON.stringify(SENTRY_ID),
+  'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
+  'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
   'process.env.DIST_PATH': JSON.stringify(
     DIST_PATH || path.join(config.distPath, './client', language)
   )
