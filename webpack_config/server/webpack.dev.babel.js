@@ -1,6 +1,6 @@
 'use strict'
 const path = require('path')
-const fs = require('fs')
+// const fs = require('fs')
 const webpack = require('webpack')
 const _ = require('lodash')
 const config = require('../config')

@@ -70,7 +70,6 @@ class App extends Component {
  }
 
  componentDidMount () {
-   //  FIXME: remove this duplication
    if (process.env.SENTRY_PUBLIC_DSN) {
      const script = document.createElement('script')
      script.type = 'text/javascript'

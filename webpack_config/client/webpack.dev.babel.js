@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseWebpackConfig = require('./webpack.base')
 const FriendlyErrors = require('friendly-errors-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const config = require('../config')
 
 const loaders = {

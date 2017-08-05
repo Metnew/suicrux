@@ -17,7 +17,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ShakePlugin = require('webpack-common-shake').Plugin
 // const git = require('git-rev-sync')
-const _ = require('lodash')
+// const _ = require('lodash')
 const path = require('path')
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
 // const WebpackShellPlugin = require('webpack-shell-plugin')
@@ -125,7 +125,7 @@ base.plugins.push(
   new webpack.BannerPlugin({
     banner: config.banner
   }),
-  // XXX: this plugin looks cool, but there are few big issues:
+  // NOTE: this plugin looks cool, but there are few big issues:
   // 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
   // E.g: in generated index.html you can see:
   // <meta name="msapplication-config" content="browserconfig.xml">
@@ -167,10 +167,10 @@ base.plugins.push(
   }),
   // https://caniuse.com/#feat=subresource-integrity
   // NOTE: please, read about SRI before using it!
-  // new SriPlugin({
-  //   hashFuncNames: ['sha256', 'sha384'],
-  //   enabled: process.env.NODE_ENV === 'production'
-  // }),
+  new SriPlugin({
+    hashFuncNames: ['sha256', 'sha384'],
+    enabled: true
+  }),
   new CompressionPlugin({
     algorithm: 'gzip'
   }),

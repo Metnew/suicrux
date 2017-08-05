@@ -1,8 +1,5 @@
 'use strict'
-const path = require('path')
-const fs = require('fs')
 const webpack = require('webpack')
-const _ = require('lodash')
 const baseWebpackConfig = require('./webpack.base')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ShakePlugin = require('webpack-common-shake').Plugin

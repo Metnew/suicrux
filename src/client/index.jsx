@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   // NOTE: whyDidYouUpdate package is temporary broken, waiting for a patch.
 
   /*eslint-disable */
-	// XXX: But if you really want to run `why-did-you-update`
+	// NOTE: But if you really want to run `why-did-you-update`
 	// You can uncomment this block:
 	/*
     Object.defineProperty(React, 'createClass', {

@@ -86,7 +86,6 @@ module.exports = {
       }
     ]
   },
-  externals: nodeModules,
   plugins: [
     new webpack.DefinePlugin(definePluginArgs),
     new webpack.BannerPlugin({
