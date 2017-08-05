@@ -69,13 +69,13 @@ class App extends Component {
 
  componentDidMount () {
    //  FIXME: remove this duplication
-   if (process.env.SENTRY_ID) {
+   if (process.env.SENTRY_PUBLIC_DSN) {
      const script = document.createElement('script')
      script.type = 'text/javascript'
      script.crossorigin = 'anonymous'
      script.async = true
      script.onload = () => {
-       Raven.config(process.env.SENTRY_ID).install()
+       Raven.config(process.env.SENTRY_PUBLIC_DSN).install()
      }
      script.src = 'https://cdn.ravenjs.com/3.16.1/raven.min.js'
      document.body.appendChild(script)

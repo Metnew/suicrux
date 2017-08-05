@@ -61,6 +61,7 @@ export default function (req, res) {
   //
   const css = sheet.getStyleTags()
   const preloadedState = store.getState()
+  // 
   render(App).toPromise().then(html => {
     res.send(renderFullPage({html, css, preloadedState}))
   })
