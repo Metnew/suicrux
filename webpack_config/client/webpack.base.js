@@ -3,12 +3,13 @@ const path = require('path')
 const webpack = require('webpack')
 const config = require('../config')
 
-process.env.BASE_API = process.env.BASE_API || '/api/v1'
+const {BASE_API, NODE_ENV, GA_ID, SENTRY_PUBLIC_DSN} = process.ENV
 
 let definePluginArgs = {
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-  'process.env.BASE_API': JSON.stringify(process.env.BASE_API),
-  'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(process.env.SENTRY_PUBLIC_DSN),
+  'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+  'process.env.BASE_API': JSON.stringify(BASE_API || '/api/v1'),
+  'process.env.GA_ID': JSON.stringify(GA_ID),
+  'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
   'process.env.BROWSER': JSON.stringify(true)
 }
 
