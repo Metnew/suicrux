@@ -4,6 +4,8 @@ import {Provider} from 'react-redux'
 import {APPLICATION_INIT} from 'actions'
 import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
+import App from 'containers/App'
+import RoutingWrapper from 'components/addons/RoutingWrapper'
 
 const Router = process.env.BROWSER === true
   ? require('react-router-redux').ConnectedRouter
@@ -14,7 +16,7 @@ export default class Root extends Component {
     store: PropTypes.object,
     SSR: PropTypes.object,
     history: PropTypes.object,
-    routes: PropTypes.func
+    routes: PropTypes.array
   }
 
   static defaultProps = {
@@ -54,7 +56,9 @@ export default class Root extends Component {
       <Provider store={store} key={Math.random()}>
         <Router {...routerProps} key={Math.random()}>
           <ThemeProvider theme={theme}>
-            {routes(::this.authCheck)}
+            <App>
+              <RoutingWrapper routes={routes} authCheck={::this.authCheck}/>
+            </App>
           </ThemeProvider>
         </Router>
       </Provider>
