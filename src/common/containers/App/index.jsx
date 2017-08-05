@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import {withRouter, matchPath} from 'react-router'
 import PropTypes from 'prop-types'
 import {push} from 'react-router-redux'
-import {Header, Sidebar, Footer} from 'components'
+import Sidebar from 'components/views/Sidebar'
+import Footer from 'components/views/Footer'
+import Header from 'components/views/Header'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {routes} from 'routing'
@@ -192,7 +194,6 @@ class App extends Component {
        <SidebarSemanticPushableStyled>
          {isLoggedIn && <Sidebar {...sidebarProps} />}
          <SidebarSemanticPusherStyledPatch>
-           {/* <Dimmer.Dimmable {...dimmerDimmableProps}> */}
            <StyledDimmer {...dimmerProps} />
            <Header {...headerProps} />
            <MainLayout>
@@ -205,14 +206,6 @@ class App extends Component {
            </MainLayout>
            {/* </Dimmer.Dimmable> */}
          </SidebarSemanticPusherStyledPatch>
-         {/* NOTE:  show dimmer only if:
-             //1. isLoggedIn, elsewhere sidebar isn't visible
-         // 2. if sidebar is opened  */}
-         {/* {isLoggedIn &&
-             sidebarOpened &&
-           <Dimmer.Dimmable as={Segment} blurring style={{position: 'absolute', width: '100%', height: '100%', top: 0}} dimmed>
-             <StyledDimmer {...dimmerProps} />
-         </Dimmer.Dimmable>} */}
        </SidebarSemanticPushableStyled>
      </PageLayout>
    )
