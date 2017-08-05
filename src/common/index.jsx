@@ -6,7 +6,7 @@ import {routerMiddleware} from 'react-router-redux'
 // Application
 import rootReducer from 'reducers'
 import {Root} from 'components'
-import {Routing, history} from 'routing'
+import {routes, history} from 'routing'
 
 /**
  * Configure application store with middlewares.
@@ -33,7 +33,7 @@ export const configureRootComponent = ({store, SSR}) => {
   // stupid eslint thinks that if function returns JSX, than it's a component
   // "Eslint, I don't want a component, I want a function!"
   const propsRoot = {
-    routes: Routing,
+    routes,
     history,
     store,
     SSR
