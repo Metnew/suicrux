@@ -45,6 +45,8 @@ baseWebpackConfig.plugins.push(
     title: config.title,
     template: path.resolve(config.srcCommonPath, 'index.ejs')
   }),
+  // create manifest.json
+  new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new FriendlyErrors()

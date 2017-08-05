@@ -35,6 +35,7 @@ exec('rm -rf dist/client')
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
+base.output.path = path.join(base.output.path, languageName)
 base.output.crossOriginLoading = 'anonymous'
 base.devtool = 'cheap-source-map'
 base.module.rules.push(
@@ -77,15 +78,16 @@ base.plugins.push(
     allChunks: true
   }),
   new OptimizeCssAssetsPlugin({
-		cssProcessorOptions: {
-			safe: true,
-			discardComments: {
-				removeAll: true
-			}
-		}
-	}),
+    cssProcessorOptions: {
+      safe: true,
+      discardComments: {
+        removeAll: true
+      }
+    }
+  }),
   // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
   // I got an error trying to deploy this app to zeit's `now` when i use this plugin
+  // Maybe, I got this error because of certain memory limit in `now` instance
   // new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
   // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
@@ -178,7 +180,7 @@ base.plugins.push(
     language: languageName,
     // minify: true,
     template: path.resolve(config.srcCommonPath, 'index.ejs'),
-    filename: path.resolve(base.output.path, languageName, 'index.html'),
+    filename: path.resolve(base.output.path, 'index.html'),
     chunksSortMode: 'dependency'
   }),
   // ServiceWorkers
