@@ -6,7 +6,7 @@ import {push} from 'react-router-redux'
 import {Header, Sidebar, Footer} from 'components'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
-import {appRouting} from 'routing'
+import {routes} from 'routing'
 import {
   PageLayout,
   MainLayout,
@@ -117,7 +117,7 @@ class App extends Component {
    * @return {Array} array of routes that will be rendered in sidebar menu
    */
  getSidebarRouting () {
-   const sidebarRouting = appRouting.filter(a => a.sidebarVisible).map(a => {
+   const sidebarRouting = routes.filter(a => a.sidebarVisible).map(a => {
      const {path, name, icon, external, strict, exact} = a
      const b = {path, name, icon, external, strict, exact}
      return b
@@ -131,7 +131,7 @@ class App extends Component {
   * @return {String} page title
   */
  getPageTitle (pathname) {
-   const matchedRoutes = appRouting.filter(a => matchPath(pathname, a))
+   const matchedRoutes = routes.filter(a => matchPath(pathname, a))
    const currentRoute = matchedRoutes[0] || {}
    const title = currentRoute.name || '404'
    return title
