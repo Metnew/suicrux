@@ -118,6 +118,7 @@ npm run docs # generate docs and `serve`
 #### Nearest future:
 
 - SSR with HMR on client and server from one process. *(testing right now)*
+- Improved docs!
 
 ### FAQ
 
