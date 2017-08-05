@@ -3,7 +3,7 @@
 ## Out-of-box:
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
 
-## DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
+## DEMO: [You can find it here]((https://reatty.now.sh/auth)
 
 [![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=master)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
 [![Join the chat at https://gitter.im/react-semantic-ui-starter/Lobby](https://badges.gitter.im/react-semantic-ui-starter/Lobby.svg)](https://gitter.im/react-semantic-ui-starter/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -108,6 +108,9 @@ npm run start # run app. You need already built app for this!
 # then visit localhost:4000 in your browser, if you didn't specify PORT env var
 ```
 
+#### Deploy:
+If you use **[now](https://github.com/zeit/now)** - you will run out of memory on `npm run build`. I recommend you to disable some non-critical plugins (ModuleConcatenationPlugin, SriPlugin, FaviconsWebpackPlugin). [Demo that was deployed to "now"](https://reatty.now.sh/)
+
 #### Test:
 
 ```bash
@@ -176,9 +179,6 @@ Each reducer/action has own folder, where you can find:
 #### How to write tests?
 You can find [action testing example here.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js)
 It uses [redux-mock-store.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js)
-
-#### How does the built app look?
-**[Like this.](https://github.com/Metnew/react-semantic.ui-starter/tree/gh-pages)**
 
 ### Also:
 
