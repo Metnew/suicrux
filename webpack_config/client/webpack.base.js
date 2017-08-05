@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const config = require('../config')
 
-const {BASE_API, NODE_ENV, GA_ID, SENTRY_PUBLIC_DSN} = process.ENV
+const {BASE_API, NODE_ENV, GA_ID, SENTRY_PUBLIC_DSN} = process.env
 
 let definePluginArgs = {
   'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
