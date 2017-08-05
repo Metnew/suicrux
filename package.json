@@ -125,7 +125,7 @@
 	"scripts": {
 		"docs": "esdoc && serve ./esdoc",
 		"build": "npm run frontend_build && npm run server_build",
-		"dev": "concurrently \"npm run server_dev\" \"npm run frontend_dev\"",
+		"dev": "concurrently -p \"[{name}]\" -n  \"SERVER,FRONTEND\" -c \"cyan.bold,magenta.bold\" \"npm run server_dev\" \"npm run frontend_dev\"",
 		"server_dev": "webpack --config webpack_config/server/webpack.dev.babel.js",
 		"server_build": "NODE_ENV=production webpack --config webpack_config/server/webpack.prod.babel.js",
 		"test": "jest --config=jest_config/jest.config.json --coverage --forceExit || true",
