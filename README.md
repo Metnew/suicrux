@@ -62,7 +62,7 @@ npm install
 ```
 
 #### ENV vars:
-ENV vars are very important for configuration.
+ENV vars are **very important** for configuration.
 
 #### Client ENV vars:
 `GA_ID`: Your Google analytics ID.     
