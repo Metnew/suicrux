@@ -50,20 +50,20 @@ npm install
 ENV vars are very important for configuration.
 
 #### Client ENV vars:
-`GA_ID`: Your Google analytics ID.
-`BASE_API`: `/api/v1` by default. App uses this path for requests with relative urls
-`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.
-`APP_LANGUAGE`: `en` by default. Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.
-`ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.
+`GA_ID`: Your Google analytics ID.     
+`BASE_API`: `/api/v1` by default. App uses this path for requests with relative urls     
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.    
+`APP_LANGUAGE`: `en` by default. Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.     
+`ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.    
 
 #### Server ENV vars:
-`PORT`: Port on which your app run.
-`JWT_SECRET`: JWT_SECRET :smile:
-`BASE_API`: App uses this path for requests with relative urls
-`SENTRY_PUBLIC_DSN`: Your Sentry public DSN
-`SENTRY_DSN`: Your Sentry full(private) DSN for server.
-`APP_LANGUAGE`: Language of your app.
-`DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.
+`PORT`: Port on which your app run.     
+`JWT_SECRET`: JWT_SECRET :smile:    
+`BASE_API`: App uses this path for requests with relative urls   
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN    
+`SENTRY_DSN`: Your Sentry full(private) DSN for server.   
+`APP_LANGUAGE`: Language of your app.    
+`DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.   
 
 #### Development:
 
