@@ -1,7 +1,6 @@
 # React-Semantic.UI-Starter
 
 ## Out-of-box:
-
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
 
 ## DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
@@ -15,16 +14,12 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ### What is it?
-Production-ready, performance-first, optimized, robust, fully-featured boilerplate/example with **Server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
-
-#### Lighthouse result - [you can find it here](https://googlechrome.github.io/lighthouse/viewer/?gist=cd19fc335d4dc2abfbba10ee550bd0c8)
-SPOILER: 97/100. It might be better/worse in your browser.
+Production-ready, performance-first, optimized, robust, **fullstack** boilerplate/example with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
 #### Includes:
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**,  and **[styled-components](https://github.com/styled-components/styled-components)** support.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
-- **[JSON-server](https://github.com/typicode/json-server)** - mock db.
 - **[rapscallion](https://github.com/FormidableLabs/rapscallion)** - async server-side rendering.
 - **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**,  **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
@@ -36,7 +31,7 @@ SPOILER: 97/100. It might be better/worse in your browser.
     - **HMR**, devServer, hotMiddleware,
     - i18n support with **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**
     - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
-- **[Jest](https://facebook.github.io/jest/)** and **[Enzyme](https://github.com/airbnb/enzyme)** - awesome libraries for testing.
+- **[Jest](https://facebook.github.io/jest/)** - awesome library for testing.
 - **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
 - **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.
 - **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)** for your new awesome app.
@@ -52,32 +47,50 @@ npm install
 ```
 
 #### ENV vars:
-BASE_API - App uses this path for requests with relative urls. By default `http://localhost:4000/api/v1` - json-server.
-BASE_API is required for `npm run ssr`, `npm run dev`, `npm run build`
+ENV vars are very important for configuration.
 
-#### Run:
+#### Client ENV vars:
+`GA_ID`: Your Google analytics ID.
+`BASE_API`: `/api/v1` by default. App uses this path for requests with relative urls
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.
+`APP_LANGUAGE`: `en` by default. Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.
+`ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.
+
+#### Server ENV vars:
+`PORT`: Port on which your app run.
+`JWT_SECRET`: JWT_SECRET :smile:
+`BASE_API`: App uses this path for requests with relative urls
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN
+`SENTRY_DSN`: Your Sentry full(private) DSN for server.
+`APP_LANGUAGE`: Language of your app.
+`DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.
+
+#### Development:
 
 ```bash
-###############################################################
-npm run dev # run app in dev mode, BASE_API env var is required!
-###############################################################
-npm run db  # run mock db for app(from another process)
-###############################################################
-npm run ssr # run server-side rendering (IT NEEDS already built app) and BASE_API env var is required!
-###############################################################
+npm run dev # run both frontend and server in dev mode(using `concurrently`)
+
+npm run frontend_dev # run frontend in dev mode.
+
+npm run server_dev  # run server in dev mode
 ```
 
 #### Build:
 
 ```bash
-###############################################################
-npm run build # build app, accept next env vars:
-# APP_LANGUAGE=ru npm run build - build only selected language, if isn't set, then build app with all i18n languages!
-# ANALYZE_BUNDLE npm run build - add `webpack-bundle-analyzer` to plugins
-###############################################################
+npm run build # build both frontend and server
+
+npm run frontend_build # build frontend
+
+npm run server_build # build server
 ```
 
-These commands generate the `dist` folder.
+#### Run:
+```bash
+# npm run build - at first build app.
+npm run start # run app. You need already built app for this!
+# then visit localhost:4000 in your browser, if you didn't specify PORT env var
+```
 
 #### Test:
 
@@ -87,6 +100,8 @@ npm run test # run tests with Jest, BASE_API env var is required!
 
 #### Lint:
 
+`eslint-loader` is already included in webpack, but if you want to lint code without webpack:
+
 ```bash
 npm run lint:styles  # lint styles with Stylelint
 npm run lint:scripts # lint scripts with ESlint
@@ -94,13 +109,15 @@ npm run lint:scripts # lint scripts with ESlint
 
 #### Docs:
 
+Powered by ESDoc.
+
 ```bash
 npm run docs # generate docs and `serve`
 ```
 
 #### Nearest future:
 
-- **Project must be isomorphic**. Code must somehow works with React-Native too. I'll be very happy, if you can help me with this task :wink:, or just recommend something.
+- SSR with HMR on client and server from one process. *(testing right now)*
 
 ### FAQ
 
@@ -111,16 +128,16 @@ You can store static assets (images, videos) in `/static` folder.
 You can find it in `webpack_config/config.js`
 
 #### Is SSR available?
-Yes! Check `/src/server/server.js`. App uses rapscallion for async rendering on server.
+Yes! Check `/src/server/ssr/`. App uses rapscallion for async rendering on server.
 
 #### How lazy-loading implemented:
-Check `src/common/routing/index.js`. TL;DR: dynamic `import()`.
+Check `src/common/routing/index.js` and `src/common/components/addons/LazyLoad`. TL;DR: dynamic `import()`.
 
 #### Is theming available?
 Yes, with styled-components's `<ThemeProvider>` you can specify your own theme. By default, app uses theme from [www.materialpallette.com](https://www.materialpalette.com/).
 
 #### How it differs from other starters?
-App is designed for big projects. Personally, I use almost similar boilerplate in production.
+App is designed for big projects. Personally, I use almost similar boilerplate in production project.
 **Main purpose - build highly customizable isomorphic(!) skeleton for PWA, with SSR, code-splitting, following best practices.**
 
 #### "You have a components folder and containers folder..and in the container you have another components folder?"

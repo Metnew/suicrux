@@ -1,28 +1,27 @@
 {
-    "extends": ["plugin:react/recommended", "standard"],
-    "parser": "babel-eslint",
-    "plugins": [
-        "react",
-        "babel"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true,
-            "modules": true
-        }
-    },
-    "env": {
-        "browser": true,
-        "amd": true,
-        "es6": true,
-        "node": true
-    },
-    "rules": {
-        "react/no-unescaped-entities": 0,
-        "no-unused-vars": 1,
-        "no-tabs": 0
-    },
-    "globals": {
-      "i18n": true
-    }
+	"extends": ["plugin:react/recommended", "standard"],
+	"parser": "babel-eslint",
+	"plugins": ["react", "babel"],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true,
+			"modules": true
+		}
+	},
+	"env": {
+		"browser": true,
+		"amd": true,
+		"es6": true,
+		"node": true
+	},
+	"rules": {
+		"react/no-unescaped-entities": 0,
+		"no-unused-vars": 1,
+		"no-tabs": 0
+	},
+	"globals": {
+		"i18n": true,
+		"Raven": true,
+		"ga": true
+	}
 }

@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'production'
+
 const exec = require('child_process').execSync
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -7,33 +8,35 @@ const SriPlugin = require('webpack-subresource-integrity')
 const I18nPlugin = require('i18n-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const BabiliPlugin = require('babili-webpack-plugin')
+// const BabiliPlugin = require('babili-webpack-plugin')
 const ProgressPlugin = require('webpack/lib/ProgressPlugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const OfflinePlugin = require('offline-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-// See comments about ShakePlugin below:
-// const ShakePlugin = require('webpack-common-shake').Plugin
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const ShakePlugin = require('webpack-common-shake').Plugin
 // const git = require('git-rev-sync')
-let languages = require('../i18n')
-const _ = require('lodash')
+// const _ = require('lodash')
 const path = require('path')
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
 // const WebpackShellPlugin = require('webpack-shell-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
 const {APP_LANGUAGE, ANALYZE_BUNDLE} = process.env
 let base = require('./webpack.base')
-const config = require('./config')
+const config = require('../config')
+let languages = config.i18n
+const languageName = APP_LANGUAGE || 'en'
 
-exec('rm -rf dist/')
+exec('rm -rf dist/client')
 // NOTE: you can track versions with gitHash and store your build
 // in dist folder with path like: /dist/<gitHash>/{yourFilesHere}
 // const gitHash = git.short() //
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
+base.output.path = path.join(base.output.path, languageName)
+base.output.crossOriginLoading = 'anonymous'
 base.devtool = 'cheap-source-map'
 base.module.rules.push(
   {
@@ -58,15 +61,13 @@ if (ANALYZE_BUNDLE) {
 }
 
 // NOTE: if language was set, then build only this language
-if (APP_LANGUAGE) {
-  try {
-    const langText = languages[APP_LANGUAGE]
-    languages = {[APP_LANGUAGE]: langText}
-  } catch (e) {
-    throw new Error(
-      `Something went wrong with your i18n. Check that "${APP_LANGUAGE}" property exists in i18n object. ${e}`
-    )
-  }
+try {
+  const langText = languages[languageName]
+  languages = {[languageName]: langText}
+} catch (e) {
+  throw new Error(
+    `Something went wrong with your i18n. Check that "${APP_LANGUAGE}" property exists in i18n object. ${e}`
+  )
 }
 
 // add webpack plugins
@@ -76,16 +77,33 @@ base.plugins.push(
     filename: '[name].[chunkhash:8].css',
     allChunks: true
   }),
-  new webpack.optimize.ModuleConcatenationPlugin(),
-  //
-  // FIXME: I'm getting error from this issue https://github.com/indutny/webpack-common-shake/issues/7
-  // Probably. it's a problem of a plugin, so it's temporarily commented
-  // new ShakePlugin(),
-  //
-  new OptimizeCssAssetsPlugin(),
-  // NOTE: Prepack currently in alpha, be carefull with it
+  new OptimizeCssAssetsPlugin({
+    cssProcessorOptions: {
+      safe: true,
+      discardComments: {
+        removeAll: true
+      }
+    }
+  }),
+  // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
+  // I got an error trying to deploy this app to zeit's `now` when i use this plugin
+  // Maybe, I got this error because of certain memory limit in `now` instance
+  // new webpack.optimize.ModuleConcatenationPlugin(),
+  new ShakePlugin(),
+  // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
+  // new BabiliPlugin(),
+  new UglifyJSPlugin({
+    sourceMap: true,
+    compress: {
+      warnings: false,
+      drop_console: true
+    },
+    output: {
+      comments: false
+    }
+  }),
+  // NOTE: Prepack is currently in alpha, be carefull with it
   // new PrepackWebpackPlugin(),
-  //
   // extract vendor chunks
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -105,18 +123,20 @@ base.plugins.push(
     name: 'manifest'
   }),
   new webpack.BannerPlugin({
-    banner:
-      'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+    banner: config.banner
   }),
-  // XXX: this plugin is cool, but there is a one big issue:
-  // It sets invalid url to browserconfig.xml and manifest.json in index.html.
+  // NOTE: this plugin looks cool, but there are few big issues:
+  // 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
   // E.g: in generated index.html you can see:
   // <meta name="msapplication-config" content="browserconfig.xml">
+  // 2. It looks like generated images aren't minified.(not sure)
+  // 3. plugin is deprecated (at least look like it's deprecated)!
+  // NOTE: It would be better to generate favicons without this plugin.
   new FaviconsWebpackPlugin({
     // add theme-color property
     background: config.manifest.theme,
-    prefix: `icons`,
-    logo: path.resolve(__dirname, '../static/images/logo.png'),
+    prefix: `favicons/`,
+    logo: path.resolve(config.rootPath, './static/images/logo.png'),
     title: config.title,
     // Inject the html into the html-webpack-plugin
     inject: true,
@@ -134,60 +154,54 @@ base.plugins.push(
       windows: true
     }
   }),
-  new BabiliPlugin(),
-  // XXX: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
-  // XXX: uglify-js 3.* doesn't working with es6 currently!
-  // new UglifyJsPlugin({
-  // 	sourceMap: true,
-  // 	compress: {
-  // 		warnings: false
-  // 	},
-  // 	output: {
-  // 		comments: false
-  // 	}
-  // }),
   //
-  //
-  // NOTE: you can uncomment this option.
-  // I think it's unnecessary for small app, because it slows page finish loading.
-  // new PreloadWebpackPlugin({
-  // 	rel: 'preload',
-  // 	as: 'script',
-  // 	include: 'asyncChunks'
-  // }),
   //
   //
   // create manifest.json
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
-  //
-  // AppCache + ServiceWorkers
+  // generate <link rel="preload"> tags for async chunks
+  new PreloadWebpackPlugin({
+    rel: 'preload',
+    as: 'script',
+    include: 'asyncChunks'
+  }),
+  // https://caniuse.com/#feat=subresource-integrity
+  // NOTE: please, read about SRI before using it!
+  new SriPlugin({
+    hashFuncNames: ['sha256', 'sha384'],
+    enabled: true
+  }),
+  new CompressionPlugin({
+    algorithm: 'gzip'
+  }),
+  new I18nPlugin(languages[languageName], {functionName: 'i18n'}),
+  new HtmlWebpackPlugin({
+    title: config.title,
+    language: languageName,
+    // minify: true,
+    template: path.resolve(config.srcCommonPath, 'index.ejs'),
+    filename: path.resolve(base.output.path, 'index.html'),
+    chunksSortMode: 'dependency'
+  }),
+  // ServiceWorkers
   new OfflinePlugin({
-    safeToUseOptionalCaches: true,
+    responseStrategy: 'network-first',
+    safeToUseOptionalCaches: false,
     caches: {
-      main: ['vendor.*.css', 'vendor.*.js'],
-      additional: [':externals:'],
-      optional: [':rest:']
+      main: ['vendor.*.css', 'vendor.*.js']
     },
     // excludes: ['.htaccess'],
     AppCache: false,
     ServiceWorker: {
-      navigateFallbackURL: '/',
+      navigateFallbackURL: '/?offline=true',
       events: true
     }
-  }),
-  new CompressionPlugin({
-    algorithm: 'gzip'
   })
-  // https://caniuse.com/#feat=subresource-integrity
-  // NOTE: please, read about SRI before using it!
-  // new SriPlugin({
-  // 	hashFuncNames: ['sha256', 'sha384'],
-  // 	enabled: process.env.NODE_ENV === 'production'
-  // })
 )
 
 // minimize webpack output
 base.stats = {
+  colors: true,
   // Add children information
   children: false,
   // Add chunk information (setting this to `false` allows for a less verbose output)
@@ -195,29 +209,30 @@ base.stats = {
   // Add built modules information to chunk information
   chunkModules: false,
   chunkOrigins: false,
-  modules: false
+  modules: false,
+  reasons: true,
+  errorDetails: true
 }
 
-const builds = Object.keys(languages).map(language => {
-  let baseConfigForLang = _.cloneDeep(base)
-  baseConfigForLang.output.path = path.join(
-    baseConfigForLang.output.path,
-    language
-  )
+// const build = Object.keys(languages).map(language => {
+//   let baseConfigForLang = _.cloneDeep(base)
+//   baseConfigForLang.output.path = path.join(
+//     baseConfigForLang.output.path,
+//     language
+//   )
+//
+//   baseConfigForLang.plugins.push(
+//     new I18nPlugin(languages[language], {functionName: 'i18n'}),
+// new HtmlWebpackPlugin({
+//   title: config.title,
+//   language,
+//   // minify: true,
+//   template: path.resolve(config.srcCommonPath, 'index.ejs'),
+//   filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
+//   chunksSortMode: 'dependency'
+// })
+//   )
+//   return baseConfigForLang
+// })
 
-  baseConfigForLang.plugins.push(
-    new I18nPlugin(languages[language], {functionName: 'i18n'}),
-    new HtmlWebpackPlugin({
-      title: config.title,
-      language: language,
-      GA_KEY: process.env.GA_KEY,
-      // minify: true,
-      template: path.resolve(config.srcCommonPath, 'index.html'),
-      filename: path.resolve(baseConfigForLang.output.path, 'index.html'),
-      chunksSortMode: 'dependency'
-    })
-  )
-  return baseConfigForLang
-})
-
-module.exports = builds
+module.exports = base

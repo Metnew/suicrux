@@ -15,8 +15,8 @@ export const initialState = {
 
 export function layout (state = initialState, action) {
   const computeMobileStatuses = () => {
-    const {innerWidth} = window
-    const isMobile = innerWidth < 1025 // 1024px - is the main breakpoint in ui
+    const innerWidth = process.env.BROWSER ? window.innerWidth : 1024
+    const isMobile = innerWidth < 1025 // 1024px - is the main breakpoint in UI
     const isMobileXS = innerWidth < 481
     const isMobileSM = innerWidth > 480 && innerWidth < 767
     return {isMobileSM, isMobileXS, isMobile}

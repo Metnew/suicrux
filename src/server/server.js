@@ -1,14 +1,14 @@
 import app from './express'
 import API from './api'
 import useSSR from './ssr'
+import chalk from 'chalk'
 
-const httpPort = process.env.PORT || 3000
-
-// add handler for non-static requests
-app.use('/api/v1', API)
-// SSR
-app.get('*', useSSR)
-
-app.listen(httpPort, () => {
-  console.log(`SSR ON PORT ${httpPort}! SSR!`)
+const {BASE_API, PORT} = process.env
+// Add API route
+app.use(BASE_API, API)
+// Add SSR handler
+app.use(useSSR)
+// Start server
+app.listen(PORT, () => {
+  console.log(chalk.green(`\nServer is running on ${PORT} port!\n`))
 })

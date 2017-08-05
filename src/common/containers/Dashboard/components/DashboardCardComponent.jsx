@@ -1,8 +1,8 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Card, Image, Button} from 'semantic-ui-react'
 
-export default class DashboardCardComponent extends PureComponent {
+export default class DashboardCardComponent extends Component {
   static propTypes = {
     title: PropTypes.string,
     body: PropTypes.string,
@@ -12,10 +12,9 @@ export default class DashboardCardComponent extends PureComponent {
 
   render () {
     const {title, body, id} = this.props
-
     return (
       <Card raised>
-        <Image alt="Dummy image" src="./images/dummy.png" />
+        <Image alt="Dummy image" src={require('images/dummy.png')} />
         <Card.Content>
           <Card.Header>
             {title}

@@ -1,35 +1,26 @@
 {
-  "plugins": [
-    "lodash",
-    [
-      "transform-runtime",
-      {
-        "helpers": false,
-        "polyfill": false,
-        "regenerator": true,
-        "moduleName": "babel-runtime"
-      }
-    ],
-    "react-hot-loader/babel",
-    "transform-react-jsx-img-import",
-    "syntax-dynamic-import"
-  ],
-  "presets": ["es2015", "react", "stage-0"],
-  "env": {
-    "ssr": {
-      "plugins": [
-        [
-          "babel-plugin-webpack-alias",
-          {
-            "config": "./webpack_config/webpack.base.js",
-            "findConfig": true
-          }
-        ],
-        "dynamic-import-node"
-      ]
-    },
-    "production": {
-      "presets": ["react-optimize"]
-    }
-  }
+	"plugins": [
+		"lodash",
+		[
+			"transform-runtime",
+			{
+				"helpers": false,
+				"polyfill": false,
+				"regenerator": true,
+				"moduleName": "babel-runtime"
+			}
+		],
+		"syntax-dynamic-import"
+	],
+	"presets": ["es2015", "react", "stage-0"],
+	"env": {
+		"production": {
+			"presets": ["react-optimize"]
+		},
+		"development": {
+			"plugins": [
+				"react-hot-loader/babel"
+			]
+		}
+	}
 }

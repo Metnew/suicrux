@@ -1,7 +1,6 @@
-import React from 'react'
-import {Route, Redirect, Switch} from 'react-router-dom'
-import {App, Users, Dashboard, Login} from 'containers'
-import {RouteAuth} from 'components'
+import {Route} from 'react-router-dom'
+import {Users, Dashboard, Login} from 'containers'
+import {RouteAuth} from 'components/addons'
 import {createBrowserHistory, createMemoryHistory} from 'history'
 
 export const history = getHistory()
@@ -13,12 +12,12 @@ const loadLazyComponent = url => {
   }
 }
 
-export const appRouting = [
+export const routes = [
   {
     path: '/',
+    exact: true,
     icon: 'newspaper',
     name: 'Dashboard',
-    exact: true,
     sidebarVisible: true,
     tag: RouteAuth,
     component: Dashboard
@@ -52,46 +51,13 @@ export const appRouting = [
     exact: true,
     strict: true,
     tag: RouteAuth,
-    component: loadLazyComponent('UsersItem')
+    component: loadLazyComponent('UserItem')
   }
 ]
 
-/**
- * Returns application routing with protected by AuthCheck func routes
- * @param {Function} authCheck checks is user logged in
- */
-export const Routing = authCheck => {
-  // remove components that aren't application routes, (e.g. github link in sidebar)
-  const routes = appRouting.filter(
-    a => a.tag || a.component || a.lazy || !a.external
-  )
-  // render components that are inside Switch (main view)
-  const routesRendered = routes.map((a, i) => {
-    // get tag for Route.
-    // is it "RouteAuth" `protected route` or "Route"?
-    const Tag = a.tag
-    const {path, exact, strict, component, lazy} = a
-    // can visitor access this route?
-    const canAccess = authCheck
-    // select only props that we need
-    const b = {path, exact, strict, component, canAccess, lazy}
-
-    return <Tag key={i} {...b} />
-  })
-
-  return (
-    <App>
-      <Switch>
-        {routesRendered}
-        <Redirect to="/" />
-      </Switch>
-    </App>
-  )
-}
-
 function getHistory () {
   const basename = ''
-  if (process.env.BABEL_ENV === 'ssr') {
+  if (process.env.BROWSER !== true) {
     return createMemoryHistory()
   }
   return createBrowserHistory({basename})
