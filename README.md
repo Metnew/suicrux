@@ -1,5 +1,7 @@
 # React-Semantic.UI-Starter
 
+[![Join the chat at https://gitter.im/react-semantic-ui-starter/Lobby](https://badges.gitter.im/react-semantic-ui-starter/Lobby.svg)](https://gitter.im/react-semantic-ui-starter/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Out-of-box:
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
 
