@@ -47,7 +47,7 @@ export default class LoginComponent extends Component {
     return (
       <Grid verticalAlign="middle" centered columns={1} textAlign="center" relaxed>
         <Helmet>
-          <title>React-Semantic-UI-Starter: Login</title>
+          <title>React-Semantic.UI-Starter: Login</title>
         </Helmet>
         <Grid.Row>
           <Grid.Column tablet={10} mobile={16} computer={6}>
