@@ -9,7 +9,7 @@ const GET_USERS_FAIL = {
 }
 const GET_USERS_SUCCESS = {
   type: actions.GET_USERS_SUCCESS,
-  result: [{id: 1, something:'strange'}]
+  result: [{id: 1, something: 'strange'}]
 }
 const GET_USERS_PENDING = {
   type: actions.GET_USERS_PENDING
@@ -31,7 +31,7 @@ describe('USERS REDUCER', () => {
     expect(reducer(initialState, GET_USERS_SUCCESS)).toEqual({
       ...initialState,
       entities: {
-        "1": {
+        '1': {
           id: 1,
           something: 'strange'
         }
@@ -39,7 +39,7 @@ describe('USERS REDUCER', () => {
       count: 1,
       isLoaded: true,
       isLoading: false,
-      fetchStatus: 'loaded',
+      fetchStatus: 'loaded'
     })
   })
 
@@ -66,6 +66,8 @@ describe('USERS REDUCER', () => {
   })
 
   it('should return same state if LOCATION_CHANGE navigates to inbox/:id route', () => {
-    expect(reducer(initialState, LOCATION_CHANGE_INBOX_ID)).toEqual(initialState)
+    expect(reducer(initialState, LOCATION_CHANGE_INBOX_ID)).toEqual(
+      initialState
+    )
   })
 })
