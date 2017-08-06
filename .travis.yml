@@ -5,6 +5,6 @@ install:
     - npm install -g codecov
     - "npm install"
 script:
-    - "npm run db & npm run test"
+    - "npm run server_dev & npm run test"
 after_script:
     - codecov
