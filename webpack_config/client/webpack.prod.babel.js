@@ -88,7 +88,7 @@ base.plugins.push(
   // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
   // I got an error trying to deploy this app to zeit's `now` when i use this plugin
   // Maybe, I got this error because of certain memory limit in `now` instance
-  // new webpack.optimize.ModuleConcatenationPlugin(),
+  new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
   // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
   // new BabiliPlugin(),
@@ -155,8 +155,6 @@ base.plugins.push(
     }
   }),
   //
-  //
-  //
   // create manifest.json
   new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
   // generate <link rel="preload"> tags for async chunks
@@ -178,24 +176,14 @@ base.plugins.push(
   new HtmlWebpackPlugin({
     title: config.title,
     language: languageName,
+    theme_color: config.manifest.theme_color,
     // minify: true,
     template: path.resolve(config.srcCommonPath, 'index.ejs'),
     filename: path.resolve(base.output.path, 'index.html'),
     chunksSortMode: 'dependency'
   }),
-  // ServiceWorkers
   new OfflinePlugin({
-    responseStrategy: 'network-first',
-    safeToUseOptionalCaches: false,
-    caches: {
-      main: ['vendor.*.css', 'vendor.*.js']
-    },
-    // excludes: ['.htaccess'],
-    AppCache: false,
-    ServiceWorker: {
-      navigateFallbackURL: '/?offline=true',
-      events: true
-    }
+    AppCache: false
   })
 )
 

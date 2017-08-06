@@ -3,6 +3,7 @@ import express from 'express'
 import helmet from 'helmet'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
@@ -22,6 +23,7 @@ app.use(
     index: false
   })
 )
+app.use(bodyParser.json())
 app.disable('x-powered-by')
 
 // Auth-related middleware, check that user is logged in and token is valid

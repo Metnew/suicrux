@@ -15,7 +15,7 @@ const plugins = [
     compress: {
       warnings: false,
       // This option removes console log in production
-      drop_console: true
+      // drop_console: true
     },
     output: {
       comments: false

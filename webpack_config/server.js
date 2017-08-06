@@ -18,6 +18,7 @@ webpackConfig.entry.client = [
 ]
 
 webpackConfig.plugins.push(new LogPlugin(port))
+process.env.BASE_API = process.env.BASE_API || '/api/v1'
 
 let compiler
 

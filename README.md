@@ -3,39 +3,54 @@
 ## Out-of-box:
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
 
-## DEMO: [You can find it here](https://metnew.github.io/react-semantic.ui-starter/)
-
+## DEMO: [You can find it here](https://reatty.now.sh/auth)
 [![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=master)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
+[![Join the chat at https://gitter.im/react-semantic-ui-starter/Lobby](https://badges.gitter.im/react-semantic-ui-starter/Lobby.svg)](https://gitter.im/react-semantic-ui-starter/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![bitHound Code](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/code.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
+[![bitHound Overall Score](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/score.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
 [![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter)
 [![bitHound Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/code.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
-[![bitHound Overall Score](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/score.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ### What is it?
-Production-ready, performance-first, optimized, robust, **fullstack** boilerplate/example with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
+Production-ready, performance-first, optimized, robust, **fullstack** **isomorphic** boilerplate/example with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
-#### Includes:
+### What's inside?
+
+#### Frontend:
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**,  and **[styled-components](https://github.com/styled-components/styled-components)** support.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
-- **[rapscallion](https://github.com/FormidableLabs/rapscallion)** - async server-side rendering.
-- **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**,  **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
-- **[Fetch polyfill](https://github.com/github/fetch)** and **[normalizr](https://github.com/paularmstrong/normalizr)**(api response normalization)
+- **[Fetch polyfill](https://github.com/matthew-andrews/isomorphic-fetch)**, **[Promise polyfill](https://github.com/stefanpenner/es6-promise)** and **[normalizr](https://github.com/paularmstrong/normalizr)** (api response normalization)
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
+- **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
+- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.
+
+#### Build (Webpack):
 - **[Webpack 3](https://webpack.js.org)**:
     - Babel (stage-0),
     - **HMR**, devServer, hotMiddleware,
     - i18n support with **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**
     - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
-- **[Jest](https://facebook.github.io/jest/)** - awesome library for testing.
-- **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
-- **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)** and **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)** for your new awesome app.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)** for your new awesome app.
+
+#### Server:
+- **[rapscallion](https://github.com/FormidableLabs/rapscallion)** - async server-side rendering.
+- **[morgan](https://www.npmjs.com/package/morgan)** - request logger middleware.
+- **[helmet](https://github.com/helmetjs/helmet)** - secure your Express app.
+- **[cookie-parser](https://www.npmjs.com/package/cookie-parser)** - cookie parsing middleware.
+- **[body-parser](https://github.com/expressjs/body-parser)** - body parsing middleware
+- **[compression](https://github.com/expressjs/compression)** -  compression middleware (gzip).
+- **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~ for Auth!
+
+#### Other:
+- **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
+- **[Jest](https://facebook.github.io/jest/)** - awesome testing framework.
 - [And more tools for building and testing...](https://github.com/Metnew/react-semantic.ui-starter/blob/master/package.json)
+
 
 ### Usage
 
@@ -47,23 +62,23 @@ npm install
 ```
 
 #### ENV vars:
-ENV vars are very important for configuration.
+ENV vars are **very important** for configuration.
 
 #### Client ENV vars:
-`GA_ID`: Your Google analytics ID.
-`BASE_API`: `/api/v1` by default. App uses this path for requests with relative urls
-`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.
-`APP_LANGUAGE`: `en` by default. Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.
-`ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.
+`GA_ID`: Your Google analytics ID.     
+`BASE_API`: `/api/v1` by default. App uses this path for requests with relative urls     
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.    
+`APP_LANGUAGE`: `en` by default. Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.     
+`ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.    
 
 #### Server ENV vars:
-`PORT`: Port on which your app run.
-`JWT_SECRET`: JWT_SECRET :smile:
-`BASE_API`: App uses this path for requests with relative urls
-`SENTRY_PUBLIC_DSN`: Your Sentry public DSN
-`SENTRY_DSN`: Your Sentry full(private) DSN for server.
-`APP_LANGUAGE`: Language of your app.
-`DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.
+`PORT`: Port on which your app run.     
+`JWT_SECRET`: JWT_SECRET :smile:    
+`BASE_API`: App uses this path for requests with relative urls   
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN    
+`SENTRY_DSN`: Your Sentry full(private) DSN for server.   
+`APP_LANGUAGE`: Language of your app.    
+`DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.   
 
 #### Development:
 
@@ -92,6 +107,9 @@ npm run start # run app. You need already built app for this!
 # then visit localhost:4000 in your browser, if you didn't specify PORT env var
 ```
 
+#### Deploy:
+If you use **[now](https://github.com/zeit/now)** - you will run out of memory on `npm run build`. I recommend you to disable some non-critical plugins (ModuleConcatenationPlugin, SriPlugin, FaviconsWebpackPlugin). [Demo that was deployed to "now"](https://reatty.now.sh/)
+
 #### Test:
 
 ```bash
@@ -118,6 +136,7 @@ npm run docs # generate docs and `serve`
 #### Nearest future:
 
 - SSR with HMR on client and server from one process. *(testing right now)*
+- Improved docs!
 
 ### FAQ
 
@@ -159,9 +178,6 @@ Each reducer/action has own folder, where you can find:
 #### How to write tests?
 You can find [action testing example here.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js)
 It uses [redux-mock-store.](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js)
-
-#### How does the built app look?
-**[Like this.](https://github.com/Metnew/react-semantic.ui-starter/tree/gh-pages)**
 
 ### Also:
 
