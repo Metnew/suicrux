@@ -183,7 +183,17 @@ base.plugins.push(
     chunksSortMode: 'dependency'
   }),
   new OfflinePlugin({
-    AppCache: false
+    // responseStrategy: 'network-first',
+    // safeToUseOptionalCaches: false,
+    // caches: {
+    //   main: ['vendor.*.css', 'vendor.*.js']
+    // },
+    // excludes: ['.htaccess'],
+    AppCache: false,
+    // ServiceWorker: {
+    //   navigateFallbackURL: '/?offline=true',
+    //   events: true
+    // }
   })
 )
 
