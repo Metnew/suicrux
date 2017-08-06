@@ -13,7 +13,7 @@ const plugins = [
   new UglifyJSPlugin({
     sourceMap: true,
     compress: {
-      warnings: false,
+      warnings: false
       // This option removes console log in production
       // drop_console: true
     },
