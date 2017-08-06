@@ -1,4 +1,7 @@
-'use strict'
+/**
+ * @file for config stuff that's used for webpack configuration, but isn't passed to webpack compiler
+ */
+
 const path = require('path')
 const rootPath = path.join(__dirname, '../') // = "/"
 const distPath = path.join(rootPath, './dist') // = "/dist"
@@ -32,7 +35,8 @@ module.exports = {
   },
   // text for WebpackBannerPlugin,
   // this plugin just adds text banner to the beginning of your file
-  banner: 'MIT License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/react-semantic.ui-starter',
+  banner:
+  'MIT License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/react-semantic.ui-starter',
   // your manifest.json
   manifest: {
     name: 'React-Semantic.UI-Starter',

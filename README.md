@@ -51,7 +51,6 @@ Production-ready, performance-first, optimized, robust, **fullstack** **isomorph
 - **[Jest](https://facebook.github.io/jest/)** - awesome testing framework.
 - [And more tools for building and testing...](https://github.com/Metnew/react-semantic.ui-starter/blob/master/package.json)
 
-
 ### Usage
 
 #### Install:
