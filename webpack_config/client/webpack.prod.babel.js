@@ -85,9 +85,6 @@ base.plugins.push(
       }
     }
   }),
-  // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
-  // I got an error trying to deploy this app to zeit's `now` when i use this plugin
-  // Maybe, I got this error because of certain memory limit in `now` instance
   new webpack.optimize.ModuleConcatenationPlugin(),
   new ShakePlugin(),
   // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
