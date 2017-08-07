@@ -14,7 +14,7 @@
 </div>
 
 ### What is it?
-Production-ready, performance-first, optimized, robust, **fullstack** **isomorphic** boilerplate/example with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
+**Fullstack** **isomorphic** boilerplate with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
 ### What's inside?
 
@@ -38,7 +38,7 @@ Production-ready, performance-first, optimized, robust, **fullstack** **isomorph
     - **HMR**, devServer, hotMiddleware,
     - i18n support with **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**
     - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)** for your new awesome app.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)**.
 
 #### Server:
 - **[rapscallion](https://github.com/FormidableLabs/rapscallion)** - async server-side rendering.
@@ -47,7 +47,7 @@ Production-ready, performance-first, optimized, robust, **fullstack** **isomorph
 - **[cookie-parser](https://www.npmjs.com/package/cookie-parser)** - cookie parsing middleware.
 - **[body-parser](https://github.com/expressjs/body-parser)** - body parsing middleware
 - **[compression](https://github.com/expressjs/compression)** -  compression middleware (gzip).
-- **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~ for Auth!
+- **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~ for Auth.
 
 #### Other:
 - **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
