@@ -178,16 +178,16 @@ base.plugins.push(
 		template: path.resolve(config.srcCommonPath, 'index.ejs'),
 		filename: path.resolve(base.output.path, 'index.html'),
 		chunksSortMode: 'dependency'
-	})
-	// new OfflinePlugin({
+	}),
+	new OfflinePlugin({
 	// responseStrategy: 'network-first',
 	// safeToUseOptionalCaches: false,
 	// caches: {
 	//   main: ['vendor.*.css', 'vendor.*.js']
 	// },
 	// excludes: ['.htaccess'],
-	//   AppCache: false
-	// })
+	  AppCache: false
+	})
 )
 
 // minimize webpack output
