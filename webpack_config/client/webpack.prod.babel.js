@@ -57,7 +57,7 @@ base.module.rules.push(
 
 // Do you want to use bundle analyzer?
 if (ANALYZE_BUNDLE) {
-	base.plugins.push(new BundleAnalyzerPlugin())
+	base.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
 }
 
 // NOTE: if language was set, then build only this language
@@ -180,13 +180,13 @@ base.plugins.push(
 		chunksSortMode: 'dependency'
 	}),
 	new OfflinePlugin({
-	// responseStrategy: 'network-first',
-	// safeToUseOptionalCaches: false,
-	// caches: {
-	//   main: ['vendor.*.css', 'vendor.*.js']
-	// },
-	// excludes: ['.htaccess'],
-	  AppCache: false
+		// responseStrategy: 'network-first',
+		// safeToUseOptionalCaches: false,
+		// caches: {
+		//   main: ['vendor.*.css', 'vendor.*.js']
+		// },
+		// excludes: ['.htaccess'],
+		AppCache: false
 	})
 )
 
