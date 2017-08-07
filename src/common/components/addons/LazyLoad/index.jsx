@@ -7,46 +7,46 @@ import {Loader} from 'semantic-ui-react'
  * Primarly routes (e.g. Route + RouteAuth)
  */
 class LazyLoad extends Component {
- static propTypes = {
-   component: PropTypes.any
-   // NOTE: @Metnew: it'd be nice to make it works with children props!  
-   //  children: PropTypes.node
- }
+	static propTypes = {
+		component: PropTypes.any
+		// NOTE: @Metnew: it'd be nice to make it works with children props!  
+		//  children: PropTypes.node
+	}
 
- state = {
-   componentLoaded: false,
-   componentToRender: null
- }
+	state = {
+		componentLoaded: false,
+		componentToRender: null
+	}
 
- componentWillMount () {
-   this.load()
- }
+	componentWillMount () {
+		this.load()
+	}
 
- async load () {
-   const {component} = this.props
-   const componentToRender = await component()
-   this.setState({
-     componentLoaded: true,
-     componentToRender: componentToRender.default
-   })
- }
+	async load () {
+		const {component} = this.props
+		const componentToRender = await component()
+		this.setState({
+			componentLoaded: true,
+			componentToRender: componentToRender.default
+		})
+	}
 
- render () {
-   const {componentLoaded} = this.state
+	render () {
+		const {componentLoaded} = this.state
 
-   console.log(
-     `Component loaded and ready to be mounted: ${componentLoaded
-       ? 'YES'
-       : 'NO'}`
-   )
+		console.log(
+			`Component loaded and ready to be mounted: ${componentLoaded
+				? 'YES'
+				: 'NO'}`
+		)
 
-   if (componentLoaded) {
-     const LoadedComponent = this.state.componentToRender
-     return <LoadedComponent />
-   } else {
-     return <Loader>Loading...</Loader>
-   }
- }
+		if (componentLoaded) {
+			const LoadedComponent = this.state.componentToRender
+			return <LoadedComponent />
+		} else {
+			return <Loader>Loading...</Loader>
+		}
+	}
 }
 
 export default LazyLoad

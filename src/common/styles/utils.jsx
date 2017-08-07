@@ -2,63 +2,63 @@ import {css} from 'styled-components'
 import _ from 'lodash'
 
 const pxToEm = px => {
-  return px / 16 + 'em'
+	return px / 16 + 'em'
 }
 
 const iWantToUseEm = true
 const sizes = _.mapValues(
-  {
-    xs: 0, // Extra small screen / phone
-    sm: 480, // Small screen / phone
-    md: 768, // Medium screen / tablet
-    lg: 1024, // Large screen / desktop
-    xl: 1200 // Extra large screen / wide desktop
-  },
-  (value, key) => {
-    // NOTE: Please, read more about `em`, before switching to it
-    // https://stackoverflow.com/questions/22228568/switching-to-em-based-media-queries
-    return iWantToUseEm ? pxToEm(value) : value + 'px'
-  }
+	{
+		xs: 0, // Extra small screen / phone
+		sm: 480, // Small screen / phone
+		md: 768, // Medium screen / tablet
+		lg: 1024, // Large screen / desktop
+		xl: 1200 // Extra large screen / wide desktop
+	},
+	(value, key) => {
+		// NOTE: Please, read more about `em`, before switching to it
+		// https://stackoverflow.com/questions/22228568/switching-to-em-based-media-queries
+		return iWantToUseEm ? pxToEm(value) : value + 'px'
+	}
 )
 
 // FIXME: @Metnew: dirty-hardcode version of media template!
 export const media = {
-  xs: (...args) => css`
+	xs: (...args) => css`
 	  @media only screen and (max-width: ${sizes.sm}) {
 	    ${css(...args)}
 	  }
 	`,
-  sm: (...args) => css`
+	sm: (...args) => css`
 	  @media only screen and (max-width: ${sizes.md}) {
 	    ${css(...args)}
 	  }
 	`,
-  smOnly: (...args) => css`
+	smOnly: (...args) => css`
 		@media only screen and (max-width: ${sizes.sm}) and (min-width: ${sizes.xs}) {
 			${css(...args)}
 		}
 	`,
-  md: (...args) => css`
+	md: (...args) => css`
 	  @media only screen and (max-width: ${sizes.lg}) {
 	    ${css(...args)}
 	  }
 	`,
-  mdOnly: (...args) => css`
+	mdOnly: (...args) => css`
 		@media only screen and (max-width: ${sizes.md}) and (min-width: ${sizes.sm}) {
 			${css(...args)}
 		}
 	`,
-  lg: (...args) => css`
+	lg: (...args) => css`
 	  @media only screen and (min-width: ${sizes.lg}) {
 	    ${css(...args)}
 	  }
 	`,
-  lgOnly: (...args) => css`
+	lgOnly: (...args) => css`
 		@media only screen and (max-width: ${sizes.xl}) and (min-width: ${sizes.lg}) {
 			${css(...args)}
 		}
 	`,
-  xl: (...args) => css`
+	xl: (...args) => css`
 	  @media only screen and (min-width: ${sizes.xl}) {
 	    ${css(...args)}
 	  }

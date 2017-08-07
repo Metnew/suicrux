@@ -2,7 +2,7 @@ import requestWrapper from './xhr_wrapper'
 
 // EXPORT NORMALIZE STUFF!
 export {normalizeArrayOfItems} from './normalize'
-// create request wrappers
+// Create request wrappers
 export const get = requestWrapper('GET')
 export const post = requestWrapper('POST')
 export const put = requestWrapper('PUT')
@@ -31,11 +31,10 @@ export const del = requestWrapper('DELETE')
  * @return {bool} - indicates was request successful or not
  */
 export function resultOK (result) {
-  if (result) {
-    let ok = result.ok
-    delete result.ok
-    return ok // look at parseJSON
-  } else {
-    return false
-  }
+	if (result) {
+		const ok = result.ok
+		delete result.ok
+		return ok // Look at parseJSON
+	}
+	return false
 }

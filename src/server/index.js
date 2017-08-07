@@ -1,5 +1,5 @@
 global.i18n = str => str
 global.fetch = require('isomorphic-fetch')
 
-// import app
+// Import app
 require('./server')

@@ -10,5 +10,5 @@ app.use(BASE_API, API)
 app.use(useSSR)
 // Start server
 app.listen(PORT, () => {
-  console.log(chalk.green(`\nServer is running on ${PORT} port!\n`))
+	console.log(chalk.magenta(`\nServer is running on ${PORT} port!\n`))
 })
