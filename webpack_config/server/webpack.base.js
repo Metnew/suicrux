@@ -88,6 +88,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.DefinePlugin(definePluginArgs),
+		new webpack.NamedModulesPlugin(),
 		new webpack.BannerPlugin({
 			banner: config.banner
 		}),
