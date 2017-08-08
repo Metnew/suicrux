@@ -19,7 +19,6 @@ export const configureStore = initialState => {
 	let enhancers
 
 	if (process.env.NODE_ENV === 'development') {
-		// FIXME: remove duplication
 		const {composeWithDevTools} = require('redux-devtools-extension')
 		enhancers = composeWithDevTools(thunkApplied, routerMiddlewareApplied)
 	} else {
