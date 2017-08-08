@@ -14,7 +14,7 @@ class RouteAuth extends Component {
 	render () {
 		const {canAccess, path} = this.props
 
-		console.log(this.props,
+		console.log(
 			`User has access to "${path}" path: ${canAccess(path) ? 'YES' : 'NO'}`
 		)
 
