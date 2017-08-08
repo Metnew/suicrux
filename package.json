@@ -82,7 +82,6 @@
 		"i18n-webpack-plugin": "^1.0.0",
 		"img-loader": "^2.0.0",
 		"jest": "^20.0.4",
-		"lqip-loader": "^0.1.2",
 		"node-sass": "^4.5.3",
 		"nodemon": "^1.11.0",
 		"open": "0.0.5",
@@ -121,7 +120,8 @@
 		"why-did-you-update": "^0.0.8"
 	},
 	"optionalDependencies": {
-		"prepack-webpack-plugin": "^1.1.0"
+		"prepack-webpack-plugin": "^1.1.0",
+		"lqip-loader": "^0.1.2"
 	},
 	"scripts": {
 		"docs": "esdoc && serve ./esdoc",
