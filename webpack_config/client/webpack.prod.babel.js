@@ -85,8 +85,8 @@ base.plugins.push(
 			}
 		}
 	}),
-	// new webpack.optimize.ModuleConcatenationPlugin(),
-	// new ShakePlugin(),
+	new webpack.optimize.ModuleConcatenationPlugin(),
+	new ShakePlugin(),
 	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
 	// new BabiliPlugin(),
 	new UglifyJSPlugin({
@@ -129,43 +129,43 @@ base.plugins.push(
 	// 2. It looks like generated images aren't minified.(not sure)
 	// 3. plugin is deprecated (at least look like it's deprecated)!
 	// NOTE: It would be better to generate favicons without this plugin.
-	// new FaviconsWebpackPlugin({
-	// 	// add theme-color property
-	// 	background: config.manifest.theme,
-	// 	prefix: `favicons/`,
-	// 	logo: path.resolve(config.rootPath, './static/images/logo.png'),
-	// 	title: config.title,
-	// 	// Inject the html into the html-webpack-plugin
-	// 	inject: true,
-	// 	// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
-	// 	icons: {
-	// 		android: true,
-	// 		appleIcon: true,
-	// 		appleStartup: true,
-	// 		coast: false,
-	// 		favicons: true,
-	// 		firefox: true,
-	// 		opengraph: false,
-	// 		twitter: true,
-	// 		yandex: false,
-	// 		windows: true
-	// 	}
-	// }),
+	new FaviconsWebpackPlugin({
+		// add theme-color property
+		background: config.manifest.theme,
+		prefix: `favicons/`,
+		logo: path.resolve(config.rootPath, './static/images/logo.png'),
+		title: config.title,
+		// Inject the html into the html-webpack-plugin
+		inject: true,
+		// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+		icons: {
+			android: true,
+			appleIcon: true,
+			appleStartup: true,
+			coast: false,
+			favicons: true,
+			firefox: true,
+			opengraph: false,
+			twitter: true,
+			yandex: false,
+			windows: true
+		}
+	}),
 	//
 	// create manifest.json
 	new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
 	// generate <link rel="preload"> tags for async chunks
-	// new PreloadWebpackPlugin({
-	// 	rel: 'preload',
-	// 	as: 'script',
-	// 	include: 'asyncChunks'
-	// }),
+	new PreloadWebpackPlugin({
+		rel: 'preload',
+		as: 'script',
+		include: 'asyncChunks'
+	}),
 	// https://caniuse.com/#feat=subresource-integrity
 	// NOTE: please, read about SRI before using it!
-	// new SriPlugin({
-	// 	hashFuncNames: ['sha256', 'sha384'],
-	// 	enabled: true
-	// }),
+	new SriPlugin({
+		hashFuncNames: ['sha256', 'sha384'],
+		enabled: true
+	}),
 	new CompressionPlugin({
 		algorithm: 'gzip'
 	}),
