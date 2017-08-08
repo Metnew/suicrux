@@ -25,7 +25,7 @@ export default class RoutingWrapper extends Component {
 		const {isLoggedIn} = store.getState().me.auth
 		const authPath = '/auth'
 		const allowedToVisitPath = [authPath]
-		console.log(`RoutingWrapper: isLoggedIn:${isLoggedIn}`)
+
 		if (isLoggedIn && path === authPath) {
 			return false
 		} else if (!isLoggedIn && !allowedToVisitPath.includes(path)) {
