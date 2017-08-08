@@ -181,14 +181,19 @@ base.plugins.push(
 	}),
 	new OfflinePlugin({
 		publicPath: '/',
-	  caches: {
-	    main: [
-	      'vendor.*.css',
-	      'vendor.*.js',
-	      'client.*.js',
-	    ]
-	  },
-	  externals: [],
+		caches: {
+			main: [
+				'vendor.*.js',
+				'vendor.*.css',
+				'manifest.*.js',
+				'client.*.js'
+			]
+		},
+		excludes: ['/', ''],
+	  externals: ['/auth'],
+		rewrites: () => {
+			return ''
+		},
 	  ServiceWorker: {
 	    navigateFallbackURL: '/auth',
 			navigateFallbackForRedirects: false
