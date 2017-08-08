@@ -180,12 +180,19 @@ base.plugins.push(
 		chunksSortMode: 'dependency'
 	}),
 	new OfflinePlugin({
-		// responseStrategy: 'network-first',
-		// safeToUseOptionalCaches: false,
-		// caches: {
-		//   main: ['vendor.*.css', 'vendor.*.js']
-		// },
-		// excludes: ['.htaccess'],
+		publicPath: '/',
+		caches: {
+			main: ['vendor.*.js', 'vendor.*.css', 'manifest.*.js', 'client.*.js']
+		},
+		excludes: ['/', ''],
+		externals: ['/auth'],
+		rewrites: () => {
+			return ''
+		},
+		ServiceWorker: {
+			navigateFallbackURL: '/auth',
+			navigateFallbackForRedirects: false
+		},
 		AppCache: false
 	})
 )

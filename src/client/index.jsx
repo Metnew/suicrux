@@ -2,8 +2,8 @@
 import 'semantic-ui-css/semantic.css'
 import 'styles/global'
 // Fetch and promise polyfill
-import 'isomorphic-fetch'
-import 'es6-promise'
+import 'promise-polyfill'
+import 'whatwg-fetch'
 // Application
 import {render} from 'react-dom'
 import {configureStore, configureRootComponent} from 'common/index.jsx'
