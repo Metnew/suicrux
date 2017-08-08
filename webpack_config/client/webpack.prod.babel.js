@@ -182,9 +182,16 @@ base.plugins.push(
 	new OfflinePlugin({
 		publicPath: '/',
 		caches: {
-			main: ['vendor.*.js', 'vendor.*.css', 'manifest.*.js', 'client.*.js', 'assets/icons.*.*']
+			main: [
+				'vendor.*.js',
+				'vendor.*.css',
+				'manifest.*.js',
+				'client.*.js',
+				'assets/icons.*.*'
+			],
+			additional: [':externals:'],
+			optional: [':rest:']
 		},
-		excludes: ['**/.*', '**/*.map'],
 		externals: [
 			'/',
 			'/auth',
