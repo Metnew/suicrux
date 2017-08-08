@@ -7,7 +7,7 @@ runtime.install({
 	},
 
 	// do something
-	onUpdating: function () { },
+	onUpdating: function () {},
 
 	// When an update is ready, tell ServiceWorker to take control immediately:
 	onUpdateReady () {
