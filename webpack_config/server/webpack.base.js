@@ -83,6 +83,34 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				use: 'babel-loader',
 				exclude: [/node_modules/]
+			},
+			// NOTE: LQIP loader doesn't work with file-loader and url-loader :(
+			// `npm i --save-dev lqip-loader`
+			// {
+			//   test: /\.(jpe?g|png)$/i,
+			//   enforce: 'pre',
+			//   loaders: [
+			//     {
+			//       loader: 'lqip-loader',
+			//       options: {
+			//         path: '/images-lqip', // your image going to be in media folder in the output dir
+			//         name: '[name]-lqip.[hash:8].[ext]' // you can use [hash].[ext] too if you wish
+			//       }
+			//     }
+			//   ]
+			// }
+			{
+				test: /\.(jpe?g|png|gif|svg)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 25000,
+							name: 'images/[name].[hash:8].[ext]'
+						}
+					},
+					'img-loader'
+				]
 			}
 		]
 	},
@@ -91,13 +119,7 @@ module.exports = {
 		new webpack.NamedModulesPlugin(),
 		new webpack.BannerPlugin({
 			banner: config.banner
-		}),
-		// Server can't process require of your styles/images/fonts
-		new webpack.NormalModuleReplacementPlugin(
-			/\.(css|sass|less|jpg|png|gif|scss)$/,
-			'node-noop'
-		)
-		// new webpack.IgnorePlugin(/\.(css|sass|less|jpg|png|gif|scss)$/)
+		})
 	],
 	node: {
 		__dirname: true,
