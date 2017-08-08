@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {users as reducer, initialState} from 'reducers/users'
 import * as actions from 'actions'
 
