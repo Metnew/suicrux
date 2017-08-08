@@ -12,16 +12,16 @@ import _ from 'lodash'
 // you styill can write a bunch of custom code in your reducers to normalize every reqests
 
 export const normalizeArrayOfItems = array => {
-  // flat array, if it had 2 levels of depth
-  const flatArray = _.flatten(array)
-  // create schema for field, e.g field is `data`
-  const dataSchema = new schema.Entity('data')
-  // create schema of list
-  const dataListSchema = [dataSchema]
-  // normalize flatArray
-  const normalizedData = normalize(flatArray, dataListSchema)
-  // get `data` entities
-  const entities = normalizedData.entities['data']
-  const count = normalizedData.result.length
-  return {entities, count}
+	// Flat array, if it had 2 levels of depth
+	const flatArray = _.flatten(array)
+	// Create schema for field, e.g field is `data`
+	const dataSchema = new schema.Entity('data')
+	// Create schema of list
+	const dataListSchema = [dataSchema]
+	// Normalize flatArray
+	const normalizedData = normalize(flatArray, dataListSchema)
+	// Get `data` entities
+	const entities = normalizedData.entities.data
+	const count = normalizedData.result.length
+	return {entities, count}
 }

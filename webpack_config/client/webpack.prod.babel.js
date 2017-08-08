@@ -28,7 +28,7 @@ const config = require('../config')
 let languages = config.i18n
 const languageName = APP_LANGUAGE || 'en'
 
-exec('rm -rf dist/client')
+exec(`rm -rf ${config.distPath}/client/${languageName}`)
 // NOTE: you can track versions with gitHash and store your build
 // in dist folder with path like: /dist/<gitHash>/{yourFilesHere}
 // const gitHash = git.short() //
@@ -39,167 +39,170 @@ base.output.path = path.join(base.output.path, languageName)
 base.output.crossOriginLoading = 'anonymous'
 base.devtool = 'cheap-source-map'
 base.module.rules.push(
-  {
-    test: /\.css$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: ['css-loader', 'postcss-loader']
-    })
-  },
-  {
-    test: /\.scss$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: ['css-loader', 'postcss-loader', 'sass-loader']
-    })
-  }
+	{
+		test: /\.css$/,
+		use: ExtractTextPlugin.extract({
+			fallback: 'style-loader',
+			use: ['css-loader', 'postcss-loader']
+		})
+	},
+	{
+		test: /\.scss$/,
+		use: ExtractTextPlugin.extract({
+			fallback: 'style-loader',
+			use: ['css-loader', 'postcss-loader', 'sass-loader']
+		})
+	}
 )
 
 // Do you want to use bundle analyzer?
 if (ANALYZE_BUNDLE) {
-  base.plugins.push(new BundleAnalyzerPlugin())
+	base.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
 }
 
 // NOTE: if language was set, then build only this language
 try {
-  const langText = languages[languageName]
-  languages = {[languageName]: langText}
+	const langText = languages[languageName]
+	languages = {[languageName]: langText}
 } catch (e) {
-  throw new Error(
-    `Something went wrong with your i18n. Check that "${APP_LANGUAGE}" property exists in i18n object. ${e}`
-  )
+	throw new Error(
+		`Something went wrong with your i18n. Check that "${APP_LANGUAGE}" property exists in i18n object. ${e}`
+	)
 }
 
 // add webpack plugins
 base.plugins.push(
-  new ProgressPlugin(),
-  new ExtractTextPlugin({
-    filename: '[name].[chunkhash:8].css',
-    allChunks: true
-  }),
-  new OptimizeCssAssetsPlugin({
-    cssProcessorOptions: {
-      safe: true,
-      discardComments: {
-        removeAll: true
-      }
-    }
-  }),
-  // NOTE: ModuleConcatenationPlugin doesn't work on linux alpine,
-  // I got an error trying to deploy this app to zeit's `now` when i use this plugin
-  // Maybe, I got this error because of certain memory limit in `now` instance
-  new webpack.optimize.ModuleConcatenationPlugin(),
-  new ShakePlugin(),
-  // NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
-  // new BabiliPlugin(),
-  new UglifyJSPlugin({
-    sourceMap: true,
-    compress: {
-      warnings: false,
-      drop_console: true
-    },
-    output: {
-      comments: false
-    }
-  }),
-  // NOTE: Prepack is currently in alpha, be carefull with it
-  // new PrepackWebpackPlugin(),
-  // extract vendor chunks
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: module => {
-      // this assumes your vendor imports exist in the node_modules directory
-      return module.context && module.context.indexOf('node_modules') !== -1
-    }
-  }),
-  // extract lazy containers chunk
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'lazy-containers',
-    chunks: ['lazy-containers'],
-    async: true
-  }),
-  // manifest chunk, more info in webpack docs
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest'
-  }),
-  new webpack.BannerPlugin({
-    banner: config.banner
-  }),
-  // NOTE: this plugin looks cool, but there are few big issues:
-  // 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
-  // E.g: in generated index.html you can see:
-  // <meta name="msapplication-config" content="browserconfig.xml">
-  // 2. It looks like generated images aren't minified.(not sure)
-  // 3. plugin is deprecated (at least look like it's deprecated)!
-  // NOTE: It would be better to generate favicons without this plugin.
-  new FaviconsWebpackPlugin({
-    // add theme-color property
-    background: config.manifest.theme,
-    prefix: `favicons/`,
-    logo: path.resolve(config.rootPath, './static/images/logo.png'),
-    title: config.title,
-    // Inject the html into the html-webpack-plugin
-    inject: true,
-    // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
-    icons: {
-      android: true,
-      appleIcon: true,
-      appleStartup: true,
-      coast: false,
-      favicons: true,
-      firefox: true,
-      opengraph: false,
-      twitter: true,
-      yandex: false,
-      windows: true
-    }
-  }),
-  //
-  // create manifest.json
-  new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
-  // generate <link rel="preload"> tags for async chunks
-  new PreloadWebpackPlugin({
-    rel: 'preload',
-    as: 'script',
-    include: 'asyncChunks'
-  }),
-  // https://caniuse.com/#feat=subresource-integrity
-  // NOTE: please, read about SRI before using it!
-  new SriPlugin({
-    hashFuncNames: ['sha256', 'sha384'],
-    enabled: true
-  }),
-  new CompressionPlugin({
-    algorithm: 'gzip'
-  }),
-  new I18nPlugin(languages[languageName], {functionName: 'i18n'}),
-  new HtmlWebpackPlugin({
-    title: config.title,
-    language: languageName,
-    theme_color: config.manifest.theme_color,
-    // minify: true,
-    template: path.resolve(config.srcCommonPath, 'index.ejs'),
-    filename: path.resolve(base.output.path, 'index.html'),
-    chunksSortMode: 'dependency'
-  }),
-  new OfflinePlugin({
-    AppCache: false
-  })
+	new ProgressPlugin(),
+	new ExtractTextPlugin({
+		filename: '[name].[chunkhash:8].css',
+		allChunks: true
+	}),
+	new OptimizeCssAssetsPlugin({
+		cssProcessorOptions: {
+			safe: true,
+			discardComments: {
+				removeAll: true
+			}
+		}
+	}),
+	new webpack.optimize.ModuleConcatenationPlugin(),
+	new ShakePlugin(),
+	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
+	// new BabiliPlugin(),
+	new UglifyJSPlugin({
+		sourceMap: true,
+		compress: {
+			warnings: false,
+			drop_console: true
+		},
+		output: {
+			comments: false
+		}
+	}),
+	// NOTE: Prepack is currently in alpha, be carefull with it
+	// new PrepackWebpackPlugin(),
+	// extract vendor chunks
+	new webpack.optimize.CommonsChunkPlugin({
+		name: 'vendor',
+		minChunks: module => {
+			// this assumes your vendor imports exist in the node_modules directory
+			return module.context && module.context.indexOf('node_modules') !== -1
+		}
+	}),
+	// extract lazy containers chunk
+	new webpack.optimize.CommonsChunkPlugin({
+		name: 'lazy-containers',
+		chunks: ['lazy-containers'],
+		async: true
+	}),
+	// manifest chunk, more info in webpack docs
+	new webpack.optimize.CommonsChunkPlugin({
+		name: 'manifest'
+	}),
+	new webpack.BannerPlugin({
+		banner: config.banner
+	}),
+	// NOTE: this plugin looks cool, but there are few big issues:
+	// 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
+	// E.g: in generated index.html you can see:
+	// <meta name="msapplication-config" content="browserconfig.xml">
+	// 2. It looks like generated images aren't minified.(not sure)
+	// 3. plugin is deprecated (at least look like it's deprecated)!
+	// NOTE: It would be better to generate favicons without this plugin.
+	new FaviconsWebpackPlugin({
+		// add theme-color property
+		background: config.manifest.theme,
+		prefix: `favicons/`,
+		logo: path.resolve(config.rootPath, './static/images/logo.png'),
+		title: config.title,
+		// Inject the html into the html-webpack-plugin
+		inject: true,
+		// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+		icons: {
+			android: true,
+			appleIcon: true,
+			appleStartup: true,
+			coast: false,
+			favicons: true,
+			firefox: true,
+			opengraph: false,
+			twitter: true,
+			yandex: false,
+			windows: true
+		}
+	}),
+	//
+	// create manifest.json
+	new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
+	// generate <link rel="preload"> tags for async chunks
+	new PreloadWebpackPlugin({
+		rel: 'preload',
+		as: 'script',
+		include: 'asyncChunks'
+	}),
+	// https://caniuse.com/#feat=subresource-integrity
+	// NOTE: please, read about SRI before using it!
+	new SriPlugin({
+		hashFuncNames: ['sha256', 'sha384'],
+		enabled: true
+	}),
+	new CompressionPlugin({
+		algorithm: 'gzip'
+	}),
+	new I18nPlugin(languages[languageName], {functionName: 'i18n'}),
+	new HtmlWebpackPlugin({
+		title: config.title,
+		language: languageName,
+		theme_color: config.manifest.theme_color,
+		// minify: true,
+		template: path.resolve(config.srcCommonPath, 'index.ejs'),
+		filename: path.resolve(base.output.path, 'index.html'),
+		chunksSortMode: 'dependency'
+	}),
+	new OfflinePlugin({
+		// responseStrategy: 'network-first',
+		// safeToUseOptionalCaches: false,
+		// caches: {
+		//   main: ['vendor.*.css', 'vendor.*.js']
+		// },
+		// excludes: ['.htaccess'],
+		AppCache: false
+	})
 )
 
 // minimize webpack output
 base.stats = {
-  colors: true,
-  // Add children information
-  children: false,
-  // Add chunk information (setting this to `false` allows for a less verbose output)
-  chunks: false,
-  // Add built modules information to chunk information
-  chunkModules: false,
-  chunkOrigins: false,
-  modules: false,
-  reasons: true,
-  errorDetails: true
+	colors: true,
+	// Add children information
+	children: false,
+	// Add chunk information (setting this to `false` allows for a less verbose output)
+	chunks: false,
+	// Add built modules information to chunk information
+	chunkModules: false,
+	chunkOrigins: false,
+	modules: false,
+	reasons: true,
+	errorDetails: true
 }
 
 // const build = Object.keys(languages).map(language => {

@@ -4,10 +4,8 @@
 	"main": "src/client/index.jsx",
 	"description": "React/Redux/Jest/Webpack/Semantic.UI boilerplate/example.",
 	"dependencies": {
-		"babel-core": "^6.25.0",
 		"body-parser": "^1.17.2",
 		"chalk": "^2.0.1",
-		"classnames": "^2.2.5",
 		"compression": "^1.7.0",
 		"cookie-parser": "^1.4.3",
 		"es6-promise": "^4.1.1",

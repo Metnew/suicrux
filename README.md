@@ -1,22 +1,25 @@
 # React-Semantic.UI-Starter
 
-## Out-of-box:
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
 
-## DEMO: [You can find it here](https://reatty.now.sh/auth)
+### Demo: [reatty.now.sh](https://reatty.now.sh/auth)
+<div>
+
 [![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=master)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
 [![Join the chat at https://gitter.im/react-semantic-ui-starter/Lobby](https://badges.gitter.im/react-semantic-ui-starter/Lobby.svg)](https://gitter.im/react-semantic-ui-starter/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![bitHound Code](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/code.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
 [![bitHound Overall Score](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/score.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
-[![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter)
-[![bitHound Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+<!-- [![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter) -->
+
+</div>
 
 ### What is it?
-Production-ready, performance-first, optimized, robust, **fullstack** **isomorphic** boilerplate/example with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
+**Fullstack** **isomorphic** boilerplate with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
 ### What's inside?
+
+[![bitHound Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
 
 #### Frontend:
 - **[React](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
@@ -35,7 +38,7 @@ Production-ready, performance-first, optimized, robust, **fullstack** **isomorph
     - **HMR**, devServer, hotMiddleware,
     - i18n support with **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**
     - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)** for your new awesome app.
+- **[Offline-plugin](https://github.com/NekR/offline-plugin)**, **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**,  **[webpack-manifest-plugin](https://github.com/danethurber/webpack-manifest-plugin)**, **[preload-webpack-plugin](https://github.com/GoogleChrome/preload-webpack-plugin)**, **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**, **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**, **[webpack-common-shake](https://github.com/indutny/webpack-common-shake)**.
 
 #### Server:
 - **[rapscallion](https://github.com/FormidableLabs/rapscallion)** - async server-side rendering.
@@ -44,7 +47,7 @@ Production-ready, performance-first, optimized, robust, **fullstack** **isomorph
 - **[cookie-parser](https://www.npmjs.com/package/cookie-parser)** - cookie parsing middleware.
 - **[body-parser](https://github.com/expressjs/body-parser)** - body parsing middleware
 - **[compression](https://github.com/expressjs/compression)** -  compression middleware (gzip).
-- **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~ for Auth!
+- **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~ for Auth.
 
 #### Other:
 - **[ESDoc](https://github.com/esdoc/esdoc)** - docs generator.
@@ -107,7 +110,7 @@ npm run start # run app. You need already built app for this!
 ```
 
 #### Deploy:
-If you use **[now](https://github.com/zeit/now)** - you will run out of memory on `npm run build`. I recommend you to disable some non-critical plugins (ModuleConcatenationPlugin, SriPlugin, FaviconsWebpackPlugin). [Demo that was deployed to "now"](https://reatty.now.sh/)
+If you use **[now](https://github.com/zeit/now)** on OSS(free) plan - you will run out of memory on `npm run build`. I recommend you to disable some non-critical plugins (ModuleConcatenationPlugin, SriPlugin, FaviconsWebpackPlugin). [Demo that was deployed to "now"](https://reatty.now.sh/)
 
 #### Test:
 
@@ -180,7 +183,7 @@ It uses [redux-mock-store.](https://github.com/Metnew/react-semantic.ui-starter/
 
 ### Also:
 
-> Have a question? Ask it. :wink:
+> Have a question? Ask! :wink:
 
 PRs, and issues are welcome :smiling_imp:
 

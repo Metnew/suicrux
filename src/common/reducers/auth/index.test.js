@@ -30,7 +30,7 @@ describe('AUTH REDUCER', () => {
       reducer(
         {
           ...initialState,
-          loggedIn: true,
+          isLoggedIn: true,
           token: 'iamnotatoken'
         },
         LOGOUT_AUTH_SUCCESS
@@ -38,14 +38,14 @@ describe('AUTH REDUCER', () => {
     ).toEqual({
       token: null,
       errors: {},
-      loggedIn: false
+      isLoggedIn: false
     })
   })
 
   it('should handle LOGIN_AUTH_FAIL', () => {
     expect(reducer(initialState, LOGIN_AUTH_FAIL)).toEqual({
       ...initialState,
-      loggedIn: false,
+      isLoggedIn: false,
       token: null,
       errors: {
         hmmThatsAnError: {
@@ -59,7 +59,7 @@ describe('AUTH REDUCER', () => {
     expect(reducer(initialState, LOGIN_AUTH_SUCCESS)).toEqual({
       ...initialState,
       token: 'iamnotatoken',
-      loggedIn: true
+      isLoggedIn: true
     })
   })
 })

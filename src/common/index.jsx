@@ -14,19 +14,19 @@ import {routes, history} from 'routing'
  * @return {Object} - configured store
  */
 export const configureStore = initialState => {
-  const thunkApplied = applyMiddleware(thunk)
-  const routerMiddlewareApplied = applyMiddleware(routerMiddleware(history))
-  let enhancers
+	const thunkApplied = applyMiddleware(thunk)
+	const routerMiddlewareApplied = applyMiddleware(routerMiddleware(history))
+	let enhancers
 
-  if (process.env.NODE_ENV === 'development') {
-    // FIXME: remove duplication
-    const {composeWithDevTools} = require('redux-devtools-extension')
-    enhancers = composeWithDevTools(thunkApplied, routerMiddlewareApplied)
-  } else {
-    enhancers = compose(thunkApplied, routerMiddlewareApplied)
-  }
+	if (process.env.NODE_ENV === 'development') {
+		// FIXME: remove duplication
+		const {composeWithDevTools} = require('redux-devtools-extension')
+		enhancers = composeWithDevTools(thunkApplied, routerMiddlewareApplied)
+	} else {
+		enhancers = compose(thunkApplied, routerMiddlewareApplied)
+	}
 
-  return createStore(rootReducer, initialState, enhancers)
+	return createStore(rootReducer, initialState, enhancers)
 }
 /* eslint-disable */
 export const configureRootComponent = ({store, SSR}) => {
