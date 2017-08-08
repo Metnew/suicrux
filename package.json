@@ -120,8 +120,7 @@
 		"why-did-you-update": "^0.0.8"
 	},
 	"optionalDependencies": {
-		"prepack-webpack-plugin": "^1.1.0",
-		"lqip-loader": "^0.1.2"
+		"prepack-webpack-plugin": "^1.1.0"
 	},
 	"scripts": {
 		"docs": "esdoc && serve ./esdoc",
