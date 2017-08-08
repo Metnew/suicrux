@@ -57,25 +57,31 @@ export default class SidebarComponent extends Component {
 
 			return (
 				<SidebarItem key={i} {...propsMenuItem} icon>
-					<Icon name={icon}/> {name}
+					<Icon name={icon} /> {name}
 				</SidebarItem>
 			)
 		})
+
+		// const logoImg = process.env.BROWSER
+		// 	? require('images/logo.png')
+		// 	: require('images/logo.png').preSrc
+		//
+		const logoImg = require('images/logo.png')
 
 		return (
 			<StyledSidebar {...sidebarProps}>
 				<SidebarLogoContainer href="https://github.com/Metnew/react-semantic.ui-starter">
 					<SidebarLogo
-						src={require('images/logo.png')}
+						src={logoImg}
 						alt="logo"
 						shape="circular"
 						centered
 					/>
 				</SidebarLogoContainer>
 				{routes}
-				<Spacer/>
+				<Spacer />
 				<SidebarLogoutItem onClick={logout}>
-					<Icon name="sign out"/>
+					<Icon name="sign out" />
 					Logout
 				</SidebarLogoutItem>
 			</StyledSidebar>
