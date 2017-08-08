@@ -2,7 +2,6 @@ import {Router} from 'express'
 import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
 // import {JWT_TOKEN} from 'common/api'
-// Import validator from 'validator'
 // {isLength, trim, isAlphanumeric, escape}
 const router = Router()
 

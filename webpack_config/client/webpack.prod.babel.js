@@ -30,7 +30,7 @@ const languageName = APP_LANGUAGE || 'en'
 
 exec(`rm -rf ${config.distPath}/client/${languageName}`)
 // NOTE: you can track versions with gitHash and store your build
-// in dist folder with path like: /dist/<gitHash>/{yourFilesHere}
+// in dist folder with path like: /dist/client/<gitHash>/<languageName>/{yourFilesHere}
 // const gitHash = git.short() //
 
 // use hash filename to support long-term caching
@@ -182,15 +182,17 @@ base.plugins.push(
 	new OfflinePlugin({
 		publicPath: '/',
 		caches: {
-			main: ['vendor.*.js', 'vendor.*.css', 'manifest.*.js', 'client.*.js']
+			main: ['vendor.*.js', 'vendor.*.css', 'manifest.*.js', 'client.*.js', 'assets/icons.*.*']
 		},
-		excludes: ['/', ''],
-		externals: ['/auth'],
-		rewrites: () => {
-			return ''
-		},
+		excludes: ['**/.*', '**/*.map'],
+		externals: [
+			'/',
+			'/auth',
+			'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin'
+		],
 		ServiceWorker: {
-			navigateFallbackURL: '/auth',
+			events: true,
+			navigateFallbackURL: '/auth?offline=true',
 			navigateFallbackForRedirects: false
 		},
 		AppCache: false
