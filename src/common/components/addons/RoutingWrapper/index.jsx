@@ -22,7 +22,6 @@ export default class RoutingWrapper extends Component {
     */
 	authCheck (path) {
 		const {store} = this.props
-		console.log(store.getState())
 		const {isLoggedIn} = store.getState().me.auth
 		const authPath = '/auth'
 		const allowedToVisitPath = [authPath]
