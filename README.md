@@ -16,6 +16,12 @@
 ### What is it?
 **Fullstack** **isomorphic** boilerplate with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
+### Quick intro
+
+##### [Why this starter use `react-semantic-ui`?](/docs/SUI.md)
+TL;DR: You're always free to use your own UI framework. The starter is "UI-framework-agnostic".    
+**[UI framework comparison here.](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651)**
+
 ### What's inside?
 
 [![bitHound Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
@@ -120,16 +126,51 @@ Powered by ESDoc.
 npm run docs # generate docs and `serve`
 ```
 
+#### ENV vars:
+ENV vars are **very important** for configuration.
+
+#### Client ENV vars:
+`GA_ID`: Your Google analytics ID.      
+`BASE_API`: `/api/v1` by default. App uses this path for requests with relative urls      
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.     
+`APP_LANGUAGE`: `en` by default. Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.      
+`ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.     
+
+#### Server ENV vars:
+`PORT`: Port on which your app run.      
+`JWT_SECRET`: JWT_SECRET :smile:     
+`BASE_API`: App uses this path for requests with relative urls    
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN     
+`SENTRY_DSN`: Your Sentry full(private) DSN for server.    
+`APP_LANGUAGE`: Language of your app.     
+`DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.    
+ 
+
+#### How it works?
+
+##### **[Most commonly asked questions are here.](/docs/faq.md)**
+
+Some guides are already finished, some aren't. I update branch very often, so improved docs and explanations will be very soon.
+
+##### ~~[Webpack configuration (not finished)](/docs/webpack.md)~~
+##### [How i18n works?](/docs/i18n.md)
+##### [Testing.](/docs/testing.md)
+##### [Why this starter use `react-semantic-ui`?](/docs/SUI.md)
+##### ~~[How does SSR work? (not finished)](/docs/ssr.md)~~
+##### ~~[Environment variables and configuration. (not finished)](/docs/env_vars.md)~~
+##### ~~[Starter architecture and design. (not finished)](/docs/design.md)~~
+
+
 #### Nearest future:
 - SSR with HMR on client and server from one process. *(testing right now)*
 - Improved docs!
 
-
-### Also:
+### Something very important:
 
 > Have a question? Ask! :wink:
 
-PRs, and issues are welcome :smiling_imp:
+Any help is highly appreciated, because the project still has only one contributor (ha-ha, yeah it's me :smiling_imp:).   
+PRs, and issues are always welcome.
 
 ### Author
 Vladimir Metnew <vladimirmetnew@gmail.com>
