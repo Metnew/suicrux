@@ -1,37 +1,33 @@
-'use strict'
-const path = require('path')
-const fs = require('fs')
-const webpack = require('webpack')
-const config = require('../config')
-const exec = require('child_process').execSync
+import path from 'path'
+import fs from 'fs'
+import webpack from 'webpack'
+import config from '../config'
+import isomorphicWebpackConfig from '../webpack.isomorphic'
+import child_process from 'child_process'
+import _ from 'lodash'
+import I18nPlugin from 'i18n-webpack-plugin'
 
-exec(`rm -rf ${config.distPath}/server`)
-
+const exec = child_process.execSync
 const {
 	BASE_API,
 	SENTRY_DSN,
-	SENTRY_PUBLIC_DSN,
 	NODE_ENV,
 	DIST_PATH,
 	APP_LANGUAGE,
 	JWT_SECRET,
+	ANALYZE_BUNDLE,
 	PORT
-} = process.env
+} = config
 
-const language = APP_LANGUAGE || 'en'
+// Cleare dist dir before run
+exec(`rm -rf ${config.distPath}/server/${APP_LANGUAGE}`)
 
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
-	'process.env.PORT': JSON.stringify(PORT || 4000),
-	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET || 'secret'),
-	'process.env.APP_LANGUAGE': JSON.stringify(language),
-	'process.env.NODE_ENV': JSON.stringify(NODE_ENV || 'development'),
-	'process.env.BASE_API': JSON.stringify(BASE_API || '/api/v1'),
-	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
+	'process.env.PORT': JSON.stringify(PORT),
+	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET),
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
-	'process.env.DIST_PATH': JSON.stringify(
-		DIST_PATH || path.join(config.distPath, './client', language)
-	)
+	'process.env.DIST_PATH': JSON.stringify(DIST_PATH)
 }
 
 let nodeModules = {}
@@ -44,11 +40,11 @@ fs
 		nodeModules[mod] = 'commonjs ' + mod
 	})
 
-module.exports = {
+const baseWebpackConfig = {
 	entry: [path.join(config.srcPath, './server/index')],
 	target: 'node',
 	output: {
-		path: path.join(config.distPath, './server'),
+		path: path.join(config.distPath, './server', APP_LANGUAGE),
 		filename: 'index.js'
 	},
 	externals: nodeModules,
@@ -56,34 +52,12 @@ module.exports = {
 		hints: false
 	},
 	resolve: {
-		extensions: ['.js', '.jsx'],
-		alias: config.alias,
-		modules: [
-			// places where to search for required modules
-			config.srcPath,
-			path.join(config.rootPath, './node_modules')
-		]
+		extensions: isomorphicWebpackConfig.resolve.extensions,
+		modules: isomorphicWebpackConfig.resolve.modules,
+		alias: isomorphicWebpackConfig.resolve.alias
 	},
 	module: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				enforce: 'pre',
-				use: [
-					{
-						loader: 'eslint-loader',
-						options: {
-							fix: true
-						}
-					}
-				],
-				exclude: [/node_modules/]
-			},
-			{
-				test: /\.(js|jsx)$/,
-				use: 'babel-loader',
-				exclude: [/node_modules/]
-			},
+		rules: isomorphicWebpackConfig.module.rules.concat([
 			// NOTE: LQIP loader doesn't work with file-loader and url-loader :(
 			// `npm i --save-dev lqip-loader`
 			// {
@@ -112,17 +86,19 @@ module.exports = {
 					'img-loader'
 				]
 			}
-		]
+		])
 	},
-	plugins: [
-		new webpack.DefinePlugin(definePluginArgs),
-		new webpack.NamedModulesPlugin(),
-		new webpack.BannerPlugin({
-			banner: config.banner
-		})
-	],
+	plugins: isomorphicWebpackConfig.plugins.concat([
+		new webpack.NormalModuleReplacementPlugin(
+			/\.(css|sass|less|scss)$/,
+			'node-noop'
+		),
+		new webpack.DefinePlugin(definePluginArgs)
+	]),
 	node: {
 		__dirname: true,
 		global: true
 	}
 }
+
+export default baseWebpackConfig

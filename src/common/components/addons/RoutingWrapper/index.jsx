@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Switch, Redirect} from 'react-router-dom'
-import {LazyLoad} from 'components/addons'
+import LazyLoad from 'components/addons/LazyLoad'
 
 /**
  * Returns application routing with protected by AuthCheck func routes

@@ -1,12 +1,10 @@
-'use strict'
-process.env.NODE_ENV = 'development'
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const baseWebpackConfig = require('./webpack.base')
-const FriendlyErrors = require('friendly-errors-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
-const config = require('../config')
+import path from 'path'
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import baseWebpackConfig from './webpack.base'
+import FriendlyErrors from 'friendly-errors-webpack-plugin'
+import config from '../config'
+import _ from 'lodash'
 
 const loaders = {
 	style: {loader: 'style-loader'},
@@ -44,13 +42,11 @@ baseWebpackConfig.plugins.push(
 	// add index.html
 	new HtmlWebpackPlugin({
 		title: config.title,
-		template: path.resolve(config.srcCommonPath, 'index.ejs')
+		template: path.resolve(config.rootPath, 'webpack_config', 'assets', 'index.ejs')
 	}),
-	// create manifest.json
-	new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
 	new webpack.HotModuleReplacementPlugin(),
 	new webpack.NoEmitOnErrorsPlugin(),
 	new FriendlyErrors()
 )
 
-module.exports = baseWebpackConfig
+export default baseWebpackConfig
