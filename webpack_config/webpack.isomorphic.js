@@ -2,6 +2,7 @@ import path from 'path'
 import config from './config'
 import webpack from 'webpack'
 import I18nPlugin from 'i18n-webpack-plugin'
+import CircularDependencyPlugin from 'circular-dependency-plugin'
 
 const {
 	srcPath,
@@ -74,6 +75,12 @@ export default {
 		new webpack.NamedModulesPlugin(),
 		new webpack.BannerPlugin({
 			banner: config.banner
+		}),
+		new CircularDependencyPlugin({
+			// exclude detection of files based on a RegExp
+			exclude: /node_modules/
+			// add errors to webpack instead of warnings
+			// failOnError: true
 		}),
 		new I18nPlugin(languageTranslation, {functionName: 'i18n'}),
 		new webpack.DefinePlugin(definePluginArgs)
