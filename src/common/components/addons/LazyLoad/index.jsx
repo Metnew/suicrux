@@ -9,7 +9,7 @@ import {Loader} from 'semantic-ui-react'
 class LazyLoad extends Component {
 	static propTypes = {
 		component: PropTypes.any
-		// NOTE: @Metnew: it'd be nice to make it works with children props!  
+		// NOTE: @Metnew: it'd be nice to make it works with children props!
 		//  children: PropTypes.node
 	}
 
