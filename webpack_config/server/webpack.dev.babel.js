@@ -1,16 +1,14 @@
-'use strict'
-const path = require('path')
-// const fs = require('fs')
-const webpack = require('webpack')
-// const _ = require('lodash')
-const config = require('../config')
-const baseWebpackConfig = require('./webpack.base')
-const WebpackShellPlugin = require('webpack-shell-plugin')
-const FriendlyErrors = require('friendly-errors-webpack-plugin')
+import path from 'path'
+import webpack from 'webpack'
+// import _ from 'lodash'
+import config from '../config'
+import baseWebpackConfig from './webpack.base'
+import WebpackShellPlugin from 'webpack-shell-plugin'
+import FriendlyErrors from 'friendly-errors-webpack-plugin'
 
 const plugins = [
 	new WebpackShellPlugin({
-		onBuildEnd: [`nodemon ${path.join(config.distPath, '/server')}`]
+		onBuildEnd: [`nodemon ${path.join(config.distPath, '/server', config.APP_LANGUAGE)}`]
 	}),
 	// new webpack.HotModuleReplacementPlugin(),
 	new webpack.NoEmitOnErrorsPlugin(),
@@ -24,4 +22,4 @@ const build = Object.assign({}, baseWebpackConfig, {
 	plugins: baseWebpackConfig.plugins.concat(plugins)
 })
 
-module.exports = build
+export default build

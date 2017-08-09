@@ -1,8 +1,7 @@
-'use strict'
-const chalk = require('chalk')
+import chalk from 'chalk'
 
-// this plugin if for loggin url after each time the compilation is done.
-module.exports = class LogPlugin {
+// this plugin logs message after every compilation
+export default class LogPlugin {
 	constructor (port) {
 		this.port = port
 	}

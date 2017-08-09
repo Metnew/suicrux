@@ -1,8 +1,11 @@
-'use strict'
-const webpack = require('webpack')
-const baseWebpackConfig = require('./webpack.base')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-const ShakePlugin = require('webpack-common-shake').Plugin
+import path from 'path'
+import webpack from 'webpack'
+// import _ from 'lodash'
+import baseWebpackConfig from './webpack.base'
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
+import {Plugin as ShakePlugin} from 'webpack-common-shake'
+//
+const {ANALYZE_BUNDLE} = process.env
 
 const plugins = [
 	new webpack.ProgressPlugin(),
@@ -23,7 +26,14 @@ const plugins = [
 	})
 ]
 
-module.exports = Object.assign({}, baseWebpackConfig, {
+// Do you want to use bundle analyzer?
+if (ANALYZE_BUNDLE) {
+	baseWebpackConfig.plugins.push(
+		new BundleAnalyzerPlugin({analyzerMode: 'static'})
+	)
+}
+
+export default Object.assign({}, baseWebpackConfig, {
 	devtool: 'cheap-source-map',
 	plugins: baseWebpackConfig.plugins.concat(plugins)
 })

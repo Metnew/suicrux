@@ -1,16 +1,17 @@
 'use strict'
-const path = require('path')
-const express = require('express')
-const httpProxy = require('http-proxy')
-const webpack = require('webpack')
-const webpackConfig = require('./client/webpack.dev.babel')
-const config = require('./config')
-const LogPlugin = require('./log-plugin')
-const open = require('open')
+import path from 'path'
+import express from 'express'
+import httpProxy from 'http-proxy'
+import webpack from 'webpack'
+import webpackConfig from './client/webpack.dev.babel'
+import config from './config'
+import LogPlugin from './log-plugin'
+import open from 'open'
 
 const apiProxy = httpProxy.createProxyServer()
 const app = express()
-const {port} = config
+const port = 3000
+
 webpackConfig.entry.client = [
 	'react-hot-loader/patch',
 	'webpack-hot-middleware/client?reload=true',
@@ -18,7 +19,6 @@ webpackConfig.entry.client = [
 ]
 
 webpackConfig.plugins.push(new LogPlugin(port))
-process.env.BASE_API = process.env.BASE_API || '/api/v1'
 
 let compiler
 
@@ -62,7 +62,7 @@ app.get('*', (req, res) => {
 })
 
 // Proxy api requests to BASE_API
-app.use(process.env.BASE_API, function (req, res) {
+app.use(config.BASE_API, function (req, res) {
 	/**
    * // req.baseUrl - The URL path on which a router instance was mounted.
    * {@link https://expressjs.com/ru/4x/api.html#req.baseUrl}
