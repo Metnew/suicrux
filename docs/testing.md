@@ -2,12 +2,14 @@
 
 ## Jest
 
-Starter uses Jest for testing.
+The boilerplate uses Jest for testing.
 You can find more about Jest in [official docs](https://facebook.github.io/jest/).
 
 You can run tests using `npm run test` that is an alias to `jest --config=jest_config/jest.config.json --coverage --forceExit || true"`.
 
-Our Jest configuration in `jest_config/jest.config.json` looks like:
+### Configuring Jest
+
+Jest configuration in `jest_config/jest.config.json` looks like:
 ```json
 {
   "moduleFileExtensions": ["js", "jsx"],
@@ -36,8 +38,7 @@ Our Jest configuration in `jest_config/jest.config.json` looks like:
   }
 }
 ```
-Jest doesn't know about webpack aliases, so we have to provide them.
-
+Jest doesn't know about webpack aliases, so we have to provide them.   
 Then we have to provide additional configuration for Jest using `setupFiles` property in Jest config object.
 
 `jest_config/setupJest.js`
@@ -48,7 +49,7 @@ global.fetch = require('node-fetch')
 process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
 ```
 
-That's all. Jest is configured for using.
+That's all. Jest is ready.
 
 ## How to test React components?
 

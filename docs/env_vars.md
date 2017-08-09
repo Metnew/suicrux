@@ -2,7 +2,8 @@
 
 > if you don't know what is environment variables - [this link is for you](https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps)
 
-Environment variables are very important for configuration.
+Environment variables are very important for configuration. Some variables are used for webpack configuration, other variables are used in code (using `webpack.DefinePlugin`).
+
 ## Frontend
 
 #### `GA_ID (default:false)`:
@@ -29,19 +30,38 @@ if (process.env.GA_ID) {
 }
 ```
 ##### Why not to add GA in index.html?
-Because, if GA is added only after `DOMContentLoaded`, it saves page loading time.
+Because, it saves loading time.
 
 #### `SENTRY_PUBLIC_DSN (default: false)`:
 Similar to `GA_ID`, but for [Sentry](https://sentry.io).
 
 #### `BASE_API (default: '/api/v1')`:
-App uses this path for requests with relative urls
+This is the prefix of your server API. This prefix is used by both client and server.    
+Server inits API based on this prefix in `src/server/server.js`:
+```js
+// ...
+const {BASE_API, PORT} = process.env
+// Add API route
+app.use(BASE_API, API)
+// ...
+```
+
+Client makes all requests to server using this prefix:
+```js
+// ...
+// Check that req url is relative and request was sent to our domain
+if (url.match(/^https?:\/\//gi) > -1) {
+  const token = getLocalToken()
+  if (token) {
+    defaults.headers.Authorization = `JWT ${token}`
+  }
+  url = process.env.BASE_API + url
+}
+// ...
+```
 
 #### `APP_LANGUAGE (default: 'en')`:
-Build app with this language. Check `/i18n` folder and **[i18n-webpack-plugin](https://github.com/webpack-contrib/i18n-webpack-plugin)**.  
-
-#### `ANALYZE_BUNDLE (default: false)`:   
-Run [webpack-bundle-analyzer]() after build.    
+Variable is used by webpack for build configuration, but you still have access to it in code. It might be useful to know app language for simple localization or other tasks.
 
 ## Server:
 
