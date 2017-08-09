@@ -89,6 +89,10 @@ const baseWebpackConfig = {
 		])
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
+		new webpack.NormalModuleReplacementPlugin(
+			/\.(css|sass|less|scss)$/,
+			'node-noop'
+		),
 		new webpack.DefinePlugin(definePluginArgs)
 	]),
 	node: {
