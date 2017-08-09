@@ -16,6 +16,7 @@
 		"lodash": "^4.17.4",
 		"morgan": "^1.8.2",
 		"node-fetch": "^1.7.1",
+		"node-noop": "^1.0.0",
 		"normalizr": "^3.2.3",
 		"offline-plugin": "^4.8.3",
 		"promise-polyfill": "6.0.2",
