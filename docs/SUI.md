@@ -21,12 +21,13 @@ When you use SUIR you import all SUI styles. So you can use the power of SUI tha
 There are few issues using SUIR:
 
 ##### 1. SUIR use css styles:
-SUIR is build based on [`classnames`](https://github.com/JedWatson/classnames) and CSS styles from SUI. According to the [issues and proposals](https://github.com/Semantic-Org/Semantic-UI-React/issues/1009) in SUIR repo, SUIR will migrate to inline-styles library like `radium`, `styled-components`, `glamour`.
+SUIR is build based on [`classnames`](https://github.com/JedWatson/classnames) and CSS styles from SUI. According to the latest [issues and proposals](https://github.com/Semantic-Org/Semantic-UI-React/issues/1009) in SUIR repo, SUIR will migrate to inline-styles library like `radium`, `styled-components`, `glamour`.
 
 The main problems of using SUI CSS styles:
   1. SSR can't render all the things.
   2. Import of unused styles. Using library like `styled-components` we import only styles that are used.
   > You can try to use PurifyCss to remove unused css. But probably it doesn't help, because PurifyCss determinate unused styles based only on static markup.
+  
   3. SUI styles are huge and blocks rendering.
   <img src="./assets/sui-block.png" />
   > There is a trick for this: you can split SUI styles into 2 smaller chunks that would be downloaded faster, if you use HTTP2.

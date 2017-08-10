@@ -155,7 +155,7 @@ Some guides are already finished, some aren't. I update branch very often, so im
 ##### ~~[Webpack configuration (not finished)](/docs/webpack.md)~~
 ##### [How i18n works?](/docs/i18n.md)
 ##### [Testing.](/docs/testing.md)
-##### [Why this starter use `react-semantic-ui`?](/docs/SUI.md)
+##### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
 ##### ~~[How does SSR work? (not finished)](/docs/ssr.md)~~
 ##### ~~[Environment variables and configuration. (not finished)](/docs/env_vars.md)~~
 ##### ~~[Starter architecture and design. (not finished)](/docs/design.md)~~
