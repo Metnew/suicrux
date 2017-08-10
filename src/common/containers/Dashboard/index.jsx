@@ -30,9 +30,9 @@ class Dashboard extends Component {
 				</Helmet>
 				{postsLoaded
 					? // Is postsLoaded => component, else Loader
-			<DashboardComponent
-				{...{posts, postsLoaded, postsLoading, count}}
-			/>
+						<DashboardComponent
+							{...{posts, postsLoaded, postsLoading, count}}
+						/>
 					: <Loader active>Loading...</Loader>}
 			</div>
 		)
