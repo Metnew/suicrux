@@ -51,7 +51,6 @@ base.stats = {
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
-base.output.path = path.join(base.output.path, APP_LANGUAGE)
 base.output.crossOriginLoading = 'anonymous'
 
 base.module.rules.push({
@@ -177,6 +176,7 @@ base.plugins.push(
 	}),
 	new OfflinePlugin({
 		publicPath: '/',
+		safeToUseOptionalCaches: true,
 		caches: {
 			main: [
 				'vendor.*.js',
