@@ -5,38 +5,38 @@ import {Loader} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 //
 import DashboardComponent from './components'
-import {GET_POSTS} from 'actions'
+import {GET_POSTS} from 'actions/posts'
 
 class Dashboard extends Component {
-		static propTypes = {
-			posts: PropTypes.object,
-			postsLoaded: PropTypes.bool,
-			postsLoading: PropTypes.bool,
-			count: PropTypes.number,
-			getPosts: PropTypes.func.isRequired
-		}
+	static propTypes = {
+		posts: PropTypes.object,
+		postsLoaded: PropTypes.bool,
+		postsLoading: PropTypes.bool,
+		count: PropTypes.number,
+		getPosts: PropTypes.func.isRequired
+	}
 
-		componentWillMount () {
-			this.props.getPosts()
-		}
+	componentWillMount () {
+		this.props.getPosts()
+	}
 
-		render () {
-			const {posts, postsLoaded, postsLoading, count} = this.props
+	render () {
+		const {posts, postsLoaded, postsLoading, count} = this.props
 
-			return (
-				<div>
-					<Helmet>
-						<title>Dashboard</title>
-					</Helmet>
-					{postsLoaded
-						// Is postsLoaded => component, else Loader
-						? <DashboardComponent
-							{...{posts, postsLoaded, postsLoading, count}}
-						/>
-						: <Loader active>Loading...</Loader>}
-				</div>
-			)
-		}
+		return (
+			<div>
+				<Helmet>
+					<title>Dashboard</title>
+				</Helmet>
+				{postsLoaded
+					? // Is postsLoaded => component, else Loader
+			<DashboardComponent
+				{...{posts, postsLoaded, postsLoading, count}}
+			/>
+					: <Loader active>Loading...</Loader>}
+			</div>
+		)
+	}
 }
 
 function mapStateToProps (state) {
