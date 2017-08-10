@@ -67,7 +67,7 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 # clone repo without full git history
 git clone --depth=1 https://github.com/Metnew/react-semantic.ui-starter.git
 cd react-semantic.ui-starter
-# You can remove .git folder, if you don't want to pull new features or need your own repo
+# You can remove .git folder if you don't want to pull new features or need your own repo
 # to remove folder run: rm -rf .git
 # install dependencies
 npm install
@@ -139,9 +139,9 @@ ENV vars are **very important** for configuration.
 #### Server ENV vars:
 `PORT`: Port on which your app run.      
 `JWT_SECRET`: JWT_SECRET :smile:     
-`BASE_API`: App uses this path for requests with relative urls    
-`SENTRY_PUBLIC_DSN`: Your Sentry public DSN     
-`SENTRY_DSN`: Your Sentry full(private) DSN for server.    
+`BASE_API`: App uses this path for requests with relative urls.    
+`SENTRY_PUBLIC_DSN`: Your Sentry public DSN.      
+`SENTRY_DSN`: Your Sentry full(private) DSN for server-side error handling.    
 `APP_LANGUAGE`: Language of your app.     
 `DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.    
 
@@ -169,8 +169,8 @@ Some guides are already finished, some aren't. I update branch very often, so im
 
 > Have a question? Ask! :wink:
 
-Any help is highly appreciated, because the project still has only one contributor (ha-ha, yeah it's me :smiling_imp:).   
-PRs, and issues are always welcome.
+Any help is highly appreciated because the project still has only one contributor (ha-ha, yeah it's me :smiling_imp:).   
+PRs and issues are always welcome.
 
 ### Author
 Vladimir Metnew <vladimirmetnew@gmail.com>
