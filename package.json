@@ -133,7 +133,7 @@
 		"test": "jest --config=jest_config/jest.config.json --coverage --forceExit || true",
 		"frontend_dev": "babel-node webpack_config/server.js",
 		"frontend_build": "NODE_ENV=production webpack --config webpack_config/client/webpack.prod.babel.js",
-		"start": "node ./dist/server",
+		"start": "node ./dist/server/${APP_LANGUAGE:=en}",
 		"precommit": "echo \"$(tput bold)$(tput setaf 5) It'd be better to run tests before commit. $(tput sgr 0)\"t",
 		"prepush": "echo \"$(tput bold)$(tput setaf 5) I hope you tested app. $(tput sgr 0)\"",
 		"lint:styles": "stylelint ./src/common/**/*.scss -s scss --config ./.stylelintrc --fix",
