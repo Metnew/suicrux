@@ -13,12 +13,12 @@
 
 </div>
 
-### What is it?
+### What is this?
 **Fullstack** **isomorphic** boilerplate with **server-side rendering** and **lazy-loading** for your **new Progressive Web App**.
 
 ### Quick intro
 
-##### [Why this starter use `react-semantic-ui`?](/docs/SUI.md)
+##### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
 TL;DR: You're always free to use your own UI framework. The starter is "UI-framework-agnostic".    
 **[UI framework comparison here.](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651)**
 
@@ -144,7 +144,7 @@ ENV vars are **very important** for configuration.
 `SENTRY_DSN`: Your Sentry full(private) DSN for server.    
 `APP_LANGUAGE`: Language of your app.     
 `DIST_PATH`: (by default: `/dist/client/<APP_LANGUAGE>`). Path where server search for the index.html of your **built** app.    
- 
+
 
 #### How it works?
 
