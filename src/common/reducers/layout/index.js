@@ -22,16 +22,7 @@ export function layout (state = initialState, action) {
 		return {isMobileSM, isMobileXS, isMobile}
 	}
 	switch (action.type) {
-	// FIXME: remove this duplication
-	case APPLICATION_INIT: {
-		const {isMobile, isMobileSM, isMobileXS} = computeMobileStatuses()
-		return {
-			...state,
-			isMobile,
-			isMobileSM,
-			isMobileXS
-		}
-	}
+	case APPLICATION_INIT:
 	case UI_WINDOW_RESIZE: {
 		const {isMobile, isMobileSM, isMobileXS} = computeMobileStatuses()
 		return {
@@ -46,17 +37,12 @@ export function layout (state = initialState, action) {
 			...state,
 			sidebarOpened: true
 		}
+	case LOCATION_CHANGE:
 	case UI_CLOSE_SIDEBAR:
 		return {
 			...state,
 			sidebarOpened: false
 		}
-	case LOCATION_CHANGE: {
-		return {
-			...state,
-			sidebarOpened: false
-		}
-	}
 	default:
 		return state
 	}
