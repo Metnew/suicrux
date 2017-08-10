@@ -36,9 +36,6 @@ The main problems of using SUI CSS styles:
 #### 2. Lodash is a dependency of SUIR:
 Lodash is great, but probably it isn't always needed in small projects. But almost every middle/big size project uses Lodash, so it's just a note.
 
-#### 3. Specific components:
-Components like `<Calendar />` and `<Datepicker />` are always very useful. [But they'll appear soon.](https://github.com/Semantic-Org/Semantic-UI-React/pull/1240) That's probably not an issue at all because SUIR already has many components and you can use other libraries for specific tasks. For example, [`react-dates`](https://github.com/airbnb/react-dates) for full-featured Calendar component.
-
 ### Summary
 SUIR is great, but it still lacks inline-styles. If this feature would be added soon then SUIR probably will be the best React framework.
 > Every contribution into [SUIR](https://react.semantic-ui.com/introduction) is highly appreciated :)
