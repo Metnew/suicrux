@@ -3,11 +3,14 @@ import {connect} from 'react-redux'
 import {withRouter, matchPath} from 'react-router'
 import PropTypes from 'prop-types'
 import {push} from 'react-router-redux'
+// Import main views
 import Sidebar from 'components/views/Sidebar'
 import Footer from 'components/views/Footer'
 import Header from 'components/views/Header'
+// Import actions
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
+// Import styled components
 import {
 	PageLayout,
 	MainLayout,
