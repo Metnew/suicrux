@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Loader} from 'semantic-ui-react'
-
+import _ from 'lodash'
 /**
  * @desc small addon that allows you to lazy load some parts of your app
  * Primarly routes (e.g. Route + RouteAuth)
@@ -41,8 +41,9 @@ class LazyLoad extends Component {
 		)
 
 		if (componentLoaded) {
+			const props = _.omit(this.props, ['component'])
 			const LoadedComponent = this.state.componentToRender
-			return <LoadedComponent />
+			return <LoadedComponent {...props} />
 		} else {
 			return <Loader>Loading...</Loader>
 		}
