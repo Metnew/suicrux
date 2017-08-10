@@ -4,7 +4,7 @@
 
 import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
 
-function requestWrapper (method) {
+export default function requestWrapper (method) {
 	return async function (url, data = null, params = {}) {
 		if (method === 'GET') {
 			// It's a GET response
