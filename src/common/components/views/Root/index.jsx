@@ -40,7 +40,7 @@ export default class Root extends Component {
 			<Provider store={store} key={Math.random()}>
 				<ThemeProvider theme={theme}>
 					<Router {...routerProps} key={Math.random()}>
-						<App>
+						<App routes={routes}>
 							<RoutingWrapper store={store} routes={routes} />
 						</App>
 					</Router>
