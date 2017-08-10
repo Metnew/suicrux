@@ -9,9 +9,7 @@ import I18nPlugin from 'i18n-webpack-plugin'
 
 const exec = child_process.execSync
 const {
-	BASE_API,
 	SENTRY_DSN,
-	NODE_ENV,
 	DIST_PATH,
 	APP_LANGUAGE,
 	JWT_SECRET,
