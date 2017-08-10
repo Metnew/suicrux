@@ -8,7 +8,6 @@ import Footer from 'components/views/Footer'
 import Header from 'components/views/Header'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
-import {routes} from 'routing'
 import {
 	PageLayout,
 	MainLayout,
@@ -22,6 +21,8 @@ import {
 class App extends Component {
 	static propTypes = {
 		children: PropTypes.node.isRequired,
+		// Routes of app passed as props in `Root`
+		routes: PropTypes.array.isRequired,
 		// React-router `withRouter` props
 		location: PropTypes.object,
 		history: PropTypes.object,
@@ -118,7 +119,7 @@ class App extends Component {
    * @return {Array} array of routes that will be rendered in sidebar menu
    */
 	getSidebarRouting () {
-		const sidebarRouting = routes.filter(a => a.sidebarVisible).map(a => {
+		const sidebarRouting = this.props.routes.filter(a => a.sidebarVisible).map(a => {
 			const {path, name, icon, external, strict, exact} = a
 			const b = {path, name, icon, external, strict, exact}
 			return b
@@ -132,7 +133,7 @@ class App extends Component {
   * @return {String} page title
   */
 	getPageTitle (pathname) {
-		const matchedRoutes = routes.filter(a => matchPath(pathname, a))
+		const matchedRoutes = this.props.routes.filter(a => matchPath(pathname, a))
 		const currentRoute = matchedRoutes[0] || {}
 		const title = currentRoute.name || '404'
 		return title
