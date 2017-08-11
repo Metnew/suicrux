@@ -162,14 +162,14 @@ Some guides are already finished, some aren't. I update branch very often, so im
 
 
 #### Nearest future:
-- SSR with HMR on client and server from one process. *(testing right now)*
+- SSR with HMR on client and server from one process. *(next.js-like HMR)*
 - Improved docs!
 
 ### Something very important:
 
 > Have a question? Ask! :wink:
 
-Any help is highly appreciated because the project still has only one contributor (ha-ha, yeah it's me :smiling_imp:).   
+Any help is highly appreciated because the project still has only one maintainer (ha-ha, yeah it's me :smiling_imp:). 
 PRs and issues are always welcome.
 
 ### Author
