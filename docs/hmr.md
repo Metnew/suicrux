@@ -18,4 +18,4 @@ I'm working on [noir](https://github.com/Metnew/noir).
 As you know both server inside `src/server` and development server are powered by **Express**.
 Noir use webpack to create development server based on the instance of your(!) server.
 And that server can serve HMR client build + SSR + your API.
-But right now it doesn't work as expected, hope it will works soon.
+But right now it doesn't work as expected, hope it will work soon.
