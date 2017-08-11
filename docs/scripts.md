@@ -1,6 +1,6 @@
-# HMR
+# Development
 
-### How HMR currently works?
+### How `npm run dev` currently works?
 When you run `npm run dev` you run 2 commands using `concurrently`.
 The first command is `npm run frontend_dev` - run development server with webpack-dev-middleware/webpack-hot-middleware/express. This server serves your bundle + require react-hot-loader for HMR.
 The second command is `npm run server_dev` - compile your server-side code with webpack(with `watch` option) and then run compiled code with `nodemon`.

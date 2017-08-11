@@ -153,6 +153,7 @@ ENV vars are **very important** for configuration.
 Some guides are already finished, some aren't. I update branch very often, so improved docs and explanations will be very soon.
 
 ##### ~~[Webpack configuration (not finished)](/docs/webpack.md)~~
+##### [What's the magic behind `npm run dev`?](/docs/scripts.md)
 ##### [How i18n works?](/docs/i18n.md)
 ##### [Testing.](/docs/testing.md)
 ##### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
@@ -163,7 +164,10 @@ Some guides are already finished, some aren't. I update branch very often, so im
 
 #### Nearest future:
 - SSR with HMR on client and server from one process. *(testing right now)*
-- Improved docs!
+- Better docs
+- Semver
+- CLI app
+
 
 ### Something very important:
 
