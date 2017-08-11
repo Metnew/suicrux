@@ -175,7 +175,6 @@ base.plugins.push(
 		chunksSortMode: 'dependency'
 	}),
 	new OfflinePlugin({
-		publicPath: '/',
 		caches: {
 			main: [
 				'vendor.*.js',
@@ -188,7 +187,6 @@ base.plugins.push(
 			optional: [':rest:']
 		},
 		externals: [
-			'/',
 			'/auth',
 			'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin'
 		],
