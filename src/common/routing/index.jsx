@@ -7,12 +7,13 @@ export const history = getHistory()
 
 const loadLazyComponent = url => {
 	return async cb => {
-		const str = `containers/${url}/index.jsx`
+		// NOTE: there isn't any duplication here
+		// Read Webpack docs about code-splitting for more info.
 		if (process.env.BROWSER) {
-			const loadComponent = await import(/* webpackMode: "lazy-once", webpackChunkName: "lazy-containers" */ str)
+			const loadComponent = await import(/* webpackMode: "lazy-once", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
 			return loadComponent
 		}
-		const loadComponent = await import(/* webpackMode: "eager", webpackChunkName: "lazy-containers" */ str)
+		const loadComponent = await import(/* webpackMode: "eager", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
 		return loadComponent
 	}
 }
