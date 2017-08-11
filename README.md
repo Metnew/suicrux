@@ -1,5 +1,7 @@
 # React-Semantic.UI-Starter
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/react-semantic.ui-starter.svg)](https://greenkeeper.io/)
+
 ![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
 
 ### Demo: [reatty.now.sh](https://reatty.now.sh/auth)
