@@ -51,7 +51,6 @@ base.stats = {
 
 // use hash filename to support long-term caching
 base.output.filename = '[name].[chunkhash:8].js'
-base.output.path = path.join(base.output.path, APP_LANGUAGE)
 base.output.crossOriginLoading = 'anonymous'
 
 base.module.rules.push({
@@ -176,7 +175,6 @@ base.plugins.push(
 		chunksSortMode: 'dependency'
 	}),
 	new OfflinePlugin({
-		publicPath: '/',
 		caches: {
 			main: [
 				'vendor.*.js',
@@ -189,7 +187,6 @@ base.plugins.push(
 			optional: [':rest:']
 		},
 		externals: [
-			'/',
 			'/auth',
 			'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin'
 		],

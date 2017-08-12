@@ -6,7 +6,7 @@ import {Helmet} from 'react-helmet'
 import {Loader} from 'semantic-ui-react'
 //
 import UserItemComponent from './components'
-import {GET_USERS, GET_USERS_PENDING} from 'actions'
+import {GET_USERS, GET_USERS_PENDING} from 'actions/users'
 
 class UserItem extends Component {
 	static propTypes = {

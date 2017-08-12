@@ -54,7 +54,7 @@ That's all. Jest is ready.
 ## How to test React components?
 
 ### Snapshot testing
-What is shapshot testing? See the official Jest docs [about this](https://facebook.github.io/jest/docs/snapshot-testing.html) and take a look at simple example](https://facebook.github.io/jest/docs/en/tutorial-react.html#content).
+What is snapshot testing? See the official Jest docs [about this](https://facebook.github.io/jest/docs/snapshot-testing.html) and take a look at simple example](https://facebook.github.io/jest/docs/en/tutorial-react.html#content).
 
 
 ### DOM testing

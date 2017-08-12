@@ -1,5 +1,8 @@
 # Env vars
 
+## Guide isn't finished yet
+
+
 > if you don't know what is environment variables - [this link is for you](https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps)
 
 Environment variables are very important for configuration. Some variables are used for webpack configuration, other variables are used in code (using `webpack.DefinePlugin`).

@@ -12,7 +12,7 @@ export const del = requestWrapper('DELETE')
 // get('https://www.google.com', {
 //     Authorization: 'JWT LOL',
 //     headers: {
-//         'Content-Type': 'text/html'
+//         'Content-Type': 'text/cooltext'
 //     }
 // })
 

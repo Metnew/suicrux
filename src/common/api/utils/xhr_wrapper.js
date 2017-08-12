@@ -1,13 +1,13 @@
 // Request utils,
-// feel free to replace with your code
+// Feel free to replace with your code
 // (get, post are used in ApiServices)
 
-import {getLocalToken, resetLocalToken} from 'api'
+import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
 
 export default function requestWrapper (method) {
 	return async function (url, data = null, params = {}) {
 		if (method === 'GET') {
-			// Is it a GET?
+			// It's a GET response
 			// GET doesn't have data
 			params = data
 			data = null
@@ -27,12 +27,16 @@ export default function requestWrapper (method) {
 		}
 
 		// Check that req url is relative and request was sent to our domain
-		if (url.match(/^https?:\/\//gi) > -1) {
+		if (!/(http|https):\/\//.test(url)) {
+			console.log(`Request ${url} was sent to our domain`)
 			const token = getLocalToken()
 			if (token) {
 				defaults.headers.Authorization = `JWT ${token}`
 			}
 			url = process.env.BASE_API + url
+		} else {
+			console.log(`Request ${url} was sent to external domain`)
+			// Request was set to an external domain
 		}
 
 		if (data) {

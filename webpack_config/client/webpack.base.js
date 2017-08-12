@@ -37,7 +37,7 @@ const baseBuild = {
 	resolve: {
 		alias: isomorphicWebpackConfig.resolve.alias,
 		modules: isomorphicWebpackConfig.resolve.modules,
-		extensions: isomorphicWebpackConfig.resolve.extensions.concat(['.css', '.scss'])
+		extensions: isomorphicWebpackConfig.resolve.extensions.concat(['.css', '.scss', '.sass'])
 	},
 	module: {
 		rules: isomorphicWebpackConfig.module.rules.concat([
