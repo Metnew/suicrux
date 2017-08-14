@@ -3,11 +3,12 @@ import fs from 'fs'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import child_process from 'child_process'
+import childProcess from 'child_process'
 import _ from 'lodash'
+// import AutoDllPlugin from 'autodll-webpack-plugin'
 import I18nPlugin from 'i18n-webpack-plugin'
 
-const exec = child_process.execSync
+const exec = childProcess.execSync
 const {
 	SENTRY_DSN,
 	DIST_PATH,
@@ -39,11 +40,13 @@ fs
 	})
 
 const baseWebpackConfig = {
-	entry: [path.join(config.srcPath, './server/index')],
+	name: 'server',
+	entry: path.join(config.srcPath, './server'),
 	target: 'node',
 	output: {
 		path: path.join(config.distPath, './server', APP_LANGUAGE),
-		filename: 'index.js'
+		filename: 'server.js',
+		libraryTarget: 'commonjs2'
 	},
 	externals: nodeModules,
 	performance: {
@@ -92,6 +95,24 @@ const baseWebpackConfig = {
 			'node-noop'
 		),
 		new webpack.DefinePlugin(definePluginArgs)
+		new AutoDllPlugin({
+		// 	debug: true,
+		// 	context: config.rootPath,
+		// 	filename: 'server.js',
+		// 	entry: {
+		// 		vendor: config.vendor.concat([
+		// 			'express',
+		// 			'helmet',
+		// 			'cookie-parser',
+		// 			'body-parser',
+		// 			'jsonwebtoken',
+		// 			'morgan',
+		// 			'compression',
+		// 			'chalk'
+		// 		]),
+		// 		polyfills: config.polyfills
+		// 	}
+		// })
 	]),
 	node: {
 		__dirname: true,
