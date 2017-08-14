@@ -17,7 +17,7 @@ const plugins = [
 		sourceMap: true,
 		compress: {
 			warnings: false
-			// This option removes console log in production
+			// This option removes console.log in production
 			// drop_console: true
 		},
 		output: {
