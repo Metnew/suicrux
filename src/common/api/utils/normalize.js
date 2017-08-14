@@ -1,7 +1,7 @@
 import {normalize, schema} from 'normalizr'
 import _ from 'lodash'
 
-// NOTE: Normalization w/o normalizr may look like (very simple example): 
+// NOTE: Normalization w/o normalizr may look like (very simple example):
 // let normalizedData = {}
 // for (let i = 0; i < result.length; i++) {
 //   const post = result[i]
