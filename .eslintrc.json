@@ -1,7 +1,11 @@
 {
-	"extends": ["plugin:react/recommended", "standard"],
+	"extends": [
+		"plugin:react/recommended",
+		"plugin:jsx-a11y/recommended",
+		"standard"
+	],
 	"parser": "babel-eslint",
-	"plugins": ["react", "babel"],
+	"plugins": ["react", "babel", "jsx-a11y"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true,
@@ -15,7 +19,7 @@
 		"node": true
 	},
 	"rules": {
-		"no-unused-vars": 1,
+		"no-unused-vars": 0,
 		"no-tabs": 0,
 		"indent": [2, "tab"]
 	},
