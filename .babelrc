@@ -20,7 +20,25 @@
 		},
 		"development": {
 			"plugins": [
-				"react-hot-loader/babel"
+				"react-hot-loader/babel",
+				[
+					"babel-plugin-webpack-alias",
+					{
+						"config": "./webpack_config/client/webpack.base.js",
+						"findConfig": true
+					}
+				]
+			]
+		},
+		"test": {
+			"plugins": [
+				[
+					"babel-plugin-webpack-alias",
+					{
+						"config": "./webpack_config/webpack.isomorphic.js",
+						"findConfig": true
+					}
+				]
 			]
 		}
 	}
