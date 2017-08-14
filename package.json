@@ -58,7 +58,6 @@
 		"babel-preset-stage-0": "^6.24.1",
 		"babel-register": "6.24.1",
 		"babel-runtime": "^6.25.0",
-		"babili-webpack-plugin": "^0.1.2",
 		"circular-dependency-plugin": "^3.0.0",
 		"commitizen": "^2.9.6",
 		"compression-webpack-plugin": "^1.0.0",
@@ -79,10 +78,7 @@
 		"favicons-webpack-plugin": "0.0.7",
 		"file-loader": "^0.11.2",
 		"friendly-errors-webpack-plugin": "^1.6.1",
-		"git-rev-sync": "^1.9.1",
-		"glob": "^7.1.2",
 		"html-webpack-plugin": "^2.30.1",
-		"http-proxy": "^1.16.2",
 		"husky": "^0.14.3",
 		"i18n-webpack-plugin": "^1.0.0",
 		"img-loader": "^2.0.0",
@@ -98,8 +94,6 @@
 		"postcss-loader": "^2.0.6",
 		"postcss-reporter": "^5.0.0",
 		"preload-webpack-plugin": "^1.2.3",
-		"purify-css": "^1.2.5",
-		"purifycss-webpack": "^0.7.0",
 		"react-a11y": "^0.3.4",
 		"react-addons-perf": "^15.4.2",
 		"react-addons-test-utils": "^15.6.0",
@@ -113,7 +107,7 @@
 		"style-loader": "^0.18.2",
 		"stylelint": "^8.0.0",
 		"stylelint-config-standard": "^17.0.0",
-		"uglify-js": "git://github.com/mishoo/UglifyJS2#harmony-v2.8.22",
+		"uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony-v2.8.22",
 		"uglifyjs-webpack-plugin": "^0.4.6",
 		"url-loader": "^0.5.9",
 		"validate-commit-msg": "^2.14.0",
@@ -124,14 +118,19 @@
 		"webpack-hot-fullstack-middleware": "^1.0.0",
 		"webpack-hot-middleware": "^2.18.2",
 		"webpack-manifest-plugin": "^1.3.0",
-		"webpack-shell-plugin": "^0.5.0",
 		"webpack-subresource-integrity": "^1.0.1",
 		"why-did-you-update": "^0.0.8",
-		"write-file-webpack-plugin": "^4.1.0",
-		"ws": "^3.1.0"
+		"write-file-webpack-plugin": "^4.1.0"
 	},
 	"optionalDependencies": {
-		"prepack-webpack-plugin": "^1.1.0"
+		"babili-webpack-plugin": "^0.1.2",
+		"purify-css": "^1.2.5",
+		"purifycss-webpack": "^0.7.0",
+		"prepack-webpack-plugin": "^1.1.0",
+		"webpack-shell-plugin": "^0.5.0",
+		"git-rev-sync": "^1.9.1",
+		"glob": "^7.1.2",
+		"ws": "^3.1.0"
 	},
 	"scripts": {
 		"docs": "esdoc && serve ./esdoc",
@@ -152,9 +151,15 @@
 	"engines": {
 		"node": ">=6"
 	},
-	"author": "Vladimir Metnew <vladimirmetnew@gmail.com>",
+	"author": {
+		"name": "Vladimir Metnew",
+		"email": "vladimirmetnew@gmail.com"
+	},
 	"license": "MIT",
-	"repository": "https://github.com/Metnew/react-semantic.ui-starter.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Metnew/react-semantic.ui-starter.git"
+	},
 	"keywords": [
 		"react",
 		"redux",
@@ -163,5 +168,9 @@
 		"template",
 		"boilerplate",
 		"webpack"
-	]
+	],
+	"bugs": {
+		"url": "https://github.com/Metnew/react-semantic.ui-starter/issues"
+	},
+	"homepage": "https://github.com/Metnew/react-semantic.ui-starter#readme"
 }
