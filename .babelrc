@@ -1,6 +1,7 @@
 {
 	"plugins": [
 		"lodash",
+		"emotion/babel",
 		[
 			"transform-runtime",
 			{
