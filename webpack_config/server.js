@@ -1,81 +1,72 @@
 'use strict'
 import path from 'path'
 import express from 'express'
-import httpProxy from 'http-proxy'
 import webpack from 'webpack'
-import webpackConfig from './client/webpack.dev.babel'
-import config from './config'
-import LogPlugin from './log-plugin'
-import open from 'open'
-
-const apiProxy = httpProxy.createProxyServer()
-const app = express()
-const port = 3000
-
-webpackConfig.entry.client = [
-	'react-hot-loader/patch',
-	'webpack-hot-middleware/client?reload=true',
-	webpackConfig.entry.client
-]
-
-webpackConfig.plugins.push(new LogPlugin(port))
-
-let compiler
-
-try {
-	compiler = webpack(webpackConfig)
-} catch (err) {
-	console.log(err.message)
-	process.exit(1)
-}
-
-const devMiddleWare = require('webpack-dev-middleware')(compiler, {
-	publicPath: webpackConfig.output.publicPath,
-	// @Metnew: personally I prefer `quite: "true"`
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import webpackHotFullStack from 'webpack-hot-fullstack-middleware'
+import WriteFilePlugin from 'write-file-webpack-plugin'
+import client from './client/webpack.dev.babel'
+import server from './server/webpack.dev.babel'
+// Webpack plugins
+import LogPlugin from './assets/log-plugin'
+import FriendlyErrors from 'friendly-errors-webpack-plugin'
+// Configs for MultiCompiler
+const webpackConfig = [client, server]
+// Get MultiCompiler
+const compiler = webpack(webpackConfig)
+// Apply some commonly used plugins
+compiler.apply(new FriendlyErrors())
+compiler.apply(new LogPlugin())
+compiler.apply(new webpack.NoEmitOnErrorsPlugin())
+// Create devMiddleWare
+const devMiddleWare = webpackDevMiddleware(compiler, {
+	serverRenderer: true,
+	publicPath: webpackConfig[0].output.publicPath,
 	quiet: false,
-	hot: true,
-	inline: true,
-	headers: {
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Methods': '*',
-		'Access-Control-Allow-Headers': '*'
-	}
+	noInfo: true
 })
 
-app.use(devMiddleWare)
-app.use(
-	require('webpack-hot-middleware')(compiler, {
-		log: console.log
-	})
-)
+// NOTE: Every time we apply our compiled code to development server
+// We add new middlewares from new code, but don't remove old middlewares from old code
 
-const mfs = devMiddleWare.fileSystem
-const file = path.join(webpackConfig.output.path, 'index.html')
-
-devMiddleWare.waitUntilValid()
-
-app.get('*', (req, res) => {
-	devMiddleWare.waitUntilValid(() => {
-		const html = mfs.readFileSync(file)
-		res.end(html)
-	})
-})
-
-// Proxy api requests to BASE_API
-app.use(config.BASE_API, function (req, res) {
+// Number of middlewares that our app should has
+let prevSize = null
+/**
+ * @desc Adds dev middlewares + your code to the instance of express server
+ * @param {Function} app - Express dev server to which compiled code will be applied
+ * @param {Function} wss - WebSocket server, allow you send event to client to re-render the page
+ */
+export default function (app, wss) {
 	/**
-   * // req.baseUrl - The URL path on which a router instance was mounted.
-   * {@link https://expressjs.com/ru/4x/api.html#req.baseUrl}
-   */
-	req.url = req.baseUrl + req.url
-	apiProxy.web(req, res, {
-		target: {
-			port: 4000,
-			host: 'localhost'
+	 * @desc Function that executes after your server-side code compiles
+	 * @param  {Function}  serverSideCode - compiled server-side code
+	 */
+	const done = serverSideCode => {
+		// Get current stack of the app (e.g. applied middlewares)
+		const {stack} = app._router
+		const {length} = stack
+		prevSize = prevSize || length
+		if (length > prevSize) {
+			// Remove old compiled code
+			app._router.stack = stack.slice(0, prevSize)
 		}
-	})
-})
+		// Apply newly compiled code
+		serverSideCode(app)
+		// wss.on('connection', (ws, req) => {
+		// 	console.log('FIRE', req.url)
+		// 	ws.send('reload')
+		// })
+	}
 
-app.listen(port)
-
-open(`http://localhost:${port}`)
+	app.use(devMiddleWare)
+	app.use(
+		webpackHotMiddleware(
+			compiler.compilers.find(compiler => compiler.name === 'client'),
+			{
+				log: console.log
+			}
+		)
+	)
+	webpackHotFullStack({compiler, done})
+}
