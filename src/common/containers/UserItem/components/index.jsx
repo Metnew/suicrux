@@ -12,7 +12,7 @@ class UsersItemComponent extends Component {
 		const {user} = this.props
 		return (
 			<Card>
-				<Image alt={`${user.name}`} src={require('images/daniel.jpg')}/>
+				<Image alt={`${user.name}`} src={require('images/daniel.jpg')} />
 				<Card.Content>
 					<Card.Header>
 						{user.name}
@@ -25,8 +25,9 @@ class UsersItemComponent extends Component {
 					</Card.Description>
 				</Card.Content>
 				<Card.Content extra>
-					<a>
-						<Icon name="user"/>
+					{/* This anchor was requested by eslint-a11y. */}
+					<a href={`#${user.name}-${user.email}`}>
+						<Icon name="user" />
 						{user.username}
 					</a>
 				</Card.Content>
