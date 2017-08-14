@@ -1,8 +1,8 @@
 import path from 'path'
 import webpack from 'webpack'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import baseWebpackConfig from './webpack.base'
-import FriendlyErrors from 'friendly-errors-webpack-plugin'
+import WriteFilePlugin from 'write-file-webpack-plugin'
+// import AutoDllPlugin from 'autodll-webpack-plugin'
 import config from '../config'
 import _ from 'lodash'
 
@@ -19,7 +19,6 @@ const loaders = {
 	sass: {loader: 'sass-loader', options: {sourceMap: true}}
 }
 
-baseWebpackConfig.devtool = 'eval-source-map'
 baseWebpackConfig.module.rules.push(
 	{
 		test: /\.css$/,
@@ -37,16 +36,16 @@ baseWebpackConfig.module.rules.push(
 	}
 )
 
+baseWebpackConfig.entry.client = [
+	'react-hot-loader/patch',
+	'webpack-hot-middleware/client?reload=true',
+	baseWebpackConfig.entry.client
+]
+
 // add dev plugins
 baseWebpackConfig.plugins.push(
-	// add index.html
-	new HtmlWebpackPlugin({
-		title: config.title,
-		template: path.resolve(config.rootPath, 'webpack_config', 'assets', 'index.ejs')
-	}),
 	new webpack.HotModuleReplacementPlugin(),
-	new webpack.NoEmitOnErrorsPlugin(),
-	new FriendlyErrors()
+	new WriteFilePlugin()
 )
 
 export default baseWebpackConfig
