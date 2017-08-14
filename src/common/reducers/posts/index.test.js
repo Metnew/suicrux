@@ -27,6 +27,13 @@ const LOCATION_CHANGE_TO_INBOX = {
 	}
 }
 
+const LOCATION_CHANGE_TO_ITSELF = {
+	type: actions.LOCATION_CHANGE,
+	payload: {
+		pathname: '/'
+	}
+}
+
 describe('POSTS REDUCER', () => {
 	it('should return the initial state', () => {
 		expect(reducer(undefined, {x: 'string'})).toEqual(initialState)
@@ -72,8 +79,16 @@ describe('POSTS REDUCER', () => {
 	it('should handle LOCATION_CHANGE to other paths', () => {
 		const customState = {
 			...initialState,
-			lol: 3
+			hello: 'world'
 		}
 		expect(reducer(customState, LOCATION_CHANGE_TO_INBOX)).toEqual(initialState)
+	})
+
+	it('should handle LOCATION_CHANGE to own path', () => {
+		const customState = {
+			...initialState,
+			hello: 'world'
+		}
+		expect(reducer(customState, LOCATION_CHANGE_TO_ITSELF)).toEqual(customState)
 	})
 })
