@@ -2,6 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
+import AutoDllPlugin from 'autodll-webpack-plugin'
 import ManifestPlugin from 'webpack-manifest-plugin'
 import _ from 'lodash'
 //
@@ -21,23 +22,36 @@ const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(true)
 }
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+// use hash filename to support long-term caching in production
+const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'
+const hints = isProduction ? 'warning' : false
+const devtool = isProduction ? 'cheap-source-map' : 'source-map'
+
 const baseBuild = {
+	name: 'client',
 	entry: {
 		client: path.join(srcPath, './client')
 	},
 	output: {
+		filename,
+		publicPath,
 		path: path.join(distPath, './client', APP_LANGUAGE),
-		filename: '[name].js',
 		chunkFilename: '[name].[chunkhash:6].js',
-		publicPath
+		crossOriginLoading: 'anonymous'
 	},
 	performance: {
-		hints: NODE_ENV === 'production' ? 'warning' : false
+		hints
 	},
 	resolve: {
 		alias: isomorphicWebpackConfig.resolve.alias,
 		modules: isomorphicWebpackConfig.resolve.modules,
-		extensions: isomorphicWebpackConfig.resolve.extensions.concat(['.css', '.scss', '.sass'])
+		extensions: isomorphicWebpackConfig.resolve.extensions.concat([
+			'.css',
+			'.scss',
+			'.sass'
+		])
 	},
 	module: {
 		rules: isomorphicWebpackConfig.module.rules.concat([
@@ -78,7 +92,15 @@ const baseBuild = {
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
-		new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest})
+		new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
+		new AutoDllPlugin({
+			debug: true,
+			filename,
+			entry: {
+				vendor: config.vendor,
+				polyfills: config.polyfills
+			}
+		})
 	]),
 	target: 'web'
 }
