@@ -10,19 +10,19 @@ import chalk from 'chalk'
 import path from 'path'
 import authMiddleware from './auth'
 
-export default function initGlobalMiddlewares () {
+export default function initGlobalMiddlewares (app) {
 	const {DIST_PATH} = process.env
 	// Add express stuff
-	this.use(helmet())
-	this.use(compression())
-	this.use(morgan('dev'))
-	this.use(cookieParser())
-	this.use(
+	app.use(helmet())
+	app.use(compression())
+	app.use(morgan('dev'))
+	app.use(cookieParser())
+	app.use(
 		express.static(DIST_PATH, {
 			// Don't use index.html inside /dist dir
 			index: false
 		})
 	)
-	this.use(bodyParser.json())
-	this.use(authMiddleware)
+	app.use(bodyParser.json())
+	app.use(authMiddleware)
 }
