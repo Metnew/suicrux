@@ -43,12 +43,13 @@ export default function requestWrapper (method) {
 			defaults.body = data
 		}
 
-		const paramsObj = {...defaults, headers: {...params, ...defaults.headers}}
+		const paramsObj = Object.assign({}, defaults, {headers: params})
 		return fetch(url, paramsObj)
 			.then(checkStatus)
 			.then(parseJSON)
 			.catch(err => {
 				console.error(err)
+				return err
 			})
 	}
 }
