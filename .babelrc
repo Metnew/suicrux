@@ -20,23 +20,25 @@
 		},
 		"development": {
 			"plugins": [
-				"react-hot-loader/babel",
-				[
-					"babel-plugin-webpack-alias",
-					{
-						"config": "./webpack_config/client/webpack.base.js",
-						"findConfig": true
-					}
-				]
+				"react-hot-loader/babel"
 			]
 		},
 		"test": {
 			"plugins": [
+				"dynamic-import-node",
 				[
-					"babel-plugin-webpack-alias",
+					"module-resolver",
 					{
-						"config": "./webpack_config/webpack.isomorphic.js",
-						"findConfig": true
+						"root": ["./"],
+						"alias": {
+							"actions": "./src/common/actions",
+							"api": "./src/common/api",
+							"components": "./src/common/components",
+							"containers": "./src/common/containers",
+							"reducers": "./src/common/reducers",
+							"routing": "./src/common/routing"
+						},
+						"extensions": [".js", ".jsx", ".json"]
 					}
 				]
 			]
