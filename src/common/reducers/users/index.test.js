@@ -19,7 +19,14 @@ const GET_USERS_PENDING = {
 const LOCATION_CHANGE_INBOX_ID = {
 	type: actions.LOCATION_CHANGE,
 	payload: {
-		pathname: '/inbox/1'
+		pathname: '/users/1'
+	}
+}
+
+const LOCATION_CHANGE_TO_OTHER_PATH = {
+	type: actions.LOCATION_CHANGE,
+	payload: {
+		pathname: '/'
 	}
 }
 
@@ -66,9 +73,21 @@ describe('USERS REDUCER', () => {
 		})
 	})
 
-	it('should return same state if LOCATION_CHANGE navigates to inbox/:id route', () => {
-		expect(reducer(initialState, LOCATION_CHANGE_INBOX_ID)).toEqual(
-			initialState
+	it('should return same state if LOCATION_CHANGE navigates to /users/:id', () => {
+		const customState = {
+			...initialState,
+			hello: 'world'
+		}
+		expect(reducer(customState, LOCATION_CHANGE_INBOX_ID)).toEqual(
+			customState
 		)
+	})
+
+	it('should handle LOCATION_CHANGE to not /users path', () => {
+		const customState = {
+			...initialState,
+			hello: 'world'
+		}
+		expect(reducer(customState, LOCATION_CHANGE_TO_OTHER_PATH)).toEqual(initialState)
 	})
 })
