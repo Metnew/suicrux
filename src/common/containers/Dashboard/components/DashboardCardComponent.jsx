@@ -14,7 +14,7 @@ export default class DashboardCardComponent extends Component {
 		const {title, body, id} = this.props
 		return (
 			<Card raised>
-				<Image alt="Dummy image" src={require('images/dummy.png')} />
+				<Image alt="Hm, is it an img?" src={require('images/dummy.png')} />
 				<Card.Content>
 					<Card.Header>
 						{title}
@@ -30,10 +30,10 @@ export default class DashboardCardComponent extends Component {
 				</Card.Content>
 				<Card.Content extra>
 					<div className="ui two buttons">
-						<Button basic color="green" disabled>
+						<Button basic color="green" role="button" disabled>
 							Approve
 						</Button>
-						<Button basic color="red" disabled>
+						<Button basic color="red" role="button" disabled>
 							Decline
 						</Button>
 					</div>
