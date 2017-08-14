@@ -95,7 +95,7 @@ const baseWebpackConfig = {
 			'node-noop'
 		),
 		new webpack.DefinePlugin(definePluginArgs)
-		new AutoDllPlugin({
+		// new AutoDllPlugin({
 		// 	debug: true,
 		// 	context: config.rootPath,
 		// 	filename: 'server.js',
