@@ -10,7 +10,7 @@ import chalk from 'chalk'
 import path from 'path'
 import authMiddleware from './auth'
 
-export default function initGlobalMiddlewares (app) {
+export default function (app) {
 	const {DIST_PATH} = process.env
 	// Add express stuff
 	app.use(helmet())
@@ -25,4 +25,6 @@ export default function initGlobalMiddlewares (app) {
 	)
 	app.use(bodyParser.json())
 	app.use(authMiddleware)
+
+	return app
 }
