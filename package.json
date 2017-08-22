@@ -94,7 +94,7 @@
 		"postcss-import": "^10.0.0",
 		"postcss-loader": "^2.0.6",
 		"postcss-reporter": "^5.0.0",
-		"preload-webpack-plugin": "^1.2.3",
+		"preload-webpack-plugin": "^2.0.0",
 		"purify-css": "^1.2.5",
 		"purifycss-webpack": "^0.7.0",
 		"react-addons-perf": "^15.4.2",
