@@ -1,26 +1,31 @@
-import React, {Component} from 'react'
+/**
+ * @flow
+ */
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import {Switch, Redirect} from 'react-router-dom'
+import type {RouteItem} from 'routing'
 import LazyLoad from 'components/addons/LazyLoad'
+
+type DefaultProps = any
+type Props = {
+	routes: RouteItem[],
+	store: Object
+}
 
 /**
  * Returns application routing with protected by AuthCheck func routes
  * @desc This function returns JSX, so we can think about it as "stateless component"
  * @param {Function} authCheck checks is user logged in
  */
-export default class RoutingWrapper extends Component {
-	static propTypes = {
-		routes: PropTypes.array,
-		store: PropTypes.object
-	}
-
+export default class RoutingWrapper extends React.Component<DefaultProps, Props> {
 	/**
     * Checks Auth logic. Is user allowed to visit certain path?
     * @param  {String} path next path to visit
     * @return {Bool} is user allowed to visit next location?
     * check RouteAuth component.
     */
-	authCheck (path) {
+	authCheck (path: string): boolean {
 		const {store} = this.props
 		const {isLoggedIn} = store.getState().me.auth
 		const authPath = '/auth'
