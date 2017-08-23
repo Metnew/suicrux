@@ -17,7 +17,7 @@ class UserItem extends Component {
 		isLoading: PropTypes.bool
 	}
 
-	componentWillMount () {
+	componentDidMount () {
 		const {isLoaded, userId} = this.props
 		if (!isLoaded) {
 			this.props.getUsers(userId)

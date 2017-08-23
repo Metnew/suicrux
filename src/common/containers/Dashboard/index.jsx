@@ -16,13 +16,12 @@ class Dashboard extends Component {
 		getPosts: PropTypes.func.isRequired
 	}
 
-	componentWillMount () {
+	componentDidMount () {
 		this.props.getPosts()
 	}
 
 	render () {
 		const {posts, postsLoaded, postsLoading, count} = this.props
-
 		return (
 			<div>
 				<Helmet>
@@ -44,7 +43,6 @@ function mapStateToProps (state) {
 	const postsLoading = posts.isLoading
 	const items = posts.entities
 	const {count} = posts
-
 	return {
 		posts: items,
 		postsLoading,
