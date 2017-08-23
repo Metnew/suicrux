@@ -1,11 +1,14 @@
-'use strict'
+/**
+ * @file
+ */
 import path from 'path'
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import webpackHotFullStack from 'webpack-hot-fullstack-middleware'
+import webpackHotFullStack from 'webpack-get-code-on-done'
 import WriteFilePlugin from 'write-file-webpack-plugin'
+import config from './config'
 import client from './client/webpack.dev.babel'
 import server from './server/webpack.dev.babel'
 // Webpack plugins
@@ -17,7 +20,7 @@ const webpackConfig = [client, server]
 const compiler = webpack(webpackConfig)
 // Apply some commonly used plugins
 compiler.apply(new FriendlyErrors())
-compiler.apply(new LogPlugin())
+compiler.apply(new LogPlugin(config.PORT))
 compiler.apply(new webpack.NoEmitOnErrorsPlugin())
 // Create devMiddleWare
 const devMiddleWare = webpackDevMiddleware(compiler, {
@@ -33,11 +36,10 @@ const devMiddleWare = webpackDevMiddleware(compiler, {
 // Number of middlewares that our app should has
 let prevSize = null
 /**
- * @desc Adds dev middlewares + your code to the instance of express server
- * @param {Function} app - Express dev server to which compiled code will be applied
- * @param {Function} wss - WebSocket server, allow you send event to client to re-render the page
+ * @desc Adds dev middlewares + your code to an express server instance
+ * @param {ExpressServer} app - Express dev server to which compiled code will be applied
  */
-export default function (app, wss) {
+export default function (app) {
 	/**
 	 * @desc Function that executes after your server-side code compiles
 	 * @param  {Function}  serverSideCode - compiled server-side code
@@ -53,10 +55,6 @@ export default function (app, wss) {
 		}
 		// Apply newly compiled code
 		serverSideCode(app)
-		// wss.on('connection', (ws, req) => {
-		// 	console.log('FIRE', req.url)
-		// 	ws.send('reload')
-		// })
 	}
 
 	app.use(devMiddleWare)
@@ -68,5 +66,6 @@ export default function (app, wss) {
 			}
 		)
 	)
-	webpackHotFullStack({compiler, done})
+	const serverCompiler = compiler.compilers.find(compiler => compiler.name === 'server')
+	webpackHotFullStack(serverCompiler, done)
 }
