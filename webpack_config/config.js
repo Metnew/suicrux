@@ -8,19 +8,17 @@ import manifest from './assets/manifest'
 
 let {
 	BASE_API,
-	APP_LANGUAGE,
 	NODE_ENV,
 	SENTRY_DSN_PUBLIC,
 	GA_ID,
 	JWT_SECRET,
-	DIST_PATH,
+	CLIENT_DIST_PATH,
 	SENTRY_DSN,
 	PORT
 } = process.env
 
 // Vars for both server and frontend
 BASE_API = BASE_API || '/api/v1'
-APP_LANGUAGE = APP_LANGUAGE || 'en'
 NODE_ENV = NODE_ENV || 'development'
 
 // Vars for frontend only
@@ -32,22 +30,25 @@ const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 
 // Vars for server only
-DIST_PATH = DIST_PATH || path.join(distPath, './client', APP_LANGUAGE)
+CLIENT_DIST_PATH = CLIENT_DIST_PATH || path.join(distPath, './client')
 JWT_SECRET = JWT_SECRET || 'secret'
 PORT = PORT || 4000
+
+// compute isProduction based on NODE_ENV
+const isProduction = process.env.NODE_ENV === 'production'
 
 export default {
 	title: 'React-Semantic.UI-Starter',
 	publicPath: '/',
 	// i18n object
 	i18n,
+	isProduction,
 	// Env vars
 	BASE_API,
-	APP_LANGUAGE,
 	NODE_ENV,
 	SENTRY_DSN_PUBLIC,
 	GA_ID,
-	DIST_PATH,
+	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	SENTRY_DSN,
 	PORT,
