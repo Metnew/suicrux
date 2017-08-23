@@ -1,12 +1,12 @@
 // Styles
 import 'semantic-ui-css/semantic.css'
-import 'styles/global'
 // Fetch and promise polyfill
 import 'promise-polyfill'
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 // Application
-import {render} from 'react-dom'
-import {configureStore, configureRootComponent} from 'common/index.jsx'
+import React from 'react'
+import ReactDOM, {render} from 'react-dom'
+import {configureApp, configureRootComponent} from 'common/app'
 
 if (process.env.NODE_ENV === 'production') {
 	require('common/pwa')
@@ -29,13 +29,21 @@ if (process.env.NODE_ENV === 'production') {
   */
 	/*eslint-enable */
 	window.Perf = require('react-addons-perf')
+
+	// NOTE: a11y doesnt work with SSR and React throws warnings like:
+	// "React attempted to reuse markup in a container but the checksum was invalid"
+	// a11y adds "id" attribute to the root container (#app) of your app and triggers re-rendering
+	//
+	/** {@link https://github.com/reactjs/react-a11y } */
+	// const a11y = require('react-a11y')
+	// a11y(React, {ReactDOM})
 }
 
-const preloadedState = window.__PRELOADED_STATE__ || {}
-delete window.__PRELOADED_STATE__
-
-const store = configureStore(preloadedState)
-const RootComponent = configureRootComponent({store})
+const initialState = window.__INITIAL_STATE__ || {}
+// NOTE: V8 doesn't optimize `delete`
+// delete window.__INITIAL_STATE__
+const propsForRoot = configureApp({initialState})
+const RootComponent = configureRootComponent(propsForRoot)
 render(RootComponent, document.getElementById('app'))
 
 if (module.hot) {
