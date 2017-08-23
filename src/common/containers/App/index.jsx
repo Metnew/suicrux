@@ -1,12 +1,15 @@
-import React, {Component} from 'react'
+/**
+ * @flow
+ */
+
+import * as React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, matchPath} from 'react-router'
-import PropTypes from 'prop-types'
 import {push} from 'react-router-redux'
 // Import main views
-import Sidebar from 'components/views/Sidebar'
-import Footer from 'components/views/Footer'
-import Header from 'components/views/Header'
+import Sidebar from 'components/parts/Sidebar'
+import Footer from 'components/parts/Footer'
+import Header from 'components/parts/Header'
 // Import actions
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
@@ -21,41 +24,31 @@ import {
 	StyledDimmer
 } from './style'
 
-class App extends Component {
-	static propTypes = {
-		children: PropTypes.node.isRequired,
-		// Routes of app passed as props in `Root`
-		routes: PropTypes.array.isRequired,
-		// React-router `withRouter` props
-		location: PropTypes.object,
-		history: PropTypes.object,
+type DefaultProps = any
+type State = any
+type Props = {
+	children: React.Node,
+	// Routes of app passed as props in `Root`
+	routes: any,
+	// React-router `withRouter` props
+	location: any,
+	history: any,
+	// SidebarOpened can force component to re-render
+	sidebarOpened: boolean,
+	closeSidebar: Function,
+	// IsLoggedIn can force component to re-render
+	isLoggedIn: boolean,
+	handleWindowResize: Function,
+	logout: Function,
+	checkAuthLogic: Function,
+	toggleSidebar: Function,
+	// IsMobile can force component to re-render
+	isMobile: string,
+	isMobileXS: boolean,
+	isMobileSM: boolean
+}
 
-		// SidebarOpened can force component to re-render
-		sidebarOpened: PropTypes.bool,
-		closeSidebar: PropTypes.func,
-		// IsLoggedIn can force component to re-render
-		isLoggedIn: PropTypes.bool,
-		handleWindowResize: PropTypes.func,
-		logout: PropTypes.func,
-		checkAuthLogic: PropTypes.func,
-		toggleSidebar: PropTypes.func,
-		// IsMobile can force component to re-render
-		isMobile: PropTypes.bool,
-		isMobileXS: PropTypes.bool,
-		isMobileSM: PropTypes.bool
-	}
-
-	// XXX: will be fixed one day.
-	// shouldComponentUpdate(nextProps) {
-	//     let {match, isMobile, isLoggedIn, sidebarOpened} = this.props
-	//     let matchSame = _.isEqual(nextProps.match, match)
-	//     let isMobileSame = _.isEqual(nextProps.isMobile, isMobile)
-	//     let isLoggedInSame = _.isEqual(nextProps.isLoggedIn, isLoggedIn)
-	//     let sidebarOpenedSame = _.isEqual(nextProps.sidebarOpened, sidebarOpened)
-	//     // return props that can force us aren't the same
-	//     return !(matchSame && isMobileSame && isLoggedInSame && sidebarOpenedSame)
-	// }
-
+class App extends React.Component<DefaultProps, Props, State> {
 	componentWillMount () {
 		const {isLoggedIn} = this.props
 		if (process.env.BROWSER) {
@@ -74,47 +67,47 @@ class App extends Component {
 	}
 
 	componentDidMount () {
-		if (process.env.SENTRY_PUBLIC_DSN) {
-			const script = document.createElement('script')
-			script.type = 'text/javascript'
-			script.crossorigin = 'anonymous'
-			script.async = true
-			script.onload = () => {
-				Raven.config(process.env.SENTRY_PUBLIC_DSN).install()
-			}
-			script.src = 'https://cdn.ravenjs.com/3.16.1/raven.min.js'
-			document.body.appendChild(script)
-		}
-
-		if (process.env.GA_ID) {
-			const script = document.createElement('script')
-			script.type = 'text/javascript'
-			script.async = true
-			script.crossorigin = 'anonymous'
-			script.onload = () => {
-				window.ga =
-					window.ga ||
-					function () {
-						(ga.q = ga.q || []).push(arguments)
-					}
-				ga.l = Number(new Date())
-				ga('create', process.env.GA_ID, 'auto')
-				ga('send', 'pageview')
-			}
-			script.src = 'https://www.google-analytics.com/analytics.js'
-			document.body.appendChild(script)
-		}
+		// NOTE: uncomment if you use Sentry
+		// if (process.env.SENTRY_PUBLIC_DSN) {
+		// 	const script = document.createElement('script')
+		// 	script.type = 'text/javascript'
+		// 	script.crossorigin = 'anonymous'
+		// 	script.async = true
+		// 	script.onload = () => {
+		// 		Raven.config(process.env.SENTRY_PUBLIC_DSN).install()
+		// 	}
+		// 	script.src = 'https://cdn.ravenjs.com/3.16.1/raven.min.js'
+		// 	document.body.appendChild(script)
+		// }
+		// NOTE: uncomment if you use Google Analytics
+		// if (process.env.GA_ID) {
+		// 	const script = document.createElement('script')
+		// 	script.type = 'text/javascript'
+		// 	script.async = true
+		// 	script.crossorigin = 'anonymous'
+		// 	script.onload = () => {
+		// 		window.ga =
+		// 			window.ga ||
+		// 			function () {
+		// 				;(ga.q = ga.q || []).push(arguments)
+		// 			}
+		// 		ga.l = Number(new Date())
+		// 		ga('create', process.env.GA_ID, 'auto')
+		// 		ga('send', 'pageview')
+		// 	}
+		// 	script.src = 'https://www.google-analytics.com/analytics.js'
+		// 	document.body.appendChild(script)
+		// }
 	}
 
 	/**
      * Check that user is allowed to visit route
-     * @param  {Bool} isLoggedIn state.auth.me.isLoggedIn, current prop
-     * @return {Undefined} Nothing
+     * @param  {Boolean} isLoggedIn state.auth.me.isLoggedIn, current prop
+     * @return {Void}
      */
-	checkAppAuthLogic (isLoggedIn) {
-		const {location, checkAuthLogic} = this.props
-		const path = location.pathname
-		checkAuthLogic(path, isLoggedIn)
+	checkAppAuthLogic (isLoggedIn: boolean) {
+		const path: string = this.props.location.pathname
+		this.props.checkAuthLogic(path, isLoggedIn)
 	}
 
 	/**
@@ -122,11 +115,22 @@ class App extends Component {
    * @return {Array} array of routes that will be rendered in sidebar menu
    */
 	getSidebarRouting () {
-		const sidebarRouting = this.props.routes.filter(a => a.sidebarVisible).map(a => {
-			const {path, name, icon, external, strict, exact} = a
-			const b = {path, name, icon, external, strict, exact}
-			return b
-		})
+		type Route = {
+			path: string,
+			name: string,
+			icon: string,
+			external: boolean,
+			strict: boolean,
+			exact: boolean
+		}
+
+		const sidebarRouting = this.props.routes
+			.filter(a => a.sidebarVisible)
+			.map((a: Object): Route => {
+				const {path, name, icon, external, strict, exact} = a
+				const b: Route = {path, name, icon, external, strict, exact}
+				return b
+			})
 		return sidebarRouting
 	}
 
@@ -135,7 +139,7 @@ class App extends Component {
   * @param  {String} pathname - location.pathname
   * @return {String} page title
   */
-	getPageTitle (pathname) {
+	getPageTitle (pathname: string) {
 		const matchedRoutes = this.props.routes.filter(a => matchPath(pathname, a))
 		const currentRoute = matchedRoutes[0] || {}
 		const title = currentRoute.name || '404'
@@ -156,7 +160,7 @@ class App extends Component {
 
 		// Routing for sidebar menu
 		const sidebarRouting = this.getSidebarRouting()
-		const title = this.getPageTitle(location.pathname)
+		const title: string = this.getPageTitle(location.pathname)
 
 		const sidebarProps = {
 			isMobile,
@@ -194,17 +198,17 @@ class App extends Component {
 		return (
 			<PageLayout>
 				<SidebarSemanticPushableStyled>
-					{isLoggedIn && <Sidebar {...sidebarProps}/>}
+					{isLoggedIn && <Sidebar {...sidebarProps} />}
 					<SidebarSemanticPusherStyledPatch>
-						<StyledDimmer {...dimmerProps}/>
-						<Header {...headerProps}/>
+						<StyledDimmer {...dimmerProps} />
+						<Header {...headerProps} />
 						<MainLayout>
 							<MainContent>
 								<MainContainer id="main-container">
 									{children}
 								</MainContainer>
 							</MainContent>
-							<Footer/>
+							<Footer />
 						</MainLayout>
 						{/* </Dimmer.Dimmable> */}
 					</SidebarSemanticPusherStyledPatch>
@@ -214,9 +218,17 @@ class App extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-	const {sidebarOpened, isMobile, isMobileXS, isMobileSM} = state.layout
-	const {isLoggedIn} = state.me.auth
+type StateToProps = {
+	sidebarOpened: boolean,
+	isMobile: boolean,
+	isMobileXS: boolean,
+	isMobileSM: boolean,
+	isLoggedIn: boolean
+}
+
+function mapStateToProps (state: any): StateToProps {
+	const {sidebarOpened, isMobile, isMobileXS, isMobileSM}: any = state.layout
+	const {isLoggedIn}: any = state.me.auth
 	return {
 		sidebarOpened,
 		isMobile,
@@ -226,16 +238,16 @@ function mapStateToProps (state) {
 	}
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps (dispatch: (action: Object) => void) {
 	let resizer
 	return {
-		closeSidebar: () => {
+		closeSidebar: (): void => {
 			dispatch(CLOSE_SIDEBAR())
 		},
-		logout: () => {
+		logout: (): void => {
 			dispatch(LOGOUT_AUTH())
 		},
-		toggleSidebar: () => {
+		toggleSidebar: (): void => {
 			dispatch(OPEN_SIDEBAR())
 		},
 		/**
@@ -246,7 +258,7 @@ function mapDispatchToProps (dispatch) {
          * @param  {String}  path       [current location path]
          * @param  {Boolean} isLoggedIn [is user logged in?]
          */
-		checkAuthLogic: (path, isLoggedIn) => {
+		checkAuthLogic: (path: string, isLoggedIn: boolean) => {
 			const authPath = '/auth'
 			const homePath = '/'
 			if (isLoggedIn && path === authPath) {
