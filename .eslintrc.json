@@ -1,11 +1,12 @@
 {
 	"extends": [
+		"plugin:flowtype/recommended",
 		"plugin:react/recommended",
 		"plugin:jsx-a11y/recommended",
 		"standard"
 	],
 	"parser": "babel-eslint",
-	"plugins": ["react", "babel", "jsx-a11y"],
+	"plugins": ["react", "babel", "jsx-a11y", "flowtype"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true,
@@ -27,5 +28,10 @@
 		"i18n": true,
 		"Raven": true,
 		"ga": true
+	},
+	"settings": {
+		"flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
 	}
 }
