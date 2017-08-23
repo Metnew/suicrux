@@ -5,29 +5,34 @@ import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import childProcess from 'child_process'
 import _ from 'lodash'
-// import AutoDllPlugin from 'autodll-webpack-plugin'
 import I18nPlugin from 'i18n-webpack-plugin'
 
 const exec = childProcess.execSync
 const {
 	SENTRY_DSN,
-	DIST_PATH,
-	APP_LANGUAGE,
+	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	ANALYZE_BUNDLE,
-	PORT
+	PORT,
+	isProduction
 } = config
 
 // Cleare dist dir before run
-exec(`rm -rf ${config.distPath}/server/${APP_LANGUAGE}`)
+exec(`rm -rf ${config.distPath}/server`)
 
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
 	'process.env.PORT': JSON.stringify(PORT),
 	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET),
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
-	'process.env.DIST_PATH': JSON.stringify(DIST_PATH)
+	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH)
 }
+
+const entry = isProduction
+	? path.join(config.srcPath, './server')
+	: path.join(config.srcPath, './server/server')
+
+const devtool = isProduction ? 'cheap-source-map' : 'eval-source-map'
 
 let nodeModules = {}
 fs
@@ -39,12 +44,19 @@ fs
 		nodeModules[mod] = 'commonjs ' + mod
 	})
 
+// const createServerAlias = !isProduction
+// 	? '../../webpack_config/server'
+// 	: './server'
+//
+// const createServerAliasPath = path.join(config.srcPath, './server', createServerAlias)
+
 const baseWebpackConfig = {
 	name: 'server',
-	entry: path.join(config.srcPath, './server'),
+	entry,
+	devtool,
 	target: 'node',
 	output: {
-		path: path.join(config.distPath, './server', APP_LANGUAGE),
+		path: path.join(config.distPath, './server'),
 		filename: 'server.js',
 		libraryTarget: 'commonjs2'
 	},
@@ -55,7 +67,10 @@ const baseWebpackConfig = {
 	resolve: {
 		extensions: isomorphicWebpackConfig.resolve.extensions,
 		modules: isomorphicWebpackConfig.resolve.modules,
-		alias: isomorphicWebpackConfig.resolve.alias
+		alias: {
+			...isomorphicWebpackConfig.resolve.alias
+			// create_server: createServerAliasPath
+		}
 	},
 	module: {
 		rules: isomorphicWebpackConfig.module.rules.concat([
@@ -95,24 +110,6 @@ const baseWebpackConfig = {
 			'node-noop'
 		),
 		new webpack.DefinePlugin(definePluginArgs)
-		// new AutoDllPlugin({
-		// 	debug: true,
-		// 	context: config.rootPath,
-		// 	filename: 'server.js',
-		// 	entry: {
-		// 		vendor: config.vendor.concat([
-		// 			'express',
-		// 			'helmet',
-		// 			'cookie-parser',
-		// 			'body-parser',
-		// 			'jsonwebtoken',
-		// 			'morgan',
-		// 			'compression',
-		// 			'chalk'
-		// 		]),
-		// 		polyfills: config.polyfills
-		// 	}
-		// })
 	]),
 	node: {
 		__dirname: true,
