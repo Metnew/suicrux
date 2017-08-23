@@ -4,62 +4,81 @@
 
 import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
 
-export default function requestWrapper (method) {
-	return async function (url, data = null, params = {}) {
-		if (method === 'GET') {
-			// It's a GET response
-			// GET doesn't have data
-			params = data
-			data = null
-		} else if (data === Object(data)) {
-			// (data === Object(data)) === _.isObject(data)
-			data = JSON.stringify(data)
-		} else {
-			throw new Error(`XHR invalid, check ${method} on ${url}`)
+/**
+ * Create request wrapper for certain method
+ * @param  {String} method - Request method
+ * @return {Function}
+ */
+export default function (method) {
+	/**
+	 * Creates request to `url` with `data`
+	 * @param  {String} url        		Request URL
+	 * @param  {Object} [data= null]	Data for Request
+	 * @return {Object}             	Request response
+	 */
+	return async (url, data = null) => {
+		// get decorated url and request params
+		const {URL, request} = decorateRequest({method, url, data})
+		// create request!
+		return fetch(URL, request).then(checkStatus).then(parseJSON).catch(err => {
+			console.error(err)
+			return err
+		})
+	}
+}
+/**
+ * Create
+ * @param  {String} method 			 -	Request method
+ * @param  {String} url 				 -  Request URL
+ * @param  {Object} [data= null] -	Data for Request
+ * @return {Object}        			 - 	Decorated request params
+ */
+function decorateRequest ({method, url, data}) {
+	// Default params for fetch = method + (Content-Type)
+	const defaults = {
+		method,
+		headers: {
+			'Content-Type': 'application/json; charset=UTF-8'
 		}
+	}
+	const token = getLocalToken()
+	const isRequestToExternalResource = /(http|https):\/\//.test(url)
+	const URL = isRequestToExternalResource ? url : process.env.BASE_API + url
 
-		// Default params for fetch = method + (Content-Type)
-		const defaults = {
-			method,
-			headers: {
-				'Content-Type': 'application/json; charset=UTF-8'
-			}
-		}
+	const requestAuthDecoration =
+		!isRequestToExternalResource && token
+			? {headers: {Authorization: `JWT ${getLocalToken()}`}}
+			: {}
 
-		// Check that req url is relative and request was sent to our domain
-		if (!/(http|https):\/\//.test(url)) {
-			console.log(`Request ${url} was sent to our domain`)
-			const token = getLocalToken()
-			if (token) {
-				defaults.headers.Authorization = `JWT ${token}`
-			}
-			url = process.env.BASE_API + url
-		} else {
-			console.log(`Request ${url} was sent to external domain`)
-			// Request was set to an external domain
-		}
+	const requesDataDecoration = data ? {body: JSON.stringify(data)} : {}
+	const request = Object.assign(
+		{},
+		defaults,
+		requestAuthDecoration,
+		requesDataDecoration
+	)
 
-		if (data) {
-			defaults.body = data
-		}
+	if (!isRequestToExternalResource) {
+		console.log(`Request ${url} was sent to our domain`, request)
+	} else {
+		console.log(`Request ${url} was sent to external domain`, request)
+	}
 
-		const paramsObj = Object.assign({}, defaults, {headers: params})
-		return fetch(url, paramsObj)
-			.then(checkStatus)
-			.then(parseJSON)
-			.catch(err => {
-				console.error(err)
-				return err
-			})
+	return {
+		request,
+		URL
 	}
 }
 
-// Checks response status in production env
+/**
+ * Checks response status
+ * @param  {Object} response - Response
+ * @return {Object}          - Response
+ */
 function checkStatus (response) {
 	const {status} = response
 	if (status >= 200 && status < 300) {
 		// Everything is ok
-		return response
 	} else if (status >= 300 && status < 400) {
 		// 300 Multiple Choices
 		// 301 - Moved Permanently,
@@ -68,7 +87,6 @@ function checkStatus (response) {
 		// 307 - Temporary Redirect
 	} else if (status === 400) {
 		// Probably is a validation error
-		return response
 	} else if (status === 403 || status === 401) {
 		// 401 - Forbidden
 		// 403 - Unauthorized
@@ -76,19 +94,18 @@ function checkStatus (response) {
 		resetLocalToken()
 	} else if (status === 404) {
 		// Not Found
-		return response
 	} else if (status >= 500) {
 		// Server error
-		return response
 	}
+	return response
 }
 
 /**
- // middlewares
+ * middlewares
  * 1. parse response
  * 2. add "ok" property to result
  * 3. return request result
- * @param  {Object} res - response from server
+ * @param  {Object} res - Response from resource
  * @return {Object} response result with "ok" property
  */
 async function parseJSON (res) {
@@ -99,7 +116,7 @@ async function parseJSON (res) {
 		return {data: {}, ok: false}
 	}
 
-	// Simplest validation ever, ahah :)
+	// Simplest validation ever
 	if (!res.ok) {
 		return {data: json, ok: false}
 	}
