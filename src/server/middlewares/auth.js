@@ -1,12 +1,20 @@
-// Application-related stuff
+/**
+ * @flow
+ */
 import chalk from 'chalk'
 import jwt from 'jsonwebtoken'
 import {JWT_TOKEN} from 'common/api'
-// Auth-related middleware, check that user is logged in and token is valid
-export default (req, res, next) => {
+/**
+ * Auth-related middleware.
+ * Checks that user is logged in and token is valid
+ * @param  {Request}  req  
+ * @param  {Response} res
+ * @param  {Function} next
+ */
+export default (req: Object, res: Object, next: () => void) => {
 	const {JWT_SECRET} = process.env
 	req.user = {}
-	const token = req.cookies[JWT_TOKEN]
+	const token: string = req.cookies[JWT_TOKEN]
 	if (!token) {
 		return next()
 	}
