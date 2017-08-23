@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+import * as React from 'react'
 import {Route} from 'react-router-dom'
 import {Users, Dashboard, Login} from 'containers'
 import RouteAuth from 'components/addons/RouteAuth'
@@ -16,6 +20,17 @@ const loadLazyComponent = url => {
 		const loadComponent = await import(/* webpackMode: "eager", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
 		return loadComponent
 	}
+}
+
+export type RouteItem = {
+	path: string,
+	exact?: boolean,
+	strict?: boolean,
+	icon?: string,
+	name?: string,
+	sidebarVisible?: boolean,
+	tag?: React.Node,
+	component?: React.Node
 }
 
 export const routes = [
