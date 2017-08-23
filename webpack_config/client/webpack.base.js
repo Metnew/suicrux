@@ -1,28 +1,30 @@
 import path from 'path'
+import child_process from 'child_process'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import AutoDllPlugin from 'autodll-webpack-plugin'
-import ManifestPlugin from 'webpack-manifest-plugin'
+import {StatsWriterPlugin} from 'webpack-stats-plugin'
+// import ManifestPlugin from 'webpack-manifest-plugin'
+import WebpackAssetsManifest from 'webpack-assets-manifest'
 import _ from 'lodash'
-//
+
 const {
 	GA_ID,
 	SENTRY_PUBLIC_DSN,
 	NODE_ENV,
-	APP_LANGUAGE,
 	srcPath,
 	distPath,
-	publicPath
+	publicPath,
+	isProduction
 } = config
+const exec = child_process.execSync
+exec(`rm -rf ${config.distPath}/client`)
 
 const definePluginArgs = {
 	'process.env.GA_ID': JSON.stringify(GA_ID),
 	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
 	'process.env.BROWSER': JSON.stringify(true)
 }
-
-const isProduction = process.env.NODE_ENV === 'production'
 
 // use hash filename to support long-term caching in production
 const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'
@@ -37,7 +39,7 @@ const baseBuild = {
 	output: {
 		filename,
 		publicPath,
-		path: path.join(distPath, './client', APP_LANGUAGE),
+		path: path.join(distPath, './client'),
 		chunkFilename: '[name].[chunkhash:6].js',
 		crossOriginLoading: 'anonymous'
 	},
@@ -92,15 +94,10 @@ const baseBuild = {
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
-		new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest}),
-		new AutoDllPlugin({
-			debug: true,
-			filename,
-			entry: {
-				vendor: config.vendor,
-				polyfills: config.polyfills
-			}
-		})
+		new StatsWriterPlugin({
+			filename: 'stats.json' // Default
+		}),
+		new WebpackAssetsManifest({writeToDisk: true})
 	]),
 	target: 'web'
 }

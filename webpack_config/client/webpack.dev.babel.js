@@ -2,10 +2,12 @@ import path from 'path'
 import webpack from 'webpack'
 import baseWebpackConfig from './webpack.base'
 import WriteFilePlugin from 'write-file-webpack-plugin'
-// import AutoDllPlugin from 'autodll-webpack-plugin'
+import AutoDllPlugin from 'autodll-webpack-plugin'
 import config from '../config'
 import _ from 'lodash'
 
+const {isProduction} = config
+const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'
 const loaders = {
 	style: {loader: 'style-loader'},
 	css: {loader: 'css-loader', options: {sourceMap: true}},
@@ -45,7 +47,15 @@ baseWebpackConfig.entry.client = [
 // add dev plugins
 baseWebpackConfig.plugins.push(
 	new webpack.HotModuleReplacementPlugin(),
-	new WriteFilePlugin()
+	new WriteFilePlugin(),
+	new AutoDllPlugin({
+		debug: true,
+		filename,
+		entry: {
+			vendor: config.vendor,
+			polyfills: config.polyfills
+		}
+	})
 )
 
 export default baseWebpackConfig
