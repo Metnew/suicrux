@@ -1,86 +1,107 @@
-import path from 'path'
+/**
+ * @flow
+ * @desc
+ */
+import * as React from 'react'
 import fs from 'fs'
-import chalk from 'chalk'
-// React-related stuff
-import React from 'react'
-import {render} from 'rapscallion'
-// Import Helmet from 'react-helmet'
+import {renderToString} from 'react-dom/server'
+import Helmet from 'react-helmet'
+import createHistory from 'history/createMemoryHistory'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
-// Application
-import {configureStore, configureRootComponent} from 'common/index'
-// Read index.html and assign to a variable
-const indexPath = path.join(`${process.env.DIST_PATH}/index.html`)
-const htmlFile = (function () {
-	try {
-		return fs.readFileSync(indexPath, 'utf8')
-	} catch (e) {
-		console.error(chalk.bgRed(`Are you sure you have already built app? ${e}`))
-		console.log(chalk.bgCyan('Application is working without SSR'))
-		return false
-	}
-})()
+import {configureApp, configureRootComponent} from 'common/app'
 
-export default function (req, res) {
-	if (!htmlFile) {
-		// NOTE: @Metnew (29.07.2017): Here must be a requirement of ejs/jade template
-		// app probably needs in template engine!
-		const warning = `
-      <h1>Do you remember that you don't have SSR?</h1>
-      <h2>Why it happens?</h2>
-      <h3>Probably, because of:</h3>
-      <h4>
-        <ul>
-          <li>No "index.html" in the dist folder. e.g.: You don't have already built app.</li>
-          <li>Path to dist folder with client app is invalid, check process.env.DIST_PATH in "webpack_config/server/webpack.base."</li>
-          <pre>process.env.path === ${process.env.DIST_PATH}</pre>
-          <pre>URL: ${req.url}</pre>
-        </ul>
-      </h4>
-    `
-		return res.send(warning)
-	}
-	// Auth-related stuff
-	// NOTE: check `server/express/index.js` for more info
-	const {user} = req
-	const {isLoggedIn, token} = user
-	const initialState = isLoggedIn ? {me: {auth: {isLoggedIn, token}}} : {}
-	//
+const DLLScripts =
+	process.env.NODE_ENV === 'production'
+		? ''
+		: `
+	<script src="/polyfills.js"></script>
+	<script src="/vendor.js"></script>
+`
+// This function makes server rendering of asset references consistent with different webpack chunk/entry confiugrations
+function normalizeAssets (assets) {
+	return Array.isArray(assets) ? assets : [assets]
+}
+
+export default (req: Object, res: Object, next: () => void) => {
+	const stats = fs.readFileSync(
+		`${process.env.CLIENT_DIST_PATH}/stats.json`,
+		'utf8'
+	)
+	const {isLoggedIn, token} = req.user
+	const initialState: Object = isLoggedIn
+		? {me: {auth: {isLoggedIn, token}}}
+		: {}
 	const sheet = new ServerStyleSheet()
-	const location = req.url
+	const location: string = req.url
 	const context = {}
-	const store = configureStore(initialState)
-	const RootComponent = configureRootComponent({
+	const {store, history, routes} = configureApp({initialState})
+	const RootComponent: React.Node = configureRootComponent({
 		store,
+		history,
+		routes,
 		SSR: {location, context}
 	})
-	const App = (
+	const App: React.Node = (
 		<StyleSheetManager sheet={sheet.instance}>
 			{RootComponent}
 		</StyleSheetManager>
 	)
-	//
 	const css = sheet.getStyleTags()
-	const preloadedState = store.getState()
-	//
-	render(App).toPromise().then(html => {
-		res.send(renderFullPage({html, css, preloadedState}))
+	const preloadedState: Object = store.getState()
+	console.log(preloadedState)
+	const app: string = renderToString(App)
+	const {assetsByChunkName}: Object = JSON.parse(stats)
+	const html = getHtml({
+		app,
+		css,
+		initialState: preloadedState,
+		assetsByChunkName
 	})
+	res.send(html)
 }
 
-function renderFullPage ({html, css, preloadedState}) {
-	// Console.log(indexHTMLFileContent)
-	const htmlWithRedux = htmlFile.replace(
-		'<div id="app"></div>',
-		`<div id="app">${html}</div><script>
-		window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-		/</g,
-		'\\u003c'
-	)}
-	</script><span style="display:none;">Server-side rendering!</span>`
-	)
-	const styledHtmlWithRedux = htmlWithRedux.replace(
-		'<meta name="ssr-styles"/>',
-		css
-	)
-	return styledHtmlWithRedux
+/**
+ * Get html
+ * @param  {[type]} app               [description]
+ * @param  {[type]} css               [description]
+ * @param  {[type]} initialState      [description]
+ * @param  {[type]} assetsByChunkName [description]
+ * @return {String}                   [description]
+ */
+const getHtml = ({app, css, initialState, assetsByChunkName}) => {
+	const stringifiedState: string = JSON.stringify(initialState)
+	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
+	return `
+	<!doctype html>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<title>Noir</title>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="description" content="Production-ready, performance-first, template built with React/Redux/React-Semantic-UI">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<base href="/" />
+			<meta name="theme-color" content="<%=htmlWebpackPlugin.options.theme_color%>"/>
+	    <meta name="msapplication-tap-highlight" content="no">
+			<link rel="manifest" href="manifest.json">
+			${css}
+			${normalizeAssets(assetsByChunkName.client)
+		.filter(path => path.endsWith('.css'))
+		.map(path => `<link rel="stylesheet" href="${path}" />`)
+		.join('\n')}
+		</head>
+		<body>
+			<div id="app">${app}</div>
+			<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
+			${DLLScripts}
+			${normalizeAssets(assetsByChunkName.client)
+		.filter(path => path.endsWith('.js'))
+		.map(path => `<script src="${path}"></script>`)
+		.join('\n')}
+	<noscript>
+		You are using outdated browser. You can install modern browser here: <a href="http://outdatedbrowser.com/" >http://outdatedbrowser.com</a>.
+	</noscript>
+		</body>
+	</html>
+	`
 }
