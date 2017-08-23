@@ -1,6 +1,6 @@
 {
 	"plugins": [
-		"lodash",
+		["lodash", {"id": ["lodash", "semantic-ui-react"]}],
 		[
 			"transform-runtime",
 			{
@@ -10,18 +10,15 @@
 				"moduleName": "babel-runtime"
 			}
 		],
-		"transform-decorators-legacy",
 		"syntax-dynamic-import"
 	],
-	"presets": ["es2015", "react", "stage-0"],
+	"presets": ["es2015", "react", "stage-0", "flow"],
 	"env": {
 		"production": {
 			"presets": ["react-optimize"]
 		},
 		"development": {
-			"plugins": [
-				"react-hot-loader/babel"
-			]
+			"plugins": ["react-hot-loader/babel"]
 		},
 		"test": {
 			"plugins": [
