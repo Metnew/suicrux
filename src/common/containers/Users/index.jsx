@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
@@ -6,16 +9,18 @@ import {Loader} from 'semantic-ui-react'
 import {GET_USERS} from 'actions/users'
 import UsersComponent from './components'
 
-class Users extends Component {
-	static propTypes = {
-		users: PropTypes.object.isRequired,
-		getUsers: PropTypes.func.isRequired,
-		isUsersLoaded: PropTypes.bool.isRequired,
-		isUsersLoading: PropTypes.bool.isRequired,
-		usersCount: PropTypes.number.isRequired
-	}
+type DefaultProps = any
+type Props = {
+	users: any,
+	getUsers: () => void,
+	isUsersLoaded: boolean,
+	isUsersLoading: boolean,
+	usersCount: number
+}
+type State = any
 
-	componentWillMount () {
+class Users extends Component<DefaultProps, Props, State> {
+	componentDidMount () {
 		this.props.getUsers()
 	}
 
