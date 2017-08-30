@@ -27,22 +27,19 @@ export const MainContent = styled.main`
 
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	height: 100%;
-	overflow: scroll!important;
+  overflow-y: scroll!important;
+  -webkit-overflow-scrolling: touch;
 
-	${'' /* poptop_modules/components/views/AppComponent/index.jsx 65:52   ${media.md`
-		max-width: ${props => props.sidebarOpened && `calc(100% - 150px)`};
-	`} */}
-
-	${'' /* ${media.sm`
-		overflow: hidden;
-	`} */}
+  ::-webkit-scrollbar {
+	  width: 0px!important;
+	}
 `
 
 export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
 	display: initial;
 `
 
-//  margin - just to fill empty space
+//  Margin - just to fill empty space
 export const MainContainer = styled(Container)`
   margin-top: 2em;
   margin-bottom: 2em;
@@ -57,11 +54,8 @@ export const MainContainer = styled(Container)`
 		`}
 	}
 
-
 	> .grid,
 	> * > .grid {
-		${'' /* FIXME: uncomment me, if somethind doesnt work properly position: relative;
-		width: 100% !important; */}
 		min-height: 100%;
 	}
 `

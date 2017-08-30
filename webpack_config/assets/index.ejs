@@ -8,13 +8,13 @@
     <meta name="description" content="Production-ready, performance-first, template built with React/Redux/React-Semantic-UI">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/" />
-    <!--  -->
-    <!-- XXX:FaviconsWebpackPlugin doesn't generate meta content below: -->
+    <!-- NOTE:FaviconsWebpackPlugin doesn't generate meta content below: -->
     <!-- Disable tap highlight on IE -->
+    <meta name="theme-color" content="<%=htmlWebpackPlugin.options.theme_color%>"/>
     <meta name="msapplication-tap-highlight" content="no">
     <!-- Web Application Manifest -->
     <link rel="manifest" href="manifest.json">
-    <!--  -->
+
     <!-- META TAG THAT IS REPLACED WITH INLINE STYLES IN SSR -->
     <meta name="ssr-styles"/>
 </head>

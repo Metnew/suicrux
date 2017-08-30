@@ -8,11 +8,11 @@ import {auth} from './auth'
 
 // Root reducer
 export default combineReducers({
-  layout,
-  me: combineReducers({auth}),
-  entities: combineReducers({
-    posts,
-    users
-  }),
-  routing: routerReducer
+	layout,
+	me: combineReducers({auth}),
+	entities: combineReducers({
+		posts,
+		users
+	}),
+	routing: routerReducer
 })

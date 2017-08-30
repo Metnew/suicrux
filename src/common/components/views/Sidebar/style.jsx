@@ -26,7 +26,7 @@ export const SidebarLogoContainer = styled.a`
     padding: 20px;
   `};
 `
-// color: ${props => props.theme.primaryColorText}!important;
+// Color: ${props => props.theme.primaryColorText}!important;
 export const SidebarItem = styled(Menu.Item)``
 //
 export const SidebarLogoutItem = SidebarItem.extend`

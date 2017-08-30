@@ -1,11 +1,5 @@
-require('babel-core/register')
-// NOTE: uncomment these lines below if you use scss/sass!
-// require.extensions['.scss'] = () => {}
-// require.extensions['.css'] = () => {}
-global.window = {
-	addEventListener: () => {}
-}
-global.i18n = () => {}
+global.i18n = str => str
 global.fetch = require('node-fetch')
+
+// Import app
 require('./server')
-// SSR is under development, be patient :)

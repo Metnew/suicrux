@@ -1,6 +1,5 @@
 {
   "moduleFileExtensions": ["js", "jsx"],
-  "testPathIgnorePatterns": ["<rootDir>/src/common/config"],
   "rootDir": "../",
   "setupFiles": ["<rootDir>/jest_config/setupJest.js"],
   "automock": false,
@@ -20,7 +19,7 @@
     "^reducers/posts$": "<rootDir>/src/common/reducers/posts",
     "^reducers/users$": "<rootDir>/src/common/reducers/users",
 
-    "^routing": "<rootDir>/src/common/routing",
+    "^routing$": "<rootDir>/src/common/routing",
     "^components$": "<rootDir>/src/common/components",
     "^containers$": "<rootDir>/src/common/containers"
   }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const TextCenter = styled.div`text-align: center;`
 
 export const Hidden = elem => {
-  return styled(elem)`
+	return styled(elem)`
     display: none;
   `
 }
