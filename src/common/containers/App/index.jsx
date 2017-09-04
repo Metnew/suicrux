@@ -2,10 +2,11 @@
  * @flow
  */
 
-import * as React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, matchPath} from 'react-router'
 import {push} from 'react-router-redux'
+import _ from 'lodash'
 // Import main views
 import Sidebar from 'components/parts/Sidebar'
 import Footer from 'components/parts/Footer'
@@ -13,6 +14,8 @@ import Header from 'components/parts/Header'
 // Import actions
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
+import {getAuthState, getLayoutState} from 'selectors'
+import {getWindowInnerWidth} from 'const'
 // Import styled components
 import {
 	PageLayout,
@@ -23,13 +26,14 @@ import {
 	MainContainer,
 	StyledDimmer
 } from './style'
+import type {RouteItem} from 'types'
+import type {GlobalState} from 'reducers'
+import type {Node} from 'react'
 
-type DefaultProps = any
-type State = any
 type Props = {
-	children: React.Node,
+	children: Node,
 	// Routes of app passed as props in `Root`
-	routes: any,
+	routes: Array<RouteItem>,
 	// React-router `withRouter` props
 	location: any,
 	history: any,
@@ -48,7 +52,8 @@ type Props = {
 	isMobileSM: boolean
 }
 
-class App extends React.Component<DefaultProps, Props, State> {
+class App extends Component {
+	props: Props
 	componentWillMount () {
 		const {isLoggedIn} = this.props
 		if (process.env.BROWSER) {
@@ -114,21 +119,12 @@ class App extends React.Component<DefaultProps, Props, State> {
    * Returns routing for sidebar menu
    * @return {Array} array of routes that will be rendered in sidebar menu
    */
-	getSidebarRouting () {
-		type Route = {
-			path: string,
-			name: string,
-			icon: string,
-			external: boolean,
-			strict: boolean,
-			exact: boolean
-		}
-
+	getSidebarRouting (): Array<RouteItem> {
 		const sidebarRouting = this.props.routes
-			.filter(a => a.sidebarVisible)
-			.map((a: Object): Route => {
+			.filter((a: RouteItem) => a.sidebarVisible)
+			.map((a: RouteItem): RouteItem => {
 				const {path, name, icon, external, strict, exact} = a
-				const b: Route = {path, name, icon, external, strict, exact}
+				const b: RouteItem = {path, name, icon, external, strict, exact}
 				return b
 			})
 		return sidebarRouting
@@ -140,9 +136,10 @@ class App extends React.Component<DefaultProps, Props, State> {
   * @return {String} page title
   */
 	getPageTitle (pathname: string) {
-		const matchedRoutes = this.props.routes.filter(a => matchPath(pathname, a))
-		const currentRoute = matchedRoutes[0] || {}
-		const title = currentRoute.name || '404'
+		const {routes} = this.props
+		const currentRoute: Object =
+			_.find(routes, (a: RouteItem) => matchPath(pathname, a)) || {}
+		const title: string = currentRoute.name || '404'
 		return title
 	}
 
@@ -218,17 +215,11 @@ class App extends React.Component<DefaultProps, Props, State> {
 	}
 }
 
-type StateToProps = {
-	sidebarOpened: boolean,
-	isMobile: boolean,
-	isMobileXS: boolean,
-	isMobileSM: boolean,
-	isLoggedIn: boolean
-}
-
-function mapStateToProps (state: any): StateToProps {
-	const {sidebarOpened, isMobile, isMobileXS, isMobileSM}: any = state.layout
-	const {isLoggedIn}: any = state.me.auth
+function mapStateToProps (state: GlobalState) {
+	const layoutState = getLayoutState(state)
+	const authState = getAuthState(state)
+	const {sidebarOpened, isMobile, isMobileXS, isMobileSM} = layoutState
+	const {isLoggedIn} = authState
 	return {
 		sidebarOpened,
 		isMobile,
@@ -238,16 +229,16 @@ function mapStateToProps (state: any): StateToProps {
 	}
 }
 
-function mapDispatchToProps (dispatch: (action: Object) => void) {
+function mapDispatchToProps (dispatch) {
 	let resizer
 	return {
-		closeSidebar: (): void => {
+		closeSidebar () {
 			dispatch(CLOSE_SIDEBAR())
 		},
-		logout: (): void => {
+		logout () {
 			dispatch(LOGOUT_AUTH())
 		},
-		toggleSidebar: (): void => {
+		toggleSidebar () {
 			dispatch(OPEN_SIDEBAR())
 		},
 		/**
@@ -258,16 +249,17 @@ function mapDispatchToProps (dispatch: (action: Object) => void) {
          * @param  {String}  path       [current location path]
          * @param  {Boolean} isLoggedIn [is user logged in?]
          */
-		checkAuthLogic: (path: string, isLoggedIn: boolean) => {
+		checkAuthLogic (path: string, isLoggedIn: boolean) {
 			const authPath = '/auth'
 			const homePath = '/'
 			if (isLoggedIn && path === authPath) {
 				dispatch(push(homePath))
 			}
 		},
-		handleWindowResize: () => {
+		handleWindowResize () {
 			clearTimeout(resizer)
-			resizer = setTimeout(() => dispatch(WINDOW_RESIZE()), 150)
+			const innerWidth: number = getWindowInnerWidth(window)
+			resizer = setTimeout(() => dispatch(WINDOW_RESIZE(innerWidth)), 150)
 		}
 	}
 }

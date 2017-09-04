@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
@@ -7,63 +8,70 @@ import {Loader} from 'semantic-ui-react'
 //
 import UserItemComponent from './components'
 import {GET_USERS, GET_USERS_PENDING} from 'actions/users'
+import {getEntitiesUsersState} from 'selectors'
+import type {UserItem as UserItemType} from 'types'
+import type {GlobalState} from 'reducers'
+
+type Props = {
+	user: UserItemType,
+	userId: string,
+	getUsers: (id: string) => void,
+	isLoaded: boolean,
+	isLoading: boolean
+}
 
 class UserItem extends Component {
-	static propTypes = {
-		user: PropTypes.object,
-		userId: PropTypes.string,
-		getUsers: PropTypes.func,
-		isLoaded: PropTypes.bool,
-		isLoading: PropTypes.bool
-	}
+	props: Props
 
 	componentDidMount () {
 		const {isLoaded, userId} = this.props
 		if (!isLoaded) {
-			this.props.getUsers(userId)
+			this.getUsers(userId)
 		}
+	}
+
+	getUsers (id: string) {
+		this.props.getUsers(id)
 	}
 
 	render () {
 		const {user, isLoaded} = this.props
-		const props = {user, isLoaded}
+		console.log(user, isLoaded)
 		return (
 			<div>
 				<Helmet>
 					<title>
-						{`React-Semantic.UI-Starter: ${isLoaded ? `${user.name}` : 'User'}`}
+						{`Noir:${isLoaded ? `${user.name}` : 'User'}`}
 					</title>
 				</Helmet>
 				{isLoaded
-					? <UserItemComponent {...props}/>
+					? <UserItemComponent user={user} />
 					: <Loader active>Loading...</Loader>}
 			</div>
 		)
 	}
 }
 
-function mapStateToProps (state, props) {
-	const {users} = state.entities
-	const {id} = props.match.params
+function mapStateToProps (state: GlobalState, props) {
+	const users = getEntitiesUsersState(state)
+	console.log(state)
+	const userId: string = props.match.params.id
 	const {entities, isLoaded, isLoading} = users
-	const user = entities ? entities[id] : {}
+	const user = entities ? entities[userId] : {}
+	console.log(entities, userId)
 	return {
 		user,
-		userId: id,
+		userId,
 		isLoading,
 		isLoaded
 	}
 }
 
-function mapDispatchToProps (dispatch) {
-	return {
-		getUsers: async id => {
-			dispatch({type: GET_USERS_PENDING})
-			const result = await GET_USERS(id)
-			return dispatch(result)
-		}
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+	getUsers (id: string) {
+		dispatch(GET_USERS(id))
 	}
-}
+})
 
 export default withRouter(
 	connect(mapStateToProps, mapDispatchToProps)(UserItem)

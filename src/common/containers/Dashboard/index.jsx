@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
@@ -6,15 +7,19 @@ import {Helmet} from 'react-helmet'
 //
 import DashboardComponent from './components'
 import {GET_POSTS} from 'actions/posts'
+import {getEntitiesPostsState} from 'selectors'
+import type {GlobalState} from 'reducers'
+
+type Props = {
+	posts: Object,
+	postsLoaded: boolean,
+	postsLoading: boolean,
+	count: number,
+	getPosts: () => void
+}
 
 class Dashboard extends Component {
-	static propTypes = {
-		posts: PropTypes.object,
-		postsLoaded: PropTypes.bool,
-		postsLoading: PropTypes.bool,
-		count: PropTypes.number,
-		getPosts: PropTypes.func.isRequired
-	}
+	props: Props
 
 	componentDidMount () {
 		this.props.getPosts()
@@ -25,7 +30,7 @@ class Dashboard extends Component {
 		return (
 			<div>
 				<Helmet>
-					<title>Dashboard</title>
+					<title>Noir:Dashboard</title>
 				</Helmet>
 				{postsLoaded
 					? <DashboardComponent
@@ -37,14 +42,14 @@ class Dashboard extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-	const {posts} = state.entities
-	const postsLoaded = posts.isLoaded
-	const postsLoading = posts.isLoading
-	const items = posts.entities
-	const {count} = posts
+function mapStateToProps (state: GlobalState) {
+	const postsState = getEntitiesPostsState(state)
+	const postsLoaded = postsState.isLoaded
+	const postsLoading = postsState.isLoading
+	const posts = postsState.entities
+	const {count} = postsState
 	return {
-		posts: items,
+		posts,
 		postsLoading,
 		postsLoaded,
 		count
@@ -53,9 +58,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
 	return {
-		getPosts: async () => {
-			const result = await GET_POSTS()
-			return dispatch(result)
+		getPosts () {
+			dispatch(GET_POSTS())
 		}
 	}
 }
