@@ -1,4 +1,7 @@
-// You know where to get new material palette, right?: https://www.materialpalette.com/
+/**
+ * You know where to get a new material palette, right?:
+ * {@link https://www.materialpalette.com/}
+ */
 export default {
 	primaryColorDark: '#00796B',
 	primaryColor: '#009688',
