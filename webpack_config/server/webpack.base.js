@@ -4,10 +4,7 @@ import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import childProcess from 'child_process'
-import _ from 'lodash'
-import I18nPlugin from 'i18n-webpack-plugin'
 
-const exec = childProcess.execSync
 const {
 	SENTRY_DSN,
 	CLIENT_DIST_PATH,
@@ -18,6 +15,7 @@ const {
 } = config
 
 // Cleare dist dir before run
+const exec = childProcess.execSync
 exec(`rm -rf ${config.distPath}/server`)
 
 const definePluginArgs = {
@@ -28,11 +26,10 @@ const definePluginArgs = {
 	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH)
 }
 
+const devtool = isProduction ? 'cheap-source-map' : 'source-map'
 const entry = isProduction
 	? path.join(config.srcPath, './server')
 	: path.join(config.srcPath, './server/server')
-
-const devtool = isProduction ? 'cheap-source-map' : 'eval-source-map'
 
 let nodeModules = {}
 fs
@@ -57,7 +54,7 @@ const baseWebpackConfig = {
 	target: 'node',
 	output: {
 		path: path.join(config.distPath, './server'),
-		filename: 'server.js',
+		filename: 'index.js',
 		libraryTarget: 'commonjs2'
 	},
 	externals: nodeModules,

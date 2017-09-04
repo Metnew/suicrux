@@ -1,4 +1,3 @@
-import path from 'path'
 import webpack from 'webpack'
 import baseWebpackConfig from './webpack.base'
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
@@ -18,7 +17,7 @@ const plugins = [
 		compress: {
 			warnings: false,
 			unused: true,
-			dead_code: true,
+			dead_code: true
 			// This option removes console.log in production
 			// drop_console: true
 		},
@@ -28,14 +27,12 @@ const plugins = [
 	}),
 	new OptimizeJsPlugin({
 		sourceMap: true
-	}),
+	})
 ]
 
 // Do you want to use bundle analyzer?
 if (ANALYZE_BUNDLE) {
-	baseWebpackConfig.plugins.push(
-		new BundleAnalyzerPlugin({analyzerMode: 'static'})
-	)
+	plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
 }
 
 export default Object.assign({}, baseWebpackConfig, {
