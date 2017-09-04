@@ -1,5 +1,5 @@
+// @flow
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {Menu, Icon} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
 import {
@@ -10,15 +10,19 @@ import {
 	SidebarLogoutItem
 } from './style'
 import {Spacer} from 'styles/base'
+
+import type {RouteItem} from 'types'
 // require('./index.scss')
 
+type Props = {
+	open: boolean,
+	logout: () => void,
+	routing: Array<RouteItem>,
+	isMobile: boolean
+}
+
 export default class SidebarComponent extends Component {
-	static propTypes = {
-		open: PropTypes.bool.isRequired,
-		logout: PropTypes.func.isRequired,
-		routing: PropTypes.array.isRequired,
-		isMobile: PropTypes.bool.isRequired
-	}
+	props: Props
 
 	render () {
 		const {open, logout, routing, isMobile} = this.props
