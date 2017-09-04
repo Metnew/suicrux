@@ -1,13 +1,25 @@
+// @flow
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {Form, Message, Grid} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 import _ from 'lodash'
 import {LoginButton} from './style'
 import {TextCenter} from 'styles/base'
 
-export default class LoginComponent extends Component {
-	constructor (props) {
+type Props = {
+	login: (data: Object) => void,
+	errors: Object
+}
+
+type State = {
+	username: string,
+	password: string
+}
+
+class LoginComponent extends Component {
+	props: Props
+	state: State
+	constructor (props: Props) {
 		super(props)
 		this.state = {
 			username: '',
@@ -15,19 +27,13 @@ export default class LoginComponent extends Component {
 		}
 	}
 
-	static propTypes = {
-		login: PropTypes.func,
-		errors: PropTypes.object
-	}
-
-	handleSubmit (e) {
+	handleSubmit (e: Event) {
 		e.preventDefault()
-		const {login} = this.props
 		const {username, password} = this.state
-		login({username, password})
+		this.props.login({username, password})
 	}
 
-	handleChange (e, {name, value}) {
+	handleChange (e: Event, {name, value}) {
 		this.setState({
 			[name]: value
 		})
@@ -53,7 +59,7 @@ export default class LoginComponent extends Component {
 				relaxed
 			>
 				<Helmet>
-					<title>React-Semantic.UI-Starter: Login</title>
+					<title>Noir:Login</title>
 				</Helmet>
 				<Grid.Row>
 					<Grid.Column tablet={10} mobile={16} computer={6}>
@@ -89,3 +95,5 @@ export default class LoginComponent extends Component {
 		)
 	}
 }
+
+export default LoginComponent

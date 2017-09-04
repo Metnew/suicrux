@@ -1,25 +1,27 @@
+// @flow
 import React, {Component} from 'react'
 import {Card, Grid} from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 import _ from 'lodash'
 import DashboardCardComponent from './DashboardCardComponent'
+import type {PostItem} from 'types'
+
+type Props = {
+	posts: Object,
+	postsLoaded: boolean,
+	postsLoading: boolean,
+	count: number
+}
 
 export default class DashboardComponent extends Component {
-	static propTypes = {
-		posts: PropTypes.object,
-		postsLoaded: PropTypes.bool,
-		postsLoading: PropTypes.bool,
-		count: PropTypes.number
-	}
+	props: Props
 
-	shouldComponentUpdate (nextProps) {
+	shouldComponentUpdate (nextProps: Props) {
 		const {posts} = this.props
 		const nextPosts = nextProps.posts
 		return !_.isEqual(posts, nextPosts)
 	}
 
 	render () {
-		// {count, postsLoading}
 		const {posts, postsLoaded} = this.props
 
 		return (
@@ -28,7 +30,7 @@ export default class DashboardComponent extends Component {
 					<Grid.Column width={16}>
 						{postsLoaded &&
 							<Card.Group itemsPerRow={3} doubling stackable>
-								{_.map(posts, (post, i) =>
+								{_.map(posts, (post: PostItem, i) =>
 									<DashboardCardComponent {...post} key={i} />
 								)}
 							</Card.Group>}
