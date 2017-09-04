@@ -3,17 +3,20 @@
  */
 import chalk from 'chalk'
 import jwt from 'jsonwebtoken'
-import {JWT_TOKEN} from 'common/api'
+import {JWT_TOKEN} from 'api/LocalStorageCookiesSvc'
 /**
  * Auth-related middleware.
  * Checks that user is logged in and token is valid
- * @param  {Request}  req  
+ * @param  {Request}  req
  * @param  {Response} res
  * @param  {Function} next
  */
 export default (req: Object, res: Object, next: () => void) => {
 	const {JWT_SECRET} = process.env
-	req.user = {}
+	req.user = {
+		token: null,
+		isLoggedIn: false
+	}
 	const token: string = req.cookies[JWT_TOKEN]
 	if (!token) {
 		return next()
