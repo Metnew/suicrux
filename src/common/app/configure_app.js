@@ -1,3 +1,4 @@
+// @flow
 // Redux stuff
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware, compose} from 'redux'
@@ -11,7 +12,7 @@ import {routes, history} from 'routing'
  * @param  {Object} initialState - preloadedState
  * @return {Object} - configured store
  */
-const configureStore = initialState => {
+const configureStore = (initialState: Object) => {
 	const thunkApplied = applyMiddleware(thunk)
 	const routerMiddlewareApplied = applyMiddleware(routerMiddleware(history))
 	let enhancers
@@ -31,7 +32,7 @@ const configureStore = initialState => {
  * @param  {Object} initialState
  * @return {Object} Object containting configured store, routes, history
  */
-export default ({initialState}) => {
+export default (initialState: Object) => {
 	const store = configureStore(initialState)
 	return {
 		store,
