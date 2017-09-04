@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {posts as reducer, initialState} from 'reducers/posts'
 import * as actions from 'actions'
 

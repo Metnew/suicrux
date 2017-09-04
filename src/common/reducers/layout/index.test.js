@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {layout as reducer, initialState} from 'reducers/layout'
 import * as actions from 'actions'
 
