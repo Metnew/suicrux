@@ -36,7 +36,6 @@ class UserItem extends Component {
 
 	render () {
 		const {user, isLoaded} = this.props
-		console.log(user, isLoaded)
 		return (
 			<div>
 				<Helmet>
@@ -54,11 +53,9 @@ class UserItem extends Component {
 
 function mapStateToProps (state: GlobalState, props) {
 	const users = getEntitiesUsersState(state)
-	console.log(state)
 	const userId: string = props.match.params.id
 	const {entities, isLoaded, isLoading} = users
 	const user = entities ? entities[userId] : {}
-	console.log(entities, userId)
 	return {
 		user,
 		userId,
