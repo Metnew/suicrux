@@ -1,11 +1,12 @@
 /**
  * @flow
  */
-import * as React from 'react'
+import React from 'react'
+import {Link} from 'react-router-dom'
 import {Grid, Header, Icon} from 'semantic-ui-react'
 import {StyledFooter, StyledFooterInner} from './style'
 
-const Footer = (): React.Node => {
+const Footer = () => {
 	return (
 		<StyledFooter>
 			<StyledFooterInner>
@@ -16,7 +17,7 @@ const Footer = (): React.Node => {
 								<Header as="h3" inverted>
 									<Icon name="github" />
 									<Header.Content>
-										React-Semantic.UI-Starter
+										Noir
 										<Header.Subheader>
 											Semantic.UI is cool, really.
 										</Header.Subheader>

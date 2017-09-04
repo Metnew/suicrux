@@ -1,7 +1,7 @@
 /**
  * @flow
  */
-import * as React from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Icon, Popup} from 'semantic-ui-react'
 import {isEqual} from 'lodash'
@@ -14,16 +14,15 @@ import {
 } from './style'
 import {Spacer} from 'styles/base'
 
-type DefaultProps = any
 type Props = {
 	title: string,
 	toggleSidebar: () => void,
 	isLoggedIn: boolean,
 	isMobile: boolean
 }
-type State = any
 
-class Header extends React.Component<DefaultProps, Props, State> {
+class Header extends React.Component {
+	props: Props
 	shouldComponentUpdate (nextProps: Props) {
 		return !isEqual(nextProps, this.props)
 	}
