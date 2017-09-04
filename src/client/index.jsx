@@ -7,6 +7,7 @@ import 'isomorphic-fetch'
 import React from 'react'
 import ReactDOM, {render} from 'react-dom'
 import {configureApp, configureRootComponent} from 'common/app'
+import {persistStore} from 'redux-persist'
 
 if (process.env.NODE_ENV === 'production') {
 	require('common/pwa')
@@ -45,6 +46,9 @@ const initialState = window.__INITIAL_STATE__ || {}
 const propsForRoot = configureApp(initialState)
 const RootComponent = configureRootComponent(propsForRoot)
 render(RootComponent, document.getElementById('app'))
+
+const {store} = propsForRoot
+persistStore(store)
 
 if (module.hot) {
 	module.hot.accept()

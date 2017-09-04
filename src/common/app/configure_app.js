@@ -1,6 +1,7 @@
 // @flow
 // Redux stuff
 import thunk from 'redux-thunk'
+import {autoRehydrate} from 'redux-persist'
 import {createStore, applyMiddleware, compose} from 'redux'
 import {routerMiddleware} from 'react-router-redux'
 // Application
@@ -13,18 +14,23 @@ import {routes, history} from 'routing'
  * @return {Object} - configured store
  */
 const configureStore = (initialState: Object) => {
-	const thunkApplied = applyMiddleware(thunk)
-	const routerMiddlewareApplied = applyMiddleware(routerMiddleware(history))
-	let enhancers
-
-	if (process.env.NODE_ENV === 'development') {
-		const {composeWithDevTools} = require('redux-devtools-extension')
-		enhancers = composeWithDevTools(thunkApplied, routerMiddlewareApplied)
-	} else {
-		enhancers = compose(thunkApplied, routerMiddlewareApplied)
+	const rehydrate = autoRehydrate()
+	const middlewares = [thunk, routerMiddleware(history)]
+	const appliedMiddlewares = middlewares.map(a => applyMiddleware(a))
+	const enhancers = [rehydrate].concat(appliedMiddlewares)
+	//
+	const getComposeFunc = () => {
+		if (process.env.NODE_ENV === 'development') {
+			const {composeWithDevTools} = require('redux-devtools-extension')
+			return composeWithDevTools
+		}
+		return compose
 	}
 
-	return createStore(rootReducer, initialState, enhancers)
+	const composeFunc = getComposeFunc()
+	const composedEnhancers = composeFunc.apply(null, enhancers)
+
+	return createStore(rootReducer, initialState, composedEnhancers)
 }
 
 /**
