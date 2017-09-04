@@ -1,73 +1,70 @@
-// Request utils,
-// Feel free to replace with your code
-// (get, post are used in ApiServices)
+/**
+ * @flow
+ */
 
-import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
+import {
+	getLocalToken,
+	resetLocalToken
+} from 'api/LocalStorageCookiesSvc'
+import _ from 'lodash'
 
 /**
  * Create request wrapper for certain method
  * @param  {String} method - Request method
  * @return {Function}
  */
-export default function (method) {
+const requestWrapper = (
+	method: 'GET' | 'POST' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PUT' | 'PATCH'
+) => {
 	/**
 	 * Creates request to `url` with `data`
-	 * @param  {String} url        		Request URL
-	 * @param  {Object} [data= null]	Data for Request
-	 * @return {Object}             	Request response
+	 * @param  {String} 	url        				Request URL
+	 * @param  {Object} 	[data= null]			Data for Request
+	 * @param  {Object} 	[options= {}]			Additional options
+	 * @param  {Function} [cb = (a) => a]		Transform request before it will be sent
+	 * @return {Object}             				Request response
 	 */
-	return async (url, data = null) => {
+	return async (
+		url: string,
+		data: Object | null = null,
+		options: Object = {},
+		cb: (request: Object) => Object = a => a
+	) => {
 		// get decorated url and request params
-		const {URL, request} = decorateRequest({method, url, data})
+		const {URL, request} = decorateRequest({method, url, data, options, cb})
 		// create request!
-		return fetch(URL, request).then(checkStatus).then(parseJSON).catch(err => {
-			console.error(err)
-			return err
-		})
+		return fetch(URL, request)
+			.then(checkStatus)
+			.then(parseJSON)
+			.catch((err: string) => {
+				console.error(err)
+				return err
+			})
 	}
 }
+
 /**
- * Create
- * @param  {String} method 			 -	Request method
- * @param  {String} url 				 -  Request URL
- * @param  {Object} [data= null] -	Data for Request
- * @return {Object}        			 - 	Decorated request params
+ * middlewares
+ * 1. parse response
+ * 2. add "ok" property to result
+ * 3. return request result
+ * @param  {Object} res - Response from resource
+ * @return {Object} response result with "ok" property
  */
-function decorateRequest ({method, url, data}) {
-	// Default params for fetch = method + (Content-Type)
-	const defaults = {
-		method,
-		headers: {
-			'Content-Type': 'application/json; charset=UTF-8'
+async function parseJSON (res: Response): Object {
+	let json: Object
+	try {
+		json = await res.json()
+	} catch (e) {
+		if (res.status === 204) {
+			return {ok: true, data: {}}
 		}
+		return {ok: false}
 	}
-	const token = getLocalToken()
-	const isRequestToExternalResource = /(http|https):\/\//.test(url)
-	const URL = isRequestToExternalResource ? url : process.env.BASE_API + url
-
-	const requestAuthDecoration =
-		!isRequestToExternalResource && token
-			? {headers: {Authorization: `JWT ${getLocalToken()}`}}
-			: {}
-
-	const requesDataDecoration = data ? {body: JSON.stringify(data)} : {}
-	const request = Object.assign(
-		{},
-		defaults,
-		requestAuthDecoration,
-		requesDataDecoration
-	)
-
-	if (!isRequestToExternalResource) {
-		console.log(`Request ${url} was sent to our domain`, request)
-	} else {
-		console.log(`Request ${url} was sent to external domain`, request)
+	if (!res.ok) {
+		return {data: json, ok: false}
 	}
-
-	return {
-		request,
-		URL
-	}
+	return {data: json, ok: true}
 }
 
 /**
@@ -75,7 +72,7 @@ function decorateRequest ({method, url, data}) {
  * @param  {Object} response - Response
  * @return {Object}          - Response
  */
-function checkStatus (response) {
+function checkStatus (response: Response): Response {
 	const {status} = response
 	if (status >= 200 && status < 300) {
 		// Everything is ok
@@ -101,26 +98,66 @@ function checkStatus (response) {
 }
 
 /**
- * middlewares
- * 1. parse response
- * 2. add "ok" property to result
- * 3. return request result
- * @param  {Object} res - Response from resource
- * @return {Object} response result with "ok" property
+ * Create
+ * @param  {String} method 			 -	Request method
+ * @param  {String} url 				 -  Request URL
+ * @param  {Object} [data= null] -	Data for Request
+ * @return {Object}        			 - 	Decorated request params
  */
-async function parseJSON (res) {
-	let json
-	try {
-		json = await res.json()
-	} catch (e) {
-		return {data: {}, ok: false}
+function decorateRequest ({method, url, data, options, cb}): Object {
+	// Default params for fetch = method + (Content-Type)
+	const defaults = {
+		method,
+		headers: {}
+	}
+	const token: string | null = getLocalToken()
+	const isRequestToExternalResource = /(http|https):\/\//.test(url)
+	const URL = isRequestToExternalResource ? url : process.env.BASE_API + url
+
+	const requestAuthDecoration =
+		!isRequestToExternalResource && token
+			? {headers: {Authorization: `JWT ${token}`}}
+			: {}
+
+	const requestHeadersDataDecoration = getHeaderDataDecoration(data)
+
+	const request = _.merge(
+		{},
+		defaults,
+		requestAuthDecoration,
+		requestHeadersDataDecoration
+	)
+
+	if (!isRequestToExternalResource) {
+		console.log(`Request ${url} was sent to our domain`, request)
+	} else {
+		console.log(`Request ${url} was sent to external domain`, request)
 	}
 
-	// Simplest validation ever
-	if (!res.ok) {
-		return {data: json, ok: false}
+	return {
+		request,
+		URL
 	}
-	// ResultOK - is a function with side effects
-	// It removes ok property from result object
-	return {data: json, ok: true}
 }
+
+function getHeaderDataDecoration (data): Object {
+	const requesDataDecoration = data ? {body: JSON.stringify(data)} : {}
+
+	const requestContentTypeDecoration =
+		data instanceof FormData
+			? {}
+			: {headers: {'Content-Type': 'application/json; charset=UTF-8'}}
+
+	return {...requesDataDecoration, ...requestContentTypeDecoration}
+}
+
+export const get = requestWrapper('GET')
+export const post = requestWrapper('POST')
+export const put = requestWrapper('PUT')
+export const patch = requestWrapper('PATCH')
+export const del = requestWrapper('DELETE')
+
+// USAGE:
+// get('https://www.google.com', options)
+//
+// post('https://www.google.com', data, options)
