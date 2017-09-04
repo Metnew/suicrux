@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === 'production') {
 const initialState = window.__INITIAL_STATE__ || {}
 // NOTE: V8 doesn't optimize `delete`
 // delete window.__INITIAL_STATE__
-const propsForRoot = configureApp({initialState})
+const propsForRoot = configureApp(initialState)
 const RootComponent = configureRootComponent(propsForRoot)
 render(RootComponent, document.getElementById('app'))
 
