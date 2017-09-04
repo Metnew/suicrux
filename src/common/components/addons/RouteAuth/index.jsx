@@ -1,7 +1,7 @@
 /**
  * @flow
  */
-import * as React from 'react'
+import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
 
 /**
@@ -9,7 +9,7 @@ import {Route, Redirect} from 'react-router-dom'
  */
 
 type Props = {
-	canAccess: (string) => boolean,
+	canAccess: string => boolean,
 	path: string
 }
 

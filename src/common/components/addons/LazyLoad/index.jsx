@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Loader} from 'semantic-ui-react'
@@ -6,14 +7,19 @@ import _ from 'lodash'
  * @desc small addon that allows you to lazy load some parts of your app
  * Primarly routes (e.g. Route + RouteAuth)
  */
-class LazyLoad extends Component {
-	static propTypes = {
-		component: PropTypes.any
-		// NOTE: @Metnew: it'd be nice to make it works with children props!
-		//  children: PropTypes.node
-	}
 
-	state = {
+type Props = {
+	component: any
+}
+
+type State = {
+	componentLoaded: boolean,
+	componentToRender: null | Function
+}
+
+class LazyLoad extends Component {
+	props: Props
+	state: State = {
 		componentLoaded: false,
 		componentToRender: null
 	}

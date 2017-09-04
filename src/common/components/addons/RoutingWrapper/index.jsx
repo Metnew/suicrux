@@ -1,13 +1,13 @@
 /**
  * @flow
  */
-import * as React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Switch, Redirect} from 'react-router-dom'
-import type {RouteItem} from 'routing'
 import LazyLoad from 'components/addons/LazyLoad'
+import {getAuthState} from 'selectors'
+import type {RouteItem} from 'routing'
 
-type DefaultProps = any
 type Props = {
 	routes: RouteItem[],
 	store: Object
@@ -18,7 +18,8 @@ type Props = {
  * @desc This function returns JSX, so we can think about it as "stateless component"
  * @param {Function} authCheck checks is user logged in
  */
-export default class RoutingWrapper extends React.Component<DefaultProps, Props> {
+export default class RoutingWrapper extends Component {
+	props: Props
 	/**
     * Checks Auth logic. Is user allowed to visit certain path?
     * @param  {String} path next path to visit
@@ -27,7 +28,7 @@ export default class RoutingWrapper extends React.Component<DefaultProps, Props>
     */
 	authCheck (path: string): boolean {
 		const {store} = this.props
-		const {isLoggedIn} = store.getState().me.auth
+		const {isLoggedIn} = getAuthState(store.getState())
 		const authPath = '/auth'
 		const allowedToVisitPath = [authPath]
 
@@ -45,7 +46,7 @@ export default class RoutingWrapper extends React.Component<DefaultProps, Props>
 			a => a.tag || a.component || a.lazy || !a.external
 		)
 		// render components that are inside Switch (main view)
-		const routesRendered = onlyRoutes.map((a, i) => {
+		const routesRendered = onlyRoutes.map((a: RouteItem, i) => {
 			// get tag for Route.
 			// is it "RouteAuth" `protected route` or "Route"?
 			const Tag = a.tag
