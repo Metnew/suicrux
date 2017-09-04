@@ -3,7 +3,7 @@
  * @desc
  */
 import React from 'react'
-import type {RouteItem} from 'routing'
+import type {RouteItem} from 'types'
 // Redux stuff
 import Root from 'components/parts/Root'
 // Styled-components's injectGlobal styles
