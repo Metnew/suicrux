@@ -7,6 +7,7 @@ import SSR from './ssr'
 import fetch from 'isomorphic-fetch'
 
 global.fetch = fetch
+global.window = {}
 
 /**
  * Mount API, SSR and middlewares to app.

@@ -1,13 +1,10 @@
 /**
  * @file
  */
-import path from 'path'
-import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackHotFullStack from 'webpack-get-code-on-done'
-import WriteFilePlugin from 'write-file-webpack-plugin'
 import config from './config'
 import client from './client/webpack.dev.babel'
 import server from './server/webpack.dev.babel'
@@ -20,7 +17,7 @@ const webpackConfig = [client, server]
 const compiler = webpack(webpackConfig)
 // Apply some commonly used plugins
 compiler.apply(new FriendlyErrors())
-compiler.apply(new LogPlugin(config.PORT))
+compiler.apply(new LogPlugin(process.env.PORT))
 compiler.apply(new webpack.NoEmitOnErrorsPlugin())
 // Create devMiddleWare
 const devMiddleWare = webpackDevMiddleware(compiler, {

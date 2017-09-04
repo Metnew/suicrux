@@ -1,10 +1,8 @@
-import path from 'path'
 import webpack from 'webpack'
 import baseWebpackConfig from './webpack.base'
 import WriteFilePlugin from 'write-file-webpack-plugin'
 import AutoDllPlugin from 'autodll-webpack-plugin'
 import config from '../config'
-import _ from 'lodash'
 
 const {isProduction} = config
 const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'

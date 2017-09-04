@@ -38,7 +38,7 @@ PORT = PORT || 4000
 const isProduction = process.env.NODE_ENV === 'production'
 
 export default {
-	title: 'React-Semantic.UI-Starter',
+	title: 'Noir',
 	publicPath: '/',
 	// i18n object
 	i18n,
@@ -60,7 +60,7 @@ export default {
 	rootPath,
 	// text for WebpackBannerPlugin
 	banner:
-		'MIT License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/react-semantic.ui-starter',
+		'Apache 2 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/noir',
 	// your manifest.json
 	manifest,
 	vendor: [

@@ -1,12 +1,11 @@
 import path from 'path'
-import child_process from 'child_process'
+import childProcess from 'child_process'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import {StatsWriterPlugin} from 'webpack-stats-plugin'
 // import ManifestPlugin from 'webpack-manifest-plugin'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
-import _ from 'lodash'
 
 const {
 	GA_ID,
@@ -17,7 +16,8 @@ const {
 	publicPath,
 	isProduction
 } = config
-const exec = child_process.execSync
+
+const exec = childProcess.execSync
 exec(`rm -rf ${config.distPath}/client`)
 
 const definePluginArgs = {
@@ -33,6 +33,7 @@ const devtool = isProduction ? 'cheap-source-map' : 'source-map'
 
 const baseBuild = {
 	name: 'client',
+	devtool,
 	entry: {
 		client: path.join(srcPath, './client')
 	},
