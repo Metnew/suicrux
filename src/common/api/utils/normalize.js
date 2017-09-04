@@ -1,3 +1,4 @@
+// @flow
 import {normalize, schema} from 'normalizr'
 import _ from 'lodash'
 
@@ -11,7 +12,7 @@ import _ from 'lodash'
 // XXX: normalization is recommended, but not a must
 // you styill can write a bunch of custom code in your reducers to normalize every reqests
 
-export const normalizeArrayOfItems = array => {
+export const normalizeArrayOfItems = (array: Array<any>) => {
 	// Flat array, if it had 2 levels of depth
 	const flatArray = _.flatten(array)
 	// Create schema for field, e.g field is `data`
@@ -22,6 +23,6 @@ export const normalizeArrayOfItems = array => {
 	const normalizedData = normalize(flatArray, dataListSchema)
 	// Get `data` entities
 	const entities = normalizedData.entities.data
-	const count = normalizedData.result.length
+	const count: number = normalizedData.result.length
 	return {entities, count}
 }
