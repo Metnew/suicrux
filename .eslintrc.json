@@ -29,10 +29,5 @@
 		"i18n": true,
 		"Raven": true,
 		"ga": true
-	},
-	"settings": {
-		"flowtype": {
-      "onlyFilesWithFlowAnnotation": false
-    }
 	}
 }
