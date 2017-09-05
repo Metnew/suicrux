@@ -83,7 +83,7 @@
 		"husky": "^0.14.3",
 		"i18n-webpack-plugin": "^1.0.0",
 		"img-loader": "^2.0.0",
-		"jest": "^20.0.4",
+		"jest": "^21.0.0",
 		"node-sass": "^4.5.3",
 		"nodemon": "^1.11.0",
 		"open": "0.0.5",
