@@ -3,7 +3,7 @@
  */
 
 import path from 'path'
-import i18n from '../i18n'
+import i18n from '../locals'
 import manifest from './assets/manifest'
 
 let {
@@ -12,7 +12,6 @@ let {
 	SENTRY_DSN_PUBLIC,
 	GA_ID,
 	JWT_SECRET,
-	CLIENT_DIST_PATH,
 	SENTRY_DSN,
 	PORT
 } = process.env
@@ -30,7 +29,7 @@ const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 
 // Vars for server only
-CLIENT_DIST_PATH = CLIENT_DIST_PATH || path.join(distPath, './client')
+const CLIENT_DIST_PATH = path.join(distPath, './client')
 JWT_SECRET = JWT_SECRET || 'secret'
 PORT = PORT || 4000
 
