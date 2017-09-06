@@ -55,7 +55,6 @@ export function users (state: State = initialState, action: Action): State {
 		// result may be an object, if it was request with params
 		// `normalizeArrayOfItems` works only with arrays!
 		const {count, entities} = normalizeArrayOfItems([action.payload])
-		console.log(entities)
 		return {
 			...state,
 			isLoaded: true,
