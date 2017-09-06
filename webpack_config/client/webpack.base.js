@@ -3,22 +3,25 @@ import childProcess from 'child_process'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import {StatsWriterPlugin} from 'webpack-stats-plugin'
 // import ManifestPlugin from 'webpack-manifest-plugin'
+import AssetsPlugin from 'assets-webpack-plugin'
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
-
 const {
 	GA_ID,
 	SENTRY_PUBLIC_DSN,
+	CLIENT_DIST_PATH,
 	NODE_ENV,
 	srcPath,
 	distPath,
 	publicPath,
-	isProduction
+	isProduction,
+	title,
+	manifest
 } = config
 
 const exec = childProcess.execSync
-exec(`rm -rf ${config.distPath}/client`)
+exec(`rm -rf ${CLIENT_DIST_PATH}`)
 
 const definePluginArgs = {
 	'process.env.GA_ID': JSON.stringify(GA_ID),
@@ -40,7 +43,7 @@ const baseBuild = {
 	output: {
 		filename,
 		publicPath,
-		path: path.join(distPath, './client'),
+		path: CLIENT_DIST_PATH,
 		chunkFilename: '[name].[chunkhash:6].js',
 		crossOriginLoading: 'anonymous'
 	},
@@ -95,10 +98,42 @@ const baseBuild = {
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
-		new StatsWriterPlugin({
-			filename: 'stats.json' // Default
+		new AssetsPlugin({
+			path: CLIENT_DIST_PATH
 		}),
-		new WebpackAssetsManifest({writeToDisk: true})
+		// NOTE: this plugin is good, but there are few big issues:
+		// 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
+		// E.g: in generated index.html you can see:
+		// <meta name="msapplication-config" content="browserconfig.xml">
+		// 2. It looks like generated images aren't minified.(not sure)
+		// NOTE: It would be better to generate favicons without this plugin.
+		new FaviconsWebpackPlugin({
+			// add theme-color property
+			background: manifest.theme,
+			prefix: `favicons/`,
+			logo: path.resolve(config.rootPath, './static/images/logo.png'),
+			title,
+			emitStats: true,
+			statsFilename: 'favicons-stats.json',
+			// Inject the html into the html-webpack-plugin
+			inject: false,
+			// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+			icons: {
+				android: true,
+				appleIcon: true,
+				appleStartup: true,
+				coast: false,
+				favicons: true,
+				firefox: true,
+				opengraph: false,
+				twitter: true,
+				yandex: false,
+				windows: true
+			}
+		}),
+		new WebpackAssetsManifest({
+			assets: config.manifest
+		})
 	]),
 	target: 'web'
 }
