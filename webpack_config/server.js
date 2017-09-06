@@ -4,7 +4,7 @@
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import webpackHotFullStack from 'webpack-get-code-on-done'
+import webpackGetCodeOnDone from 'webpack-get-code-on-done'
 import config from './config'
 import client from './client/webpack.dev.babel'
 import server from './server/webpack.dev.babel'
@@ -17,7 +17,7 @@ const webpackConfig = [client, server]
 const compiler = webpack(webpackConfig)
 // Apply some commonly used plugins
 compiler.apply(new FriendlyErrors())
-compiler.apply(new LogPlugin(process.env.PORT))
+compiler.apply(new LogPlugin(config.PORT))
 compiler.apply(new webpack.NoEmitOnErrorsPlugin())
 // Create devMiddleWare
 const devMiddleWare = webpackDevMiddleware(compiler, {
@@ -63,6 +63,8 @@ export default function (app) {
 			}
 		)
 	)
-	const serverCompiler = compiler.compilers.find(compiler => compiler.name === 'server')
-	webpackHotFullStack(serverCompiler, done)
+	const serverCompiler = compiler.compilers.find(
+		compiler => compiler.name === 'server'
+	)
+	webpackGetCodeOnDone(serverCompiler, done)
 }
