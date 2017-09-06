@@ -65,7 +65,9 @@ const baseWebpackConfig = {
 		extensions: isomorphicWebpackConfig.resolve.extensions,
 		modules: isomorphicWebpackConfig.resolve.modules,
 		alias: {
-			...isomorphicWebpackConfig.resolve.alias
+			...isomorphicWebpackConfig.resolve.alias,
+			'webpack-assets': `${CLIENT_DIST_PATH}/webpack-assets.json`,
+			'favicons-assets': `${CLIENT_DIST_PATH}/favicons-stats.json`
 			// create_server: createServerAliasPath
 		}
 	},
