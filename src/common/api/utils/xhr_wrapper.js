@@ -53,6 +53,7 @@ const requestWrapper = (
  */
 async function parseJSON (res: Response): Object {
 	let json: Object
+	// status response field in return object
 	try {
 		json = await res.json()
 	} catch (e) {
