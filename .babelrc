@@ -33,7 +33,9 @@
 							"components": "./src/common/components",
 							"containers": "./src/common/containers",
 							"reducers": "./src/common/reducers",
-							"routing": "./src/common/routing"
+							"routing": "./src/common/routing",
+							"styles": "./src/common/styles",
+							"images": "./static/images"
 						},
 						"extensions": [".js", ".jsx", ".json"]
 					}
