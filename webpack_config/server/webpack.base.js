@@ -34,10 +34,10 @@ const entry = isProduction
 let nodeModules = {}
 fs
 	.readdirSync('node_modules')
-	.filter(function (x) {
+	.filter(x => {
 		return ['.bin'].indexOf(x) === -1
 	})
-	.forEach(function (mod) {
+	.forEach(mod => {
 		nodeModules[mod] = 'commonjs ' + mod
 	})
 
@@ -67,8 +67,8 @@ const baseWebpackConfig = {
 		alias: {
 			...isomorphicWebpackConfig.resolve.alias,
 			'webpack-assets': `${CLIENT_DIST_PATH}/webpack-assets.json`,
-			'favicons-assets': `${CLIENT_DIST_PATH}/favicons-stats.json`
-			// create_server: createServerAliasPath
+			'favicons-assets': `${CLIENT_DIST_PATH}/favicons-stats.json`,
+			locals: `${config.rootPath}/locals`
 		}
 	},
 	module: {
