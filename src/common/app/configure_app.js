@@ -4,10 +4,10 @@ import thunk from 'redux-thunk'
 import {autoRehydrate} from 'redux-persist'
 import {createStore, applyMiddleware, compose} from 'redux'
 import {routerMiddleware} from 'react-router-redux'
-// Application
+// // Application
 import rootReducer from 'reducers'
-import {routes, history} from 'routing'
-
+import {history, routes} from 'routing'
+//
 /**
  * Configure application store with middlewares.
  * @param  {Object} initialState - preloadedState
@@ -18,7 +18,7 @@ const configureStore = (initialState: Object) => {
 	const middlewares = [thunk, routerMiddleware(history)]
 	const appliedMiddlewares = middlewares.map(a => applyMiddleware(a))
 	const enhancers = [rehydrate].concat(appliedMiddlewares)
-	//
+
 	const getComposeFunc = () => {
 		if (process.env.NODE_ENV === 'development') {
 			const {composeWithDevTools} = require('redux-devtools-extension')
