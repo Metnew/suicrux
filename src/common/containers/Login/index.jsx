@@ -7,17 +7,12 @@ import {getAuthState} from 'selectors'
 import type {GlobalState} from 'reducers'
 
 type Props = {
-	login: () => void,
+	login: (data: Object) => void,
 	errors: Object
 }
-class Login extends Component {
-	props: Props
 
-	render () {
-		const {login, errors} = this.props
-		const props = {login, errors}
-		return <LoginComponent {...props} />
-	}
+const Login = ({login, errors}: Props) => {
+	return <LoginComponent login={login} errors={errors} />
 }
 
 function mapStateToProps (state: GlobalState) {
