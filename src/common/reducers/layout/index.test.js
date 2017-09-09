@@ -14,11 +14,17 @@ const LOCATION_CHANGE = {
 }
 
 const UI_WINDOW_RESIZE = {
-	type: actions.UI_WINDOW_RESIZE
+	type: actions.UI_WINDOW_RESIZE,
+	payload: {
+		innerWidth: 1280
+	}
 }
 
 const APPLICATION_INIT = {
-	type: actions.APPLICATION_INIT
+	type: actions.APPLICATION_INIT,
+	payload: {
+		innerWidth: 360
+	}
 }
 
 describe('LAYOUT REDUCER', () => {
@@ -33,23 +39,21 @@ describe('LAYOUT REDUCER', () => {
 		})
 	})
 
-	it('should handle APPLICATION_INIT', () => {
+	it('should handle APPLICATION_INIT with 360px screen', () => {
 		expect(reducer(initialState, APPLICATION_INIT)).toEqual({
 			...initialState,
 			isMobile: true,
-			isMobileXS: false,
+			isMobileXS: true,
 			isMobileSM: false
-			// `window.innerWidth` is 1024px in test env
 		})
 	})
 
-	it('should handle WINDOW_RESIZE', () => {
+	it('should handle WINDOW_RESIZE with 1280px screen', () => {
 		expect(reducer(initialState, UI_WINDOW_RESIZE)).toEqual({
 			...initialState,
-			isMobile: true,
+			isMobile: false,
 			isMobileXS: false,
 			isMobileSM: false
-			// `window.innerWidth` is 1024px in test env
 		})
 	})
 
