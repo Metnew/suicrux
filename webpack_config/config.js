@@ -4,7 +4,7 @@
 
 import path from 'path'
 import i18n from '../locals'
-import manifest from './assets/manifest'
+import manifest from '../static/manifest'
 
 let {
 	BASE_API,
@@ -20,8 +20,6 @@ let {
 BASE_API = BASE_API || '/api/v1'
 NODE_ENV = NODE_ENV || 'development'
 
-// Vars for frontend only
-
 // Paths
 const rootPath = path.join(__dirname, '../') // = "/"
 const distPath = path.join(rootPath, './dist') // = "/dist"
@@ -31,7 +29,7 @@ const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 // Vars for server only
 const CLIENT_DIST_PATH = path.join(distPath, './client')
 JWT_SECRET = JWT_SECRET || 'secret'
-PORT = PORT || 4000
+PORT = PORT || 3000
 
 // compute isProduction based on NODE_ENV
 const isProduction = process.env.NODE_ENV === 'production'
