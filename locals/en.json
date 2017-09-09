@@ -1,0 +1,3 @@
+{
+  "Header.Popup.HeaderButton": "Hello {name}, today is {today, date}"
+}
