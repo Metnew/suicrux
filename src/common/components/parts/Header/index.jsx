@@ -4,6 +4,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Icon, Popup} from 'semantic-ui-react'
+import {FormattedMessage, FormattedDate} from 'react-intl'
+
 import {isEqual} from 'lodash'
 import {
 	StyledHeader,
@@ -56,7 +58,16 @@ class Header extends React.Component {
 								<Icon name="github" size="large" link fitted />
 							</HeaderButton>
 						}
-						content={`RSUIS on @Github`}
+						content={
+							<FormattedMessage
+								id="Header.Popup.HeaderButton"
+								defaultMessage={`Hello {name}, today is {today, date}`}
+								values={{
+									name: <b>user</b>,
+									today: Date.now()
+								}}
+							/>
+						}
 						inverted
 					/>
 				</HeaderInner>
