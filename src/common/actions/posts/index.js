@@ -23,9 +23,9 @@ export type GET_POSTS_FAIL_TYPE = {
 	}
 }
 
-export const GET_POSTS = () => async dispatch => {
+export const GET_POSTS = (userId: number) => async dispatch => {
 	dispatch({type: GET_POSTS_PENDING})
-	const result = await getPostsAPI()
+	const result = await getPostsAPI(userId)
 	if (resultOK(result)) {
 		dispatch({type: GET_POSTS_SUCCESS, payload: result.data})
 	} else {
