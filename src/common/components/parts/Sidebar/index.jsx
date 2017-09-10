@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import {Menu, Icon} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
+import Logo from 'components/elements/Logo'
 import {
 	StyledSidebar,
 	SidebarLogo,
@@ -10,9 +11,7 @@ import {
 	SidebarLogoutItem
 } from './style'
 import {Spacer} from 'styles/base'
-
 import type {RouteItem} from 'types'
-// require('./index.scss')
 
 type Props = {
 	open: boolean,
@@ -71,12 +70,11 @@ export default class SidebarComponent extends Component {
 		// 	? require('images/logo.png')
 		// 	: require('images/logo.png').preSrc
 		//
-		const logoImg = require('images/logo.png')
 
 		return (
 			<StyledSidebar {...sidebarProps}>
 				<SidebarLogoContainer href="https://github.com/Metnew/react-semantic.ui-starter">
-					<SidebarLogo src={logoImg} alt="logo" shape="circular" centered />
+					<SidebarLogo alt="logo" shape="circular" centered />
 				</SidebarLogoContainer>
 				{routes}
 				<Spacer />
