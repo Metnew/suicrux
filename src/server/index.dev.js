@@ -5,7 +5,6 @@
 import express from 'express'
 import spdy from 'spdy'
 import chalk from 'chalk'
-import keys from './ssl'
 // Mount our server-side code to dev server
 import server from '../../webpack_config/server'
 import {serverOptions as options} from './config'
