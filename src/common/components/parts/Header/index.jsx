@@ -61,10 +61,9 @@ class Header extends React.Component {
 						content={
 							<FormattedMessage
 								id="Header.Popup.HeaderButton"
-								defaultMessage={`Hello {name}, today is {today, date}`}
+								defaultMessage={`Hello {name}`}
 								values={{
-									name: <b>user</b>,
-									today: Date.now()
+									name: <b>user</b>
 								}}
 							/>
 						}
