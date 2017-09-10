@@ -1,33 +1,47 @@
+// @flow
 import {posts as reducer, initialState} from 'reducers/posts'
-import * as actions from 'actions'
+import {
+	GET_POSTS_PENDING,
+	GET_POSTS_SUCCESS,
+	GET_POSTS_FAIL
+} from 'actions/posts'
+import {LOCATION_CHANGE} from 'actions/common'
+import type {PostItem} from 'types'
 
-const GET_POSTS_SUCCESS = {
-	type: actions.GET_POSTS_SUCCESS,
-	result: [{id: 1, lol: 1}]
+const samplePostItem: PostItem = {
+	id: 1,
+	title: 'string',
+	body: 'string',
+	userId: 1
 }
 
-const GET_POSTS_FAIL = {
-	type: actions.GET_POSTS_FAIL,
-	errors: {
-		ohMyGodThatsError: {
-			xxx: 1
+const getPostsSuccess = {
+	type: GET_POSTS_SUCCESS,
+	payload: samplePostItem
+}
+
+const getPostsFail = {
+	type: GET_POSTS_FAIL,
+	payload: {
+		errors: {
+			ohMyGodThatsAnError: true
 		}
 	}
 }
 
-const GET_POSTS_PENDING = {
-	type: actions.GET_POSTS_PENDING
+const getPostsPending = {
+	type: GET_POSTS_PENDING
 }
 
-const LOCATION_CHANGE_TO_INBOX = {
-	type: actions.LOCATION_CHANGE,
+const locationChangeToInbox = {
+	type: LOCATION_CHANGE,
 	payload: {
 		pathname: '/inbox'
 	}
 }
 
-const LOCATION_CHANGE_TO_ITSELF = {
-	type: actions.LOCATION_CHANGE,
+const locationChangeToItself = {
+	type: LOCATION_CHANGE,
 	payload: {
 		pathname: '/'
 	}
@@ -39,39 +53,33 @@ describe('POSTS REDUCER', () => {
 	})
 
 	it('should handle GET_POSTS_PENDING', () => {
-		expect(reducer(initialState, GET_POSTS_PENDING)).toEqual({
+		expect(reducer(initialState, getPostsPending)).toEqual({
 			...initialState,
 			errors: {},
 			isLoaded: false,
-			isLoading: true,
-			fetchStatus: 'loading'
+			isLoading: true
 		})
 	})
 
 	it('should handle GET_POSTS_SUCCESS', () => {
-		expect(reducer(initialState, GET_POSTS_SUCCESS)).toEqual({
+		expect(reducer(initialState, getPostsSuccess)).toEqual({
 			...initialState,
 			isLoaded: true,
 			isLoading: false,
-			fetchStatus: 'loaded',
 			errors: {},
 			count: 1,
 			entities: {
-				'1': {
-					lol: 1,
-					id: 1
-				}
+				'1': samplePostItem
 			}
 		})
 	})
 
 	it('should handle GET_POSTS_FAIL', () => {
-		expect(reducer(initialState, GET_POSTS_FAIL)).toEqual({
+		expect(reducer(initialState, getPostsFail)).toEqual({
 			...initialState,
 			isLoaded: true,
 			isLoading: false,
-			fetchStatus: 'loaded',
-			errors: {ohMyGodThatsError: {xxx: 1}}
+			errors: {ohMyGodThatsAnError: true}
 		})
 	})
 
@@ -80,7 +88,7 @@ describe('POSTS REDUCER', () => {
 			...initialState,
 			hello: 'world'
 		}
-		expect(reducer(customState, LOCATION_CHANGE_TO_INBOX)).toEqual(initialState)
+		expect(reducer(customState, locationChangeToInbox)).toEqual(initialState)
 	})
 
 	it('should handle LOCATION_CHANGE to own path', () => {
@@ -88,6 +96,6 @@ describe('POSTS REDUCER', () => {
 			...initialState,
 			hello: 'world'
 		}
-		expect(reducer(customState, LOCATION_CHANGE_TO_ITSELF)).toEqual(customState)
+		expect(reducer(customState, locationChangeToItself)).toEqual(customState)
 	})
 })
