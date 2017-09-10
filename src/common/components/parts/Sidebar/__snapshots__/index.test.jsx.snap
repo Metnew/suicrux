@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile screen 1`] = `
+<Styled(Sidebar)
+  animation="push"
+  as={[Function]}
+  icon="labeled"
+  vertical={true}
+  visible={true}
+  width="thin"
+>
+  <styled.a
+    href="https://github.com/Metnew/react-semantic.ui-starter"
+  >
+    <Styled(Logo)
+      alt="logo"
+      centered={true}
+      shape="circular"
+    />
+  </styled.a>
+  <Styled(MenuItem)
+    activeClassName="active"
+    as={[Function]}
+    exact={true}
+    icon={true}
+    link={true}
+    to="/"
+  >
+    <Icon
+      as="i"
+      name="newspaper"
+    />
+     
+    Dashboard
+  </Styled(MenuItem)>
+  <Styled(MenuItem)
+    activeClassName="active"
+    as={[Function]}
+    exact={true}
+    icon={true}
+    link={true}
+    to="/users"
+  >
+    <Icon
+      as="i"
+      name="users"
+    />
+     
+    Users
+  </Styled(MenuItem)>
+  <Styled(MenuItem)
+    as="a"
+    href="https://github.com/Metnew/react-semantic.ui-starter"
+    icon={true}
+    link={true}
+  >
+    <Icon
+      as="i"
+      name="github"
+    />
+     
+    Github
+  </Styled(MenuItem)>
+  <Styled(MenuItem)
+    activeClassName="active"
+    as={[Function]}
+    icon={true}
+    link={true}
+    to="/auth"
+  >
+    <Icon
+      as="i"
+    />
+     
+    Auth
+  </Styled(MenuItem)>
+  <Styled(MenuItem)
+    activeClassName="active"
+    as={[Function]}
+    exact={true}
+    icon={true}
+    link={true}
+    to="/users/:id"
+  >
+    <Icon
+      as="i"
+    />
+     
+    User
+  </Styled(MenuItem)>
+  <styled.span />
+  <Styled(MenuItem)
+    onClick={[Function]}
+  >
+    <Icon
+      as="i"
+      name="sign out"
+    />
+    Logout
+  </Styled(MenuItem)>
+</Styled(Sidebar)>
+`;

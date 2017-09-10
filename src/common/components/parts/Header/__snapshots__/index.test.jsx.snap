@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component same snapshot at Dashboard on non-mobile screen 1`] = `
+<styled.header>
+  <styled.div>
+    <styled.span>
+      Dashboard
+    </styled.span>
+    <styled.span />
+    <Popup
+      content={
+        <FormattedMessage
+          defaultMessage="Hello {name}"
+          id="Header.Popup.HeaderButton"
+          values={
+            Object {
+              "name": <b>
+                user
+              </b>,
+            }
+          }
+        />
+      }
+      inverted={true}
+      on="hover"
+      position="top left"
+      trigger={
+        <Styled(Button)
+          aria-label="github-header-link-button"
+          as="a"
+          basic={true}
+          circular={true}
+          href="https://github.com/Metnew/react-semantic.ui-starter"
+          icon={true}
+          id="header-button"
+        >
+          <Icon
+            as="i"
+            fitted={true}
+            link={true}
+            name="github"
+            size="large"
+          />
+        </Styled(Button)>
+      }
+    />
+  </styled.div>
+</styled.header>
+`;

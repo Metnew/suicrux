@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component same snapshot 1`] = `
+<styled.footer>
+  <styled.div>
+    <Grid
+      relaxed={true}
+    >
+      <GridRow
+        verticalAlign="middle"
+      >
+        <GridColumn
+          mobile={16}
+          width={12}
+        >
+          <a
+            href="https://github.com/Metnew/react-semantic.ui-starter"
+          >
+            <Header
+              as="h3"
+              inverted={true}
+            >
+              <Icon
+                as="i"
+                name="github"
+              />
+              <HeaderContent>
+                Noir
+                <HeaderSubheader>
+                  Semantic.UI is cool, really.
+                </HeaderSubheader>
+              </HeaderContent>
+            </Header>
+          </a>
+        </GridColumn>
+      </GridRow>
+    </Grid>
+  </styled.div>
+</styled.footer>
+`;
