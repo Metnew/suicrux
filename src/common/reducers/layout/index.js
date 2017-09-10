@@ -43,18 +43,11 @@ export function layout (state: State = initialState, action: Action): State {
 	}
 	switch (action.type) {
 	case APPLICATION_INIT:
-	case UI_WINDOW_RESIZE: {
-		const {innerWidth} = action.payload
-		const {isMobile, isMobileSM, isMobileXS} = computeMobileStatuses(
-			innerWidth
-		)
+	case UI_WINDOW_RESIZE:
 		return {
 			...state,
-			isMobile,
-			isMobileSM,
-			isMobileXS
+			...computeMobileStatuses(action.payload.innerWidth)
 		}
-	}
 	case UI_OPEN_SIDEBAR:
 		return {
 			...state,
