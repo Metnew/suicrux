@@ -14,6 +14,7 @@ import {JWT_TOKEN} from 'common/api/LocalStorageCookiesSvc'
 export default (req: Object, res: Object, next: () => void) => {
 	req.user = {
 		token: null,
+		lang: 'en',
 		isLoggedIn: false
 	}
 
