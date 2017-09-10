@@ -2,10 +2,9 @@ import {layout as reducer, initialState} from 'reducers/layout'
 import {
 	UI_CLOSE_SIDEBAR,
 	UI_OPEN_SIDEBAR,
-	UI_WINDOW_RESIZE,
-	APPLICATION_INIT
+	UI_WINDOW_RESIZE
 } from 'actions/layout'
-import {LOCATION_CHANGE} from 'actions/common'
+import {LOCATION_CHANGE, APPLICATION_INIT} from 'actions/common'
 
 const closeSidebar = {
 	type: UI_CLOSE_SIDEBAR
