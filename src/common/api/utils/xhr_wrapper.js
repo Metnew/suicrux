@@ -130,9 +130,9 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 	)
 
 	if (!isRequestToExternalResource) {
-		console.log(`Request ${url} was sent to our domain`, request)
+		// console.log(`Request ${url} was sent to our domain`, request)
 	} else {
-		console.log(`Request ${url} was sent to external domain`, request)
+		// console.log(`Request ${url} was sent to external domain`, request)
 	}
 
 	return {
