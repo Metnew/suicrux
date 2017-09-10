@@ -14,37 +14,37 @@ const mockStore = configureMockStore(middlewares)
 
 describe('Layout actions', () => {
 	it('creates UI_CLOSE_SIDEBAR after CLOSE_SIDEBAR was dispatched', () => {
-		const expectedAction = {
+		const expectedAction = [{
 			type: UI_CLOSE_SIDEBAR
-		}
+		}]
 
 		const store = mockStore({})
-		const result = store.dispatch(CLOSE_SIDEBAR)
+		store.dispatch(CLOSE_SIDEBAR())
 
-		expect(result).toEqual(expectedAction)
+		expect(store.getActions()).toEqual(expectedAction)
 	})
 
 	it('creates UI_OPEN_SIDEBAR after OPEN_SIDEBAR was dispatched', () => {
-		const expectedAction = {
+		const expectedAction = [{
 			type: UI_OPEN_SIDEBAR
-		}
+		}]
 
 		const store = mockStore({})
-		const result = store.dispatch(OPEN_SIDEBAR)
+		store.dispatch(OPEN_SIDEBAR())
 
-		expect(result).toEqual(expectedAction)
+		expect(store.getActions()).toEqual(expectedAction)
 	})
 
 	it('creates UI_WINDOW_RESIZE after WINDOW_RESIZE was dispatched', () => {
-		const expectedAction = {
+		const expectedAction = [{
 			type: UI_WINDOW_RESIZE,
 			payload: {
 				innerWidth: 480
 			}
-		}
+		}]
 
 		const store = mockStore({})
-		const result = store.dispatch(WINDOW_RESIZE(480))
-		expect(result).toEqual(expectedAction)
+		store.dispatch(WINDOW_RESIZE(480))
+		expect(store.getActions()).toEqual(expectedAction)
 	})
 })
