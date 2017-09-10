@@ -4,7 +4,8 @@ type args = {
 	App: string,
 	initialState: Object,
 	assets: Object,
-	faviconsAssets: Object
+	faviconsAssets: Object,
+	translation: Object
 }
 // renderToString
 const DLLScripts =
@@ -20,16 +21,18 @@ const IndexHTMLComponent = ({
 	App,
 	initialState,
 	assets,
-	faviconsAssets
+	faviconsAssets,
+	translation
 }: args) => {
 	const stringifiedState: string = JSON.stringify(initialState)
+	const stringifiedTranslation: string = JSON.stringify(translation)
 	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
 
 	const createBody = () => {
 		const html = `
 			<div id="app">${App}</div>
 		<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
-		<script>window.__I18N__ = ${safeStringifiedState}</script>
+		<script>window.__I18N__ = ${stringifiedTranslation}</script>
 		${DLLScripts}
 		${Object.keys(assets)
 		.filter(bundleName => assets[bundleName].js)
