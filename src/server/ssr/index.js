@@ -26,8 +26,9 @@ const translations = globSync('locals/*.json')
 		collection[locale] = messages
 		return collection
 	}, {})
+
 export default (req: Object, res: Object, next: () => void) => {
-	const {isLoggedIn, token} = req.user
+	const {isLoggedIn, token, lang} = req.user
 	const initialState: Object = isLoggedIn
 		? {me: {auth: {isLoggedIn, token}}}
 		: {}
@@ -53,6 +54,7 @@ export default (req: Object, res: Object, next: () => void) => {
 		assets,
 		faviconsAssets,
 		initialState: preloadedState,
+		translation: translations[lang],
 		App
 	}
 	const html: string = IndexHTMLComponent(props)
