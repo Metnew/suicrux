@@ -1,6 +1,7 @@
 import {Menu, Sidebar, Image as ImageComponent} from 'semantic-ui-react'
 import styled from 'styled-components'
 import {media} from 'styles/utils'
+import Logo from 'components/elements/Logo'
 
 // ${'combine sidebar with dimmer, when sidebar is visible on mobile'}
 //   color: ${props => props.theme.primaryColorText}!important;
@@ -11,7 +12,7 @@ export const StyledSidebar = styled(Sidebar)`
   border: none !important;
 `
 //
-export const SidebarLogo = styled(ImageComponent)`
+export const SidebarLogo = styled(Logo)`
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `
 //
