@@ -1,7 +1,6 @@
 /**
  * @flow
  */
-
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, matchPath} from 'react-router'
@@ -84,6 +83,7 @@ class App extends Component {
 		// 	script.src = 'https://cdn.ravenjs.com/3.16.1/raven.min.js'
 		// 	document.body.appendChild(script)
 		// }
+		//
 		// NOTE: uncomment if you use Google Analytics
 		// if (process.env.GA_ID) {
 		// 	const script = document.createElement('script')
