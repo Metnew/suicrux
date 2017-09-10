@@ -3,7 +3,6 @@
  */
 
 import path from 'path'
-import i18n from '../locals'
 import manifest from '../static/manifest'
 
 let {
@@ -38,7 +37,6 @@ export default {
 	title: 'Noir',
 	publicPath: '/',
 	// i18n object
-	i18n,
 	isProduction,
 	// Env vars
 	BASE_API,
