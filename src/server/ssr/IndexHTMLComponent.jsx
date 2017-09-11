@@ -5,7 +5,7 @@ type args = {
 	initialState: Object,
 	assets: Object,
 	faviconsAssets: Object,
-	translation: Object
+	i18n: Object
 }
 // renderToString
 const DLLScripts =
@@ -22,22 +22,21 @@ const IndexHTMLComponent = ({
 	initialState,
 	assets,
 	faviconsAssets,
-	translation
+	i18n
 }: args) => {
 	const stringifiedState: string = JSON.stringify(initialState)
-	const stringifiedTranslation: string = JSON.stringify(translation)
+	const stringifiedI18N: string = JSON.stringify(i18n)
 	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
 
 	const createBody = () => {
 		const html = `
 			<div id="app">${App}</div>
 		<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
-		<script>window.__I18N__ = ${stringifiedTranslation}</script>
+		<script>window.__I18N__ = ${stringifiedI18N}</script>
 		${DLLScripts}
 		${Object.keys(assets)
 		.filter(bundleName => assets[bundleName].js)
 		.map(bundleName => {
-			console.log(bundleName)
 			const path = assets[bundleName].js
 			return `<script src="${path}" type="text/javascript"></script>`
 		})
@@ -74,7 +73,7 @@ const IndexHTMLComponent = ({
 		return html
 	}
 
-	return `<html lang="en">
+	return `<html lang="${i18n.lang}">
 			<head>${createHead()}<head>
 			<body>
 				${createBody()}
