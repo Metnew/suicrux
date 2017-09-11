@@ -10,6 +10,7 @@ import Root from 'components/parts/Root'
 import 'styles/global'
 
 type Props = {
+	i18n: Object,
 	store: Object, // unconfigured store
 	SSR: {
 		// SSR options, see `/server` for more info
@@ -24,9 +25,9 @@ type Props = {
  * Configure Root component.
  */
 
-const configureRootComponent = ({store, SSR, history, routes}: Props) => {
-	const props = {store, SSR, history, routes}
+const configureRootComponent = (props: Props) => {
 	if (module.hot) {
+		const {store} = props
 		// Enable Webpack hot module replacement for reducers
 		module.hot.accept('reducers', () => {
 			const nextRootReducer = require('reducers').default
