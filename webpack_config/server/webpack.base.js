@@ -41,12 +41,6 @@ fs
 		nodeModules[mod] = 'commonjs ' + mod
 	})
 
-// const createServerAlias = !isProduction
-// 	? '../../webpack_config/server'
-// 	: './server'
-//
-// const createServerAliasPath = path.join(config.srcPath, './server', createServerAlias)
-
 const baseWebpackConfig = {
 	name: 'server',
 	entry,
@@ -68,7 +62,8 @@ const baseWebpackConfig = {
 			...isomorphicWebpackConfig.resolve.alias,
 			'webpack-assets': `${CLIENT_DIST_PATH}/webpack-assets.json`,
 			'favicons-assets': `${CLIENT_DIST_PATH}/favicons-stats.json`,
-			locals: `${config.rootPath}/locals`
+			locals: `${config.rootPath}/locals`,
+			ssl: `${config.srcPath}/server/config/ssl`
 		}
 	},
 	module: {
