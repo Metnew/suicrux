@@ -24,11 +24,7 @@ class LazyLoad extends Component {
 		componentToRender: null
 	}
 
-	componentWillMount () {
-		this.load()
-	}
-
-	async load () {
+	async componentWillMount () {
 		const {component} = this.props
 		const componentToRender = await component()
 		this.setState({

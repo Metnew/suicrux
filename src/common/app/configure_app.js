@@ -9,7 +9,7 @@ import rootReducer from 'reducers'
 import {history, routes} from 'routing'
 //
 /**
- * Configure application store with middlewares.
+ * Configure application store
  * @param  {Object} initialState - preloadedState
  * @return {Object} - configured store
  */
@@ -34,7 +34,7 @@ const configureStore = (initialState: Object) => {
 }
 
 /**
- * Return configured history, routes and store for the app
+ * Return configured history, routes and store
  * @param  {Object} initialState
  * @return {Object} Object containting configured store, routes, history
  */

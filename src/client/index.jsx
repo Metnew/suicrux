@@ -41,13 +41,18 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const initialState = window.__INITIAL_STATE__ || {}
+const i18n = window.__I18N__ || {}
 // NOTE: V8 doesn't optimize `delete`
 // delete window.__INITIAL_STATE__
-const propsForRoot = configureApp(initialState)
-const RootComponent = configureRootComponent(propsForRoot)
-render(RootComponent, document.getElementById('app'))
+const {store, routes, history} = configureApp(initialState)
+const RootComponent = configureRootComponent({
+	store,
+	routes,
+	history,
+	i18n
+})
 
-const {store} = propsForRoot
+render(RootComponent, document.getElementById('app'))
 persistStore(store)
 
 if (module.hot) {

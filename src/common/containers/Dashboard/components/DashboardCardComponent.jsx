@@ -23,7 +23,7 @@ const DashboardCardComponent = ({title, body, id, userId}: PostItem) => {
 			<Card.Content extra>
 				<div className="ui two buttons">
 					<Button basic color="green" role="button" disabled>
-						{`Approve #${userId}`}
+						{`Approve #${id}`}
 					</Button>
 					<Button basic color="red" role="button" disabled>
 						{`Decline`}
