@@ -3,7 +3,8 @@ import {post} from 'api/utils'
 
 export type LoginDataType = {
 	username: string,
-	password: string
+	password: string,
+	language?: string
 }
 
 export async function loginAPI (data: LoginDataType) {
