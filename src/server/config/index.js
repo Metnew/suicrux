@@ -1,7 +1,7 @@
+import path from 'path'
+import {readFileSync} from 'fs'
+
 export const serverOptions = {
-	spdy: {
-		ssl: false,
-		plain: true,
-		protocols: ['h2', 'spdy/3.1', 'http/1.1']
-	}
+	key: readFileSync(path.join(__dirname, 'ssl/server.key')),
+	cert: readFileSync(path.join(__dirname, 'ssl/server.crt'))
 }
