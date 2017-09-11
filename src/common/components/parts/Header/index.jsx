@@ -51,7 +51,7 @@ class Header extends React.Component {
 								icon
 								as={'a'}
 								aria-label="github-header-link-button"
-								href="https://github.com/Metnew/react-semantic.ui-starter"
+								href="https://github.com/Metnew/noir"
 								basic
 								circular
 							>
@@ -59,13 +59,7 @@ class Header extends React.Component {
 							</HeaderButton>
 						}
 						content={
-							<FormattedMessage
-								id="Header.Popup.HeaderButton"
-								defaultMessage={`Hello {name}`}
-								values={{
-									name: <b>user</b>
-								}}
-							/>
+							`Star this project!`
 						}
 						inverted
 					/>
