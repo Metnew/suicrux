@@ -4,8 +4,7 @@ import WriteFilePlugin from 'write-file-webpack-plugin'
 import AutoDllPlugin from 'autodll-webpack-plugin'
 import config from '../config'
 
-const {isProduction} = config
-const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'
+const filename = '[name].js'
 const loaders = {
 	style: {loader: 'style-loader'},
 	css: {loader: 'css-loader', options: {sourceMap: true}},
