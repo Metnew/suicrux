@@ -18,7 +18,7 @@ export default (app: Object): Object => {
 	// Add global middlewares
 	addMiddlewares(app)
 	// Add API
-	app.use('/api/v1', API)
+	app.use(process.env.BASE_API, API)
 	// Add SSR
 	app.use(SSR)
 	return app
