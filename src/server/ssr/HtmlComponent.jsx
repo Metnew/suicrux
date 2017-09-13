@@ -16,7 +16,7 @@ const DLLScripts =
 	<script src="/vendor.js"></script>
 `
 
-const IndexHTMLComponent = ({
+const HtmlComponent = ({
 	css,
 	App,
 	initialState,
@@ -81,4 +81,4 @@ const IndexHTMLComponent = ({
 		</html>`
 }
 
-export default IndexHTMLComponent
+export default HtmlComponent
