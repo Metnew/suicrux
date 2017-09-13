@@ -4,7 +4,13 @@ import RouteAuth from 'components/addons/RouteAuth'
 import type {RouteItem} from 'types'
 
 const loadLazyComponentFnConstructor = (url: string) => async () => {
-	const loadComponent = await import(/* webpackMode: "weak", webpackChunkName: "lazy-containers.[index].[request]" */ `containers/${url}/index.jsx`)
+	// NOTE: there isn't any duplication here
+	// Read Webpack docs about code-splitting for more info.
+	if (process.env.BROWSER) {
+		const loadComponent = await import(/* webpackMode: "lazy-once", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
+		return loadComponent
+	}
+	const loadComponent = await import(/* webpackMode: "eager", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
 	return loadComponent
 }
 
