@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import {Loader} from 'semantic-ui-react'
 import {GET_USERS} from 'actions/users'

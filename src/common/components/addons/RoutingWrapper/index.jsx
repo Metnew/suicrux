@@ -2,7 +2,6 @@
  * @flow
  */
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {Switch, Redirect} from 'react-router-dom'
 import LazyLoad from 'components/addons/LazyLoad'
 import {getAuthState} from 'selectors'

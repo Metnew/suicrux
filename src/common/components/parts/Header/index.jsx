@@ -2,9 +2,7 @@
  * @flow
  */
 import React from 'react'
-import PropTypes from 'prop-types'
 import {Icon, Popup} from 'semantic-ui-react'
-import {FormattedMessage, FormattedDate} from 'react-intl'
 
 import {isEqual} from 'lodash'
 import {

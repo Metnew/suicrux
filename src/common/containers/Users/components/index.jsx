@@ -1,6 +1,5 @@
 // @flow
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import {Item, Grid} from 'semantic-ui-react'
 import _ from 'lodash'
 import UsersItemComponent from './UsersItemComponent'

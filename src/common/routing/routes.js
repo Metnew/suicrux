@@ -3,14 +3,8 @@ import {Route} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
 import type {RouteItem} from 'types'
 
-const loadLazyComponent = (url: string) => async () => {
-	// NOTE: there isn't any duplication here
-	// Read Webpack docs about code-splitting for more info.
-	if (process.env.BROWSER) {
-		const loadComponent = await import(/* webpackMode: "lazy-once", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
-		return loadComponent
-	}
-	const loadComponent = await import(/* webpackMode: "eager", webpackChunkName: "lazy-containers" */ `containers/${url}/index.jsx`)
+const loadLazyComponentFnConstructor = (url: string) => async () => {
+	const loadComponent = await import(/* webpackMode: "weak", webpackChunkName: "lazy-containers.[index].[request]" */ `containers/${url}/index.jsx`)
 	return loadComponent
 }
 
@@ -23,7 +17,7 @@ const routes: Array<RouteItem> = [
 		name: 'Dashboard',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: loadLazyComponent('Dashboard')
+		component: loadLazyComponentFnConstructor('Dashboard')
 	},
 	{
 		path: '/users',
@@ -33,7 +27,7 @@ const routes: Array<RouteItem> = [
 		icon: 'users',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: loadLazyComponent('Users')
+		component: loadLazyComponentFnConstructor('Users')
 	},
 	{
 		external: true,
@@ -47,7 +41,7 @@ const routes: Array<RouteItem> = [
 		name: 'Auth',
 		lazy: true,
 		tag: Route,
-		component: loadLazyComponent('Login')
+		component: loadLazyComponentFnConstructor('Login')
 	},
 	{
 		path: '/users/:id',
@@ -55,7 +49,7 @@ const routes: Array<RouteItem> = [
 		lazy: true,
 		exact: true,
 		tag: RouteAuth,
-		component: loadLazyComponent('UserItem')
+		component: loadLazyComponentFnConstructor('UserItem')
 	}
 ]
 

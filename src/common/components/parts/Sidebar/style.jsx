@@ -1,4 +1,4 @@
-import {Menu, Sidebar, Image as ImageComponent} from 'semantic-ui-react'
+import {Menu, Sidebar} from 'semantic-ui-react'
 import styled from 'styled-components'
 import {media} from 'styles/utils'
 import Logo from 'components/elements/Logo'

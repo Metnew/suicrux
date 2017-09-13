@@ -2,7 +2,6 @@
  * @flow
  */
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {Grid, Header, Icon} from 'semantic-ui-react'
 import {StyledFooter, StyledFooterInner} from './style'
 
@@ -19,7 +18,7 @@ const Footer = () => {
 									<Header.Content>
 										Noir
 										<Header.Subheader>
-											Semantic.UI is cool, really.
+											Starter for bleeding-edge <t>blade</t> runners
 										</Header.Subheader>
 									</Header.Content>
 								</Header>

@@ -2,12 +2,11 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import {Helmet} from 'react-helmet'
 import {Loader} from 'semantic-ui-react'
 //
 import UserItemComponent from './components'
-import {GET_USERS, GET_USERS_PENDING} from 'actions/users'
+import {GET_USERS} from 'actions/users'
 import {getEntitiesUsersState} from 'selectors'
 import type {UserItem as UserItemType} from 'types'
 import type {GlobalState} from 'reducers'

@@ -1,7 +1,7 @@
 // @flow
-import React, {Component} from 'react'
+import React from 'react'
 import {Card, Icon, Image} from 'semantic-ui-react'
-// 
+//
 import type {UserItem} from 'types'
 
 type Props = {

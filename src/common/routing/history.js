@@ -1,6 +1,6 @@
 // @flow
 import {createBrowserHistory, createMemoryHistory} from 'history'
-const selectHistory = () => {
+const selectHistory = (): Function => {
 	return process.env.BROWSER ? createBrowserHistory : createMemoryHistory
 }
 

@@ -7,8 +7,10 @@ const router = Router()
 
 // Define the home page route
 router.post('/', (req, res) => {
-	const lang = req.body.lang || 'en'
-	const data = {username: 'cool_username_for_testing', lang}
+	const {lang} = req.body
+	const isLangSupported = ['en', 'ru'].includes(lang)
+	const language = isLangSupported ? lang : 'en'
+	const data = {username: 'cool_username_for_testing', lang: language}
 	jwt.sign(data, process.env.JWT_SECRET, {expiresIn: '7d'}, (err, token) => {
 		if (err) {
 			throw new Error(

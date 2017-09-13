@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react'
+import React from 'react'
 import {Image as ImageComponent} from 'semantic-ui-react'
 
 type Props = {

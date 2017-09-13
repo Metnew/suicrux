@@ -1,7 +1,6 @@
 // @flow
-import React, {Component} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
 import {Item, Label, Divider, Statistic} from 'semantic-ui-react'
 import {StyledUserItem} from './style'
 

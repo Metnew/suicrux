@@ -2,7 +2,6 @@
 import React, {Component} from 'react'
 import {Menu, Icon} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
-import Logo from 'components/elements/Logo'
 import {
 	StyledSidebar,
 	SidebarLogo,

@@ -1,7 +1,6 @@
 // @flow
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import {Loader} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 //

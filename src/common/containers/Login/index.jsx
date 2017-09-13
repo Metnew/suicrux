@@ -1,7 +1,7 @@
 // @flow
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import {LOGIN_AUTH, LOGIN_AUTH_PENDING} from 'actions/auth'
+import {LOGIN_AUTH} from 'actions/auth'
 import LoginComponent from './components'
 import {getAuthState} from 'selectors'
 import type {GlobalState} from 'reducers'

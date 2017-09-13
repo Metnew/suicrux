@@ -11,7 +11,7 @@ import {JWT_TOKEN} from 'common/api/LocalStorageCookiesSvc'
  * @param  {Response} res
  * @param  {Function} next
  */
-export default (req: Object, res: Object, next: () => void) => {
+export default (req: express$Request, res: express$Response, next: () => void) => {
 	req.user = {
 		token: null,
 		lang: 'en',
