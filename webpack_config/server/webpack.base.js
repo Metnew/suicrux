@@ -9,7 +9,6 @@ const {
 	SENTRY_DSN,
 	CLIENT_DIST_PATH,
 	JWT_SECRET,
-	ANALYZE_BUNDLE,
 	PORT,
 	isProduction
 } = config

@@ -4,8 +4,7 @@ import 'semantic-ui-css/semantic.css'
 import 'promise-polyfill'
 import 'isomorphic-fetch'
 // Application
-import React from 'react'
-import ReactDOM, {render} from 'react-dom'
+import {render} from 'react-dom'
 import {configureApp, configureRootComponent} from 'common/app'
 import {persistStore} from 'redux-persist'
 
