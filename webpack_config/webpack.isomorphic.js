@@ -6,13 +6,7 @@ import config from './config'
 import webpack from 'webpack'
 import CircularDependencyPlugin from 'circular-dependency-plugin'
 
-const {
-	srcPath,
-	rootPath,
-	srcCommonPath,
-	BASE_API,
-	NODE_ENV,
-} = config
+const {srcPath, rootPath, srcCommonPath, BASE_API, NODE_ENV} = config
 
 const definePluginArgs = {
 	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
