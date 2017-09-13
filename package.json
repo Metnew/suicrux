@@ -145,7 +145,6 @@
 	"scripts": {
 		"build": "npm run frontend_build && npm run server_build",
 		"dev": "NODE_ENV=development babel-node ./src/server/index.dev",
-		"dev:exp": "NODE_ENV=development babel-node -- --expose-http2 ./src/server/index.dev",
 		"server_build": "NODE_ENV=production webpack --config webpack_config/server/webpack.prod.babel.js",
 		"frontend_build": "NODE_ENV=production webpack --config webpack_config/client/webpack.prod.babel.js",
 		"test": "NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --forceExit || true",
