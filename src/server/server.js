@@ -11,10 +11,10 @@ global.window = {}
 
 /**
  * Mount API, SSR and middlewares to app.
- * @param  {Object} app - Express server instance
- * @return {Object}     - Decorated server instance
+ * @param  {express$Application} app - Express server instance
+ * @return {express$Application}     - Decorated server instance
  */
-export default (app: Object): Object => {
+export default (app: express$Application): express$Application => {
 	// Add global middlewares
 	addMiddlewares(app)
 	// Add API

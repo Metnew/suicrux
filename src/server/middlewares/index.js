@@ -10,7 +10,7 @@ import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import authMiddleware from './auth'
 
-export default (app: Object) => {
+export default (app: express$Application): express$Application => {
 	// Add express stuff
 	app.use(helmet())
 	app.use(compression())
