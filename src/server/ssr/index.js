@@ -3,9 +3,9 @@
  * @desc
  */
 import React from 'react'
-import {readFileSync, readFile} from 'fs'
+import {readFileSync} from 'fs' // readFile
 import path from 'path'
-import _ from 'lodash'
+// import _ from 'lodash'
 import {sync as globSync} from 'glob'
 import {renderToString} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
@@ -14,7 +14,6 @@ import {configureRootComponent, configureApp} from 'common/app'
 import HtmlComponent from './HtmlComponent'
 import assets from 'webpack-assets'
 import faviconsAssets from 'favicons-assets'
-
 import type {Node} from 'react'
 
 const translations = globSync('locals/*.json')
@@ -33,7 +32,7 @@ export default (req: express$Request, res: express$Response) => {
 	const initialState: Object = isLoggedIn
 		? {me: {auth: {isLoggedIn, token}}}
 		: {}
-	const localeData = require('react-intl/locale-data/' + lang)
+	const localeData = require('react-intl/locale-data/' + (lang || 'en'))
 	const i18n = {
 		lang,
 		localeData,
@@ -67,49 +66,6 @@ export default (req: express$Request, res: express$Response) => {
 		i18n,
 		App
 	}
-
-	Object.keys(assets).map(key => {
-		const bundle = assets[key]
-		Object.keys(bundle).map(async filetype => {
-			const filename = bundle[filetype]
-			const isJS = filetype === 'js'
-			const isCSS = filetype === 'css'
-
-			var stream = res.push(filename, {
-				status: 200, // optional
-				method: 'GET', // optional
-				request: {
-					accept: '*/*'
-				},
-				response: {
-					'content-type': isJS
-						? 'application/javascript'
-						: isCSS ? 'text/css' : 'text/html'
-				}
-			})
-
-			const readFileAsync = path => {
-				return new Promise((resolve, reject) => {
-					try {
-						readFile(path, (err, data) => {
-							if (err) {
-								reject(err)
-							}
-							resolve(data)
-						})
-					} catch (e) {
-						reject(e)
-					}
-				})
-			}
-
-			const memoizedReadFileAsync = _.memoize(readFileAsync)
-			const dataToStream = await memoizedReadFileAsync(
-				`${process.env.CLIENT_DIST_PATH}/${filename}`
-			)
-			stream.end(dataToStream)
-		})
-	})
 
 	const html: string = HtmlComponent(props)
 	res.send(html)
