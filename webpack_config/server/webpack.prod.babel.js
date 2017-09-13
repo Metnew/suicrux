@@ -5,9 +5,6 @@ import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import {Plugin as ShakePlugin} from 'webpack-common-shake'
 import OptimizeJsPlugin from 'optimize-js-plugin'
 
-const analyzePlugins = process.env.ANALYZE_BUNDLE
-	? [new BundleAnalyzerPlugin({analyzerMode: 'static'})]
-	: []
 const plugins = [
 	new webpack.ProgressPlugin(),
 	new webpack.optimize.ModuleConcatenationPlugin(),
@@ -29,9 +26,13 @@ const plugins = [
 	}),
 	new OptimizeJsPlugin({
 		sourceMap: true
-	}),
-	...analyzePlugins
+	})
 ]
+
+// Do you want to use bundle analyzer?
+if (process.env.ANALYZE_BUNDLE) {
+	plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
+}
 
 export default Object.assign({}, baseWebpackConfig, {
 	plugins: baseWebpackConfig.plugins.concat(plugins)
