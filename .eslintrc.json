@@ -22,6 +22,7 @@
 	},
 	"rules": {
 		"no-tabs": 0,
+		"no-unused-vars": 1,
 		"indent": [2, "tab"]
 	},
 	"globals": {
