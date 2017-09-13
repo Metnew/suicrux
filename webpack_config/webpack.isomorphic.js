@@ -12,7 +12,6 @@ const {
 	srcCommonPath,
 	BASE_API,
 	NODE_ENV,
-	isProduction
 } = config
 
 const definePluginArgs = {
@@ -61,8 +60,7 @@ export default {
 				test: /\.(js|jsx)$/,
 				use: 'babel-loader',
 				exclude: [/node_modules/]
-			},
-			{test: /\.pug$/, loader: 'pug-loader'}
+			}
 		]
 	},
 	plugins: [
