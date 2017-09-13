@@ -10,6 +10,7 @@ const {
 	GA_ID,
 	SENTRY_PUBLIC_DSN,
 	CLIENT_DIST_PATH,
+	rootPath,
 	srcPath,
 	publicPath,
 	isProduction,
@@ -108,24 +109,24 @@ const baseBuild = {
 			// add theme-color property
 			background: manifest.theme,
 			prefix: `favicons/`,
-			logo: path.resolve(config.rootPath, './static/images/logo.png'),
+			logo: path.join(rootPath, './static/images/logo.png'),
 			title,
 			emitStats: true,
 			statsFilename: 'favicons-stats.json',
-			// Inject the html into the html-webpack-plugin
+			// Inject generated html into html-webpack-plugin
 			inject: false,
 			// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
 			icons: {
-				android: true,
-				appleIcon: true,
-				appleStartup: true,
-				coast: false,
-				favicons: true,
-				firefox: true,
-				opengraph: false,
-				twitter: true,
-				yandex: false,
-				windows: true
+				// android: true,
+				// appleIcon: true,
+				// appleStartup: true,
+				// coast: false,
+				// favicons: true,
+				// firefox: true,
+				// opengraph: false,
+				// twitter: true,
+				// yandex: false,
+				// windows: true
 			}
 		}),
 		new WebpackAssetsManifest({

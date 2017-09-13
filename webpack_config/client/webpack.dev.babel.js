@@ -43,8 +43,8 @@ baseWebpackConfig.entry.client = [
 
 // add dev plugins
 baseWebpackConfig.plugins.push(
-	new webpack.HotModuleReplacementPlugin(),
 	new WriteFilePlugin(),
+	new webpack.HotModuleReplacementPlugin(),
 	new AutoDllPlugin({
 		debug: true,
 		filename,
