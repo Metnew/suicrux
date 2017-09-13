@@ -26,7 +26,7 @@ const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 
 // Vars for server only
-const CLIENT_DIST_PATH = path.join(distPath, './client')
+const CLIENT_DIST_PATH = path.join(distPath, './client') // = "/dist/client"
 JWT_SECRET = JWT_SECRET || 'secret'
 PORT = PORT || 3000
 
