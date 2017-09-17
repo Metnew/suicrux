@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Logo = (props: Props) => {
-	const logoImg = require('images/logo.png')
+	const logoImg = require('images/Logo.svg')
 	return <ImageComponent src={logoImg} {...props} />
 }
 
