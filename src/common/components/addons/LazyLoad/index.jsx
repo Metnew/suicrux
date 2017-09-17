@@ -23,13 +23,16 @@ class LazyLoad extends Component {
 		componentToRender: null
 	}
 
-	async componentWillMount () {
-		const {component} = this.props
-		const componentToRender = await component()
+	async load () {
+		const componentToRender = await this.props.component()
 		this.setState({
 			componentLoaded: true,
 			componentToRender: componentToRender.default
 		})
+	}
+
+	componentWillMount () {
+		this.load()
 	}
 
 	render () {
@@ -40,6 +43,8 @@ class LazyLoad extends Component {
 				? 'YES'
 				: 'NO'}`
 		)
+
+		// console.log(this.state.componentToRender)
 
 		if (componentLoaded) {
 			const props = _.omit(this.props, ['component'])
