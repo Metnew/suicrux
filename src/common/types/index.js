@@ -1,5 +1,4 @@
 // @flow
-import type {Node} from 'react'
 export type PostItem = {
 	title: string,
 	body: string,
@@ -40,6 +39,6 @@ export type RouteItem = {
 	icon?: string,
 	name?: string,
 	sidebarVisible?: boolean,
-	tag?: Node | Function,
-	component?: Node | Function
+	tag?: React$Node | Function,
+	component?: React$Node | Function
 }
