@@ -1,6 +1,7 @@
 // @flow
 import * as store from 'store2'
 import Cookies from 'js-cookie'
+import decodeJWT from 'jwt-decode'
 
 export const JWT_TOKEN = 'JWT_TOKEN'
 
@@ -16,6 +17,11 @@ export function resetLocalToken () {
 export function setLocalToken (token: string) {
 	store.set(JWT_TOKEN, token)
 	Cookies.set(JWT_TOKEN, token, {expires: 365})
+}
+
+export function getInfoFromJWT () {
+	const token = getLocalToken()
+	return decodeJWT(token)
 }
 
 export const isLoggedIn = () => !!getLocalToken()
