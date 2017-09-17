@@ -4,7 +4,7 @@ import {
 	UI_CLOSE_SIDEBAR,
 	UI_WINDOW_RESIZE
 } from 'actions/layout'
-import {LOCATION_CHANGE, APPLICATION_INIT} from 'actions/common'
+import {LOCATION_CHANGE} from 'actions/common'
 //
 import type {LOCATION_CHANGE_TYPE, APPLICATION_INIT_TYPE} from 'actions/common'
 import type {
@@ -42,12 +42,14 @@ export function layout (state: State = initialState, action: Action): State {
 		return {isMobileSM, isMobileXS, isMobile}
 	}
 	switch (action.type) {
-	case APPLICATION_INIT:
-	case UI_WINDOW_RESIZE:
+	case UI_WINDOW_RESIZE: {
+		const {innerWidth} = action.payload
+		const mobileStates = computeMobileStatuses(innerWidth)
 		return {
 			...state,
-			...computeMobileStatuses(action.payload.innerWidth)
+			...mobileStates
 		}
+	}
 	case UI_OPEN_SIDEBAR:
 		return {
 			...state,
