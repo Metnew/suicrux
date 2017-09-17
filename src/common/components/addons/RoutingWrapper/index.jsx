@@ -5,7 +5,7 @@ import React, {Component} from 'react'
 import {Switch, Redirect} from 'react-router-dom'
 import LazyLoad from 'components/addons/LazyLoad'
 import {getAuthState} from 'selectors'
-import type {RouteItem} from 'routing'
+import type {RouteItem} from 'types'
 
 type Props = {
 	routes: RouteItem[],
@@ -52,7 +52,7 @@ export default class RoutingWrapper extends Component {
 			const {path, exact, strict, component, lazy} = a
 			// can visitor access this route?
 			// this function determinates is user allowed to visit route
-			const canAccess = ::this.authCheck
+			const canAccess = this.authCheck.bind(this)
 			// select only props that we need
 			const b = {path, exact, strict, canAccess}
 
