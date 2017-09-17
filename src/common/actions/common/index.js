@@ -10,6 +10,5 @@ export type LOCATION_CHANGE_TYPE = {
 // export const APP_INIT = '@@INIT'
 export const APPLICATION_INIT = 'APPLICATION_INIT'
 export type APPLICATION_INIT_TYPE = {
-	type: 'APPLICATION_INIT',
-	payload: {innerWidth: number}
+	type: 'APPLICATION_INIT'
 }
