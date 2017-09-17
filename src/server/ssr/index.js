@@ -3,48 +3,34 @@
  * @desc
  */
 import React from 'react'
-import {readFileSync} from 'fs' // readFile
-import path from 'path'
+import chalk from 'chalk'
 // import _ from 'lodash'
-import {sync as globSync} from 'glob'
 import {renderToString} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
 // import {addLocaleData} from 'react-intl'
 import HtmlComponent from './HtmlComponent'
+// $FlowFixMe
 import assets from 'webpack-assets'
+// $FlowFixMe
 import faviconsAssets from 'favicons-assets'
-import type {Node} from 'react'
-
-const translations = globSync('locals/*.json')
-	.map(filename => [
-		path.basename(filename, '.json'),
-		readFileSync(filename, 'utf8')
-	])
-	.map(([locale, file]) => [locale, JSON.parse(file)])
-	.reduce((collection, [locale, messages]) => {
-		collection[locale] = messages
-		return collection
-	}, {})
+import getI18nData from 'server/i18n'
 
 export default (req: express$Request, res: express$Response) => {
-	const {isLoggedIn, token, lang} = req.user
+	const {isLoggedIn, lang} = req.user
+	const {isMobile} = req.useragent
+	console.log(chalk.cyan(`MOBILE DEVICE: ${isMobile}`, JSON.stringify(req.useragent), lang))
+	const meState = {auth: {isLoggedIn}}
+	const layoutState = {isMobile}
 	const initialState: Object = isLoggedIn
-		? {me: {auth: {isLoggedIn, token}}}
-		: {}
-	const localeData = require('react-intl/locale-data/' + (lang || 'en'))
-	const i18n = {
-		lang,
-		localeData,
-		locale: lang,
-		messages: translations[lang]
-	}
-	//
+		? {me: meState, layout: layoutState}
+		: {layout: layoutState}
+	const i18n = getI18nData(lang)
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url
 	const context = {}
 	const {store, history, routes} = configureApp(initialState)
-	const RootComponent: Node = configureRootComponent({
+	const RootComponent: React$Node = configureRootComponent({
 		store,
 		history,
 		routes,
