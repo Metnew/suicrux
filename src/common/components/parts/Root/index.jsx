@@ -1,14 +1,13 @@
 // @flow
 import React, {Component} from 'react'
 import {Provider} from 'react-redux'
-import {IntlProvider, defineMessages, addLocaleData} from 'react-intl' // as we build ourself via webpack
+import {IntlProvider, defineMessages, addLocaleData} from 'react-intl'
 import {APPLICATION_INIT} from 'actions/common'
 import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
 import App from 'containers/App'
 import RoutingWrapper from 'components/addons/RoutingWrapper'
-import {getWindowInnerWidth} from 'const'
-import type {RouteItem} from 'types'
+import type {RouteItem, i18nConfigObject} from 'types'
 
 const Router = process.env.BROWSER
 	? require('react-router-redux').ConnectedRouter
@@ -16,10 +15,7 @@ const Router = process.env.BROWSER
 
 type Props = {
 	store: Object,
-	i18n: {
-		messages: Object,
-		locale: string
-	},
+	i18n: i18nConfigObject,
 	SSR: {
 		location?: Object,
 		context?: Object
@@ -37,9 +33,8 @@ export default class Root extends Component {
 
 	componentWillMount () {
 		const {store, i18n} = this.props
-		const innerWidth: number = getWindowInnerWidth(window)
-		store.dispatch({type: APPLICATION_INIT, payload: {innerWidth}})
-		addLocaleData([...i18n.localeData])
+		store.dispatch({type: APPLICATION_INIT})
+		addLocaleData(i18n.localeData)
 	}
 
 	render () {
@@ -55,9 +50,9 @@ export default class Root extends Component {
 				locale={i18n.locale}
 				messages={defineMessages(i18n.messages)}
 			>
-				<Provider store={store} key={Math.random()}>
+				<Provider store={store} key={Date.now()}>
 					<ThemeProvider theme={theme}>
-						<Router {...routerProps} key={Math.random()}>
+						<Router {...routerProps}>
 							<App routes={routes}>
 								<RoutingWrapper store={store} routes={routes} />
 							</App>
