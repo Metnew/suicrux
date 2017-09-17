@@ -5,13 +5,7 @@ import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import childProcess from 'child_process'
 
-const {
-	SENTRY_DSN,
-	CLIENT_DIST_PATH,
-	JWT_SECRET,
-	PORT,
-	isProduction
-} = config
+const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, isProduction} = config
 
 // Cleare dist dir before run
 const exec = childProcess.execSync
