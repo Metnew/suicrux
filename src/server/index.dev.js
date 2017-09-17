@@ -8,7 +8,7 @@ import spdy from 'spdy'
 import chalk from 'chalk'
 // Mount our server-side code to dev server
 import server from '../../webpack_config/devServer'
-import {serverOptions as options} from './config/index.dev'
+import {serverOptions as options} from './config'
 
 const app: express$Application = express()
 const httpsPORT: number = +process.env.PORT || 3000
