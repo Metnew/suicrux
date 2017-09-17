@@ -5,7 +5,7 @@ export const StyledFooter = styled.footer`
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.primaryColorLight};
   color: ${props => props.theme.primaryTextColor};
   height: 90px;
   box-shadow: inset 0 0 0 0 ${props => props.theme.primaryColorDark},
