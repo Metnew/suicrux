@@ -15,6 +15,7 @@ import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {getAuthState, getLayoutState} from 'selectors'
 import {getWindowInnerWidth} from 'const'
+import ReactGA from 'react-ga'
 // Import styled components
 import {
 	PageLayout,
@@ -85,24 +86,9 @@ class App extends Component {
 		// }
 		//
 		// NOTE: uncomment if you use Google Analytics
-		// if (process.env.GA_ID) {
-		// 	const script = document.createElement('script')
-		// 	script.type = 'text/javascript'
-		// 	script.async = true
-		// 	script.crossorigin = 'anonymous'
-		// 	script.onload = () => {
-		// 		window.ga =
-		// 			window.ga ||
-		// 			function () {
-		// 				;(ga.q = ga.q || []).push(arguments)
-		// 			}
-		// 		ga.l = Number(new Date())
-		// 		ga('create', process.env.GA_ID, 'auto')
-		// 		ga('send', 'pageview')
-		// 	}
-		// 	script.src = 'https://www.google-analytics.com/analytics.js'
-		// 	document.body.appendChild(script)
-		// }
+		if (process.env.GA_ID) {
+			ReactGA.initialize(process.env.GA_ID)
+		}
 	}
 
 	/**
