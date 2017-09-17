@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import {media} from 'styles/utils'
 import {Button} from 'semantic-ui-react'
-
 export const StyledHeader = styled.header`
 	background: ${props => props.theme.primaryColor};
 	border-bottom: 1px solid ${props => props.theme.primaryColorDark};
@@ -12,11 +11,8 @@ export const StyledHeader = styled.header`
 	justify-content: center;
 	flex-direction: column;
 	width: 100%;
-	position: fixed;
 	z-index: 444;
-	${media.md`
-		height: 65px;
-	`};
+	height: 65px;
 	${media.lg`
 		height: 72px;
 	`};
@@ -24,7 +20,6 @@ export const StyledHeader = styled.header`
 export const HeaderInner = styled.div`
 	display: flex;
 	padding: 0 15px;
-	${'XXX: maybe it\'s better to use `em`s?'}
 `
 
 export const PageTitle = styled.span`
