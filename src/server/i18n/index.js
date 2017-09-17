@@ -1,12 +1,14 @@
+// @flow
 import {readFileSync} from 'fs' // readFile
 import path from 'path'
 import {sync as globSync} from 'glob'
 // import {addLocaleData} from 'react-intl'
 import enLocaleData from 'react-intl/locale-data/en'
 import ruLocaleData from 'react-intl/locale-data/ru'
+import type {i18nConfigObject} from 'types'
 
 const translations = globSync('locals/*.json')
-	.map(filename => [
+	.map((filename: string) => [
 		path.basename(filename, '.json'),
 		readFileSync(filename, 'utf8')
 	])
@@ -24,7 +26,7 @@ const summaryLocaleData = {
 export const defaultLanguage = 'en'
 export const supportedLanguages = ['en', 'ru']
 
-export default lang => {
+export default (lang: string): i18nConfigObject => {
 	console.log(lang)
 	return {
 		lang,
