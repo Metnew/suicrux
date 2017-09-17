@@ -1,6 +1,6 @@
 {
 	"plugins": [
-		["lodash", {"id": ["lodash", "semantic-ui-react"]}],
+		["lodash", {"id": ["lodash"]}],
 		[
 			"transform-runtime",
 			{
@@ -10,9 +10,29 @@
 				"moduleName": "babel-runtime"
 			}
 		],
-		"syntax-dynamic-import"
+		"syntax-dynamic-import",
+		[
+			"babel-plugin-styled-components",
+			{
+				"preprocess": true,
+				"ssr": true
+			}
+		]
 	],
-	"presets": ["es2015", "react", "stage-0", "flow"],
+	"presets": [
+		[
+			"env",
+			{
+				"targets": {
+					"browsers": ["last 2 versions", "> 1%"]
+				}
+			}
+		],
+		"es2015",
+		"stage-1",
+		"react",
+		"flow"
+	],
 	"env": {
 		"production": {
 			"presets": ["react-optimize"]
