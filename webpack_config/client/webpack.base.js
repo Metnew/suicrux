@@ -51,10 +51,11 @@ const baseBuild = {
 	resolve: {
 		alias: {
 			...isomorphicWebpackConfig.resolve.alias
+			// NOTE: Preact + preact-compat can save you 148Kb parsed or 14kb gzipped
+			// Preact may breaks your React app, starter by default doesn't aim to support Preact
 			// react: 'preact-compat',
 			// 'react-dom': 'preact-compat',
-			// 'preact-compat': 'preact-compat/dist/preact-compat',
-			// 'react-redux': 'preact-redux'
+			// 'preact-compat': 'preact-compat/dist/preact-compat'
 		},
 		modules: isomorphicWebpackConfig.resolve.modules,
 		extensions: isomorphicWebpackConfig.resolve.extensions.concat([
