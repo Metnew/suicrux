@@ -18,13 +18,9 @@ type State = {
 
 class LoginComponent extends Component {
 	props: Props
-	state: State
-	constructor (props: Props) {
-		super(props)
-		this.state = {
-			username: '',
-			password: ''
-		}
+	state: State = {
+		username: '',
+		password: ''
 	}
 
 	handleSubmit (e: Event) {
@@ -63,7 +59,7 @@ class LoginComponent extends Component {
 				</Helmet>
 				<Grid.Row>
 					<Grid.Column tablet={10} mobile={16} computer={6}>
-						<Form onSubmit={::this.handleSubmit} {...loginFormProps}>
+						<Form onSubmit={this.handleSubmit.bind(this)} {...loginFormProps}>
 							{errors &&
 								<Message
 									error
@@ -75,7 +71,7 @@ class LoginComponent extends Component {
 								name="username"
 								label="Username"
 								value={username}
-								onChange={::this.handleChange}
+								onChange={this.handleChange}
 							/>
 							<Form.Input
 								placeholder="Password"
@@ -83,7 +79,7 @@ class LoginComponent extends Component {
 								name="password"
 								label="Password"
 								value={password}
-								onChange={::this.handleChange}
+								onChange={this.handleChange}
 							/>
 							<TextCenter>
 								<LoginButton {...loginBtnProps} />
