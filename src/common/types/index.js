@@ -42,3 +42,10 @@ export type RouteItem = {
 	tag?: React$Node | Function,
 	component?: React$Node | Function
 }
+
+export type i18nConfigObject = {
+	messages: Object,
+	localeData: Object,
+	locale: string,
+	lang?: string
+}
