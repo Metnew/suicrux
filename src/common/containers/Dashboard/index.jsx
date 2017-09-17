@@ -19,7 +19,6 @@ type Props = {
 
 class Dashboard extends Component {
 	props: Props
-
 	componentDidMount () {
 		this.props.getPosts()
 	}
