@@ -3,11 +3,11 @@
  * {@link https://www.materialpalette.com/}
  */
 export default {
-	primaryColorDark: '#00796B',
-	primaryColor: '#009688',
-	primaryColorLight: '#B2DFDB',
+	primaryColorDark: '#0e1319',
+	primaryColor: '#1b1e2f',
+	primaryColorLight: '#303747',
 	primaryColorText: '#F7F7F7',
-	accentColor: '#00BCD4',
+	accentColor: '#e2c7c0',
 	primaryTextColor: '#212121',
 	secondaryTextColor: '#757575',
 	dividerColor: '#BDBDBD'
