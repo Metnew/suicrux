@@ -1,4 +1,6 @@
 // @flow
+import serealize from 'serialize-javascript'
+
 type args = {
 	css: string,
 	App: string,
@@ -24,8 +26,8 @@ const HtmlComponent = ({
 	faviconsAssets,
 	i18n
 }: args) => {
-	const stringifiedState: string = JSON.stringify(initialState)
-	const stringifiedI18N: string = JSON.stringify(i18n)
+	const stringifiedState: string = serealize(initialState)
+	const stringifiedI18N: string = serealize(i18n)
 	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
 
 	const createBody = () => {
