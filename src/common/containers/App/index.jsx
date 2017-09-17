@@ -27,10 +27,9 @@ import {
 } from './style'
 import type {RouteItem} from 'types'
 import type {GlobalState} from 'reducers'
-import type {Node} from 'react'
 
 type Props = {
-	children: Node,
+	children: React$Node,
 	// Routes of app passed as props in `Root`
 	routes: Array<RouteItem>,
 	// React-router `withRouter` props
@@ -57,6 +56,7 @@ class App extends Component {
 		const {isLoggedIn} = this.props
 		if (process.env.BROWSER) {
 			const {handleWindowResize} = this.props
+			handleWindowResize()
 			window.addEventListener('resize', handleWindowResize)
 		}
 		this.checkAppAuthLogic(isLoggedIn)
