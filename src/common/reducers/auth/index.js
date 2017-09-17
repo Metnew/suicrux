@@ -1,8 +1,5 @@
 // @flow
-import {
-	isLoggedIn as hasLocalToken,
-	getLocalToken
-} from 'api/LocalStorageCookiesSvc'
+import {isLoggedIn as hasLocalToken} from 'api/LocalStorageCookiesSvc'
 import {
 	LOGIN_AUTH_FAIL,
 	LOGIN_AUTH_PENDING,
@@ -23,7 +20,6 @@ export type State = {
 	isLoading: boolean,
 	isLoaded: boolean,
 	isLoggedIn: boolean,
-	token: string | null,
 	errors: Object
 }
 
@@ -38,7 +34,6 @@ export const initialState: State = {
 	isLoading: false,
 	isLoaded: false,
 	isLoggedIn: hasLocalToken(),
-	token: getLocalToken(),
 	errors: {}
 }
 
@@ -52,7 +47,6 @@ export function auth (state: State = initialState, action: Action): State {
 			isLoading: false,
 			isLoaded: true,
 			isLoggedIn: false,
-			token: null,
 			errors: {}
 		}
 	}
@@ -63,18 +57,15 @@ export function auth (state: State = initialState, action: Action): State {
 			isLoading: false,
 			isLoaded: true,
 			isLoggedIn: false,
-			token: null,
 			errors
 		}
 	}
 	case LOGIN_AUTH_SUCCESS: {
-		const {token} = action.payload
 		return {
 			...state,
 			isLoading: false,
 			isLoaded: true,
-			isLoggedIn: true,
-			token
+			isLoggedIn: true
 		}
 	}
 	case LOGIN_AUTH_PENDING: {
