@@ -2,10 +2,8 @@
  * @flow
  */
 
-import {
-	getLocalToken,
-	resetLocalToken
-} from 'api/LocalStorageCookiesSvc'
+import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
+import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 
 /**
