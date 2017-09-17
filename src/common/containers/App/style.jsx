@@ -5,30 +5,30 @@ import {Dimmer, Sidebar, Container} from 'semantic-ui-react'
 export const PageLayout = styled.div`height: 100%;`
 
 export const MainLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  color: ${props => props.theme.primaryTextColor};
-  background-color: ${props => props.theme.primaryColorText};
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	color: ${props => props.theme.primaryTextColor};
+	background-color: ${props => props.theme.primaryColorText};
 `
 
 export const MainContent = styled.main`
-  display: flex;
-  flex-grow: 1;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  ${media.md`
+	display: flex;
+	flex-grow: 1;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	${media.md`
 		padding-top: 65px;
 	`};
-  ${media.lg`
+	${media.lg`
 		padding-top: 72px;
 	`};
 `
 
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	height: 100%;
-  overflow-y: scroll!important;
   -webkit-overflow-scrolling: touch;
+  overflow: visible;
 
   ::-webkit-scrollbar {
 	  width: 0px!important;
