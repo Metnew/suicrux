@@ -1,11 +1,12 @@
 import webpack from 'webpack'
+import config from '../config'
 import baseWebpackConfig from './webpack.base'
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import {Plugin as ShakePlugin} from 'webpack-common-shake'
 import OptimizeJsPlugin from 'optimize-js-plugin'
 
-const analyzePlugins = process.env.ANALYZE_BUNDLE
+const analyzePlugins = config.ANALYZE_BUNDLE
 	? [new BundleAnalyzerPlugin({analyzerMode: 'static'})]
 	: []
 const plugins = [
