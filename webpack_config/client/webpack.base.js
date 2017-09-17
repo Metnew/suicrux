@@ -49,7 +49,13 @@ const baseBuild = {
 		hints
 	},
 	resolve: {
-		alias: isomorphicWebpackConfig.resolve.alias,
+		alias: {
+			...isomorphicWebpackConfig.resolve.alias
+			// react: 'preact-compat',
+			// 'react-dom': 'preact-compat',
+			// 'preact-compat': 'preact-compat/dist/preact-compat',
+			// 'react-redux': 'preact-redux'
+		},
 		modules: isomorphicWebpackConfig.resolve.modules,
 		extensions: isomorphicWebpackConfig.resolve.extensions.concat([
 			'.css',
@@ -69,7 +75,7 @@ const baseBuild = {
 					{
 						loader: 'url-loader',
 						options: {
-							limit: 8192,
+							limit: 4096,
 							// path: '/images',
 							name: 'images/[name].[hash:8].[ext]'
 						}
@@ -109,7 +115,7 @@ const baseBuild = {
 			// add theme-color property
 			background: manifest.theme,
 			prefix: `favicons/`,
-			logo: path.join(rootPath, './static/images/logo.png'),
+			logo: path.join(rootPath, './static/images/Logo.svg'),
 			title,
 			emitStats: true,
 			statsFilename: 'favicons-stats.json',
