@@ -25,9 +25,7 @@ function mapStateToProps (state: GlobalState) {
 
 const mapDispatchToProps = dispatch => ({
 	login (data) {
-		const language = navigator && navigator.language
-		const payload = {...data, lang: language}
-		dispatch(LOGIN_AUTH(payload))
+		dispatch(LOGIN_AUTH(data))
 	}
 })
 
