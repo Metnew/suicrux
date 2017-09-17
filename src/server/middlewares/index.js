@@ -8,6 +8,7 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
+import useragent from 'express-useragent'
 import authMiddleware from './auth'
 
 export default (app: express$Application): express$Application => {
@@ -22,6 +23,7 @@ export default (app: express$Application): express$Application => {
 		})
 	)
 	app.use(bodyParser.json())
+	app.use(useragent.express())
 	app.use(authMiddleware)
 
 	return app
