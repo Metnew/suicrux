@@ -5,10 +5,6 @@ injectGlobal`
     box-sizing: border-box;
   }
 
-  /* After one of the latest releases Semantic styles scrollbars!
-   * It's important to remember this info, when you work on custom scrollbar
-   */
-
   ${'' /* body ::-webkit-scrollbar {
     width: 0;
   }
