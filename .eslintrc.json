@@ -13,6 +13,11 @@
 			"modules": true
 		}
 	},
+	"globals": {
+		"i18n": true,
+		"Raven": true,
+		"ga": true
+	},
 	"env": {
 		"browser": true,
 		"amd": true,
@@ -24,10 +29,5 @@
 		"no-tabs": 0,
 		"no-unused-vars": 1,
 		"indent": [2, "tab"]
-	},
-	"globals": {
-		"i18n": true,
-		"Raven": true,
-		"ga": true
 	}
 }
