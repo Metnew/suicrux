@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === 'production') {
    const {whyDidYouUpdate} = require('why-did-you-update')
     whyDidYouUpdate(React)
   */
-	/*eslint-enable */
+	/* eslint-enable */
 	// window.Perf = require('react-addons-perf')
 	// NOTE: a11y doesnt work with SSR and React throws warnings like:
 	// "React attempted to reuse markup in a container but the checksum was invalid"
