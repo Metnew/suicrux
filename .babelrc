@@ -14,7 +14,6 @@
 		[
 			"babel-plugin-styled-components",
 			{
-				"preprocess": true,
 				"ssr": true
 			}
 		]
