@@ -9,8 +9,8 @@ import {
 	StyledHeader,
 	HeaderInner,
 	Navicon,
-	PageTitle,
-	HeaderButton
+	PageTitle
+	// HeaderButton
 } from './style'
 import {Spacer} from 'styles/base'
 import Headroom from 'react-headroom'
