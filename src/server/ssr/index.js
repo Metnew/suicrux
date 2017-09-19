@@ -5,7 +5,7 @@
 import React from 'react'
 import chalk from 'chalk'
 // import _ from 'lodash'
-import {renderToString} from 'react-dom/server'
+import {render as renderToString} from 'rapscallion'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
 // import {addLocaleData} from 'react-intl'
@@ -16,16 +16,16 @@ import assets from 'webpack-assets'
 import faviconsAssets from 'favicons-assets'
 import getI18nData from 'server/i18n'
 
-export default (req: express$Request, res: express$Response) => {
-	const {isLoggedIn, lang} = req.user
+export default async (req: express$Request, res: express$Response) => {
+	const {isLoggedIn, language} = req.user
 	const {isMobile} = req.useragent
-	console.log(chalk.cyan(`MOBILE DEVICE: ${isMobile}`, JSON.stringify(req.useragent), lang))
+	console.log(chalk.cyan(`MOBILE DEVICE: ${isMobile}`))
 	const meState = {auth: {isLoggedIn}}
 	const layoutState = {isMobile}
 	const initialState: Object = isLoggedIn
 		? {me: meState, layout: layoutState}
 		: {layout: layoutState}
-	const i18n = getI18nData(lang)
+	const i18n = getI18nData(language)
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url
 	const context = {}
@@ -37,11 +37,11 @@ export default (req: express$Request, res: express$Response) => {
 		i18n,
 		SSR: {location, context}
 	})
-	const App: string = renderToString(
+	const App: string = await renderToString(
 		<StyleSheetManager sheet={sheet.instance}>
 			{RootComponent}
 		</StyleSheetManager>
-	)
+	).toPromise()
 	const css: string = sheet.getStyleTags()
 	const preloadedState: Object = store.getState()
 	const props = {
@@ -53,6 +53,9 @@ export default (req: express$Request, res: express$Response) => {
 		App
 	}
 
-	const html: string = HtmlComponent(props)
-	res.send(html)
+	res.writeHead(200, {
+		'Content-Type': 'text/html'
+	})
+
+	HtmlComponent(props).toStream().pipe(res)
 }
