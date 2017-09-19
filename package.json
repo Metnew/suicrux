@@ -25,6 +25,7 @@
 		"promise-polyfill": "6.0.2",
 		"prop-types": "^15.5.10",
 		"query-string": "^5.0.0",
+		"rapscallion": "^2.1.13",
 		"raven": "^2.1.2",
 		"react": "^15.6.1",
 		"react-dom": "^15.6.1",
