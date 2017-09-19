@@ -1,6 +1,6 @@
 // @flow
 import serealize from 'serialize-javascript'
-
+import {template} from 'rapscallion'
 type args = {
 	css: string,
 	App: string,
@@ -29,56 +29,53 @@ const HtmlComponent = ({
 	const stringifiedState: string = serealize(initialState)
 	const stringifiedI18N: string = serealize(i18n)
 	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
-
-	const createBody = () => {
-		const html = `
-			<div id="app">${App}</div>
-		<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
-		<script>window.__I18N__ = ${stringifiedI18N}</script>
-		${DLLScripts}
-		${Object.keys(assets)
-		.filter(bundleName => assets[bundleName].js)
-		.map(bundleName => {
-			const path = assets[bundleName].js
-			return `<script src="${path}" type="text/javascript"></script>`
-		})
-		.join('')}
-		<noscript>
-			You are using outdated browser. You can install modern browser here:{' '}
-			<a href="http://outdatedbrowser.com/">http://outdatedbrowser.com</a>.
-		</noscript>`
-		return html
+	const wrapFuncs = {
+		css: ({path}) => `<link rel="stylesheet" href="${path}" />`,
+		js: ({path}) => `<script src="${path}" type="text/javascript"></script>`
 	}
-
-	const createHead = () => {
-		const html = `
-			<meta charset="utf-8" />
-		<title>Noir</title>
-		<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta
-			name="description"
-			content="Advanced universal React starter built with a scale in mind."
-		/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<base href="/" />
-		<meta name="msapplication-tap-highlight" content="no" />
-		<link rel="manifest" href="manifest.json" />
-		${faviconsAssets.html && faviconsAssets.html.join('')}
-		${css}
-		${Object.keys(assets)
-		.filter(bundleName => assets[bundleName].css)
-		.map(bundleName => {
-			const path = assets[bundleName].css
-			return `<link rel="stylesheet" href="${path}" />`
-		})
-		.join('')}`
-		return html
+	const getTags = assets => funcs => ext => {
+		const assetsOrdered = ['manifest', 'vendor', 'client']
+		return Object.keys(assets)
+			.filter(bundleName => assets[bundleName][ext])
+			.sort((a, b) => assetsOrdered.indexOf(a) > assetsOrdered.indexOf(b))
+			.map(bundleName => {
+				const path = assets[bundleName][ext]
+				return funcs[ext]({path})
+			})
+			.join('')
 	}
+	const getTagsFromAssets = getTags(assets)(wrapFuncs)
+	const cssTags = getTagsFromAssets('css')
+	const jsTags = getTagsFromAssets('js')
 
-	return `<html lang="${i18n.lang}">
-			<head>${createHead()}<head>
+	return template`
+		<html lang="${i18n.lang}">
+			<head>
+				<meta charset="utf-8" />
+				<title>Noir</title>
+				<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+				<meta
+					name="description"
+					content="Advanced universal React starter built with a scale in mind."
+				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<base href="/" />
+				<meta name="msapplication-tap-highlight" content="no" />
+				<link rel="manifest" href="manifest.json" />
+				${faviconsAssets && faviconsAssets.html && faviconsAssets.html.join('')}
+				${css}
+				${cssTags}
+			<head>
 			<body>
-				${createBody()}
+				<div id="app">${App}</div>
+				<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
+				<script>window.__I18N__ = ${stringifiedI18N}</script>
+				${DLLScripts}
+				${jsTags}
+					<noscript>
+						You are using outdated browser. You can install modern browser here:
+						<a href="http://outdatedbrowser.com/">http://outdatedbrowser.com</a>.
+					</noscript>
 			</body>
 		</html>`
 }
