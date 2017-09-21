@@ -1,5 +1,5 @@
 // @flow
-import {resultOK} from 'api/utils'
+import {awral} from 'actions/utils'
 import {getUsersAPI} from 'api/UsersSvc'
 import type {UserItem} from 'types'
 // Define action types
@@ -21,12 +21,4 @@ export type GET_USERS_PENDING_TYPE = {
 	type: 'GET_USERS_PENDING'
 }
 
-export const GET_USERS = id => async (dispatch: Dispatch) => {
-	dispatch({type: GET_USERS_PENDING})
-	const result = await getUsersAPI({id})
-	if (resultOK(result)) {
-		dispatch({type: GET_USERS_SUCCESS, payload: result.data})
-	} else {
-		dispatch({type: GET_USERS_FAIL, payload: result.data})
-	}
-}
+export const GET_USERS = awral(getUsersAPI)('GET_USERS')
