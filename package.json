@@ -23,7 +23,7 @@
 		"prop-types": "^15.5.10",
 		"rapscallion": "^2.1.13",
 		"react": "^15.6.1",
-		"react-dom": "^15.6.1",
+		"react-dom": "^16.0.0",
 		"react-helmet": "^5.1.3",
 		"react-redux": "^5.0.5",
 		"react-router": "^4.1.2",
