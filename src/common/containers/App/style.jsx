@@ -40,7 +40,7 @@ export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
 
 //  Margin - just to fill empty space
 export const MainContainer = styled(Container)`
-  margin-top: 1em;
+  margin-top: 2em;
   margin-bottom: 1em;
 
   &#main-container {
