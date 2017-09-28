@@ -13,7 +13,7 @@ const UsersItemComponent = ({user}: Props) => {
 	const {name, username, address, email, website, phone, id} = user
 	return (
 		<StyledUserItem as={Link} to={`/users/${id}`}>
-			<Statistic floated="left" value={id} label={'User ID'} />
+			<Statistic floated="left" value={id} label={'User'} />
 			<Item.Content>
 				<Item.Header>
 					{`${name} "${username}"`}
