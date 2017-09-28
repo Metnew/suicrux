@@ -5,7 +5,7 @@
 import React from 'react'
 import chalk from 'chalk'
 // import _ from 'lodash'
-import {render as renderToString} from 'rapscallion'
+import {renderToNodeStream, renderToStaticNodeStream} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
 // import {addLocaleData} from 'react-intl'
@@ -37,11 +37,12 @@ export default async (req: express$Request, res: express$Response) => {
 		i18n,
 		SSR: {location, context}
 	})
-	const App: string = await renderToString(
+	const stream = renderToNodeStream(
 		<StyleSheetManager sheet={sheet.instance}>
 			{RootComponent}
 		</StyleSheetManager>
-	).toPromise()
+	)
+
 	const css: string = sheet.getStyleTags()
 	const preloadedState: Object = store.getState()
 	const props = {
@@ -49,13 +50,18 @@ export default async (req: express$Request, res: express$Response) => {
 		assets,
 		faviconsAssets,
 		initialState: preloadedState,
-		i18n,
-		App
+		i18n
 	}
+	const {beforeAppTag, afterAppTag} = HtmlComponent(props)
 
 	res.writeHead(200, {
 		'Content-Type': 'text/html'
 	})
+	res.write(beforeAppTag)
+	stream.pipe(res, {end: false})
 
-	HtmlComponent(props).toStream().pipe(res)
+	stream.on('end', () => {
+		res.write(afterAppTag)
+		res.end()
+	})
 }
