@@ -6,7 +6,7 @@ import {
 } from 'actions/layout'
 import {LOCATION_CHANGE} from 'actions/common'
 //
-import type {LOCATION_CHANGE_TYPE, APPLICATION_INIT_TYPE} from 'actions/common'
+import type {LOCATION_CHANGE_TYPE} from 'actions/common'
 import type {
 	UI_OPEN_SIDEBAR_TYPE,
 	UI_CLOSE_SIDEBAR_TYPE,
@@ -25,7 +25,6 @@ type Action =
 	| UI_CLOSE_SIDEBAR_TYPE
 	| UI_WINDOW_RESIZE_TYPE
 	| LOCATION_CHANGE_TYPE
-	| APPLICATION_INIT_TYPE
 
 export const initialState: State = {
 	sidebarOpened: false,
