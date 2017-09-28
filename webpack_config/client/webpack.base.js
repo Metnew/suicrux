@@ -30,7 +30,7 @@ const definePluginArgs = {
 // use hash filename to support long-term caching in production
 const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'
 const hints = isProduction ? 'warning' : false
-const devtool = isProduction ? 'cheap-source-map' : 'source-map'
+const devtool = isProduction ? 'cheap-source-map' : 'eval'
 
 const baseBuild = {
 	name: 'client',

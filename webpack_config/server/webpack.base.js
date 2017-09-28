@@ -19,7 +19,7 @@ const definePluginArgs = {
 	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH)
 }
 
-const devtool = isProduction ? 'cheap-source-map' : 'source-map'
+const devtool = isProduction ? 'cheap-source-map' : 'eval'
 const entry = isProduction
 	? path.join(config.srcPath, './server')
 	: path.join(config.srcPath, './server/server')
