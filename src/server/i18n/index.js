@@ -18,16 +18,14 @@ const translations = globSync('locals/*.json')
 		return acc
 	}, {})
 
-const summaryLocaleData = {
-	en: enLocaleData,
-	ru: ruLocaleData
-}
-
 export const defaultLanguage = 'en'
 export const supportedLanguages = ['en', 'ru']
 
-export default (lang: string): i18nConfigObject => {
-	console.log(lang)
+export default (lang: string = defaultLanguage): i18nConfigObject => {
+	const summaryLocaleData = {
+		en: enLocaleData,
+		ru: ruLocaleData
+	}
 	return {
 		lang,
 		localeData: summaryLocaleData[lang],
