@@ -15,7 +15,7 @@ const Login = ({login, errors}: Props) => {
 	return <LoginComponent login={login} errors={errors} />
 }
 
-function mapStateToProps (state: GlobalState) {
+const mapStateToProps = (state: GlobalState) => {
 	const authState = getAuthState(state)
 	const {errors} = authState
 	return {
@@ -24,8 +24,8 @@ function mapStateToProps (state: GlobalState) {
 }
 
 const mapDispatchToProps = dispatch => ({
-	login (data) {
-		dispatch(LOGIN_AUTH(data))
+	login (payload) {
+		dispatch(LOGIN_AUTH(payload))
 	}
 })
 
