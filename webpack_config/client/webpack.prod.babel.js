@@ -1,5 +1,5 @@
-import child_process from 'child_process'
 import webpack from 'webpack'
+import rimraf from 'rimraf'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import SriPlugin from 'webpack-subresource-integrity'
@@ -22,9 +22,8 @@ import base from './webpack.base'
 import config from '../config'
 //
 const {APP_LANGUAGE, ANALYZE_BUNDLE} = config
-const exec = child_process.execSync
 
-exec(`rm -rf ${config.distPath}/client/${APP_LANGUAGE}`)
+rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
 // NOTE: you can track versions with gitHash and store your build
 // in dist folder with path like: /dist/client/<gitHash>/<languageName>/{yourFilesHere}
 // const gitHash = git.short() //
@@ -198,6 +197,5 @@ base.plugins.push(
 		AppCache: false
 	})
 )
-
 
 export default base

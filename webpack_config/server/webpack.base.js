@@ -1,13 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import webpack from 'webpack'
+import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import child_process from 'child_process'
 import _ from 'lodash'
 import I18nPlugin from 'i18n-webpack-plugin'
 
-const exec = child_process.execSync
 const {
 	SENTRY_DSN,
 	DIST_PATH,
@@ -18,7 +17,7 @@ const {
 } = config
 
 // Cleare dist dir before run
-exec(`rm -rf ${config.distPath}/server/${APP_LANGUAGE}`)
+rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
 
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
