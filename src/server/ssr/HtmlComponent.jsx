@@ -1,9 +1,7 @@
 // @flow
 import serealize from 'serialize-javascript'
-import {template} from 'rapscallion'
 type args = {
 	css: string,
-	App: string,
 	initialState: Object,
 	assets: Object,
 	faviconsAssets: Object,
@@ -20,7 +18,6 @@ const DLLScripts =
 
 const HtmlComponent = ({
 	css,
-	App,
 	initialState,
 	assets,
 	faviconsAssets,
@@ -34,10 +31,11 @@ const HtmlComponent = ({
 		js: ({path}) => `<script src="${path}" type="text/javascript"></script>`
 	}
 	const getTags = assets => funcs => ext => {
+		// sort assets to be injected in right order
 		const assetsOrdered = ['manifest', 'vendor', 'client']
 		return Object.keys(assets)
 			.filter(bundleName => assets[bundleName][ext])
-			.sort((a, b) => assetsOrdered.indexOf(a) > assetsOrdered.indexOf(b))
+			.sort((a, b) => assetsOrdered.indexOf(a) - assetsOrdered.indexOf(b))
 			.map(bundleName => {
 				const path = assets[bundleName][ext]
 				return funcs[ext]({path})
@@ -48,8 +46,8 @@ const HtmlComponent = ({
 	const cssTags = getTagsFromAssets('css')
 	const jsTags = getTagsFromAssets('js')
 
-	return template`
-		<html lang="${i18n.lang}">
+	return {
+		beforeAppTag: `<html lang="${i18n.lang}">
 			<head>
 				<meta charset="utf-8" />
 				<title>Noir</title>
@@ -66,18 +64,19 @@ const HtmlComponent = ({
 				${css}
 				${cssTags}
 			<head>
-			<body>
-				<div id="app">${App}</div>
-				<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
-				<script>window.__I18N__ = ${stringifiedI18N}</script>
-				${DLLScripts}
-				${jsTags}
-					<noscript>
-						You are using outdated browser. You can install modern browser here:
-						<a href="http://outdatedbrowser.com/">http://outdatedbrowser.com</a>.
-					</noscript>
+			<body>`,
+		afterAppTag: `
+			<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
+			<script>window.__I18N__ = ${stringifiedI18N}</script>
+			${DLLScripts}
+			${jsTags}
+			<noscript>
+				You are using outdated browser. You can install modern browser here:
+				<a href="http://outdatedbrowser.com/">http://outdatedbrowser.com</a>.
+			</noscript>
 			</body>
-		</html>`
+			</html>`
+	}
 }
 
 export default HtmlComponent
