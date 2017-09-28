@@ -1,4 +1,3 @@
-import child_process from 'child_process'
 import webpack from 'webpack'
 import rimraf from 'rimraf'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'

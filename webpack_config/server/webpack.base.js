@@ -4,7 +4,6 @@ import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import child_process from 'child_process'
 import _ from 'lodash'
 import I18nPlugin from 'i18n-webpack-plugin'
 
