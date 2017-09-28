@@ -55,7 +55,7 @@ if (process.env.NODE_ENV === 'production') {
 	// window.Perf = require('react-addons-perf')
 	// NOTE: a11y doesnt work with SSR and React throws warnings like:
 	// "React attempted to reuse markup in a container but the checksum was invalid"
-	// a11y adds "id" attribute to the root container (#app) of your app and triggers re-rendering
+	// a11y adds "id" attribute to the root container (#app) of app and triggers re-rendering
 	//
 	/** {@link https://github.com/reactjs/react-a11y } */
 	// const a11y = require('react-a11y')
@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const initialState: GlobalState = window.__INITIAL_STATE__ || {}
 const i18n: i18nConfigObject = window.__I18N__ || {}
-// NOTE: V8 doesn't optimize `delete`
+// NOTE: V8 doesn't optimize code with `delete`
 // delete window.__INITIAL_STATE__
 const {store, routes, history} = configureApp(initialState)
 const RootComponent = configureRootComponent({
@@ -75,6 +75,7 @@ const RootComponent = configureRootComponent({
 })
 
 render(RootComponent, document.getElementById('app'))
+
 persistStore(store)
 
 if (module.hot) {

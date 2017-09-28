@@ -11,12 +11,14 @@ export type GET_USERS_SUCCESS_TYPE = {
 	type: 'GET_USERS_SUCCESS',
 	payload: Array<UserItem>
 }
+
 export type GET_USERS_FAIL_TYPE = {
 	type: 'GET_USERS_FAIL',
 	payload: {
 		errors?: void | Object
 	}
 }
+
 export type GET_USERS_PENDING_TYPE = {
 	type: 'GET_USERS_PENDING'
 }
