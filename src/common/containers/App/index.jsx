@@ -67,7 +67,7 @@ class App extends Component {
    * Checks that user is still allowed to visit path after props changed
    * @param  {Object} nextProps
    */
-	componentWillReceiveProps (nextProps) {
+	componentWillReceiveProps (nextProps: Props) {
 		this.checkAppAuthLogic(nextProps.isLoggedIn)
 	}
 
@@ -84,8 +84,7 @@ class App extends Component {
 		// 	script.src = 'https://cdn.ravenjs.com/3.16.1/raven.min.js'
 		// 	document.body.appendChild(script)
 		// }
-		//
-		// NOTE: uncomment if you use Google Analytics
+
 		if (process.env.GA_ID) {
 			ReactGA.initialize(process.env.GA_ID)
 		}
