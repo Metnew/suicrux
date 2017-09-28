@@ -19,7 +19,7 @@ type Props = {
 	isMobile: boolean
 }
 
-export default class SidebarComponent extends Component {
+class SidebarComponent extends Component {
 	props: Props
 
 	render () {
@@ -36,14 +36,14 @@ export default class SidebarComponent extends Component {
 
 		const routes = routing.map((route, i) => {
 			const {external, path, icon, name, strict, exact} = route
-			// Props that are applicable for both "plain link, i.e. <a>" and "RR Link"
+			// Props that are common for both "<a>" and "RR Link"
 			const basicProps = {
 				as: external ? 'a' : NavLink,
 				link: true,
 				[external ? 'href' : 'to']: path
 			}
 
-			// Is it's RR Link, then it has more props
+			// Is it's RR Link, then it needs additional props
 			const externalProps = external
 				? {}
 				: {
@@ -85,3 +85,5 @@ export default class SidebarComponent extends Component {
 		)
 	}
 }
+
+export default SidebarComponent
