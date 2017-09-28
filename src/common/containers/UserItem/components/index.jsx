@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import {Card, Icon, Image} from 'semantic-ui-react'
-//
 import type {UserItem} from 'types'
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 const UserItemComponent = ({user}: Props) => {
 	return (
 		<Card>
-			<Image alt={`${user.name}`} src={require('images/daniel.jpg')} />
+			<Image alt={`${user.name}`} src={require('images/Logo.svg')} />
 			<Card.Content>
 				<Card.Header>
 					{user.name}
