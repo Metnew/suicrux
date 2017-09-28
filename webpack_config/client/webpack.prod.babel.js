@@ -23,7 +23,6 @@ import base from './webpack.base'
 import config from '../config'
 //
 const {APP_LANGUAGE, ANALYZE_BUNDLE} = config
-const exec = child_process.execSync
 
 rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
 // NOTE: you can track versions with gitHash and store your build

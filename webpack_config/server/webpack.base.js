@@ -8,7 +8,6 @@ import child_process from 'child_process'
 import _ from 'lodash'
 import I18nPlugin from 'i18n-webpack-plugin'
 
-const exec = child_process.execSync
 const {
 	SENTRY_DSN,
 	DIST_PATH,
