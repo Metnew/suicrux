@@ -4,14 +4,12 @@
 // import 'semantic-ui-css/semantic.css'
 // If you want only some components from SUI:
 import 'semantic-ui-css/components/button.css'
-import 'semantic-ui-css/components/card.css'
+// import 'semantic-ui-css/components/card.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/dimmer.css'
 import 'semantic-ui-css/components/divider.css'
-import 'semantic-ui-css/components/dropdown.css'
 import 'semantic-ui-css/components/grid.css'
 import 'semantic-ui-css/components/header.css'
-import 'semantic-ui-css/components/flag.css'
 import 'semantic-ui-css/components/form.css'
 import 'semantic-ui-css/components/item.css'
 import 'semantic-ui-css/components/icon.css'
@@ -27,7 +25,7 @@ import 'semantic-ui-css/components/statistic.css'
 // promise polyfill
 import 'promise-polyfill'
 // Application
-import {render} from 'react-dom'
+import {hydrate} from 'react-dom'
 import {configureApp, configureRootComponent} from 'common/app'
 import {persistStore} from 'redux-persist'
 import type {GlobalState} from 'reducers'
@@ -74,7 +72,7 @@ const RootComponent = configureRootComponent({
 	i18n
 })
 
-render(RootComponent, document.getElementById('app'))
+hydrate(RootComponent, document.getElementById('app'))
 
 persistStore(store)
 
