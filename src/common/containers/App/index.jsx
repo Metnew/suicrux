@@ -13,8 +13,7 @@ import Header from 'components/parts/Header'
 // Import actions
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
-import {getAuthState, getLayoutState} from 'selectors'
-import {getWindowInnerWidth} from 'const'
+import {getAuthState, getLayoutState, getWindowInnerWidth} from 'selectors'
 import ReactGA from 'react-ga'
 // Import styled components
 import {
@@ -244,7 +243,7 @@ function mapDispatchToProps (dispatch) {
 		handleWindowResize () {
 			clearTimeout(resizer)
 			const innerWidth: number = getWindowInnerWidth(window)
-			resizer = setTimeout(() => dispatch(WINDOW_RESIZE(innerWidth)), 150)
+			resizer = setTimeout(() => dispatch(WINDOW_RESIZE(innerWidth)), 100)
 		}
 	}
 }
