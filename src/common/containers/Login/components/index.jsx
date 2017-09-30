@@ -4,7 +4,6 @@ import {Form, Message, Grid} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 import _ from 'lodash'
 import {LoginButton} from './style'
-import {TextCenter} from 'styles/base'
 
 type Props = {
 	login: (data: Object) => void,
@@ -40,11 +39,6 @@ class LoginComponent extends Component {
 		// Error from server
 		const {errors} = this.props
 		const loginFormProps = {error: !_.isEmpty(errors)}
-		// Login btn props
-		const loginBtnProps = {
-			content: 'Login',
-			icon: 'sign in'
-		}
 
 		return (
 			<Grid
@@ -53,19 +47,22 @@ class LoginComponent extends Component {
 				columns={1}
 				textAlign="center"
 				relaxed
+				stretched
 			>
 				<Helmet>
 					<title>Noir:Login</title>
 				</Helmet>
 				<Grid.Row>
 					<Grid.Column tablet={10} mobile={16} computer={6}>
+						{/* Consider using Redux-Form */}
 						<Form onSubmit={this.handleSubmit.bind(this)} {...loginFormProps}>
-							{errors &&
+							{errors && (
 								<Message
 									error
 									header={'Invalid credentials'}
 									content={'Your credentials are invalid.'}
-								/>}
+								/>
+							)}
 							<Form.Input
 								placeholder="Username"
 								name="username"
@@ -81,9 +78,7 @@ class LoginComponent extends Component {
 								value={password}
 								onChange={this.handleChange}
 							/>
-							<TextCenter>
-								<LoginButton {...loginBtnProps} />
-							</TextCenter>
+							<LoginButton content="Login" icon="sign in" />
 						</Form>
 					</Grid.Column>
 				</Grid.Row>
