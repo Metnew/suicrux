@@ -5,7 +5,6 @@ import {readFileSync} from 'fs'
 let key = ''
 let cert = ''
 
-
 if (process.env.NODE_ENV === 'development') {
 	// REMOVE THESE LINES IF YOU HAVE VALID CERT AND KEY FOR DEVELOPMENT
 	const pseudossl = require('pseudossl')
