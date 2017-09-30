@@ -16,29 +16,10 @@ Jest configuration in `jest_config/jest.config.json` looks like:
   "rootDir": "../",
   "setupFiles": ["<rootDir>/jest_config/setupJest.js"],
   "automock": false,
-  "moduleNameMapper": {
-    "^actions$": "<rootDir>/src/common/actions",
-    "^actions/auth$": "<rootDir>/src/common/actions/auth",
-    "^actions/common$": "<rootDir>/src/common/actions/common",
-    "^actions/layout$": "<rootDir>/src/common/actions/layout",
-    "^actions/posts$": "<rootDir>/src/common/actions/posts",
-    "^actions/users$": "<rootDir>/src/common/actions/users",
-
-    "^api": "<rootDir>/src/common/api",
-
-    "^reducers$": "<rootDir>/src/common/reducers",
-    "^reducers/auth$": "<rootDir>/src/common/reducers/auth",
-    "^reducers/layout$": "<rootDir>/src/common/reducers/layout",
-    "^reducers/posts$": "<rootDir>/src/common/reducers/posts",
-    "^reducers/users$": "<rootDir>/src/common/reducers/users",
-
-    "^routing$": "<rootDir>/src/common/routing",
-    "^components$": "<rootDir>/src/common/components",
-    "^containers$": "<rootDir>/src/common/containers"
-  }
+  "moduleNameMapper": {}
 }
 ```
-Jest doesn't know about webpack aliases, so we have to provide them.   
+Jest doesn't know about webpack aliases, so we have to provide them inside `.babelrc` (using `"module-resolver"` plugin). It's more recommended than writing all aliases inside `"moduleNameMapper"`
 Then we have to provide additional configuration for Jest using `setupFiles` property in Jest config object.
 
 `jest_config/setupJest.js`
@@ -59,8 +40,6 @@ What is snapshot testing? See the official Jest docs [about this](https://facebo
 
 ### DOM testing
 You can find [example of DOM testing](https://facebook.github.io/jest/docs/en/tutorial-react.html#dom-testing) in Jest docs.
-
-
 The starter *doesn't include* tests for React components. Feel free to submit PR to add this feature.
 
 ## How to test Redux?
@@ -139,7 +118,7 @@ describe('AUTH REDUCER', () => {
 ```
 
 ### Where to store tests?
-Store tests in the same folder as the component/action/reducer itself.
+Store tests in the same folder with the component/action/reducer.
 
 ### Also
 There are [other solutions](https://github.com/brillout/awesome-react-components#test) to deal with testing, so you're always free to choose your testing library.

@@ -11,7 +11,10 @@ Environment variables are very important for configuration. Some variables are u
 
 #### `GA_ID (default:false)`:
 Your Google analytics ID.    
-If set, google-analytics will be added on `<App>` container's `componentDidMount()` event.
+If set, react-ga will be initialized inside `<App>` container on `componentDidMount()` event.
+
+#### `SENTRY_PUBLIC_DSN (default: false)`:
+Similar to `GA_ID`, but for [Sentry](https://sentry.io).
 ```js
 if (process.env.GA_ID) {
   const script = document.createElement('script')
@@ -28,18 +31,12 @@ if (process.env.GA_ID) {
     ga('create', process.env.GA_ID, 'auto')
     ga('send', 'pageview')
   }
-  script.src = 'https://www.google-analytics.com/analytics.js'
+  script.src = '<url-too-sentry-script>'
   document.body.appendChild(script)
-}
 ```
-##### Why not to add GA in index.html?
-Because, it saves loading time.
-
-#### `SENTRY_PUBLIC_DSN (default: false)`:
-Similar to `GA_ID`, but for [Sentry](https://sentry.io).
 
 #### `BASE_API (default: '/api/v1')`:
-This is the prefix of your server API. This prefix is used by both client and server.    
+Prefix of server API. This prefix is used by both client and server.    
 Server inits API based on this prefix in `src/server/server.js`:
 ```js
 // ...
@@ -62,10 +59,6 @@ if (url.match(/^https?:\/\//gi) > -1) {
 }
 // ...
 ```
-
-#### `APP_LANGUAGE (default: 'en')`:
-Variable is used by webpack for build configuration, but you still have access to it in code. It might be useful to know app language for simple localization or other tasks.
-
 ## Server:
 
 #### `PORT (default: 4000)`:
