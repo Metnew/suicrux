@@ -1,39 +1,29 @@
 // @flow
 import React, {Component} from 'react'
-import {Card, Grid} from 'semantic-ui-react'
-import _ from 'lodash'
-import DashboardCardComponent from './DashboardCardComponent'
-import type {PostItem} from 'types'
-
-type Props = {
-	posts: Object,
-	postsLoaded: boolean,
-	postsLoading: boolean,
-	count: number
-}
+import {Grid, Header} from 'semantic-ui-react'
+import {FormattedMessage} from 'react-intl'
 
 export default class DashboardComponent extends Component {
-	props: Props
-
-	shouldComponentUpdate (nextProps: Props) {
-		const {posts} = this.props
-		const nextPosts = nextProps.posts
-		return !_.isEqual(posts, nextPosts)
-	}
-
 	render () {
-		const {posts, postsLoaded} = this.props
-
 		return (
 			<Grid columns={1}>
 				<Grid.Row centered>
 					<Grid.Column width={16}>
-						{postsLoaded &&
-							<Card.Group itemsPerRow={3} doubling stackable>
-								{_.map(posts, (post: PostItem, i) =>
-									<DashboardCardComponent {...post} key={i} />
-								)}
-							</Card.Group>}
+						<Header as="h1">
+							<FormattedMessage id="Dashboard.h1" />
+						</Header>
+						<Header as="h2">
+							<FormattedMessage id="Dashboard.h2-1" />
+						</Header>
+						<p>
+							<FormattedMessage id="Dashboard.p-1" />
+						</p>
+						<Header as="h2">
+							<FormattedMessage id="Dashboard.h2-2" />
+						</Header>
+						<p>
+							<FormattedMessage id="Dashboard.p-2" />
+						</p>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>
