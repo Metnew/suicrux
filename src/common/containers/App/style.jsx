@@ -52,11 +52,6 @@ export const MainContainer = styled(Container)`
 		  width: 100% !important;
 		`}
 	}
-
-	> .grid,
-	> * > .grid {
-		min-height: 100%;
-	}
 `
 
 export const StyledDimmer = styled(Dimmer)`
