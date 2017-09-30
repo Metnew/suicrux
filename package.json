@@ -7,6 +7,7 @@
 		"awral": "^1.1.2",
 		"body-parser": "^1.18.2",
 		"chalk": "^2.1.0",
+		"chokidar": "^1.7.0",
 		"compression": "^1.7.1",
 		"cookie-parser": "^1.4.3",
 		"express": "^4.15.5",
