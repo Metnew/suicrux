@@ -4,11 +4,9 @@
  */
 import React from 'react'
 import chalk from 'chalk'
-// import _ from 'lodash'
-import {renderToNodeStream, renderToStaticNodeStream} from 'react-dom/server'
+import {renderToNodeStream} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
-// import {addLocaleData} from 'react-intl'
 import HtmlComponent from './HtmlComponent'
 // $FlowFixMe
 import assets from 'webpack-assets'
@@ -58,9 +56,11 @@ export default async (req: express$Request, res: express$Response) => {
 		'Content-Type': 'text/html'
 	})
 	res.write(beforeAppTag)
+	res.write(`<div id="app">`)
 	stream.pipe(res, {end: false})
 
 	stream.on('end', () => {
+		res.write('</div>')
 		res.write(afterAppTag)
 		res.end()
 	})
