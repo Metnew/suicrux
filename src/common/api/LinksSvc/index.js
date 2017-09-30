@@ -2,5 +2,5 @@
 import {get} from 'api/utils'
 
 export async function getLinksAPI () {
-	return get(`/data`)
+	return get(`/links`)
 }
