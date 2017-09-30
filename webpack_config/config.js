@@ -13,7 +13,8 @@ let {
 	JWT_SECRET,
 	ANALYZE_BUNDLE,
 	SENTRY_DSN,
-	PORT
+	HTTP_PORT,
+	HTTPS_PORT
 } = process.env
 
 // Vars for both server and frontend
@@ -29,7 +30,8 @@ const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 // Vars for server only
 const CLIENT_DIST_PATH = path.join(distPath, './client') // = "/dist/client"
 JWT_SECRET = JWT_SECRET || 'secret'
-PORT = PORT || 3000
+HTTP_PORT = HTTP_PORT || 3000
+HTTPS_PORT = HTTPS_PORT || 3030
 
 // compute isProduction based on NODE_ENV
 const isProduction = process.env.NODE_ENV === 'production'
@@ -48,7 +50,8 @@ export default {
 	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	SENTRY_DSN,
-	PORT,
+	HTTPS_PORT,
+	HTTP_PORT,
 	// It's better to define pathes in one file
 	// and then use everywhere across app
 	srcPath,
@@ -76,7 +79,8 @@ export default {
 		'js-cookie',
 		'prop-types',
 		'store2',
-		'styled-components'
+		'styled-components',
+		'react-headroom'
 	],
 	polyfills: ['promise-polyfill', 'isomorphic-fetch']
 }
