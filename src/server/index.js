@@ -11,8 +11,8 @@ import server from './server'
 import {serverOptions as options} from './config'
 
 const app: express$Application = express()
-const httpsPORT: number = +process.env.PORT || 3030
-const httpPORT: number = +process.env.PORT || 3000
+const httpsPORT: number = +process.env.HTTPS_PORT || 3030
+const httpPORT: number = +process.env.HTTP_PORT || 3000
 
 server(app)
 
