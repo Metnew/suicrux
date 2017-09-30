@@ -1,3 +1,9 @@
 {
-  "Dashboard.Text": "Hello HELLOOOO"
+  "Dashboard.h1": "Noir.",
+  "Dashboard.h2-1": "Intro",
+  "Dashboard.h2-2": "How it works?",
+  "Dashboard.h3-1": "Hello, this is Noir.",
+  "Dashboard.h3-2": "Hello, this is Noir.",
+  "Dashboard.p-1": "How it works?",
+  "Dashboard.p-2": "Hello, this is Noir."
 }
