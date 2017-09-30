@@ -1,3 +1,10 @@
+
+### Normalization
+Normalization using is `normalizr` is recommended but not a must. You can ignore it if you want. Concept of normalization is strongly connected with state-management. The idea behind normalization is to make a in-memory DB in state. Think of it like we can create NoSQL collection (table) in state.
+
+Typical script for normalization of arrays:
+
+```js
 // @flow
 import {normalize, schema} from 'normalizr'
 import _ from 'lodash'
@@ -10,9 +17,9 @@ import _ from 'lodash'
 // }
 //
 // XXX: normalization is recommended, but not a must
-// you styill can write a bunch of custom code in your reducers to normalize every reqests
+// you still can write a bunch of custom code in your reducers to normalize every reqests
 
-export const normalizeArrayOfItems = (array: Array<any>) => {
+export const normalizeArrayOfItems = (array) => {
 	// Flat array, if it had 2 levels of depth
 	const flatArray = _.flatten(array)
 	// Create schema for field, e.g field is `data`
@@ -23,6 +30,7 @@ export const normalizeArrayOfItems = (array: Array<any>) => {
 	const normalizedData = normalize(flatArray, dataListSchema)
 	// Get `data` entities
 	const entities = normalizedData.entities.data
-	const count: number = normalizedData.result.length
+	const count = normalizedData.result.length
 	return {entities, count}
 }
+```
