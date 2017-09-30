@@ -1,6 +1,9 @@
 // @flow
 import {Route} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
+import Dashboard from 'containers/Dashboard'
+import Links from 'containers/Links'
+import Login from 'containers/Login'
 import type {RouteItem} from 'types'
 
 const loadLazyComponentFnConstructor = (url: string) => async () => {
@@ -14,26 +17,25 @@ const loadLazyComponentFnConstructor = (url: string) => async () => {
 	return loadComponent
 }
 
+// FIXME: sidebar routes and app routes should be separated!
 const routes: Array<RouteItem> = [
 	{
 		path: '/',
 		exact: true,
-		lazy: true,
 		icon: 'newspaper',
 		name: 'Dashboard',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: loadLazyComponentFnConstructor('Dashboard')
+		component: Dashboard
 	},
 	{
-		path: '/users',
-		name: 'Users',
+		path: '/links',
+		name: 'Links',
 		exact: true,
-		lazy: true,
-		icon: 'users',
+		icon: 'bookmark',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: loadLazyComponentFnConstructor('Users')
+		component: Links
 	},
 	{
 		external: true,
@@ -45,17 +47,8 @@ const routes: Array<RouteItem> = [
 	{
 		path: '/auth',
 		name: 'Auth',
-		lazy: true,
 		tag: Route,
-		component: loadLazyComponentFnConstructor('Login')
-	},
-	{
-		path: '/users/:id',
-		name: 'User',
-		lazy: true,
-		exact: true,
-		tag: RouteAuth,
-		component: loadLazyComponentFnConstructor('UserItem')
+		component: Login
 	}
 ]
 
