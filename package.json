@@ -111,7 +111,7 @@
 		"stylelint-config-standard": "^17.0.0",
 		"uglify-js": "git://github.com/mishoo/UglifyJS2#harmony-v2.8.22",
 		"uglifyjs-webpack-plugin": "^0.4.6",
-		"url-loader": "^0.5.9",
+		"url-loader": "^0.6.1",
 		"webpack": "^3.4.1",
 		"webpack-bundle-analyzer": "^2.9.0",
 		"webpack-common-shake": "^1.5.3",
