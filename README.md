@@ -151,7 +151,7 @@ ENV vars are **very important** for configuration.
 
 #### How it works?
 
-##### **[Most commonly asked questions are here.](/docs/faq.md)**
+##### **[Most commonly asked questions are here.](/docs/FAQ.md)**
 
 Some guides are already finished, some aren't. I update branch very often, so improved docs and explanations will be very soon.
 
