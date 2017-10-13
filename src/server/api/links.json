@@ -4,42 +4,43 @@
 		"icon": "github",
 		"header": "SSR + Webpack (in development)",
 		"desc":
-			"Step by step guide with working example of hot-reloaded server and client with SSR with Webpack in development."
+			"Step by step guide with working example of server and client with hot-reloading and SSR with Webpack (in development)."
 	},
 	{
-		"link": "https://github.com/Metnew/tiny-universal-example",
+		"link": "https://github.com/Metnew/noir",
 		"icon": "bug",
-		"header": "How to test actions and reducers?",
-		"desc": "How to test actions and reducers?"
+		"header": "Testing",
+		"desc": "How to test actions, reducers, components?"
 	},
 	{
 		"link": "https://github.com/Metnew/noir",
 		"icon": "paint brush",
-		"header": "Why semantic-ui-react?"
+		"header": "Why semantic-ui-react?",
+		"desc": "Notes about SUI. Why SUIR is a good (or bad) choise."
 	},
 	{
 		"link": "",
 		"icon": "globe",
 		"header": "How i18n works?",
-		"desc": "i18n configuration and how to customize it in own project"
+		"desc": "How i18n is implemented and how to customize it."
 	},
 	{
 		"header": "How Webpack is configured?",
 		"icon": "code",
 		"link": "",
 		"desc":
-			"Webpack configuration for server/client in production and development"
+			"Webpack configuration for server/client in production and development."
 	},
 	{
 		"link": "",
 		"icon": "terminal",
-		"header": "npm scripts",
-		"desc": "npm scripts under the hood and ENV vars"
+		"header": "npm scripts and ENV vars",
+		"desc": "Docs about every npm script and ENV variable."
 	},
 	{
 		"link": "",
 		"icon": "folder",
 		"header": "Folder structure",
-		"desc": "Why this folder structure and how to adapt it for own project"
+		"desc": "Why this folder structure and how to adapt it in own project."
 	}
 ]
