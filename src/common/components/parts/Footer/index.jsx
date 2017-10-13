@@ -18,7 +18,7 @@ const Footer = () => {
 									<Header.Content>
 										Noir
 										<Header.Subheader>
-											Starter for bleeding-edge <t>blade</t> runners
+											Starter for <s>blade</s> bleeding-edge runners
 										</Header.Subheader>
 									</Header.Content>
 								</Header>
