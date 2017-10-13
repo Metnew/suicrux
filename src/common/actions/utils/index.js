@@ -12,5 +12,10 @@ import Awral from 'awral'
 const check = (result: Object = {ok: false}): boolean => result.ok
 const beforeCheck = a => a
 const afterCheck = a => a.data
-// Create default Awral
+/**
+  Create default Awral
+  Awral is my own tool.
+  It's not well known, but it can make your work with actions even more simpler.
+  {@link https://github.com/Metnew/awral}
+*/
 export const awral = Awral.of({check, beforeCheck, afterCheck})
