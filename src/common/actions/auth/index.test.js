@@ -1,4 +1,3 @@
-// Disable Eslint for tests
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 // Import all redux actions
