@@ -13,7 +13,7 @@ const LinksComponent = ({links}: Props) => {
 	return (
 		<Grid stackable>
 			<Grid.Column width={16}>
-				<List relaxed link celled animated>
+				<List relaxed divided animated>
 					{_.map(links, (link: LinkItem, i) => {
 						return <LinksItemComponent key={i} item={link} />
 					})}
