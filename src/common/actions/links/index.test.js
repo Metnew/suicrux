@@ -1,29 +1,37 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import nock from 'nock'
 import {
-	GET_USERS,
-	GET_USERS_SUCCESS,
-	GET_USERS_PENDING,
-	GET_USERS_FAIL
-} from 'actions/users'
-import {getUsersAPI} from 'api/UsersSvc'
+	GET_LINKS,
+	GET_LINKS_SUCCESS,
+	GET_LINKS_PENDING,
+	GET_LINKS_FAIL
+} from 'actions/links'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 const pending = {
-	type: GET_USERS_PENDING
+	type: GET_LINKS_PENDING
 }
 
 describe('USERS actions', () => {
-	it('creates GET_USERS_SUCCESS when GET_USERS was successful', async done => {
+	it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', async done => {
 		const store = mockStore({})
-		const apiResult = await getUsersAPI({id: 1})
-		const samplePayload = apiResult.data
-		return store.dispatch(GET_USERS(1)).then(res => {
+		const samplePayload = [
+			{
+				link: 'string',
+				header: 'string'
+			}
+		]
+		nock('https://github.com/Metnew')
+			.get('/noir/*')
+			.reply(200, samplePayload)
+
+		return store.dispatch(GET_LINKS()).then(res => {
 			const actions = store.getActions()
 			const success = {
-				type: GET_USERS_SUCCESS,
+				type: GET_LINKS_SUCCESS,
 				payload: samplePayload
 			}
 			const expectedActions = [pending, success]
@@ -33,12 +41,12 @@ describe('USERS actions', () => {
 		})
 	})
 
-	xit('creates GET_USERS_FAIL when GET_USERS was unsuccessful', done => {
+	xit('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', done => {
 		const store = mockStore({})
-		return store.dispatch(GET_USERS(1)).then(res => {
+		return store.dispatch(GET_LINKS(1)).then(res => {
 			const actions = store.getActions()
 			const fail = {
-				type: GET_USERS_FAIL,
+				type: GET_LINKS_FAIL,
 				payload: {}
 			}
 			const expectedActions = [pending, fail]
