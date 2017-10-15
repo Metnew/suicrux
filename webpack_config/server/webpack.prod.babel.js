@@ -1,4 +1,3 @@
-import path from 'path'
 import webpack from 'webpack'
 // import _ from 'lodash'
 import baseWebpackConfig from './webpack.base'
@@ -29,7 +28,9 @@ const plugins = [
 // Do you want to use bundle analyzer?
 if (ANALYZE_BUNDLE) {
 	baseWebpackConfig.plugins.push(
+		/* eslint-disable no-undef */
 		new BundleAnalyzerPlugin({analyzerMode: 'static'})
+		/* eslint-enable no-undef */
 	)
 }
 

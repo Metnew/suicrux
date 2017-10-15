@@ -39,7 +39,7 @@ export const routes = [
 	},
 	{
 		external: true,
-		path: 'https://github.com/Metnew/react-semantic.ui-starter',
+		path: 'https://github.com',
 		icon: 'github',
 		name: 'Github',
 		sidebarVisible: true
