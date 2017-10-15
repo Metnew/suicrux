@@ -20,7 +20,7 @@ const loadLazyComponent = url => {
 
 export const routes = [
 	{
-		path: '/',
+		path: '/home',
 		exact: true,
 		icon: 'newspaper',
 		name: 'Dashboard',
@@ -39,13 +39,13 @@ export const routes = [
 	},
 	{
 		external: true,
-		path: 'https://github.com/Metnew/react-semantic.ui-starter',
+		path: 'https://github.com',
 		icon: 'github',
 		name: 'Github',
 		sidebarVisible: true
 	},
 	{
-		path: '/auth',
+		path: '/',
 		name: 'Auth',
 		tag: Route,
 		component: Login

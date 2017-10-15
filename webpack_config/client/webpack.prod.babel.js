@@ -7,7 +7,7 @@ import CompressionPlugin from 'compression-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 // import BabiliPlugin = require('babili-webpack-plugin'
 import ProgressPlugin from 'webpack/lib/ProgressPlugin'
-import OfflinePlugin from 'offline-plugin'
+// import OfflinePlugin from 'offline-plugin'
 import PreloadWebpackPlugin from 'preload-webpack-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
@@ -33,7 +33,7 @@ if (ANALYZE_BUNDLE) {
 	base.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
 }
 
-base.devtool = 'cheap-source-map',
+base.devtool = 'cheap-source-map'
 base.stats = {
 	colors: true,
 	// Add children information
@@ -172,30 +172,30 @@ base.plugins.push(
 		template: path.resolve(config.rootPath, 'webpack_config', 'assets', 'index.ejs'),
 		filename: path.resolve(base.output.path, 'index.html'),
 		chunksSortMode: 'dependency'
-	}),
-	new OfflinePlugin({
-		caches: {
-			main: [
-				'vendor.*.js',
-				'vendor.*.css',
-				'manifest.*.js',
-				'client.*.js',
-				'assets/icons.*.*'
-			],
-			additional: [':externals:'],
-			optional: [':rest:']
-		},
-		externals: [
-			'/auth',
-			'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin'
-		],
-		ServiceWorker: {
-			events: true,
-			navigateFallbackURL: '/auth?offline=true',
-			navigateFallbackForRedirects: false
-		},
-		AppCache: false
 	})
+	// new OfflinePlugin({
+	// 	caches: {
+	// 		main: [
+	// 			'vendor.*.js',
+	// 			'vendor.*.css',
+	// 			'manifest.*.js',
+	// 			'client.*.js',
+	// 			'assets/icons.*.*'
+	// 		],
+	// 		additional: [':externals:'],
+	// 		optional: [':rest:']
+	// 	},
+	// 	externals: [
+	// 		'/auth',
+	// 		'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin'
+	// 	],
+	// 	ServiceWorker: {
+	// 		events: true,
+	// 		navigateFallbackURL: '/auth?offline=true',
+	// 		navigateFallbackForRedirects: false
+	// 	},
+	// 	AppCache: false
+	// })
 )
 
 export default base

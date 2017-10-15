@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import {Switch, Redirect} from 'react-router-dom'
 import LazyLoad from 'components/addons/LazyLoad'
 
+const authPath = '/'
+
 /**
  * Returns application routing with protected by AuthCheck func routes
  * @desc This function returns JSX, so we can think about it as "stateless component"
@@ -23,7 +25,6 @@ export default class RoutingWrapper extends Component {
 	authCheck (path) {
 		const {store} = this.props
 		const {isLoggedIn} = store.getState().me.auth
-		const authPath = '/auth'
 		const allowedToVisitPath = [authPath]
 
 		if (isLoggedIn && path === authPath) {

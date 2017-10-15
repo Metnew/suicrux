@@ -4,7 +4,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import baseWebpackConfig from './webpack.base'
 import FriendlyErrors from 'friendly-errors-webpack-plugin'
 import config from '../config'
-import _ from 'lodash'
 
 const loaders = {
 	style: {loader: 'style-loader'},

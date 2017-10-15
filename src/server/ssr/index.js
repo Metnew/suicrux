@@ -68,7 +68,6 @@ export default function (req, res) {
 }
 
 function renderFullPage ({html, css, preloadedState}) {
-	// Console.log(indexHTMLFileContent)
 	const htmlWithRedux = htmlFile.replace(
 		'<div id="app"></div>',
 		`<div id="app">${html}</div><script>

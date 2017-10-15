@@ -45,7 +45,7 @@ export default class Header extends Component {
 								icon
 								as={'a'}
 								aria-label="github-header-link-button"
-								href="https://github.com/Metnew/react-semantic.ui-starter"
+								href=""
 								basic
 								circular
 							>

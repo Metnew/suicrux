@@ -5,12 +5,15 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
-import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
+import {
+	meAPI,
+	resultOK
+} from 'api'
 // Application-related stuff
 import {JWT_TOKEN} from 'common/api'
 
-const {DIST_PATH, JWT_SECRET} = process.env
+const {DIST_PATH} = process.env
 const app = express()
 // Add express stuff
 app.use(helmet())
@@ -33,24 +36,23 @@ app.use((req, res, next) => {
 	if (!token) {
 		return next()
 	}
-
-	console.log(chalk.blue('USER HAS TOKEN'))
-	jwt.verify(token, JWT_SECRET, (err, decoded) => {
-		if (err) {
-			console.log(chalk.red('CANT DECODE JWT TOKEN!', err))
-		} else {
-			console.log(chalk.magenta('TOKEN SUCCESSFULLY DECODED'))
-			req.user = {
-				...decoded,
-				token,
-				isLoggedIn: true
-			}
+	// Call API to check if authenticated.
+	meAPI(token).then(result => {
+		if (!resultOK(result)) {
+			return next()
 		}
+
+		req.user = {
+			...result.data,
+			token,
+			isLoggedIn: true
+		}
+
 		console.log(
 			chalk.yellow(`USER IS LOGGED IN: ${req.user.isLoggedIn ? 'YES' : 'NO'}`)
 		)
 		next()
-	})
+	}).catch(() => next())
 })
 
 export default app
