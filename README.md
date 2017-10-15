@@ -140,8 +140,7 @@ ENV vars are **very important** for configuration.
 `ANALYZE_BUNDLE`: Run webpack-bundle-analyzer after build.     
 
 #### Server ENV vars:
-`PORT`: Port on which your app run.      
-`JWT_SECRET`: JWT_SECRET :smile:     
+`PORT`: Port on which your app run.          
 `BASE_API`: App uses this path for requests with relative urls.    
 `SENTRY_PUBLIC_DSN`: Your Sentry public DSN.      
 `SENTRY_DSN`: Your Sentry full(private) DSN for server-side error handling.    

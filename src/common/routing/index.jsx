@@ -20,7 +20,7 @@ const loadLazyComponent = url => {
 
 export const routes = [
 	{
-		path: '/',
+		path: '/home',
 		exact: true,
 		icon: 'newspaper',
 		name: 'Dashboard',
@@ -45,7 +45,7 @@ export const routes = [
 		sidebarVisible: true
 	},
 	{
-		path: '/auth',
+		path: '/',
 		name: 'Auth',
 		tag: Route,
 		component: Login

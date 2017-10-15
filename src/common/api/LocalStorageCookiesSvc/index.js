@@ -19,5 +19,6 @@ export function setLocalToken (token) {
 }
 
 export function isLoggedIn () {
-	return !!getLocalToken()
+	const hasToken = !!getLocalToken()
+	return hasToken
 }

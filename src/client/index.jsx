@@ -9,7 +9,7 @@ import {render} from 'react-dom'
 import {configureStore, configureRootComponent} from 'common/index.jsx'
 
 if (process.env.NODE_ENV === 'production') {
-	require('common/pwa')
+	// require('common/pwa')
 } else if (process.env.NODE_ENV === 'development') {
 	// Devtools
 	// NOTE: whyDidYouUpdate package is temporary broken, waiting for a patch.

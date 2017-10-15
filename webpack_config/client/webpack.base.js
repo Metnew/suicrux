@@ -3,7 +3,6 @@ import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import ManifestPlugin from 'webpack-manifest-plugin'
-import _ from 'lodash'
 //
 const {
 	GA_ID,

@@ -21,6 +21,8 @@ import {
 	StyledDimmer
 } from './style'
 
+const authPath = '/'
+
 class App extends Component {
 	static propTypes = {
 		children: PropTypes.node.isRequired,
@@ -153,7 +155,6 @@ class App extends Component {
 			location,
 			isMobile
 		} = this.props
-
 		// Routing for sidebar menu
 		const sidebarRouting = this.getSidebarRouting()
 		const title = this.getPageTitle(location.pathname)
@@ -190,7 +191,6 @@ class App extends Component {
 						max-width: calc(100% - 150px);
 					`
 				: SidebarSemanticPusherStyled
-
 		return (
 			<PageLayout>
 				<SidebarSemanticPushableStyled>
@@ -247,8 +247,7 @@ function mapDispatchToProps (dispatch) {
          * @param  {Boolean} isLoggedIn [is user logged in?]
          */
 		checkAuthLogic: (path, isLoggedIn) => {
-			const authPath = '/auth'
-			const homePath = '/'
+			const homePath = '/home'
 			if (isLoggedIn && path === authPath) {
 				dispatch(push(homePath))
 			}

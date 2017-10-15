@@ -1,11 +1,10 @@
 import app from './express'
-import API from './api'
 import useSSR from './ssr'
 import chalk from 'chalk'
 
-const {BASE_API, PORT} = process.env
+const {PORT} = process.env
 // Add API route
-app.use(BASE_API, API)
+// app.use(BASE_API, API)
 // Add SSR handler
 app.use(useSSR)
 // Start server

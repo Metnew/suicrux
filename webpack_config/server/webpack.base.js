@@ -4,15 +4,11 @@ import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import _ from 'lodash'
-import I18nPlugin from 'i18n-webpack-plugin'
 
 const {
 	SENTRY_DSN,
 	DIST_PATH,
 	APP_LANGUAGE,
-	JWT_SECRET,
-	ANALYZE_BUNDLE,
 	PORT
 } = config
 
@@ -22,7 +18,6 @@ rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
 	'process.env.PORT': JSON.stringify(PORT),
-	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET),
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
 	'process.env.DIST_PATH': JSON.stringify(DIST_PATH)
 }
