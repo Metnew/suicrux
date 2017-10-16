@@ -1,6 +1,6 @@
 {
   "name": "react-semantic.ui-starter",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "src/client/index.jsx",
   "description": "Advanced universal React starter built with a scale in mind.",
   "dependencies": {

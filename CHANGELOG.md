@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/Metnew/react-semantic.ui-starter/compare/v0.1.1...v0.2.0) (2017-10-16)
+
+
+### Bug Fixes
+
+* **reducers:** fix reducers layout/links/auth tests ([94d82fd](https://github.com/Metnew/react-semantic.ui-starter/commit/94d82fd))
+
+
+### Features
+
+* **.babelrc:** add "selectors" folder to module-resolver in .babelrc ([7ec78eb](https://github.com/Metnew/react-semantic.ui-starter/commit/7ec78eb))
+* **jest_config:** add enzyme adapter configuration ([f8adc27](https://github.com/Metnew/react-semantic.ui-starter/commit/f8adc27))
+* **package.json:** add snapshot_update script, update deps ([283e9a8](https://github.com/Metnew/react-semantic.ui-starter/commit/283e9a8))
+* update jest snapshots ([e39d11d](https://github.com/Metnew/react-semantic.ui-starter/commit/e39d11d))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/Metnew/react-semantic.ui-starter/compare/v0.1.0-alpha.0...v0.1.0) (2017-10-16)
 
