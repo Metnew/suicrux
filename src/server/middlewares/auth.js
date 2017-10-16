@@ -24,7 +24,7 @@ export default (
 		isLoggedIn: false
 	}
 
-	const token: string = req.cookies[JWT_TOKEN]
+	let token: string = req.cookies[JWT_TOKEN]
 	if (!token) {
 		return next()
 	}
@@ -33,16 +33,18 @@ export default (
 	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			console.log(chalk.red('CANT DECODE JWT TOKEN!', err))
+			token = null
 		} else {
-			console.log(chalk.magenta('TOKEN SUCCESSFULLY DECODED'))
-			// NOTE: set user language in jwt token that may helps handling i18n efficiently
 			const {username} = decoded
 			req.user = {
 				token,
 				username,
 				isLoggedIn: true
 			}
+			console.log(chalk.magenta('TOKEN SUCCESSFULLY DECODED'))
+			// FIXME: set user language in jwt token
 		}
+
 		console.log(
 			chalk.yellow(`USER IS LOGGED IN: ${req.user.isLoggedIn ? 'YES' : 'NO'}`)
 		)
