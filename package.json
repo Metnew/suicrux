@@ -32,7 +32,7 @@
 		"redux": "^3.7.2",
 		"redux-thunk": "^2.2.0",
 		"semantic-ui-css": "^2.2.11",
-		"semantic-ui-react": "^0.74.0",
+		"semantic-ui-react": "^0.75.0",
 		"store2": "^2.5.1",
 		"styled-components": "^2.1.2",
 		"whatwg-fetch": "^2.0.3"
