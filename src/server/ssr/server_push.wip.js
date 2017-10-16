@@ -1,3 +1,4 @@
+// Code for server-push:
 // Object.keys(assets).map(key => {
 // 	const bundle = assets[key]
 // 	Object.keys(bundle).map(async filetype => {
