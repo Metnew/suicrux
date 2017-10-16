@@ -18,6 +18,13 @@ export const WINDOW_RESIZE = (innerWidth: number) => ({
 	}
 })
 
+// See reducers/layout for an additional info:
+// export const ADD_STYLES_TO_ELEMENT = (element
+// ) => (styles) => ({
+// 		element,
+// 		styles
+// 	})
+
 export type UI_OPEN_SIDEBAR_TYPE = {type: 'UI_OPEN_SIDEBAR'}
 export type UI_CLOSE_SIDEBAR_TYPE = {type: 'UI_CLOSE_SIDEBAR'}
 export type UI_WINDOW_RESIZE_TYPE = {
