@@ -32,10 +32,11 @@ const routes: Array<RouteItem> = [
 		path: '/links',
 		name: 'Links',
 		exact: true,
+		// lazy: true,
 		icon: 'bookmark',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: Links
+		component: Links// loadLazyComponentFnConstructor('Links')
 	},
 	{
 		external: true,
