@@ -52,6 +52,7 @@
 							"containers": "./src/common/containers",
 							"reducers": "./src/common/reducers",
 							"routing": "./src/common/routing",
+							"selectors": "./src/common/selectors",
 							"styles": "./src/common/styles",
 							"images": "./static/images"
 						},
