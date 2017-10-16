@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile screen 1`] = `
-<Styled(Sidebar)
+<style__StyledSidebar
   animation="push"
   as={[Function]}
   icon="labeled"
@@ -9,20 +9,21 @@ exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile 
   visible={true}
   width="thin"
 >
-  <styled.a
-    href="https://github.com/Metnew/react-semantic.ui-starter"
+  <style__SidebarLogoContainer
+    href="https://github.com/Metnew/noir"
   >
-    <Styled(Logo)
+    <style__SidebarLogo
       alt="logo"
       centered={true}
       shape="circular"
     />
-  </styled.a>
-  <Styled(MenuItem)
+  </style__SidebarLogoContainer>
+  <style__SidebarItem
     activeClassName="active"
     as={[Function]}
     exact={true}
     icon={true}
+    key="0"
     link={true}
     to="/"
   >
@@ -32,26 +33,28 @@ exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile 
     />
      
     Dashboard
-  </Styled(MenuItem)>
-  <Styled(MenuItem)
+  </style__SidebarItem>
+  <style__SidebarItem
     activeClassName="active"
     as={[Function]}
     exact={true}
     icon={true}
+    key="1"
     link={true}
-    to="/users"
+    to="/links"
   >
     <Icon
       as="i"
-      name="users"
+      name="bookmark"
     />
      
-    Users
-  </Styled(MenuItem)>
-  <Styled(MenuItem)
+    Links
+  </style__SidebarItem>
+  <style__SidebarItem
     as="a"
     href="https://github.com/Metnew/react-semantic.ui-starter"
     icon={true}
+    key="2"
     link={true}
   >
     <Icon
@@ -60,11 +63,12 @@ exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile 
     />
      
     Github
-  </Styled(MenuItem)>
-  <Styled(MenuItem)
+  </style__SidebarItem>
+  <style__SidebarItem
     activeClassName="active"
     as={[Function]}
     icon={true}
+    key="3"
     link={true}
     to="/auth"
   >
@@ -73,23 +77,9 @@ exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile 
     />
      
     Auth
-  </Styled(MenuItem)>
-  <Styled(MenuItem)
-    activeClassName="active"
-    as={[Function]}
-    exact={true}
-    icon={true}
-    link={true}
-    to="/users/:id"
-  >
-    <Icon
-      as="i"
-    />
-     
-    User
-  </Styled(MenuItem)>
-  <styled.span />
-  <Styled(MenuItem)
+  </style__SidebarItem>
+  <base__Spacer />
+  <style__SidebarLogoutItem
     onClick={[Function]}
   >
     <Icon
@@ -97,6 +87,6 @@ exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile 
       name="sign out"
     />
     Logout
-  </Styled(MenuItem)>
-</Styled(Sidebar)>
+  </style__SidebarLogoutItem>
+</style__StyledSidebar>
 `;

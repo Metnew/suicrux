@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Footer component same snapshot 1`] = `
-<styled.footer>
-  <styled.div>
+<style__StyledFooter>
+  <style__StyledFooterInner>
     <Grid
       relaxed={true}
     >
@@ -14,7 +14,7 @@ exports[`Footer component same snapshot 1`] = `
           width={12}
         >
           <a
-            href="https://github.com/Metnew/react-semantic.ui-starter"
+            href="https://github.com/Metnew/noir"
           >
             <Header
               as="h3"
@@ -27,7 +27,11 @@ exports[`Footer component same snapshot 1`] = `
               <HeaderContent>
                 Noir
                 <HeaderSubheader>
-                  Semantic.UI is cool, really.
+                  Starter for 
+                  <s>
+                    blade
+                  </s>
+                   bleeding-edge runners
                 </HeaderSubheader>
               </HeaderContent>
             </Header>
@@ -35,6 +39,6 @@ exports[`Footer component same snapshot 1`] = `
         </GridColumn>
       </GridRow>
     </Grid>
-  </styled.div>
-</styled.footer>
+  </style__StyledFooterInner>
+</style__StyledFooter>
 `;
