@@ -14,8 +14,10 @@ const beforeCheck = a => a
 const afterCheck = a => a.data
 /**
   Create default Awral
-  Awral is my own tool.
-  It's not well known, but it can make your work with actions even more simpler.
+  Awral is not recommended for production usage now
+  But it can make your work with actions even simpler.
+  NOTE:I strongly recommend you check Awral sources!
+  Awral is 880B gzipped!
   {@link https://github.com/Metnew/awral}
 */
 export const awral = Awral.of({check, beforeCheck, afterCheck})
