@@ -71,6 +71,7 @@ class LoginComponent extends Component {
 								onChange={this.handleChange}
 							/>
 							<Form.Input
+								autoComplete="current-password"
 								placeholder="Password"
 								type="password"
 								name="password"
