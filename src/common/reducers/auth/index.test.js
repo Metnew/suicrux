@@ -56,7 +56,6 @@ describe('AUTH REDUCER', () => {
 		// User is logged out after LOGOUT_AUTH_SUCCESS
 		expect(reducer(loggedInState, logoutSuccess)).toEqual({
 			...loggedInState,
-			token: null,
 			errors: {},
 			isLoggedIn: false,
 			isLoading: false,
@@ -71,7 +70,6 @@ describe('AUTH REDUCER', () => {
 			isLoggedIn: false,
 			isLoaded: true,
 			isLoading: false,
-			token: null,
 			errors: loginFail.payload.errors
 		})
 	})
@@ -80,7 +78,6 @@ describe('AUTH REDUCER', () => {
 		// User is logged in and has `token` after LOGIN_AUTH_SUCCESS
 		expect(reducer(initialState, loginSuccess)).toEqual({
 			...initialState,
-			token: loginSuccess.payload.token,
 			isLoaded: true,
 			isLoading: false,
 			isLoggedIn: true

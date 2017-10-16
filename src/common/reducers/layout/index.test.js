@@ -26,7 +26,7 @@ const windowResize = {
 }
 
 const appInit = {
-	type: APPLICATION_INIT,
+	type: UI_WINDOW_RESIZE,
 	payload: {
 		innerWidth: 360
 	}
@@ -45,7 +45,7 @@ describe('LAYOUT REDUCER', () => {
 	})
 
 	describe('Mobile properties', () => {
-		it('should handle APPLICATION_INIT with 360px screen', () => {
+		it('should handle WINDOW_RESIZE with 360px screen', () => {
 			expect(reducer(initialState, appInit)).toEqual({
 				...initialState,
 				isMobile: true,
