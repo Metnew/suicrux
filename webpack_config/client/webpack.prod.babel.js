@@ -33,7 +33,7 @@ if (ANALYZE_BUNDLE) {
 	base.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
 }
 
-base.devtool = 'cheap-source-map',
+base.devtool = 'cheap-source-map'
 base.stats = {
 	colors: true,
 	// Add children information
