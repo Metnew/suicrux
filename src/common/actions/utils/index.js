@@ -1,5 +1,5 @@
 // @flow
-import Awral from './awral'
+import Awral from 'awral'
 /**
  * `parseJSON()` adds property "ok"
  *  that identicates that response is OK
