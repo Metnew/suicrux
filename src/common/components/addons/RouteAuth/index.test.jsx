@@ -1,7 +1,7 @@
 import React from 'react'
+import {Route, Redirect} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
 import {shallow} from 'enzyme'
-import toJson from 'enzyme-to-json'
 import {routes as routing} from 'routing'
 
 const accessToInboxOnly = path => {
@@ -13,25 +13,24 @@ const accessExceptInbox = path => {
 
 const sampleRouteItem = routing.filter(a => a.component && a.tag)[0]
 
-xdescribe('RouteAuth component', () => {
-	it('creates <Redirect /> if user dont have access', done => {
+describe('RouteAuth component', () => {
+	it('creates <Redirect /> if user doesn\'t have access', () => {
 		const gotRedirect = {
 			...sampleRouteItem,
 			canAccess: accessExceptInbox,
 			path: '/inbox'
 		}
 		const component = shallow(<RouteAuth {...gotRedirect} />)
-		done()
+		expect(component.equals(<Redirect to="/auth" />)).toBe(true)
 	})
 
-	it('creates component if user have access', done => {
+	it('creates <Route /> if user has access', () => {
 		const gotComponent = {
 			...sampleRouteItem,
 			canAccess: accessToInboxOnly,
 			path: '/inbox'
 		}
 		const component = shallow(<RouteAuth {...gotComponent} />)
-		console.log(component)
-		done()
+		expect(component.equals(<Route {...gotComponent} />)).toBe(true)
 	})
 })
