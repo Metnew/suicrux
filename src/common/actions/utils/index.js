@@ -1,5 +1,5 @@
 // @flow
-import Awral from 'awral'
+import Awral from './awral'
 /**
  * `parseJSON()` adds property "ok"
  *  that identicates that response is OK
@@ -12,6 +12,11 @@ import Awral from 'awral'
 const check = (result: Object = {ok: false}): boolean => result.ok
 const beforeCheck = a => a
 const afterCheck = a => a.data
+// disable dispatch of GET_LINKS_FINALLY
+const finallyAction = null
+// disable dispatch of GET_LINKS_BEFORE_PENDING
+const beforePending = null
+
 /**
   Create default Awral
   Awral is not recommended for production usage now
@@ -20,4 +25,4 @@ const afterCheck = a => a.data
   Awral is 880B gzipped!
   {@link https://github.com/Metnew/awral}
 */
-export const awral = Awral.of({check, beforeCheck, afterCheck})
+export const awral = Awral.of({check, beforeCheck, afterCheck, finally: finallyAction, beforePending})
