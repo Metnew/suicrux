@@ -4,7 +4,7 @@
   "main": "src/client/index.jsx",
   "description": "Advanced universal React starter built with a scale in mind.",
   "dependencies": {
-    "awral": "^1.1.2",
+    "awral": "^1.2.0",
     "body-parser": "^1.18.2",
     "chalk": "^2.2.0",
     "chokidar": "^1.7.0",
