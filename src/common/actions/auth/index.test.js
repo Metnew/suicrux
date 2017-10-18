@@ -1,5 +1,6 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import nock from 'nock'
 // Import all redux actions
 import {
 	LOGIN_AUTH_SUCCESS,
@@ -17,6 +18,7 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 const loginPending = {
+	meta: null,
 	type: LOGIN_AUTH_PENDING
 }
 
@@ -25,15 +27,20 @@ describe('Auth actions', () => {
 	 * @arg {Function} done - is a callback that you need to execute,
 	 * If your action performing async task (e.g. request to API)
 	 */
-	xtest('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
+	test('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
+		const successPayload = {
+			token: 'nothing'
+		}
+
+		nock('http://localhost:3000/api/v1')
+			.post('/auth')
+			.reply(200, successPayload)
 		// Create expected output of your action
 		const expectedActions = [
 			loginPending,
 			{
 				type: LOGIN_AUTH_SUCCESS,
-				payload: {
-					token: 'nothing'
-				}
+				payload: successPayload
 			}
 		]
 		// Create store for testing
@@ -47,17 +54,25 @@ describe('Auth actions', () => {
 		})
 	})
 
-	xtest('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was unsuccessful', done => {
+	test('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was unsuccessful', done => {
 		// Create expected output of your action
+		const errorPayload = {
+			errors: {}
+		}
+
 		const expectedActions = [
 			loginPending,
 			{
 				type: LOGIN_AUTH_FAIL,
-				payload: {
-					errors: {}
-				}
+				error: true,
+				meta: null,
+				payload: errorPayload
 			}
 		]
+
+		nock('http://localhost:3000/api/v1')
+			.post('/auth')
+			.reply(400, errorPayload)
 		// Create store for testing
 		const store = mockStore({})
 		// Dispatch action
