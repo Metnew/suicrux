@@ -1,9 +1,8 @@
 /**
  * @flow
  */
-import React, {Component} from 'react'
+import React from 'react'
 import {Icon} from 'semantic-ui-react'
-import {isEqual} from 'lodash'
 // import {FormattedMessage} from 'react-intl'
 import {
 	StyledHeader,
@@ -22,32 +21,23 @@ type Props = {
 	isMobile: boolean
 }
 
-class Header extends Component {
-	props: Props
-	shouldComponentUpdate (nextProps: Props) {
-		return !isEqual(nextProps, this.props)
-	}
-
-	render () {
-		const {title, toggleSidebar, isLoggedIn, isMobile} = this.props
-
-		return (
-			<Headroom>
-				<StyledHeader>
-					<HeaderInner>
-						{isLoggedIn &&
-							isMobile && (
-								<Navicon onClick={toggleSidebar}>
-									<Icon name="content" />
-								</Navicon>
-							)}
-						<PageTitle>{title}</PageTitle>
-						<Spacer />
-					</HeaderInner>
-				</StyledHeader>
-			</Headroom>
-		)
-	}
+const Header = ({title, toggleSidebar, isLoggedIn, isMobile}: Props) => {
+	return (
+		<Headroom>
+			<StyledHeader>
+				<HeaderInner>
+					{isLoggedIn &&
+						isMobile && (
+							<Navicon onClick={toggleSidebar}>
+								<Icon name="content" />
+							</Navicon>
+						)}
+					<PageTitle>{title}</PageTitle>
+					<Spacer />
+				</HeaderInner>
+			</StyledHeader>
+		</Headroom>
+	)
 }
 
 export default Header
