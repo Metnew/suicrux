@@ -29,9 +29,9 @@ const requestWrapper = (
 		cb: (request: Object) => Object = a => a
 	) => {
 		// get decorated url and request params
-		const {URL, request} = decorateRequest({method, url, data, options, cb})
+		const {requestURL, request} = decorateRequest({method, url, data, options, cb})
 		// create request!
-		return fetch(URL, request)
+		return fetch(requestURL, request)
 			.then(checkStatus)
 			.then(parseJSON)
 			.catch((err: string) => {
@@ -51,19 +51,20 @@ const requestWrapper = (
  */
 async function parseJSON (res: Response): Object {
 	let json: Object
+	const {status} = res
 	// status response field in return object
 	try {
 		json = await res.json()
 	} catch (e) {
 		if (res.status === 204) {
-			return {ok: true, data: {}}
+			return {ok: true, data: {}, status}
 		}
-		return {ok: false}
+		return {ok: false, status}
 	}
 	if (!res.ok) {
-		return {data: json, ok: false}
+		return {data: json, ok: false, status}
 	}
-	return {data: json, ok: true}
+	return {data: json, ok: true, status}
 }
 
 /**
@@ -97,11 +98,13 @@ function checkStatus (response: Response): Response {
 }
 
 /**
- * Create
- * @param  {String} method 			 -	Request method
- * @param  {String} url 				 -  Request URL
- * @param  {Object} [data= null] -	Data for Request
- * @return {Object}        			 - 	Decorated request params
+ * Creates request to `url` with `data`
+ * @param  {String} 	method        		Request method
+ * @param  {String} 	url        				Request URL
+ * @param  {Object} 	[data= null]			Data for Request
+ * @param  {Object} 	[options= {}]			Additional options
+ * @param  {Function} [cb = (a) => a]		Transform request before it will be sent
+ * @return {Object}             				{URL, request}
  */
 function decorateRequest ({method, url, data, options, cb}): Object {
 	// Default params for fetch = method + (Content-Type)
@@ -111,7 +114,7 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 	}
 	const token: string | null = getLocalToken()
 	const isRequestToExternalResource = /(http|https):\/\//.test(url)
-	const URL = isRequestToExternalResource ? url : process.env.BASE_API + url
+	const requestURL = isRequestToExternalResource ? url : process.env.BASE_API + url
 
 	const requestAuthDecoration =
 		!isRequestToExternalResource && token
@@ -120,12 +123,13 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 
 	const requestHeadersDataDecoration = getHeaderDataDecoration(data)
 
-	const request = _.merge(
+	const request = cb(_.merge(
 		{},
 		defaults,
+		options,
 		requestAuthDecoration,
 		requestHeadersDataDecoration
-	)
+	))
 
 	if (!isRequestToExternalResource) {
 		// console.log(`Request ${url} was sent to our domain`, request)
@@ -135,7 +139,7 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 
 	return {
 		request,
-		URL
+		requestURL
 	}
 }
 
