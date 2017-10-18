@@ -12,11 +12,12 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 const pending = {
+	meta: null,
 	type: GET_LINKS_PENDING
 }
 
-describe('USERS actions', () => {
-	it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', async done => {
+describe('Links actions', () => {
+	it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', done => {
 		const store = mockStore({})
 		const samplePayload = [
 			{
@@ -24,35 +25,42 @@ describe('USERS actions', () => {
 				header: 'string'
 			}
 		]
-		nock('https://github.com/Metnew')
-			.get('/noir/*')
+		nock('http://localhost:3000/api/v1')
+			.get('/links')
 			.reply(200, samplePayload)
 
 		return store.dispatch(GET_LINKS()).then(res => {
 			const actions = store.getActions()
 			const success = {
+				meta: null,
 				type: GET_LINKS_SUCCESS,
 				payload: samplePayload
 			}
 			const expectedActions = [pending, success]
 
-			expect(actions).toMatchObject(expectedActions)
+			expect(actions).toEqual(expectedActions)
 			done()
 		})
 	})
 
-	xit('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', done => {
-		const store = mockStore({})
-		return store.dispatch(GET_LINKS(1)).then(res => {
-			const actions = store.getActions()
-			const fail = {
-				type: GET_LINKS_FAIL,
-				payload: {}
-			}
-			const expectedActions = [pending, fail]
+	it('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', async done => {
+		const errorPayload = {errors: {}}
+		nock('http://localhost:3000/api/v1')
+			.get('/links')
+			.reply(400, errorPayload)
 
-			expect(actions).toEqual(expectedActions)
-			done()
-		})
+		const store = mockStore({})
+		await store.dispatch(GET_LINKS())
+		const actions = store.getActions()
+		const fail = {
+			meta: null,
+			type: GET_LINKS_FAIL,
+			error: true,
+			payload: errorPayload
+		}
+		const expectedActions = [pending, fail]
+
+		expect(actions).toEqual(expectedActions)
+		done()
 	})
 })
