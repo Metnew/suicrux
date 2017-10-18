@@ -23,7 +23,9 @@ export default class RoutingWrapper extends Component {
     * Checks Auth logic. Is user allowed to visit certain path?
     * @param  {String} path next path to visit
     * @return {Bool} is user allowed to visit next location?
-    * check RouteAuth component.
+    * @desc Think about this method as static.
+    * Maybe, It'd be even better to store this logic in a plain function rather than in a method.
+    * {@link - src/common/components/addons/RouteAuth/index.jsx}
     */
 	authCheck (path: string): boolean {
 		const {store} = this.props
