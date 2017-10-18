@@ -12,9 +12,9 @@ import Awral from 'awral'
 const check = (result: Object = {ok: false}): boolean => result.ok
 const beforeCheck = a => a
 const afterCheck = a => a.data
-// disable dispatch of GET_LINKS_FINALLY
+// disable dispatch of *_FINALLY actions
 const finallyAction = null
-// disable dispatch of GET_LINKS_BEFORE_PENDING
+// disable dispatch of *_BEFORE_PENDING actions
 const beforePending = null
 
 /**
