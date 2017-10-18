@@ -68,7 +68,7 @@ class LoginComponent extends Component {
 								name="username"
 								label="Username"
 								value={username}
-								onChange={this.handleChange}
+								onChange={this.handleChange.bind(this)}
 							/>
 							<Form.Input
 								autoComplete="current-password"
@@ -77,7 +77,7 @@ class LoginComponent extends Component {
 								name="password"
 								label="Password"
 								value={password}
-								onChange={this.handleChange}
+								onChange={this.handleChange.bind(this)}
 							/>
 							<LoginButton content="Login" icon="sign in" />
 						</Form>
