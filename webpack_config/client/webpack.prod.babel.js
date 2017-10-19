@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import rimraf from 'rimraf'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
@@ -14,7 +15,10 @@ import OptimizeJsPlugin from 'optimize-js-plugin'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import base from './webpack.base'
 import config from '../config'
+//
+const {APP_LANGUAGE, ANALYZE_BUNDLE} = config
 
+rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
 // NOTE: you can track versions with gitHash and store your build
 // in dist folder with path like: /dist/client/<gitHash>/{yourFilesHere}
 // const gitHash = git.short()
