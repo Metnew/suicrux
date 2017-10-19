@@ -1,5 +1,5 @@
 import path from 'path'
-import childProcess from 'child_process'
+import rimraf from 'rimraf'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
@@ -18,8 +18,7 @@ const {
 	manifest
 } = config
 
-const exec = childProcess.execSync
-exec(`rm -rf ${CLIENT_DIST_PATH}`)
+rimraf(`${config.distPath}/server`, {}, () => {})
 
 const definePluginArgs = {
 	'process.env.GA_ID': JSON.stringify(GA_ID),
@@ -124,16 +123,16 @@ const baseBuild = {
 			inject: false,
 			// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
 			icons: {
-				// android: true,
-				// appleIcon: true,
-				// appleStartup: true,
-				// coast: false,
-				// favicons: true,
-				// firefox: true,
-				// opengraph: false,
-				// twitter: true,
-				// yandex: false,
-				// windows: true
+				android: false,
+				appleIcon: true,
+				appleStartup: true,
+				coast: false,
+				favicons: true,
+				firefox: true,
+				opengraph: false,
+				twitter: true,
+				yandex: false,
+				windows: false
 			}
 		}),
 		new WebpackAssetsManifest({

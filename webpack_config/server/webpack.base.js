@@ -6,8 +6,8 @@ import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, isProduction} = config
 
-// Cleare dist dir before run
-rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
+// Clear dist dir before run
+rimraf(`${config.distPath}/server`, {}, () => {})
 
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
