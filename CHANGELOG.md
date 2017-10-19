@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/Metnew/react-semantic.ui-starter/compare/v0.2.0...v0.3.0) (2017-10-19)
+
+
+### Bug Fixes
+
+* **actions/utils:** fix awral import ([4ee2c9a](https://github.com/Metnew/react-semantic.ui-starter/commit/4ee2c9a))
+* **actions/utils:** fix comments about awral disabling ([f12aa33](https://github.com/Metnew/react-semantic.ui-starter/commit/f12aa33))
+* **containers/Login:** fix input fields onChange ([486601e](https://github.com/Metnew/react-semantic.ui-starter/commit/486601e))
+* **jest_config:** add process.env.BASE_API ([bfff20b](https://github.com/Metnew/react-semantic.ui-starter/commit/bfff20b))
+* **jest_config:** remove BASE_API assign in test mode ([651e370](https://github.com/Metnew/react-semantic.ui-starter/commit/651e370))
+* **package:** update jsonwebtoken to version 8.0.0 ([c2aad78](https://github.com/Metnew/react-semantic.ui-starter/commit/c2aad78))
+* **package:** update react to version 16.0.0 ([ace78b4](https://github.com/Metnew/react-semantic.ui-starter/commit/ace78b4))
+* **package:** update react-dom to version 16.0.0 ([54089cc](https://github.com/Metnew/react-semantic.ui-starter/commit/54089cc))
+* **package:** update semantic-ui-react to version 0.72.0 ([a914351](https://github.com/Metnew/react-semantic.ui-starter/commit/a914351))
+* **package:** update semantic-ui-react to version 0.73.0 ([1f1adf8](https://github.com/Metnew/react-semantic.ui-starter/commit/1f1adf8))
+* **package:** update semantic-ui-react to version 0.74.0 ([9707aec](https://github.com/Metnew/react-semantic.ui-starter/commit/9707aec))
+* **package:** update semantic-ui-react to version 0.75.0 ([1a8b3e7](https://github.com/Metnew/react-semantic.ui-starter/commit/1a8b3e7))
+* **package.json:** remove babel-preset-es2015 ([f341308](https://github.com/Metnew/react-semantic.ui-starter/commit/f341308))
+* **package.json:** remove uglify-js ([b6d3980](https://github.com/Metnew/react-semantic.ui-starter/commit/b6d3980))
+* **reducers/layout:** remove APPLICATION_INIT ([f615586](https://github.com/Metnew/react-semantic.ui-starter/commit/f615586))
+* **webpack_config:** use rimraf instead of rm rf ([18ba44f](https://github.com/Metnew/react-semantic.ui-starter/commit/18ba44f))
+* **webpack_config:** use webpack's uglifyjs instead of uglifyjs plugin ([5ebcc3c](https://github.com/Metnew/react-semantic.ui-starter/commit/5ebcc3c))
+* **webpack_config/:** fix UglifyJS plugin, use rimraf ([c720fc8](https://github.com/Metnew/react-semantic.ui-starter/commit/c720fc8))
+* **xhr_wrapper:** add status in response, use 'options' and 'cb' ([a52318a](https://github.com/Metnew/react-semantic.ui-starter/commit/a52318a))
+
+
+### Features
+
+* **actons/auth:** add nock in tests ([7cef458](https://github.com/Metnew/react-semantic.ui-starter/commit/7cef458))
+* **actons/auth:** add nock in tests, fix tests ([17e9b55](https://github.com/Metnew/react-semantic.ui-starter/commit/17e9b55))
+* **actons/utils:** disable "FINALLY", "BEFORE_PENDING" in awral ([3558336](https://github.com/Metnew/react-semantic.ui-starter/commit/3558336))
+* **api/LocalStorateCookiesSvc:** remove store2, add comments ([a056b6c](https://github.com/Metnew/react-semantic.ui-starter/commit/a056b6c))
+* **components/Header:** make Header stateless ([c657cc8](https://github.com/Metnew/react-semantic.ui-starter/commit/c657cc8))
+* **components/Logo:** add test file ([de4d758](https://github.com/Metnew/react-semantic.ui-starter/commit/de4d758))
+* **components/RouteAuth:** add RouteAuth tests ([c824599](https://github.com/Metnew/react-semantic.ui-starter/commit/c824599))
+* **package.json:** install "sinon" in dev deps ([3dfa763](https://github.com/Metnew/react-semantic.ui-starter/commit/3dfa763))
+* **package.json:** install awral[@1](https://github.com/1).2.0 ([6e5716c](https://github.com/Metnew/react-semantic.ui-starter/commit/6e5716c))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/Metnew/react-semantic.ui-starter/compare/v0.1.1...v0.2.0) (2017-10-16)
 
