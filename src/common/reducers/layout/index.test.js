@@ -4,7 +4,7 @@ import {
 	UI_OPEN_SIDEBAR,
 	UI_WINDOW_RESIZE
 } from 'actions/layout'
-import {LOCATION_CHANGE, APPLICATION_INIT} from 'actions/common'
+import {LOCATION_CHANGE} from 'actions/common'
 
 const closeSidebar = {
 	type: UI_CLOSE_SIDEBAR
