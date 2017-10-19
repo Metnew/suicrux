@@ -2,7 +2,6 @@
 import {Route} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
 import Dashboard from 'containers/Dashboard'
-import Links from 'containers/Links'
 import Login from 'containers/Login'
 import type {RouteItem} from 'types'
 
@@ -32,11 +31,11 @@ const routes: Array<RouteItem> = [
 		path: '/links',
 		name: 'Links',
 		exact: true,
-		// lazy: true,
+		lazy: true,
 		icon: 'bookmark',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: Links// loadLazyComponentFnConstructor('Links')
+		component: loadLazyComponentFnConstructor('Links')
 	},
 	{
 		external: true,
