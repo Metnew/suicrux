@@ -8,20 +8,14 @@ import OfflinePlugin from 'offline-plugin'
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
 import {Plugin as ShakePlugin} from 'webpack-common-shake'
 import OptimizeJsPlugin from 'optimize-js-plugin'
-// import git from 'git-rev-sync'
-// import _ from 'lodash'
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
 // import WebpackShellPlugin from 'webpack-shell-plugin'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import base from './webpack.base'
 import config from '../config'
-//
-const {APP_LANGUAGE, ANALYZE_BUNDLE} = config
 
-rimraf(`${config.distPath}/server/${APP_LANGUAGE}`, {}, () => {})
-// NOTE: you can track versions with gitHash and store your build
-// in dist folder with path like: /dist/client/<gitHash>/{yourFilesHere}
-// const gitHash = git.short()
+// Clean build dir
+rimraf(`${config.distPath}/server`, {}, () => {})
 
 // Do you want to use bundle analyzer?
 if (config.ANALYZE_BUNDLE) {
@@ -79,15 +73,18 @@ base.plugins.push(
 	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
 	// new BabiliPlugin(),
 	new UglifyJSPlugin({
-		sourceMap: true,
-		compress: {
-			unused: true,
-			warnings: false,
-			dead_code: true,
-			drop_console: true
-		},
-		output: {
-			comments: false
+		uglifyOptions: {
+			sourceMap: true,
+			compress: {
+				warnings: false,
+				unused: true,
+				dead_code: true,
+				// This option removes console.log in production
+				drop_console: true
+			},
+			output: {
+				comments: false
+			}
 		}
 	}),
 	new OptimizeJsPlugin({

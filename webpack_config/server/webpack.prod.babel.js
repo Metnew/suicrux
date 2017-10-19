@@ -14,18 +14,19 @@ const plugins = [
 	new webpack.optimize.ModuleConcatenationPlugin(),
 	new ShakePlugin(),
 	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
-	// new BabiliPlugin(),
 	new UglifyJSPlugin({
-		sourceMap: true,
-		compress: {
-			warnings: false,
-			unused: true,
-			dead_code: true
-			// This option removes console.log in production
-			// drop_console: true
-		},
-		output: {
-			comments: false
+		uglifyOptions: {
+			sourceMap: true,
+			compress: {
+				warnings: false,
+				unused: true,
+				dead_code: true,
+				// This option removes console.log in production
+				drop_console: true
+			},
+			output: {
+				comments: false
+			}
 		}
 	}),
 	new OptimizeJsPlugin({
