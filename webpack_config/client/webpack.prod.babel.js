@@ -5,7 +5,6 @@ import CompressionPlugin from 'compression-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import ProgressPlugin from 'webpack/lib/ProgressPlugin'
 import OfflinePlugin from 'offline-plugin'
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin'
 import {Plugin as ShakePlugin} from 'webpack-common-shake'
 import OptimizeJsPlugin from 'optimize-js-plugin'
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
