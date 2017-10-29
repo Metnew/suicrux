@@ -21,7 +21,7 @@ export const LOGOUT_AUTH_SUCCESS = 'LOGOUT_AUTH_SUCCESS'
 export type LOGOUT_AUTH_SUCCESS_TYPE = {type: 'LOGOUT_AUTH_SUCCESS'}
 
 const awralLogin = awral.of({
-	success: ({payload, dispatch}) => {
+	success ({payload, dispatch}) {
 		setLocalToken(payload.token)
 		dispatch({type: LOGIN_AUTH_SUCCESS, payload})
 	}
