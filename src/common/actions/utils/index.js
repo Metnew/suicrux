@@ -21,8 +21,9 @@ const beforePending = null
   Create default Awral
   Awral is not recommended for production usage now
   But it can make your work with actions even simpler.
-  NOTE:I strongly recommend you check Awral sources!
-  Awral is 880B gzipped!
+  NOTE: I strongly recommend you check Awral sources!
+  NOTE: But it's actively developed!
+  Awral is 910 bytes gzipped!
   {@link https://github.com/Metnew/awral}
 */
 export const awral = Awral.of({check, beforeCheck, afterCheck, finally: finallyAction, beforePending})
