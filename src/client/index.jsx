@@ -25,6 +25,7 @@ import 'semantic-ui-css/components/statistic.css'
 // Polyfill for IE 11
 // P.S: i don't know does starter works in IE 11
 import 'promise-polyfill'
+import 'isomorphic-fetch'
 // Application
 import {hydrate} from 'react-dom'
 import {configureApp, configureRootComponent} from 'common/app'
@@ -35,30 +36,6 @@ import type {i18nConfigObject} from 'types'
 if (process.env.NODE_ENV === 'production') {
 	require('common/pwa')
 } else if (process.env.NODE_ENV === 'development') {
-	// Devtools
-	// NOTE: whyDidYouUpdate package is temporarily broken, waiting for a patch.
-	/*eslint-disable */
-	// NOTE: But if you really want to run `why-did-you-update`
-	// You can uncomment this block:
-	/*
-    Object.defineProperty(React, 'createClass', {
-      set: nextCreateClass => {
-        createClass = nextCreateClass
-      }
-    })
-
-   const {whyDidYouUpdate} = require('why-did-you-update')
-    whyDidYouUpdate(React)
-  */
-	/* eslint-enable */
-	// window.Perf = require('react-addons-perf')
-	// NOTE: a11y doesnt work with SSR and React throws warnings like:
-	// "React attempted to reuse markup in a container but the checksum was invalid"
-	// a11y adds "id" attribute to the root container (#app) of app and triggers re-rendering
-	//
-	/** {@link https://github.com/reactjs/react-a11y } */
-	// const a11y = require('react-a11y')
-	// a11y(React, {ReactDOM})
 }
 
 const initialState: GlobalState = window.__INITIAL_STATE__ || {}
