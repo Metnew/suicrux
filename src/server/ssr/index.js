@@ -13,6 +13,7 @@ import assets from 'webpack-assets'
 // $FlowFixMe
 import faviconsAssets from 'favicons-assets'
 import getI18nData from 'server/i18n'
+import {matchPath} from 'react-router'
 
 export default async (req: express$Request, res: express$Response) => {
 	const {isLoggedIn, language} = req.user
@@ -50,6 +51,18 @@ export default async (req: express$Request, res: express$Response) => {
 		initialState: preloadedState,
 		i18n
 	}
+
+	// FIXME: how to replace `let` and `for`?
+	let lazyRoutes = routes.filter(a => a.lazy)
+	for (var i = 0; i < lazyRoutes.length; i++) {
+		let route = routes[i]
+		if (matchPath(req.url, route)) {
+			route.component = await routes[i].component().default
+			route.lazy = false
+			break
+		}
+	}
+
 	const {beforeAppTag, afterAppTag} = HtmlComponent(props)
 
 	res.writeHead(200, {
