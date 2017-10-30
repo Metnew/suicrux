@@ -29,7 +29,6 @@ import 'isomorphic-fetch'
 // Application
 import {hydrate} from 'react-dom'
 import {configureApp, configureRootComponent} from 'common/app'
-import {persistStore} from 'redux-persist'
 import type {GlobalState} from 'reducers'
 import type {i18nConfigObject} from 'types'
 
@@ -51,8 +50,6 @@ const RootComponent = configureRootComponent({
 })
 
 hydrate(RootComponent, document.getElementById('app'))
-
-persistStore(store)
 
 if (module.hot) {
 	module.hot.accept()

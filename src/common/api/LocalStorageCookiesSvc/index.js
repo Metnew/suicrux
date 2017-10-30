@@ -1,7 +1,6 @@
 // @flow
 import Cookies from 'js-cookie'
 // By default, we don't use localStorage, but store2 is already installed
-// But we use redux-persist (syncs localStorage with redux state)
 // import store from 'store2'
 import decodeJWT from 'jwt-decode'
 
