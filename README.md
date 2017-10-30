@@ -38,7 +38,6 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 - **[Fetch polyfill](https://github.com/matthew-andrews/isomorphic-fetch)**, **[Promise polyfill](https://github.com/stefanpenner/es6-promise)** and **[normalizr](https://github.com/paularmstrong/normalizr)** (api response normalization)
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
-- **[why-did-you-update](https://github.com/garbles/why-did-you-update)** and **[React-Addons-Perf](https://facebook.github.io/react/docs/perf.html)** for better performance optimization.
 - **[Lodash](https://lodash.com/)** - is a dependency of Semantic-ui-react.
 
 #### Build (Webpack):
@@ -88,7 +87,7 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 
 > Have a question? Ask! :wink:
 
-Any help is highly appreciated. PRs, issues, questions, enhancements are always welcome. 
+Any help is highly appreciated. PRs, issues, questions, enhancements are always welcome.
 
 ### Author
 Vladimir Metnew <vladimirmetnew@gmail.com>
