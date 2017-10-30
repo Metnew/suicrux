@@ -11,56 +11,59 @@ import {
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const pending = {
-	meta: null,
-	type: GET_LINKS_PENDING
-}
-
 describe('Links actions', () => {
-	it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', done => {
-		const store = mockStore({})
-		const samplePayload = [
-			{
-				link: 'string',
-				header: 'string'
-			}
-		]
-		nock('http://localhost:3000/api/v1')
-			.get('/links')
-			.reply(200, samplePayload)
+	describe('GET_LINKS', () => {
+		const pending = {
+			meta: null,
+			type: GET_LINKS_PENDING
+		}
 
-		return store.dispatch(GET_LINKS()).then(res => {
+		it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', done => {
+			const store = mockStore({})
+			const payload = [
+				{
+					link: 'string',
+					header: 'string'
+				}
+			]
+
+			nock(process.env.BASE_API)
+				.get('/links')
+				.reply(200, payload)
+
+			return store.dispatch(GET_LINKS()).then(res => {
+				const actions = store.getActions()
+				const success = {
+					meta: null,
+					type: GET_LINKS_SUCCESS,
+					payload
+				}
+				const expectedActions = [pending, success]
+
+				expect(actions).toEqual(expectedActions)
+				done()
+			})
+		})
+
+		it('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', async done => {
+			const payload = {errors: {}}
+			nock(process.env.BASE_API)
+				.get('/links')
+				.reply(400, payload)
+
+			const store = mockStore({})
+			await store.dispatch(GET_LINKS())
 			const actions = store.getActions()
-			const success = {
+			const fail = {
 				meta: null,
-				type: GET_LINKS_SUCCESS,
-				payload: samplePayload
+				type: GET_LINKS_FAIL,
+				error: true,
+				payload
 			}
-			const expectedActions = [pending, success]
+			const expectedActions = [pending, fail]
 
 			expect(actions).toEqual(expectedActions)
 			done()
 		})
-	})
-
-	it('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', async done => {
-		const errorPayload = {errors: {}}
-		nock('http://localhost:3000/api/v1')
-			.get('/links')
-			.reply(400, errorPayload)
-
-		const store = mockStore({})
-		await store.dispatch(GET_LINKS())
-		const actions = store.getActions()
-		const fail = {
-			meta: null,
-			type: GET_LINKS_FAIL,
-			error: true,
-			payload: errorPayload
-		}
-		const expectedActions = [pending, fail]
-
-		expect(actions).toEqual(expectedActions)
-		done()
 	})
 })

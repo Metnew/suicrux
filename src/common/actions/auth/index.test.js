@@ -17,85 +17,89 @@ const middlewares = [thunk]
 // Create mockStore for testing
 const mockStore = configureMockStore(middlewares)
 
-const loginPending = {
-	meta: null,
-	type: LOGIN_AUTH_PENDING
-}
 
 describe('Auth actions', () => {
-	/**
+	describe('LOGIN_AUTH', () => {
+		const loginPending = {
+			meta: null,
+			type: LOGIN_AUTH_PENDING
+		}
+		/**
 	 * @arg {Function} done - is a callback that you need to execute,
 	 * If your action performing async task (e.g. request to API)
 	 */
-	test('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
-		const successPayload = {
-			token: 'nothing'
-		}
-
-		nock('http://localhost:3000/api/v1')
-			.post('/auth')
-			.reply(200, successPayload)
-		// Create expected output of your action
-		const expectedActions = [
-			loginPending,
-			{
-				type: LOGIN_AUTH_SUCCESS,
-				payload: successPayload
+		test('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
+			const successPayload = {
+				token: 'nothing'
 			}
-		]
-		// Create store for testing
-		const store = mockStore({})
-		// Dispatch action
-		store.dispatch(LOGIN_AUTH()).then(() => {
-			// Compare expected and real outputs
-			expect(store.getActions()).toEqual(expectedActions)
-			// Call `done()` callback, because action is async
-			done()
+
+			nock(process.env.BASE_API)
+				.post('/auth')
+				.reply(200, successPayload)
+			// Create expected output of your action
+			const expectedActions = [
+				loginPending,
+				{
+					type: LOGIN_AUTH_SUCCESS,
+					payload: successPayload
+				}
+			]
+			// Create store for testing
+			const store = mockStore({})
+			// Dispatch action
+			store.dispatch(LOGIN_AUTH()).then(() => {
+				// Compare expected and real outputs
+				expect(store.getActions()).toEqual(expectedActions)
+				// Call `done()` callback, because action is async
+				done()
+			})
+		})
+
+		test('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was unsuccessful', done => {
+			// Create expected output of your action
+			const errorPayload = {
+				errors: {}
+			}
+
+			const expectedActions = [
+				loginPending,
+				{
+					type: LOGIN_AUTH_FAIL,
+					error: true,
+					meta: null,
+					payload: errorPayload
+				}
+			]
+
+			nock(process.env.BASE_API)
+				.post('/auth')
+				.reply(400, errorPayload)
+			// Create store for testing
+			const store = mockStore({})
+			// Dispatch action
+			store.dispatch(LOGIN_AUTH()).then(res => {
+				// Compare expected and real outputs
+				expect(store.getActions()).toEqual(expectedActions)
+				// Call `done()`, because test is async
+				done()
+			})
 		})
 	})
 
-	test('creates LOGIN_AUTH_FAIL when LOGIN_AUTH was unsuccessful', done => {
-		// Create expected output of your action
-		const errorPayload = {
-			errors: {}
-		}
-
-		const expectedActions = [
-			loginPending,
-			{
-				type: LOGIN_AUTH_FAIL,
-				error: true,
-				meta: null,
-				payload: errorPayload
-			}
-		]
-
-		nock('http://localhost:3000/api/v1')
-			.post('/auth')
-			.reply(400, errorPayload)
-		// Create store for testing
-		const store = mockStore({})
-		// Dispatch action
-		store.dispatch(LOGIN_AUTH()).then(res => {
+	describe('LOGOUT_AUTH', () => {
+		test('creates LOGOUT_AUTH_SUCCESS on LOGOUT_AUTH', () => {
+			// Create expected output of your action
+			const expectedActions = [
+				{
+					type: LOGOUT_AUTH_SUCCESS
+				}
+			]
+			// Create store for testing
+			const store = mockStore({})
+			// Dispatch action
+			store.dispatch(LOGOUT_AUTH())
 			// Compare expected and real outputs
 			expect(store.getActions()).toEqual(expectedActions)
-			// Call `done()`, because test is async
-			done()
 		})
-	})
-
-	test('creates LOGOUT_AUTH_SUCCESS on LOGOUT_AUTH', () => {
-		// Create expected output of your action
-		const expectedActions = [
-			{
-				type: LOGOUT_AUTH_SUCCESS
-			}
-		]
-		// Create store for testing
-		const store = mockStore({})
-		// Dispatch action
-		store.dispatch(LOGOUT_AUTH())
-		// Compare expected and real outputs
-		expect(store.getActions()).toEqual(expectedActions)
 	})
 })

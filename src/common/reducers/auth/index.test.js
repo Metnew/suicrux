@@ -28,22 +28,6 @@ describe('AUTH REDUCER', () => {
 		type: LOGOUT_AUTH_SUCCESS
 	}
 
-	const loginFail = {
-		type: LOGIN_AUTH_FAIL,
-		payload: {
-			errors: {
-				hello: 'world'
-			}
-		}
-	}
-
-	const loginSuccess = {
-		type: LOGIN_AUTH_SUCCESS,
-		payload: {
-			token: 'iamnotatoken'
-		}
-	}
-
 	const loginPending = {
 		type: LOGIN_AUTH_PENDING
 	}
@@ -64,19 +48,35 @@ describe('AUTH REDUCER', () => {
 	})
 
 	it('should handle LOGIN_AUTH_FAIL if not logged in', () => {
+		const action = {
+			type: LOGIN_AUTH_FAIL,
+			payload: {
+				errors: {
+					hello: 'world'
+				}
+			}
+		}
 		// User is logged out and has `errors` after LOGIN_AUTH_FAIL
-		expect(reducer(initialState, loginFail)).toEqual({
+		expect(reducer(initialState, action)).toEqual({
 			...initialState,
 			isLoggedIn: false,
 			isLoaded: true,
 			isLoading: false,
-			errors: loginFail.payload.errors
+			errors: {
+				hello: 'world'
+			}
 		})
 	})
 
 	it('should handle LOGIN_AUTH_SUCCESS if not logged in', () => {
+		const action = {
+			type: LOGIN_AUTH_SUCCESS,
+			payload: {
+				token: 'iamnotatoken'
+			}
+		}
 		// User is logged in and has `token` after LOGIN_AUTH_SUCCESS
-		expect(reducer(initialState, loginSuccess)).toEqual({
+		expect(reducer(initialState, action)).toEqual({
 			...initialState,
 			isLoaded: true,
 			isLoading: false,
