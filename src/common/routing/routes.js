@@ -1,8 +1,8 @@
 // @flow
 import {Route} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
-import Dashboard from 'containers/Dashboard'
-import Login from 'containers/Login'
+// import Dashboard from 'containers/Dashboard'
+// import Login from 'containers/Login'
 import type {RouteItem} from 'types'
 
 const loadLazyComponentFnConstructor = (url: string) => async () => {
@@ -24,8 +24,9 @@ const routes: Array<RouteItem> = [
 		icon: 'newspaper',
 		name: 'Dashboard',
 		sidebarVisible: true,
+		lazy: true,
 		tag: RouteAuth,
-		component: Dashboard
+		component: loadLazyComponentFnConstructor('Dashboard')
 	},
 	{
 		path: '/links',
@@ -47,8 +48,9 @@ const routes: Array<RouteItem> = [
 	{
 		path: '/auth',
 		name: 'Auth',
+		lazy: true,
 		tag: Route,
-		component: Login
+		component: loadLazyComponentFnConstructor('Login')
 	}
 ]
 
