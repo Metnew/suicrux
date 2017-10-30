@@ -37,7 +37,6 @@ That's all. Jest is ready.
 ### Snapshot testing
 What is snapshot testing? See the official Jest docs [about this](https://facebook.github.io/jest/docs/snapshot-testing.html) and take a look at simple example](https://facebook.github.io/jest/docs/en/tutorial-react.html#content).
 
-
 ### DOM testing
 You can find [example of DOM testing](https://facebook.github.io/jest/docs/en/tutorial-react.html#dom-testing) in Jest docs.
 The starter *doesn't include* tests for React components. Feel free to submit PR to add this feature.
@@ -49,12 +48,15 @@ One of the simplest ways to test redux actions and reducers is to use [`redux-mo
 ### Actions
 For example, tests for `auth` actions in `src/common/actions/auth/index.test.js` look like:
 ```js
-// Disable Eslint for tests
-/* eslint-disable */
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-// Import all redux actions
-import * as actions from 'actions'
+import nock from 'nock'
+// Import redux actions
+import {
+	LOGIN_AUTH_SUCCESS,
+	LOGIN_AUTH_PENDING,
+	LOGIN_AUTH,
+} from 'actions/auth'
 // Add middlewares that our mock store will use
 // It can be redux-thunk or routingMiddleware from `react-router-redux`
 // Or any other middleware that you use in your app
@@ -62,25 +64,38 @@ const middlewares = [thunk]
 // Create mockStore for testing
 const mockStore = configureMockStore(middlewares)
 
+const loginPending = {
+	meta: null,
+	type: LOGIN_AUTH_PENDING
+}
+
 describe('Auth actions', () => {
 	/**
 	 * @arg {Function} done - is a callback that you need to execute,
 	 * If your action performing async task (e.g. request to API)
 	 */
-	it('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
-		// Create expected output of your action
-		const expectedActions = {
-			type: actions.LOGIN_AUTH_SUCCESS,
-			result: {
-				token: 'nothing'
-			}
+	test('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
+		const successPayload = {
+			token: 'nothing'
 		}
+
+		nock('http://localhost:3000/api/v1')
+			.post('/auth')
+			.reply(200, successPayload)
+		// Create expected output of your action
+		const expectedActions = [
+			loginPending,
+			{
+				type: LOGIN_AUTH_SUCCESS,
+				payload: successPayload
+			}
+		]
 		// Create store for testing
 		const store = mockStore({})
 		// Dispatch action
-		return store.dispatch(actions.LOGIN_AUTH).then(res => {
+		store.dispatch(LOGIN_AUTH()).then(() => {
 			// Compare expected and real outputs
-			expect(res).toEqual(expectedActions)
+			expect(store.getActions()).toEqual(expectedActions)
 			// Call `done()` callback, because action is async
 			done()
 		})

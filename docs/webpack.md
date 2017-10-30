@@ -1,7 +1,6 @@
 # Webpack
 
 ## Isomorphism
-Both server and client code are compiled with.
 
 ## Frontend
 

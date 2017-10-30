@@ -10,7 +10,7 @@ You can find it in `webpack_config/config.js`
 Yes! Check `/src/server/ssr/`. App uses rapscallion for async rendering on server.
 
 #### How lazy-loading implemented:
-Check `src/common/routing/index.js` and `src/common/components/addons/LazyLoad`. TL;DR: dynamic `import()`.
+Check `src/common/routing/index.js`, `src/server/ssr/index.js` and `src/common/components/addons/LazyLoad`. TL;DR: dynamic `import()`.
 
 #### Is theming available?
 Yes, with styled-components's `<ThemeProvider>` you can specify your own theme. By default, app uses theme from [www.materialpallette.com](https://www.materialpalette.com/).

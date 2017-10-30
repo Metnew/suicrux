@@ -1,6 +1,6 @@
 
 ### Normalization
-Normalization using is `normalizr` is recommended but not a must. You can ignore it if you want. Concept of normalization is strongly connected with state-management. The idea behind normalization is to make a in-memory DB in state. Think of it like we can create NoSQL collection (table) in state.
+Normalization using `normalizr` is recommended but not a must. You can ignore it if you want. Concept of normalization is strongly connected with state-management. The idea behind normalization is to make an in-memory DB inside the state. Think of it like NoSQL collection (table) in the state.
 
 Typical script for normalization of arrays:
 

@@ -10,7 +10,7 @@ Environment variables are very important for configuration. Some variables are u
 ## Frontend
 
 #### `GA_ID (default:false)`:
-Your Google analytics ID.    
+Your Google analytics ID.
 If set, react-ga will be initialized inside `<App>` container on `componentDidMount()` event.
 
 #### `SENTRY_PUBLIC_DSN (default: false)`:
@@ -31,7 +31,7 @@ if (process.env.GA_ID) {
     ga('create', process.env.GA_ID, 'auto')
     ga('send', 'pageview')
   }
-  script.src = '<url-too-sentry-script>'
+  script.src = '<url-to-sentry-script>'
   document.body.appendChild(script)
 ```
 
