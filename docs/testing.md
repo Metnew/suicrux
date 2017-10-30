@@ -104,18 +104,18 @@ describe('Auth actions', () => {
 ```
 
 ### Reducers
-Let's test handling of `LOGIN_AUTH_SUCCESS` action in auth reducer (`src/common/reducers/auth/index.test.js`) as an example.
+Let's test handling of `LOGIN_AUTH_SUCCESS` action in auth reducer (`src/common/reducers/auth/index.test.js`).
 ```javascript
 /* eslint-disable */
 // Import `auth` reducer and initialState for this
 import {auth as reducer, initialState} from 'reducers/auth'
 // Import all actions
-import * as actions from 'actions'
+import {LOGIN_AUTH_SUCCESS} from 'actions/auth'
 
 describe('AUTH REDUCER', () => {
 	// Create test action for reducer
-	const LOGIN_AUTH_SUCCESS = {
-		type: actions.LOGIN_AUTH_SUCCESS,
+	const action = {
+		type: LOGIN_AUTH_SUCCESS,
 		result: {
 			token: 'iamnotatoken'
 		}
@@ -123,7 +123,7 @@ describe('AUTH REDUCER', () => {
 
 	it('should handle LOGIN_AUTH_SUCCESS', () => {
 		// User is logged in and has `token` after LOGIN_AUTH_SUCCESS
-		expect(reducer(initialState, LOGIN_AUTH_SUCCESS)).toEqual({
+		expect(reducer(initialState, action)).toEqual({
 			...initialState,
 			token: 'iamnotatoken',
 			isLoggedIn: true
@@ -136,4 +136,4 @@ describe('AUTH REDUCER', () => {
 Store tests in the same folder with the component/action/reducer.
 
 ### Also
-There are [other solutions](https://github.com/brillout/awesome-react-components#test) to deal with testing, so you're always free to choose your testing library.
+There are [other solutions](https://github.com/brillout/awesome-react-components#test) to deal with testing, so you're always free to choose testing library.
