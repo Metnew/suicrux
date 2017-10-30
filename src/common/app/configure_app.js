@@ -1,7 +1,8 @@
 // @flow
 // Redux stuff
 import thunk from 'redux-thunk'
-import {autoRehydrate} from 'redux-persist'
+import {persistStore, persistCombineReducers} from 'redux-persist'
+import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
 import {createStore, applyMiddleware, compose} from 'redux'
 import {routerMiddleware} from 'react-router-redux'
 // // Application
@@ -14,10 +15,14 @@ import {history, routes} from 'routing'
  * @return {Object} - configured store
  */
 const configureStore = (initialState: Object) => {
-	const rehydrate = autoRehydrate()
+	const config = {
+		key: 'root',
+		storage
+	}
+	const persistReducer = persistCombineReducers(config, rootReducer)
+
 	const middlewares = [thunk, routerMiddleware(history)]
-	const appliedMiddlewares = middlewares.map(a => applyMiddleware(a))
-	const enhancers = [rehydrate].concat(appliedMiddlewares)
+	const enhancers = middlewares.map(a => applyMiddleware(a))
 
 	const getComposeFunc = () => {
 		if (process.env.NODE_ENV === 'development') {
@@ -30,7 +35,13 @@ const configureStore = (initialState: Object) => {
 	const composeFunc = getComposeFunc()
 	const composedEnhancers = composeFunc.apply(null, enhancers)
 
-	return createStore(rootReducer, initialState, composedEnhancers)
+	const store = createStore(persistReducer, initialState, composedEnhancers)
+	const persistor = persistStore(store)
+
+	return {
+		store,
+		persistor
+	}
 }
 
 /**
@@ -39,9 +50,10 @@ const configureStore = (initialState: Object) => {
  * @return {Object} Object containting configured store, routes, history
  */
 export default (initialState: Object) => {
-	const store = configureStore(initialState)
+	const {store, persistor} = configureStore(initialState)
 	return {
 		store,
+		persistor,
 		routes,
 		history
 	}

@@ -11,14 +11,14 @@ import {links} from './links'
 import {auth} from './auth'
 
 // Root reducer
-export default combineReducers({
+export default {
 	layout,
-	me: combineReducers({auth}),
-	entities: combineReducers({
+	me: {auth},
+	entities: {
 		links
-	}),
+	},
 	routing: routerReducer
-})
+}
 
 export type GlobalState = {layout: LayoutState} & {me: {auth: AuthState}} & {
 		entities: {links: EntitiesLinksState}

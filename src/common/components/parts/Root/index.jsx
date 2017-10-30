@@ -2,6 +2,8 @@
 import React, {Component} from 'react'
 import {Provider} from 'react-redux'
 import {IntlProvider, defineMessages, addLocaleData} from 'react-intl'
+import {Loader} from 'semantic-ui-react'
+import {PersistGate} from 'redux-persist/es/integration/react'
 import {APPLICATION_INIT} from 'actions/common'
 import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
@@ -21,7 +23,8 @@ type Props = {
 		context?: Object
 	},
 	history: any,
-	routes: Array<RouteItem>
+	routes: Array<RouteItem>,
+	persistor: Object
 }
 
 export default class Root extends Component {
@@ -38,7 +41,8 @@ export default class Root extends Component {
 	}
 
 	render () {
-		const {SSR, store, history, routes, i18n} = this.props
+		const {SSR, store, history, routes, persistor, i18n} = this.props
+		console.log(persistor)
 		const routerProps = process.env.BROWSER
 			? {history}
 			: {location: SSR.location, context: SSR.context}
@@ -53,9 +57,17 @@ export default class Root extends Component {
 				<Provider store={store} key={Date.now()}>
 					<ThemeProvider theme={theme}>
 						<Router {...routerProps}>
-							<App routes={routes}>
-								<RoutingWrapper store={store} routes={routes} />
-							</App>
+							<PersistGate
+								persistor={persistor}
+								loading={<Loader active>Loading...</Loader>}
+								onBeforeList={() => {
+									console.log(arguments)
+								}}
+							>
+								<App routes={routes}>
+									<RoutingWrapper store={store} routes={routes} />
+								</App>
+							</PersistGate>
 						</Router>
 					</ThemeProvider>
 				</Provider>
