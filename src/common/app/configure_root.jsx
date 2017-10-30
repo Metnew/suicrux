@@ -12,7 +12,6 @@ import 'styles/global'
 type Props = {
 	i18n: Object,
 	store: Object, // unconfigured store
-	persistor: Object,
 	SSR: {
 		// SSR options, see `/server` for more info
 		context: Object,
