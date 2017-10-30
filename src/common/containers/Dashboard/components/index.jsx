@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {Grid, Header} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 
-export default class DashboardComponent extends Component {
+class DashboardComponent extends Component {
 	render () {
 		return (
 			<Grid columns={1}>
@@ -30,3 +30,5 @@ export default class DashboardComponent extends Component {
 		)
 	}
 }
+
+export default DashboardComponent

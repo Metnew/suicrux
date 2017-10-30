@@ -12,7 +12,11 @@ type Props = {
 }
 
 const Login = ({login, errors}: Props) => {
-	return <LoginComponent login={login} errors={errors} />
+	const props = {
+		login,
+		errors
+	}
+	return <LoginComponent {...props} />
 }
 
 const mapStateToProps = (state: GlobalState) => {

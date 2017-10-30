@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Helmet} from 'react-helmet'
 import DashboardComponent from './components'
-
 import type {GlobalState} from 'reducers'
 
 type Props = any
