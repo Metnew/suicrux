@@ -5,6 +5,10 @@ import RouteAuth from 'components/addons/RouteAuth'
 import {asyncComponent} from 'react-async-component'
 import {Loader, Dimmer, Header, Icon} from 'semantic-ui-react'
 import _ from 'lodash'
+import Dashboard from 'containers/Dashboard'
+import Links from 'containers/Links'
+import Login from 'containers/Login'
+import NotFound from 'containers/NotFound'
 import type {RouteItem} from 'types'
 
 function asyncComponentCreator (url) {
@@ -46,6 +50,15 @@ function asyncComponentCreator (url) {
 }
 
 function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
+	const [AsyncDashoard, AsyncLinks, AsyncLogin, AsyncNotFound] = [
+		'Dashboard',
+		'Links',
+		'Login',
+		'NotFound'
+	].map(a => {
+		return asyncComponentCreator(a)
+	})
+
 	const routes: Array<RouteItem> = [
 		{
 			path: '/',
@@ -54,7 +67,7 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			name: 'Dashboard',
 			sidebarVisible: true,
 			tag: RouteAuth,
-			component: asyncComponentCreator('Dashboard')
+			component: Dashboard
 		},
 		{
 			path: '/links',
@@ -63,7 +76,7 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			icon: 'bookmark',
 			sidebarVisible: true,
 			tag: RouteAuth,
-			component: asyncComponentCreator('Links')
+			component: Links
 		},
 		{
 			external: true,
@@ -77,13 +90,13 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			name: 'Auth',
 			exact: true,
 			tag: Route,
-			component: asyncComponentCreator('Login')
+			component: Login
 		},
-		// find the way to add/remove routes conditionally
+		// Find the way to add/remove routes conditionally
 		{
 			name: '404',
 			tag: RouteAuth,
-			component: asyncComponentCreator('NotFound')
+			component: NotFound
 		},
 		{
 			tag: Redirect,
@@ -104,7 +117,17 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 		routing (x: Array<RouteItem> = routes) {
 			return x
 				.filter(a => !!a.tag)
-				.map(a => _.pick(a, ['path', 'name', 'strict', 'exact', 'component', 'tag']))
+				.map(a =>
+					_.pick(a, [
+						'path',
+						'name',
+						'strict',
+						'exact',
+						'component',
+						'tag',
+						'to'
+					])
+				)
 		},
 		all () {
 			return routes
