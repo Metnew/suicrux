@@ -4,9 +4,12 @@
  */
 import React from 'react'
 import chalk from 'chalk'
+import _ from 'lodash'
 import {renderToNodeStream} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
+import asyncBootstrapper from 'react-async-bootstrapper'
+import {AsyncComponentProvider, createAsyncContext} from 'react-async-component'
 import HtmlComponent from './HtmlComponent'
 // $FlowFixMe
 import assets from 'webpack-assets'
@@ -36,45 +39,48 @@ export default async (req: express$Request, res: express$Response) => {
 		i18n,
 		SSR: {location, context}
 	})
-	const stream = renderToNodeStream(
-		<StyleSheetManager sheet={sheet.instance}>
-			{RootComponent}
-		</StyleSheetManager>
+	const asyncContext = createAsyncContext()
+
+	const app = (
+		<AsyncComponentProvider asyncContext={asyncContext}>
+			<StyleSheetManager sheet={sheet.instance}>
+				{RootComponent}
+			</StyleSheetManager>
+		</AsyncComponentProvider>
 	)
 
-	const css: string = sheet.getStyleTags()
-	const preloadedState: Object = store.getState()
-	const props = {
-		css,
-		assets,
-		faviconsAssets,
-		initialState: preloadedState,
-		i18n
-	}
+	// console.log(_.find(routes, a => matchPath(req.url, a)))
+	const noRequestURLMatch = !!_.find(routes, a => matchPath(req.url, a))
 
-	// FIXME: how to replace `let` and `for`?
-	let lazyRoutes = routes.filter(a => a.lazy)
-	for (var i = 0; i < lazyRoutes.length; i++) {
-		let route = routes[i]
-		if (matchPath(req.url, route)) {
-			route.component = await routes[i].component().default
-			route.lazy = false
-			break
+	asyncBootstrapper(app).then(() => {
+		const appStream = renderToNodeStream(app)
+		const css: string = sheet.getStyleTags()
+		const preloadedState: Object = store.getState()
+
+		const asyncState = asyncContext.getState()
+		const props = {
+			css,
+			assets,
+			faviconsAssets,
+			asyncState,
+			initialState: preloadedState,
+			i18n
 		}
-	}
 
-	const {beforeAppTag, afterAppTag} = HtmlComponent(props)
+		const {beforeAppTag, afterAppTag} = HtmlComponent(props)
+		const responseStatusCode = noRequestURLMatch ? 404 : 200
 
-	res.writeHead(200, {
-		'Content-Type': 'text/html'
-	})
-	res.write(beforeAppTag)
-	res.write(`<div id="app">`)
-	stream.pipe(res, {end: false})
+		res.writeHead(responseStatusCode, {
+			'Content-Type': 'text/html'
+		})
+		res.write(beforeAppTag)
+		res.write(`<div id="app">`)
+		appStream.pipe(res, {end: false})
 
-	stream.on('end', () => {
-		res.write('</div>')
-		res.write(afterAppTag)
-		res.end()
+		appStream.on('end', () => {
+			res.write('</div>')
+			res.write(afterAppTag)
+			res.end()
+		})
 	})
 }
