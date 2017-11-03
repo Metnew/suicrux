@@ -7,6 +7,7 @@ export const StyledFooter = styled.footer`
 	background-color: ${props => props.theme.primaryColorLight};
 	color: ${props => props.theme.primaryTextColor};
 	height: 90px;
+	min-height: 90px;
 	box-shadow: inset 0 0 0 0 ${props => props.theme.primaryColorDark},
 		0 2px 1px 0 ${props => props.theme.primaryColorDark};
 `
