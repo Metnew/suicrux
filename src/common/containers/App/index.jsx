@@ -71,18 +71,17 @@ class App extends Component {
 	}
 
 	componentDidMount () {
-		// NOTE: uncomment if you use Sentry
-		// if (process.env.SENTRY_PUBLIC_DSN) {
-		// 	const script = document.createElement('script')
-		// 	script.type = 'text/javascript'
-		// 	script.crossorigin = 'anonymous'
-		// 	script.async = true
-		// 	script.onload = () => {
-		// 		Raven.config(process.env.SENTRY_PUBLIC_DSN).install()
-		// 	}
-		// 	script.src = 'https://cdn.ravenjs.com/3.16.1/raven.min.js'
-		// 	document.body.appendChild(script)
-		// }
+		if (process.env.SENTRY_PUBLIC_DSN) {
+			const script = document.createElement('script')
+			script.type = 'text/javascript'
+			script.crossorigin = 'anonymous'
+			script.async = true
+			script.onload = () => {
+				Raven.config(process.env.SENTRY_PUBLIC_DSN).install()
+			}
+			script.src = 'https://cdn.ravenjs.com/3.19.1/raven.min.js'
+			document.body.appendChild(script)
+		}
 
 		if (process.env.GA_ID) {
 			ReactGA.initialize(process.env.GA_ID)
