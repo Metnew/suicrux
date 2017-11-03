@@ -55,10 +55,6 @@ export default class RoutingWrapper extends Component {
 			return <Tag key={i} {...b} />
 		})
 
-		return (
-			<Switch>
-				{routesRendered}
-			</Switch>
-		)
+		return <Switch>{routesRendered}</Switch>
 	}
 }

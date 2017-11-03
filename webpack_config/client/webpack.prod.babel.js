@@ -69,8 +69,6 @@ base.plugins.push(
 	}),
 	new webpack.optimize.ModuleConcatenationPlugin(),
 	new ShakePlugin(),
-	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
-	// new BabiliPlugin(),
 	new webpack.optimize.UglifyJsPlugin({
 		sourceMap: true,
 		compress: {

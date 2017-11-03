@@ -2,6 +2,7 @@
 import serealize from 'serialize-javascript'
 type args = {
 	css: string,
+	asyncState: Object,
 	initialState: Object,
 	assets: Object,
 	faviconsAssets: Object,
@@ -18,11 +19,13 @@ const DLLScripts =
 
 const HtmlComponent = ({
 	css,
+	asyncState,
 	initialState,
 	assets,
 	faviconsAssets,
 	i18n
 }: args) => {
+	const stringifiedAsyncState: string = serealize(asyncState)
 	const stringifiedState: string = serealize(initialState)
 	const stringifiedI18N: string = serealize(i18n)
 	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
@@ -66,6 +69,7 @@ const HtmlComponent = ({
 			<head>
 			<body>`,
 		afterAppTag: `
+			<script>window.__ASYNC_STATE__ = ${stringifiedAsyncState}</script>
 			<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
 			<script>window.__I18N__ = ${stringifiedI18N}</script>
 			${DLLScripts}

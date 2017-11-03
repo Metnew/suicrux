@@ -167,7 +167,9 @@ class App extends Component {
 						<Header {...headerProps} />
 						<MainLayout>
 							<MainContent>
-								<MainContainer id="main-container">{children}</MainContainer>
+								<MainContainer id="main-container">
+									{children}
+								</MainContainer>
 							</MainContent>
 							<Footer />
 						</MainLayout>
