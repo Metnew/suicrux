@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
 import {asyncComponent} from 'react-async-component'
 import {Loader, Dimmer, Header, Icon} from 'semantic-ui-react'
@@ -11,11 +11,10 @@ function asyncComponentCreator (url) {
 	const importCreator = (url: string) => async () => {
 		// Read Webpack docs about code-splitting for more info.
 		if (process.env.BROWSER) {
-			const resolve = import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
-			return resolve
+			// const resolve = import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
+			return import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
 		}
-		const resolve = import(/* webpackMode: "eager" */ `containers/${url}/index.jsx`)
-		return resolve
+		return import(/* webpackMode: "eager" */ `containers/${url}/index.jsx`)
 	}
 
 	return asyncComponent({
@@ -79,13 +78,17 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			exact: true,
 			tag: Route,
 			component: asyncComponentCreator('Login')
-		}
+		},
 		// find the way to add/remove routes conditionally
-		// {
-		// 	name: '404',
-		// 	tag: RouteAuth,
-		// 	component: asyncComponentCreator('NotFound')
-		// }
+		{
+			name: '404',
+			tag: RouteAuth,
+			component: asyncComponentCreator('NotFound')
+		},
+		{
+			tag: Redirect,
+			to: '/auth'
+		}
 	]
 
 	const fns = {
@@ -100,7 +103,7 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 		// Returns routing for React-Router
 		routing (x: Array<RouteItem> = routes) {
 			return x
-				.filter(a => !a.sidebarVisible)
+				.filter(a => !!a.tag)
 				.map(a => _.pick(a, ['path', 'name', 'strict', 'exact', 'component', 'tag']))
 		},
 		all () {
