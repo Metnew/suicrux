@@ -1,2 +1,2 @@
 export history from './history'
-export routes from './routes'
+export {getSidebarRoutes, getRouterRoutes, getRoutes} from './routes'
