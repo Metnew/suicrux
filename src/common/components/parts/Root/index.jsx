@@ -7,6 +7,7 @@ import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
 import App from 'containers/App'
 import RoutingWrapper from 'components/addons/RoutingWrapper'
+import {getRouterRoutes} from 'routing'
 import type {RouteItem, i18nConfigObject} from 'types'
 
 const Router = process.env.BROWSER
@@ -54,7 +55,10 @@ export default class Root extends Component {
 					<ThemeProvider theme={theme}>
 						<Router {...routerProps}>
 							<App routes={routes}>
-								<RoutingWrapper store={store} routes={routes} />
+								<RoutingWrapper
+									store={store}
+									routes={getRouterRoutes(routes)}
+								/>
 							</App>
 						</Router>
 					</ThemeProvider>
