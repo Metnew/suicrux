@@ -23,7 +23,8 @@ export const initialState: State = {
 	entities: [],
 	errors: {},
 	isLoading: false,
-	isLoaded: false
+	isLoaded: false,
+	count: 0
 }
 
 export function links (state: State = initialState, action: Action): State {
@@ -38,11 +39,13 @@ export function links (state: State = initialState, action: Action): State {
 	}
 	case GET_LINKS_SUCCESS: {
 		const entities = action.payload
+		const count = entities.length
 		return {
 			...state,
 			isLoaded: true,
 			isLoading: false,
-			entities
+			entities,
+			count
 		}
 	}
 	case GET_LINKS_FAIL: {
@@ -51,7 +54,9 @@ export function links (state: State = initialState, action: Action): State {
 			...state,
 			errors,
 			isLoaded: true,
-			isLoading: false
+			isLoading: false,
+			entities: [],
+			count: 0
 		}
 	}
 	default:
