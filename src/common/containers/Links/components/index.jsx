@@ -3,8 +3,8 @@ import React from 'react'
 import {Grid, List} from 'semantic-ui-react'
 import _ from 'lodash'
 import LinksItemComponent from './LinksItemComponent'
-
 import type {LinkItem} from 'types'
+
 type Props = {
 	links: Object
 }
