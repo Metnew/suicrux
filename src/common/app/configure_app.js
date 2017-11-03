@@ -5,7 +5,7 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import {routerMiddleware} from 'react-router-redux'
 // // Application
 import rootReducer from 'reducers'
-import {history, routes} from 'routing'
+import {history, getRoutes} from 'routing'
 //
 /**
  * Configure application store
@@ -36,6 +36,7 @@ const configureStore = (initialState: Object) => {
  * @return {Object} Object containting configured store, routes, history
  */
 export default (initialState: Object) => {
+	const routes = getRoutes()
 	const store = configureStore(initialState)
 	return {
 		store,
