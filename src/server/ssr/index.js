@@ -49,8 +49,8 @@ export default async (req: express$Request, res: express$Response) => {
 		</AsyncComponentProvider>
 	)
 
-	// console.log(_.find(routes, a => matchPath(req.url, a)))
-	const noRequestURLMatch = !!_.find(routes, a => matchPath(req.url, a))
+	// if true - > throw 404, if match found -> 200
+	const noRequestURLMatch = !_.find(routes, a => matchPath(req.url, a.path))
 
 	asyncBootstrapper(app).then(() => {
 		const appStream = renderToNodeStream(app)
