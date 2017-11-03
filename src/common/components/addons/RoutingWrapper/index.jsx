@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react'
 import {Switch, Redirect} from 'react-router-dom'
-import LazyLoad from 'components/addons/LazyLoad'
 import {getAuthState} from 'selectors'
 import type {RouteItem} from 'types'
 
@@ -44,30 +43,19 @@ export default class RoutingWrapper extends Component {
 	render () {
 		const {routes} = this.props
 		const onlyRoutes = routes.filter(
-			a => a.tag || a.component || a.lazy || !a.external
+			a => a.tag || a.component || !a.external
 		)
 		// render components that are inside Switch (main view)
 		const routesRendered = onlyRoutes.map((a: RouteItem, i) => {
 			// get tag for Route.
-			// is it "RouteAuth" `protected route` or "Route"?
+			// is it "RouteAuth" (e.g. `protected route`) or "Route"?
 			const Tag = a.tag
-			const {path, exact, strict, component, lazy} = a
-			// can visitor access this route?
-			// this function determinates is user allowed to visit route
+			const {path, exact, strict, component} = a
+			// Determinates is user allowed to visit certain route
 			const canAccess = this.authCheck.bind(this)
-			// select only props that we need
-			const b = {path, exact, strict, canAccess}
+			// Select only props that we need
+			const b = {canAccess, path, exact, strict, component}
 
-			if (lazy) {
-				const routeToRenderLazy = (
-					<Tag {...b} key={i}>
-						<LazyLoad component={component} />
-					</Tag>
-				)
-				return routeToRenderLazy
-			}
-
-			// it can be Route or RouteAuth
 			return <Tag key={i} {...b} component={component} />
 		})
 
