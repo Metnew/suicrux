@@ -27,7 +27,10 @@ import 'semantic-ui-css/components/statistic.css'
 import 'promise-polyfill'
 import 'isomorphic-fetch'
 // Application
+import React from 'react'
 import {hydrate} from 'react-dom'
+import {AsyncComponentProvider} from 'react-async-component'
+import asyncBootstrapper from 'react-async-bootstrapper'
 import {configureApp, configureRootComponent} from 'common/app'
 import type {GlobalState} from 'reducers'
 import type {i18nConfigObject} from 'types'
@@ -39,7 +42,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const initialState: GlobalState = window.__INITIAL_STATE__ || {}
 const i18n: i18nConfigObject = window.__I18N__ || {}
-// NOTE: V8 doesn't optimize code with `delete`
+const asyncState: Object = window.__ASYNC_STATE__ || {}
+// NOTE: V8 doesn't optimize  `delete`
 // delete window.__INITIAL_STATE__
 const {store, routes, history} = configureApp(initialState)
 const RootComponent = configureRootComponent({
@@ -49,7 +53,16 @@ const RootComponent = configureRootComponent({
 	i18n
 })
 
-hydrate(RootComponent, document.getElementById('app'))
+const app = (
+	<AsyncComponentProvider rehydrateState={asyncState}>
+		{RootComponent}
+	</AsyncComponentProvider>
+)
+
+asyncBootstrapper(app).then(() => {
+	console.log('FROM SERVER:', document.getElementById('app').innerHTML)
+	hydrate(app, document.getElementById('app'))
+})
 
 if (module.hot) {
 	module.hot.accept()
