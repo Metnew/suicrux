@@ -14,6 +14,7 @@ import Header from 'components/parts/Header'
 import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {getAuthState, getLayoutState, getWindowInnerWidth} from 'selectors'
+import {getSidebarRoutes} from 'routing'
 import ReactGA from 'react-ga'
 // Import styled components
 import {
@@ -99,31 +100,14 @@ class App extends Component {
 	}
 
 	/**
-   * Returns routing for sidebar menu
-   * @return {Array} array of routes that will be rendered in sidebar menu
-   */
-	getSidebarRouting (): Array<RouteItem> {
-		const sidebarRouting = this.props.routes
-			.filter((a: RouteItem) => a.sidebarVisible)
-			.map((a: RouteItem): RouteItem => {
-				const {path, name, icon, external, strict, exact} = a
-				const b: RouteItem = {path, name, icon, external, strict, exact}
-				return b
-			})
-		return sidebarRouting
-	}
-
-	/**
   * Returns title for header
   * @param  {String} pathname - location.pathname
   * @return {String} page title
   */
-	getPageTitle (pathname: string) {
-		const {routes} = this.props
+	getPageTitle (pathname: string): string {
 		const currentRoute: Object =
-			_.find(routes, (a: RouteItem) => matchPath(pathname, a)) || {}
-		const title: string = currentRoute.name || '404'
-		return title
+			_.find(this.props.routes, (a: RouteItem) => matchPath(pathname, a)) || {}
+		return currentRoute.name
 	}
 
 	render () {
@@ -135,18 +119,17 @@ class App extends Component {
 			logout,
 			toggleSidebar,
 			location,
-			isMobile
+			isMobile,
+			routes
 		} = this.props
-
 		// Routing for sidebar menu
-		const sidebarRouting = this.getSidebarRouting()
 		const title: string = this.getPageTitle(location.pathname)
 
 		const sidebarProps = {
 			isMobile,
 			logout,
 			open: sidebarOpened,
-			routing: sidebarRouting
+			routing: getSidebarRoutes(routes)
 		}
 
 		const headerProps = {
@@ -184,13 +167,10 @@ class App extends Component {
 						<Header {...headerProps} />
 						<MainLayout>
 							<MainContent>
-								<MainContainer id="main-container">
-									{children}
-								</MainContainer>
+								<MainContainer id="main-container">{children}</MainContainer>
 							</MainContent>
 							<Footer />
 						</MainLayout>
-						{/* </Dimmer.Dimmable> */}
 					</SidebarSemanticPusherStyledPatch>
 				</SidebarSemanticPushableStyled>
 			</PageLayout>
