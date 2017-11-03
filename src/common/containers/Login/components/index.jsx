@@ -48,6 +48,7 @@ class LoginComponent extends Component {
 				textAlign="center"
 				relaxed
 				stretched
+				style={{height: '100%'}}
 			>
 				<Helmet>
 					<title>Noir:Login</title>
