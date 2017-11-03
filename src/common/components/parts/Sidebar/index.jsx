@@ -65,11 +65,6 @@ class SidebarComponent extends Component {
 			)
 		})
 
-		// const logoImg = process.env.BROWSER
-		// 	? require('images/logo.png')
-		// 	: require('images/logo.png').preSrc
-		//
-
 		return (
 			<StyledSidebar {...sidebarProps}>
 				<SidebarLogoContainer href="https://github.com/Metnew/noir">
