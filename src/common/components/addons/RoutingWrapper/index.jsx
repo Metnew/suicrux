@@ -42,27 +42,22 @@ export default class RoutingWrapper extends Component {
 
 	render () {
 		const {routes} = this.props
-		const onlyRoutes = routes.filter(
-			a => a.tag || a.component || !a.external
-		)
 		// render components that are inside Switch (main view)
-		const routesRendered = onlyRoutes.map((a: RouteItem, i) => {
-			// get tag for Route.
-			// is it "RouteAuth" (e.g. `protected route`) or "Route"?
+		const routesRendered = routes.map((a: RouteItem, i) => {
+			// Get tag for Route.
+			// Is it "RouteAuth" (e.g. `protected route`) or "Route"?
 			const Tag = a.tag
-			const {path, exact, strict, component} = a
 			// Determinates is user allowed to visit certain route
 			const canAccess = this.authCheck.bind(this)
 			// Select only props that we need
-			const b = {canAccess, path, exact, strict, component}
+			const b = {canAccess, ...a}
 
-			return <Tag key={i} {...b} component={component} />
+			return <Tag key={i} {...b} />
 		})
 
 		return (
 			<Switch>
 				{routesRendered}
-				<Redirect to="/" />
 			</Switch>
 		)
 	}
