@@ -2,7 +2,7 @@
  * @flow
  */
 import React, {Component} from 'react'
-import {Switch, Redirect} from 'react-router-dom'
+import {Switch} from 'react-router-dom'
 import {getAuthState} from 'selectors'
 import type {RouteItem} from 'types'
 
