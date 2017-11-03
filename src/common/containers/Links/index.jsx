@@ -13,13 +13,18 @@ import type {GlobalState} from 'reducers'
 type Props = {
 	links: Object,
 	getLinks: () => void,
-	isLinksLoading: boolean
+	isLinksLoading: boolean,
+	isLinksLoaded: boolean
 }
 
 class Links extends Component {
 	props: Props
+
 	componentDidMount () {
-		this.getLinks()
+		const {isLinksLoaded} = this.props
+		if (!isLinksLoaded) {
+			this.getLinks()
+		}
 	}
 
 	getLinks () {
@@ -34,7 +39,7 @@ class Links extends Component {
 					<title>Noir:Links</title>
 				</Helmet>
 				{isLinksLoading ? (
-					<Loader active>Loading...</Loader>
+					<Loader active>Loading data...</Loader>
 				) : (
 					<LinksComponent links={links} />
 				)}
@@ -47,8 +52,8 @@ function mapStateToProps (state: GlobalState) {
 	const linksState = getEntitiesLinksState(state)
 	const links = linksState.entities
 	const isLinksLoading = linksState.isLoading
-
-	return {links, isLinksLoading}
+	const isLinksLoaded = linksState.isLoaded
+	return {links, isLinksLoading, isLinksLoaded}
 }
 
 const mapDispatchToProps = dispatch => ({
