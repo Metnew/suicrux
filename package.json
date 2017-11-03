@@ -29,6 +29,8 @@
     "query-string": "^5.0.1",
     "raven": "^2.2.1",
     "react": "^16.0.0",
+    "react-async-bootstrapper": "^1.1.2",
+    "react-async-component": "^1.0.2",
     "react-dom": "^16.0.0",
     "react-ga": "^2.3.5",
     "react-headroom": "^2.2.2",
