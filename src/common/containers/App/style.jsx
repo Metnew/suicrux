@@ -7,15 +7,15 @@ export const PageLayout = styled.div`height: 100%;`
 export const MainLayout = styled.div`
 	display: flex;
 	flex-direction: column;
-	min-height: calc(100% - 65px);
 	color: ${props => props.theme.primaryTextColor};
 	background-color: ${props => props.theme.primaryColorText};
-	${media.lg`
-		min-height: calc(100% - 72px);
-	`};
+	${'100% - Header height - Footer height'};
+	height: 100%;
+	max-height: calc(100% - 72px);
 `
 
 export const MainContent = styled.main`
+	height: 100%;
 	display: flex;
 	flex-grow: 1;
 	padding-left: 1rem;
@@ -25,6 +25,7 @@ export const MainContent = styled.main`
 // 	${'' /* height: 100%; */}
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
   -webkit-overflow-scrolling: touch;
+	${''}
 
   ::-webkit-scrollbar {
 	  width: 0px!important;
@@ -40,6 +41,7 @@ export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
 
 //  Margin - just to fill empty space
 export const MainContainer = styled(Container)`
+	height: 100%;
   margin-top: 2em;
   margin-bottom: 1em;
 
