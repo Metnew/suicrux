@@ -1,19 +1,30 @@
 // @flow
+import React from 'react'
 import {Route} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
-// import Dashboard from 'containers/Dashboard'
-// import Login from 'containers/Login'
+import {asyncComponent} from 'react-async-component'
+import {Loader} from 'semantic-ui-react'
 import type {RouteItem} from 'types'
 
-const loadLazyComponentFnConstructor = (url: string) => async () => {
+const importCreator = (url: string) => async () => {
 	// NOTE: there isn't any duplication here
 	// Read Webpack docs about code-splitting for more info.
 	if (process.env.BROWSER) {
-		const loadComponent = await import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
-		return loadComponent
+		const resolve = import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
+		return resolve
 	}
-	const loadComponent = await import(/* webpackMode: "eager" */ `containers/${url}/index.jsx`)
-	return loadComponent
+	const resolve = import(/* webpackMode: "eager" */ `containers/${url}/index.jsx`)
+	return resolve
+}
+
+const asyncComponentCreator = url => {
+	const resolve = importCreator(url)
+	return asyncComponent({
+		resolve,
+		LoadingComponent () {
+			return <Loader>Loading...</Loader>
+		}
+	})
 }
 
 // FIXME: sidebar routes and app routes should be separated!
@@ -24,19 +35,17 @@ const routes: Array<RouteItem> = [
 		icon: 'newspaper',
 		name: 'Dashboard',
 		sidebarVisible: true,
-		lazy: true,
 		tag: RouteAuth,
-		component: loadLazyComponentFnConstructor('Dashboard')
+		component: asyncComponentCreator('Dashboard')
 	},
 	{
 		path: '/links',
 		name: 'Links',
 		exact: true,
-		lazy: true,
 		icon: 'bookmark',
 		sidebarVisible: true,
 		tag: RouteAuth,
-		component: loadLazyComponentFnConstructor('Links')
+		component: asyncComponentCreator('Links')
 	},
 	{
 		external: true,
@@ -48,9 +57,8 @@ const routes: Array<RouteItem> = [
 	{
 		path: '/auth',
 		name: 'Auth',
-		lazy: true,
 		tag: Route,
-		component: loadLazyComponentFnConstructor('Login')
+		component: asyncComponentCreator('Login')
 	}
 ]
 
