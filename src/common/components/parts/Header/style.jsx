@@ -12,11 +12,9 @@ export const StyledHeader = styled.header`
 	flex-direction: column;
 	width: 100%;
 	z-index: 444;
-	height: 65px;
-	${media.lg`
-		height: 72px;
-	`};
+	height: 72px;
 `
+
 export const HeaderInner = styled.div`
 	display: flex;
 	padding: 0 15px;
@@ -28,6 +26,7 @@ export const PageTitle = styled.span`
 	align-items: center;
 	display: flex;
 `
+
 export const Navicon = styled.span`
 	width: 48px;
 	height: 48px;
