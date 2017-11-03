@@ -2,6 +2,7 @@
  * @file
  */
 import webpack from 'webpack'
+import chalk from 'chalk'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackGetCodeOnDone from 'webpack-get-code-on-done'
@@ -50,8 +51,16 @@ export default function (app) {
 			// Remove old compiled code
 			app._router.stack = stack.slice(0, prevSize)
 		}
-		// Apply newly compiled code
-		serverSideCode(app)
+		if (!serverSideCode) {
+			console.log(
+				chalk.red(
+					'Error: no "serverSideCode" got. Check latest changes.'
+				)
+			)
+		} else {
+			// Apply newly compiled code
+			serverSideCode(app)
+		}
 	}
 
 	app.use(devMiddleWare)
