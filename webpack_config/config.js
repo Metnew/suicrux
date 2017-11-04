@@ -5,21 +5,16 @@
 import path from 'path'
 import manifest from '../static/manifest'
 
-let {
-	BASE_API,
-	NODE_ENV,
+const {
+	BASE_API = '/api/v1',
+	NODE_ENV = 'development',
 	SENTRY_DSN_PUBLIC,
 	GA_ID,
-	JWT_SECRET,
+	JWT_SECRET = 'secret',
 	ANALYZE_BUNDLE,
 	SENTRY_DSN,
-	HTTP_PORT,
-	HTTPS_PORT
+	HTTP_PORT = 3000
 } = process.env
-
-// Vars for both server and frontend
-BASE_API = BASE_API || '/api/v1'
-NODE_ENV = NODE_ENV || 'development'
 
 // Paths
 const rootPath = path.join(__dirname, '../') // = "/"
@@ -29,9 +24,6 @@ const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 
 // Vars for server only
 const CLIENT_DIST_PATH = path.join(distPath, './client') // = "/dist/client"
-JWT_SECRET = JWT_SECRET || 'secret'
-HTTP_PORT = HTTP_PORT || 3000
-HTTPS_PORT = HTTPS_PORT || 3030
 
 // compute isProduction based on NODE_ENV
 const isProduction = process.env.NODE_ENV === 'production'
@@ -50,7 +42,6 @@ export default {
 	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	SENTRY_DSN,
-	HTTPS_PORT,
 	HTTP_PORT,
 	// It's better to define pathes in one file
 	// and then use everywhere across app
