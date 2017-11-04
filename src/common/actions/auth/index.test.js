@@ -17,7 +17,6 @@ const middlewares = [thunk]
 // Create mockStore for testing
 const mockStore = configureMockStore(middlewares)
 
-
 describe('Auth actions', () => {
 	describe('LOGIN_AUTH', () => {
 		const loginPending = {
