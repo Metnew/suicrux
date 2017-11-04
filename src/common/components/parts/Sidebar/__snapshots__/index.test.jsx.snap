@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile screen 1`] = `
+exports[`Sidebar component same snapshot for Sidebar 1`] = `
 <style__StyledSidebar
   animation="push"
   as={[Function]}
@@ -63,20 +63,6 @@ exports[`Sidebar component same snapshot if Sidebar is open and it is on mobile 
     />
      
     Github
-  </style__SidebarItem>
-  <style__SidebarItem
-    activeClassName="active"
-    as={[Function]}
-    icon={true}
-    key="3"
-    link={true}
-    to="/auth"
-  >
-    <Icon
-      as="i"
-    />
-     
-    Auth
   </style__SidebarItem>
   <base__Spacer />
   <style__SidebarLogoutItem
