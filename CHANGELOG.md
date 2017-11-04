@@ -2,6 +2,74 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/Metnew/suicrux/compare/v0.3.0...v0.4.0) (2017-11-04)
+
+
+### Bug Fixes
+
+* **App:** add `getSidebarRoutes` instead of direct filtering inside component ([75d5bf0](https://github.com/Metnew/suicrux/commit/75d5bf0))
+* **client/index:** remove devtools for R15, add isomorphic-fetch ([cefba8c](https://github.com/Metnew/suicrux/commit/cefba8c))
+* **containers/App:** uncomment Sentry code ([a58db5e](https://github.com/Metnew/suicrux/commit/a58db5e))
+* **Footer:** add min-height for Footer ([be521a8](https://github.com/Metnew/suicrux/commit/be521a8))
+* **Header:** fixed height for header ([027ed0a](https://github.com/Metnew/suicrux/commit/027ed0a))
+* **jest_config:** add scss|sass as extensions to mock by jest ([210fb1b](https://github.com/Metnew/suicrux/commit/210fb1b))
+* **Links:** use isLinksLoading instead of isLinksLoaded ([143e5a4](https://github.com/Metnew/suicrux/commit/143e5a4))
+* **locals:** update ru locals ([e41ea18](https://github.com/Metnew/suicrux/commit/e41ea18))
+* **Login:** add 100% height for Login component ([6b247e2](https://github.com/Metnew/suicrux/commit/6b247e2))
+* **reducers/links:** fix tests (payload should be array) ([8fbd57c](https://github.com/Metnew/suicrux/commit/8fbd57c))
+* **Root:** use `getRouterRoutes()` as routes for RoutingWrapper ([f539033](https://github.com/Metnew/suicrux/commit/f539033))
+* **routing:** fix detection of routerRoutes ([f1224b9](https://github.com/Metnew/suicrux/commit/f1224b9))
+* **routing:** use only direct imports (no LL) ([53c479d](https://github.com/Metnew/suicrux/commit/53c479d))
+* **server:** add FormData for server ([80b6071](https://github.com/Metnew/suicrux/commit/80b6071))
+* **server:** return correct status code if path matched ([a2c637f](https://github.com/Metnew/suicrux/commit/a2c637f))
+* **server/api:** fix links to repo in links.json ([58c7f7d](https://github.com/Metnew/suicrux/commit/58c7f7d))
+* **Sidebar:** fix shapshot ([e09c965](https://github.com/Metnew/suicrux/commit/e09c965))
+* **webpack_config:** es6ify code ([de3de45](https://github.com/Metnew/suicrux/commit/de3de45))
+* **webpack_config:** fix logo import path ([609d241](https://github.com/Metnew/suicrux/commit/609d241))
+* **webpack_config:** PORT -> HTTP_PORT, remove `ssl` alias ([89c5d80](https://github.com/Metnew/suicrux/commit/89c5d80))
+* **webpack_config:** remove lazy-containers chunk ([d01676f](https://github.com/Metnew/suicrux/commit/d01676f))
+* **webpack_config:** remove UglifyJSPlugin ([1e8d061](https://github.com/Metnew/suicrux/commit/1e8d061))
+* **webpack_config:** SENTRY_DSN_PUBLIC -> SENTRY_PUBLIC_DSN ([a8ca4b1](https://github.com/Metnew/suicrux/commit/a8ca4b1))
+* **webpack_config/devServer:** add dummy check for `serverSideCode` ([ae38d2e](https://github.com/Metnew/suicrux/commit/ae38d2e))
+* fix `routes` import in app ([a862358](https://github.com/Metnew/suicrux/commit/a862358))
+* formatting, small design fixes ([9d921a4](https://github.com/Metnew/suicrux/commit/9d921a4))
+* make all lazy routes ([cce4088](https://github.com/Metnew/suicrux/commit/cce4088))
+* move tests in own describe block ([1a61c67](https://github.com/Metnew/suicrux/commit/1a61c67))
+* remove ShakePlugin ([c1e01f9](https://github.com/Metnew/suicrux/commit/c1e01f9))
+* use only plain dynamic imports with no comments ([b09e40c](https://github.com/Metnew/suicrux/commit/b09e40c))
+
+
+### Features
+
+* **addons/LazyLoad:** remove LazyLoad component ([01bf70e](https://github.com/Metnew/suicrux/commit/01bf70e))
+* **addons/RoutingWrapper:** remove mentions about `lazy` ([2dcaa6e](https://github.com/Metnew/suicrux/commit/2dcaa6e))
+* **app:** use `getRoutes()` instead of `routes` ([3c09b54](https://github.com/Metnew/suicrux/commit/3c09b54))
+* **App:** add `max-height: 100% - 72px` for MainLayout ([a0c03ab](https://github.com/Metnew/suicrux/commit/a0c03ab))
+* **client:** add async-component and async-bootstrapper ([db5ef11](https://github.com/Metnew/suicrux/commit/db5ef11))
+* **Links:** add isLinksLoaded, get links only if links aren't loaded ([969bcf0](https://github.com/Metnew/suicrux/commit/969bcf0))
+* **NotFound:** add NotFound container (404 error) ([2070c0a](https://github.com/Metnew/suicrux/commit/2070c0a))
+* **package:** install form-data ([50c8160](https://github.com/Metnew/suicrux/commit/50c8160))
+* **package.json:** install react-async-component and react-async-bootstrapper ([a3e8fc8](https://github.com/Metnew/suicrux/commit/a3e8fc8))
+* **package.json:** update deps ([5961bde](https://github.com/Metnew/suicrux/commit/5961bde))
+* **reducers/links:** add count property ([7399f8e](https://github.com/Metnew/suicrux/commit/7399f8e))
+* **redux-persist:** v5 integration ([1c439eb](https://github.com/Metnew/suicrux/commit/1c439eb))
+* **routing:** add `asyncComponent` from `react-async-component` ([4d9ec26](https://github.com/Metnew/suicrux/commit/4d9ec26))
+* **routing:** add asyncComponent, routingFnCreator, ([c742eb4](https://github.com/Metnew/suicrux/commit/c742eb4))
+* **routing:** export `get*()` funcs from `routes` ([57bb4c3](https://github.com/Metnew/suicrux/commit/57bb4c3))
+* **routing:** make all routes lazy ([d0a19c6](https://github.com/Metnew/suicrux/commit/d0a19c6))
+* **RoutingWrapper:** use `getRouterRoutes()` instead of routes ([64c4f30](https://github.com/Metnew/suicrux/commit/64c4f30))
+* **server:** add Raven, disable x-powered-by ([4c3ed6f](https://github.com/Metnew/suicrux/commit/4c3ed6f))
+* **server:** remove HTTPS server and config, remove spdy, remove `genssl` script ([0d8ddb5](https://github.com/Metnew/suicrux/commit/0d8ddb5))
+* remove redux-persist from project ([86d781e](https://github.com/Metnew/suicrux/commit/86d781e))
+* **server:** remove server_push code ([2eba2fe](https://github.com/Metnew/suicrux/commit/2eba2fe))
+* **server/ssr:** add <meta name="theme-color" />, Html -> HTML ([8fa5ca8](https://github.com/Metnew/suicrux/commit/8fa5ca8))
+* **server/ssr:** add async-component, async-bootstrapper ([64dc579](https://github.com/Metnew/suicrux/commit/64dc579))
+* **server/ssr:** add Lazy loading with SSR ([ff0d42d](https://github.com/Metnew/suicrux/commit/ff0d42d))
+* **styles:** duplicate some styles to make SSR result nicer ([862d8c4](https://github.com/Metnew/suicrux/commit/862d8c4))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/Metnew/react-semantic.ui-starter/compare/v0.2.0...v0.3.0) (2017-10-19)
 
