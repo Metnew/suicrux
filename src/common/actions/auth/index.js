@@ -1,26 +1,37 @@
-import {
-	loginAPI,
-	setLocalToken,
-	resetLocalToken,
-	resultOK
-} from 'api'
+// @flow
+import {awral} from 'actions/utils'
+import {loginAPI} from 'api/AuthSvc'
+import {setLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
 
 export const LOGIN_AUTH_PENDING = 'LOGIN_AUTH_PENDING'
 export const LOGIN_AUTH_SUCCESS = 'LOGIN_AUTH_SUCCESS'
 export const LOGIN_AUTH_FAIL = 'LOGIN_AUTH_FAIL'
 
-export const LOGOUT_AUTH_SUCCESS = 'LOGOUT_AUTH_SUCCESS'
-
-export const LOGIN_AUTH = async data => {
-	const result = await loginAPI(data)
-	if (!resultOK(result)) {
-		return {type: LOGIN_AUTH_FAIL, errors: result.data}
-	}
-	setLocalToken(result.data.token)
-	return {type: LOGIN_AUTH_SUCCESS, result: result.data}
+export type LOGIN_AUTH_PENDING_TYPE = {type: 'LOGIN_AUTH_PENDING'}
+export type LOGIN_AUTH_SUCCESS_TYPE = {
+	type: 'LOGIN_AUTH_SUCCESS',
+	payload: {token: string}
+}
+export type LOGIN_AUTH_FAIL_TYPE = {
+	type: 'LOGIN_AUTH_FAIL',
+	payload: {errors: Object}
 }
 
+export const LOGOUT_AUTH_SUCCESS = 'LOGOUT_AUTH_SUCCESS'
+export type LOGOUT_AUTH_SUCCESS_TYPE = {type: 'LOGOUT_AUTH_SUCCESS'}
+
+const awralLogin = awral.of({
+	success ({payload, dispatch}) {
+		setLocalToken(payload.token)
+		dispatch({type: LOGIN_AUTH_SUCCESS, payload})
+	}
+})
+
+export const LOGIN_AUTH = awralLogin(loginAPI)('LOGIN_AUTH')
+
 export const LOGOUT_AUTH = () => {
-	resetLocalToken()
-	return {type: LOGOUT_AUTH_SUCCESS}
+	return dispatch => {
+		resetLocalToken()
+		dispatch({type: LOGOUT_AUTH_SUCCESS})
+	}
 }

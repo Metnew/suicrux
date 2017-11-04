@@ -1,26 +1,11 @@
 {
-  "moduleFileExtensions": ["js", "jsx"],
-  "rootDir": "../",
-  "setupFiles": ["<rootDir>/jest_config/setupJest.js"],
-  "automock": false,
-  "moduleNameMapper": {
-    "^actions$": "<rootDir>/src/common/actions",
-    "^actions/auth$": "<rootDir>/src/common/actions/auth",
-    "^actions/common$": "<rootDir>/src/common/actions/common",
-    "^actions/layout$": "<rootDir>/src/common/actions/layout",
-    "^actions/posts$": "<rootDir>/src/common/actions/posts",
-    "^actions/users$": "<rootDir>/src/common/actions/users",
-
-    "^api": "<rootDir>/src/common/api",
-
-    "^reducers$": "<rootDir>/src/common/reducers",
-    "^reducers/auth$": "<rootDir>/src/common/reducers/auth",
-    "^reducers/layout$": "<rootDir>/src/common/reducers/layout",
-    "^reducers/posts$": "<rootDir>/src/common/reducers/posts",
-    "^reducers/users$": "<rootDir>/src/common/reducers/users",
-
-    "^routing$": "<rootDir>/src/common/routing",
-    "^components$": "<rootDir>/src/common/components",
-    "^containers$": "<rootDir>/src/common/containers"
-  }
+	"moduleFileExtensions": ["js", "jsx"],
+	"rootDir": "../",
+	"setupFiles": ["<rootDir>/jest_config/setupJest.js"],
+	"automock": false,
+	"moduleNameMapper": {
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest_config/__mocks__/fileMock.js",
+		"\\.(css|less|scss|sass)$": "<rootDir>/jest_config/__mocks__/styleMock.js"
+	},
+	"coveragePathIgnorePatterns": ["style.jsx", "/styles"]
 }

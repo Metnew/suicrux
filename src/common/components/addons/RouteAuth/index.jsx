@@ -1,25 +1,21 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+/**
+ * @flow
+ */
+import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
 
 /**
  * Component that protects route from unauthorized users.
  */
-class RouteAuth extends Component {
-	static propTypes = {
-		canAccess: PropTypes.func,
-		path: PropTypes.string
-	}
 
-	render () {
-		const {canAccess, path} = this.props
+type Props = {
+	canAccess: string => boolean,
+	path: string
+}
 
-		console.log(
-			`User has access to "${path}" path: ${canAccess(path) ? 'YES' : 'NO'}`
-		)
-
-		return canAccess(path) ? <Route {...this.props} /> : <Redirect to="/auth" />
-	}
+const RouteAuth = (props: Props) => {
+	const {canAccess, path} = props
+	return canAccess(path) ? <Route {...props} /> : <Redirect to="/auth" />
 }
 
 export default RouteAuth

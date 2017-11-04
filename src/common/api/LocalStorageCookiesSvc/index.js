@@ -1,23 +1,26 @@
-import * as store from 'store2'
+// @flow
 import Cookies from 'js-cookie'
+// By default, we don't use localStorage, but store2 is already installed
+// import store from 'store2'
+import decodeJWT from 'jwt-decode'
 
 export const JWT_TOKEN = 'JWT_TOKEN'
 
-export function getLocalToken () {
-	const token = store.get(JWT_TOKEN) || Cookies.get(JWT_TOKEN)
-	return token
+export function getLocalToken (): string | null {
+	return Cookies.get(JWT_TOKEN)
 }
 
 export function resetLocalToken () {
-	store.remove(JWT_TOKEN)
 	Cookies.remove(JWT_TOKEN)
 }
 
-export function setLocalToken (token) {
-	store.set(JWT_TOKEN, token)
+export function setLocalToken (token: string) {
 	Cookies.set(JWT_TOKEN, token, {expires: 365})
 }
 
-export function isLoggedIn () {
-	return !!getLocalToken()
+export function getInfoFromJWT () {
+	const token = getLocalToken()
+	return decodeJWT(token)
 }
+
+export const isLoggedIn = () => !!getLocalToken()

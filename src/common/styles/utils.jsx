@@ -6,6 +6,9 @@ const pxToEm = px => {
 }
 
 const iWantToUseEm = true
+// NOTE: This grid don't match SUI's grid.
+// NOTE: RSUI has <Responsive> element!
+// You might don't need media template function for styled-components
 const sizes = _.mapValues(
 	{
 		xs: 0, // Extra small screen / phone
@@ -15,13 +18,13 @@ const sizes = _.mapValues(
 		xl: 1200 // Extra large screen / wide desktop
 	},
 	(value, key) => {
-		// NOTE: Please, read more about `em`, before switching to it
+		// NOTE: Please, read more about `em` before switching
 		// https://stackoverflow.com/questions/22228568/switching-to-em-based-media-queries
 		return iWantToUseEm ? pxToEm(value) : value + 'px'
 	}
 )
 
-// FIXME: @Metnew: dirty-hardcode version of media template!
+// NOTE: @Metnew: this block may be rewritten more elegant (like the code below, from off docs)
 export const media = {
 	xs: (...args) => css`
 	  @media only screen and (max-width: ${sizes.sm}) {
@@ -66,6 +69,7 @@ export const media = {
 }
 
 // NOTE: from official docs, but it looks like a black-voodoo-magic
+// ####
 // // iterate through the sizes and create a media template
 // export const media = Object.keys(sizes).reduce((accumulator, label, i) => {
 // 	console.log(accumulator, label)

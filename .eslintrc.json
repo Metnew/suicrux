@@ -1,27 +1,33 @@
 {
-	"extends": ["plugin:react/recommended", "standard"],
+	"extends": [
+		"plugin:flowtype/recommended",
+		"plugin:react/recommended",
+		"plugin:jsx-a11y/recommended",
+		"standard"
+	],
 	"parser": "babel-eslint",
-	"plugins": ["react", "babel"],
+	"plugins": ["react", "babel", "jsx-a11y", "flowtype"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true,
 			"modules": true
 		}
 	},
-	"env": {
-		"browser": true,
-		"amd": true,
-		"es6": true,
-		"node": true
-	},
-	"rules": {
-		"no-unused-vars": 1,
-		"no-tabs": 0,
-		"indent": [2, "tab"]
-	},
 	"globals": {
 		"i18n": true,
 		"Raven": true,
 		"ga": true
+	},
+	"env": {
+		"browser": true,
+		"amd": true,
+		"es6": true,
+		"node": true,
+		"jest": true
+	},
+	"rules": {
+		"no-tabs": 0,
+		"no-unused-vars": 1,
+		"indent": [2, "tab"]
 	}
 }

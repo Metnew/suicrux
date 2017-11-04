@@ -1,15 +1,15 @@
+// @flow
 import {Router} from 'express'
 import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
-// import {JWT_TOKEN} from 'common/api'
-// {isLength, trim, isAlphanumeric, escape}
-const router = Router()
+const router: express$Router = Router()
 
-// Define the home page route
-router.post('/', (req, res) => {
-	// Const {username, password} = req.body
+router.post('/', (req: express$Request, res: express$Response) => {
+	// NOTE: if user is already logged in, but wants to change language
+	// we have to update his JWT token
 	const data = {username: 'cool_username_for_testing'}
-	jwt.sign(data, process.env.JWT_SECRET, {expiresIn: '7d'}, (err, token) => {
+	const jwtOptions = {expiresIn: '7d'}
+	jwt.sign(data, process.env.JWT_SECRET, jwtOptions, (err, token) => {
 		if (err) {
 			throw new Error(
 				`Cant create JWT token based on input data: ${JSON.stringify(data)}`,

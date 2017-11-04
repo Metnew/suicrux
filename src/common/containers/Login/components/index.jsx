@@ -1,33 +1,34 @@
+// @flow
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {Form, Message, Grid} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 import _ from 'lodash'
 import {LoginButton} from './style'
-import {TextCenter} from 'styles/base'
 
-export default class LoginComponent extends Component {
-	constructor (props) {
-		super(props)
-		this.state = {
-			username: '',
-			password: ''
-		}
+type Props = {
+	login: (data: Object) => void,
+	errors: Object
+}
+
+type State = {
+	username: string,
+	password: string
+}
+
+class LoginComponent extends Component {
+	props: Props
+	state: State = {
+		username: '',
+		password: ''
 	}
 
-	static propTypes = {
-		login: PropTypes.func,
-		errors: PropTypes.object
-	}
-
-	handleSubmit (e) {
+	handleSubmit (e: Event) {
 		e.preventDefault()
-		const {login} = this.props
 		const {username, password} = this.state
-		login({username, password})
+		this.props.login({username, password})
 	}
 
-	handleChange (e, {name, value}) {
+	handleChange (e: Event, {name, value}) {
 		this.setState({
 			[name]: value
 		})
@@ -38,11 +39,6 @@ export default class LoginComponent extends Component {
 		// Error from server
 		const {errors} = this.props
 		const loginFormProps = {error: !_.isEmpty(errors)}
-		// Login btn props
-		const loginBtnProps = {
-			content: 'Login',
-			icon: 'sign in'
-		}
 
 		return (
 			<Grid
@@ -51,37 +47,40 @@ export default class LoginComponent extends Component {
 				columns={1}
 				textAlign="center"
 				relaxed
+				stretched
+				style={{height: '100%'}}
 			>
 				<Helmet>
-					<title>React-Semantic.UI-Starter: Login</title>
+					<title>Suicrux:Login</title>
 				</Helmet>
 				<Grid.Row>
 					<Grid.Column tablet={10} mobile={16} computer={6}>
-						<Form onSubmit={::this.handleSubmit} {...loginFormProps}>
-							{errors &&
+						{/* Consider using Redux-Form */}
+						<Form onSubmit={this.handleSubmit.bind(this)} {...loginFormProps}>
+							{errors && (
 								<Message
 									error
 									header={'Invalid credentials'}
 									content={'Your credentials are invalid.'}
-								/>}
+								/>
+							)}
 							<Form.Input
 								placeholder="Username"
 								name="username"
 								label="Username"
 								value={username}
-								onChange={::this.handleChange}
+								onChange={this.handleChange.bind(this)}
 							/>
 							<Form.Input
+								autoComplete="current-password"
 								placeholder="Password"
 								type="password"
 								name="password"
 								label="Password"
 								value={password}
-								onChange={::this.handleChange}
+								onChange={this.handleChange.bind(this)}
 							/>
-							<TextCenter>
-								<LoginButton {...loginBtnProps} />
-							</TextCenter>
+							<LoginButton content="Login" icon="sign in" />
 						</Form>
 					</Grid.Column>
 				</Grid.Row>
@@ -89,3 +88,5 @@ export default class LoginComponent extends Component {
 		)
 	}
 }
+
+export default LoginComponent

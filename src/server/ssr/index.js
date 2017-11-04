@@ -1,86 +1,86 @@
-import path from 'path'
-import fs from 'fs'
-import chalk from 'chalk'
-// React-related stuff
+/**
+ * @flow
+ * @desc
+ */
 import React from 'react'
-import {render} from 'rapscallion'
-// Import Helmet from 'react-helmet'
+import chalk from 'chalk'
+import _ from 'lodash'
+import {renderToNodeStream} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
-// Application
-import {configureStore, configureRootComponent} from 'common/index'
-// Read index.html and assign to a variable
-const indexPath = path.join(`${process.env.DIST_PATH}/index.html`)
-const htmlFile = (function () {
-	try {
-		return fs.readFileSync(indexPath, 'utf8')
-	} catch (e) {
-		console.error(chalk.bgRed(`Are you sure you have already built app? ${e}`))
-		console.log(chalk.bgCyan('Application is working without SSR'))
-		return false
-	}
-})()
+import {configureRootComponent, configureApp} from 'common/app'
+import asyncBootstrapper from 'react-async-bootstrapper'
+import {AsyncComponentProvider, createAsyncContext} from 'react-async-component'
+import HTMLComponent from './HTMLComponent'
+// $FlowFixMe
+import assets from 'webpack-assets'
+// $FlowFixMe
+import faviconsAssets from 'favicons-assets'
+import getI18nData from 'server/i18n'
+import {matchPath} from 'react-router'
 
-export default function (req, res) {
-	if (!htmlFile) {
-		// NOTE: @Metnew (29.07.2017): Here must be a requirement of ejs/jade template
-		// app probably needs in template engine!
-		const warning = `
-      <h1>Do you remember that you don't have SSR?</h1>
-      <h2>Why it happens?</h2>
-      <h3>Probably, because of:</h3>
-      <h4>
-        <ul>
-          <li>No "index.html" in the dist folder. e.g.: You don't have already built app.</li>
-          <li>Path to dist folder with client app is invalid, check process.env.DIST_PATH in "webpack_config/server/webpack.base."</li>
-          <pre>process.env.path === ${process.env.DIST_PATH}</pre>
-          <pre>URL: ${req.url}</pre>
-        </ul>
-      </h4>
-    `
-		return res.send(warning)
-	}
-	// Auth-related stuff
-	// NOTE: check `server/express/index.js` for more info
-	const {user} = req
-	const {isLoggedIn, token} = user
-	const initialState = isLoggedIn ? {me: {auth: {isLoggedIn, token}}} : {}
-	//
+export default async (req: express$Request, res: express$Response) => {
+	const {isLoggedIn, language} = req.user
+	const {isMobile} = req.useragent
+	console.log(chalk.cyan(`MOBILE DEVICE: ${isMobile}`))
+	const meState = {auth: {isLoggedIn}}
+	const layoutState = {isMobile}
+	const initialState: Object = isLoggedIn
+		? {me: meState, layout: layoutState}
+		: {layout: layoutState}
+	const i18n = getI18nData(language)
 	const sheet = new ServerStyleSheet()
-	const location = req.url
+	const location: string = req.url
 	const context = {}
-	const store = configureStore(initialState)
-	const RootComponent = configureRootComponent({
+	const {store, history, routes} = configureApp(initialState)
+	const RootComponent: React$Node = configureRootComponent({
 		store,
+		history,
+		routes,
+		i18n,
 		SSR: {location, context}
 	})
-	const App = (
-		<StyleSheetManager sheet={sheet.instance}>
-			{RootComponent}
-		</StyleSheetManager>
-	)
-	//
-	const css = sheet.getStyleTags()
-	const preloadedState = store.getState()
-	//
-	render(App).toPromise().then(html => {
-		res.send(renderFullPage({html, css, preloadedState}))
-	})
-}
+	const asyncContext = createAsyncContext()
 
-function renderFullPage ({html, css, preloadedState}) {
-	// Console.log(indexHTMLFileContent)
-	const htmlWithRedux = htmlFile.replace(
-		'<div id="app"></div>',
-		`<div id="app">${html}</div><script>
-		window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-		/</g,
-		'\\u003c'
-	)}
-	</script><span style="display:none;">Server-side rendering!</span>`
+	const app = (
+		<AsyncComponentProvider asyncContext={asyncContext}>
+			<StyleSheetManager sheet={sheet.instance}>
+				{RootComponent}
+			</StyleSheetManager>
+		</AsyncComponentProvider>
 	)
-	const styledHtmlWithRedux = htmlWithRedux.replace(
-		'<meta name="ssr-styles"/>',
-		css
-	)
-	return styledHtmlWithRedux
+
+	// if true - > throw 404, if match found -> 200
+	const noRequestURLMatch = !_.find(routes, a => matchPath(req.url, a.path))
+
+	asyncBootstrapper(app).then(() => {
+		const appStream = renderToNodeStream(app)
+		const css: string = sheet.getStyleTags()
+		const preloadedState: Object = store.getState()
+
+		const asyncState = asyncContext.getState()
+		const props = {
+			css,
+			assets,
+			faviconsAssets,
+			asyncState,
+			initialState: preloadedState,
+			i18n
+		}
+
+		const {beforeAppTag, afterAppTag} = HTMLComponent(props)
+		const responseStatusCode = noRequestURLMatch ? 404 : 200
+
+		res.writeHead(responseStatusCode, {
+			'Content-Type': 'text/html'
+		})
+		res.write(beforeAppTag)
+		res.write(`<div id="app">`)
+		appStream.pipe(res, {end: false})
+
+		appStream.on('end', () => {
+			res.write('</div>')
+			res.write(afterAppTag)
+			res.end()
+		})
+	})
 }

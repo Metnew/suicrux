@@ -1,19 +1,24 @@
 import path from 'path'
+import rimraf from 'rimraf'
 import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-import ManifestPlugin from 'webpack-manifest-plugin'
-import _ from 'lodash'
-//
+import AssetsPlugin from 'assets-webpack-plugin'
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
+import WebpackAssetsManifest from 'webpack-assets-manifest'
 const {
 	GA_ID,
 	SENTRY_PUBLIC_DSN,
-	NODE_ENV,
-	APP_LANGUAGE,
+	CLIENT_DIST_PATH,
+	rootPath,
 	srcPath,
-	distPath,
-	publicPath
+	publicPath,
+	isProduction,
+	title,
+	manifest
 } = config
+
+rimraf(`${config.distPath}/server`, {}, () => {})
 
 const definePluginArgs = {
 	'process.env.GA_ID': JSON.stringify(GA_ID),
@@ -21,29 +26,49 @@ const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(true)
 }
 
+// use hash filename to support long-term caching in production
+// NOTE: [chunkhash] leads to high memory consumption
+const filename = isProduction ? '[name].[hash:6].js' : '[name].js'
+const hints = isProduction ? 'warning' : false
+const devtool = isProduction ? 'cheap-source-map' : 'eval'
+
 const baseBuild = {
+	name: 'client',
+	devtool,
 	entry: {
 		client: path.join(srcPath, './client')
 	},
 	output: {
-		path: path.join(distPath, './client', APP_LANGUAGE),
-		filename: '[name].js',
-		chunkFilename: '[name].[chunkhash:6].js',
-		publicPath
+		filename,
+		publicPath,
+		path: CLIENT_DIST_PATH,
+		chunkFilename: '[name].[hash:6].js',
+		crossOriginLoading: 'anonymous'
 	},
 	performance: {
-		hints: NODE_ENV === 'production' ? 'warning' : false
+		hints
 	},
 	resolve: {
-		alias: isomorphicWebpackConfig.resolve.alias,
+		alias: {
+			...isomorphicWebpackConfig.resolve.alias
+			// NOTE: Preact + preact-compat can save you 148Kb parsed or 14kb gzipped
+			// Preact may breaks your React app, starter by default doesn't aim to support Preact
+			// react: 'preact-compat',
+			// 'react-dom': 'preact-compat',
+			// 'preact-compat': 'preact-compat/dist/preact-compat'
+		},
 		modules: isomorphicWebpackConfig.resolve.modules,
-		extensions: isomorphicWebpackConfig.resolve.extensions.concat(['.css', '.scss', '.sass'])
+		extensions: isomorphicWebpackConfig.resolve.extensions.concat([
+			'.css',
+			'.scss',
+			'.sass'
+		])
 	},
 	module: {
 		rules: isomorphicWebpackConfig.module.rules.concat([
 			{
 				test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
-				use: `file-loader?limit=100000&name=assets/[name].[hash:8].[ext]`
+				use: `file-loader?limit=100000&name=assets/[name].[hash:6].[ext]`
 			},
 			{
 				test: /\.(jpe?g|png|gif|svg)$/,
@@ -51,9 +76,9 @@ const baseBuild = {
 					{
 						loader: 'url-loader',
 						options: {
-							limit: 8192,
+							limit: 4096,
 							// path: '/images',
-							name: 'images/[name].[hash:8].[ext]'
+							name: 'images/[name].[hash:6].[ext]'
 						}
 					},
 					'img-loader'
@@ -78,7 +103,42 @@ const baseBuild = {
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
-		new ManifestPlugin({fileName: 'manifest.json', cache: config.manifest})
+		new AssetsPlugin({
+			path: CLIENT_DIST_PATH
+		}),
+		// NOTE: this plugin is good, but there are few big issues:
+		// 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
+		// E.g: in generated index.html you can see:
+		// <meta name="msapplication-config" content="browserconfig.xml">
+		// 2. It looks like generated images aren't minified.(not sure)
+		// NOTE: It would be better to generate favicons without this plugin.
+		new FaviconsWebpackPlugin({
+			// add theme-color property
+			background: manifest.theme,
+			prefix: `favicons/`,
+			logo: path.join(rootPath, './static/images/Logo.png'),
+			title,
+			emitStats: true,
+			statsFilename: 'favicons-stats.json',
+			// Inject generated html into html-webpack-plugin
+			inject: false,
+			// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+			icons: {
+				android: false,
+				appleIcon: true,
+				appleStartup: false,
+				coast: false,
+				favicons: true,
+				firefox: false,
+				opengraph: false,
+				twitter: true,
+				yandex: false,
+				windows: false
+			}
+		}),
+		new WebpackAssetsManifest({
+			assets: config.manifest
+		})
 	]),
 	target: 'web'
 }
