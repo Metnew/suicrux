@@ -4,14 +4,14 @@ import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, isProduction} = config
+const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, HTTP_PORT, isProduction} = config
 
 // Clear dist dir before run
 rimraf(`${config.distPath}/server`, {}, () => {})
 
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
-	'process.env.PORT': JSON.stringify(PORT),
+	'process.env.HTTP_PORT': JSON.stringify(HTTP_PORT),
 	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET),
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
 	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH)
@@ -53,8 +53,7 @@ const baseWebpackConfig = {
 			...isomorphicWebpackConfig.resolve.alias,
 			'webpack-assets': `${CLIENT_DIST_PATH}/webpack-assets.json`,
 			'favicons-assets': `${CLIENT_DIST_PATH}/favicons-stats.json`,
-			locals: `${config.rootPath}/locals`,
-			ssl: `${config.srcPath}/server/config/ssl`
+			locals: `${config.rootPath}/locals`
 		}
 	},
 	module: {
