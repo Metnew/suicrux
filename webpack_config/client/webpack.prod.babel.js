@@ -91,12 +91,6 @@ base.plugins.push(
 			return module.context && module.context.indexOf('node_modules') !== -1
 		}
 	}),
-	// extract lazy containers chunk
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'lazy-containers',
-		chunks: ['lazy-containers'],
-		async: true
-	}),
 	// manifest chunk, more info in webpack docs
 	new webpack.optimize.CommonsChunkPlugin({
 		name: 'manifest'
