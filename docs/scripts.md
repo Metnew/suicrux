@@ -14,15 +14,15 @@ npm install
 ### Development:
 
 ```bash
-npm run dev # run both frontend and server in dev mode(using `concurrently`)
+npm run dev
 ```
 
 ### Build:
 
 ```bash
-npm run build # build both frontend and server
+npm run build # build both client and server
 
-npm run frontend_build # build frontend
+npm run frontend_build # build client
 
 npm run server_build # build server
 ```
@@ -33,7 +33,7 @@ npm run start
 ```
 
 ### Deploy:
-If you use **[now](https://github.com/zeit/now)** on OSS(free) plan - you will run out of memory on `npm run build`. I recommend you to disable some non-critical plugins (ModuleConcatenationPlugin) and loaders. [Demo that was deployed to "now"](https://suicrux.now.sh/)
+If you use **[now](https://github.com/zeit/now)** on OSS(free) plan - you will run out of memory on `npm run build`. I recommend to disable some non-critical plugins (ModuleConcatenationPlugin) and loaders. [Demo that was deployed to "now"](https://suicrux.now.sh/)
 
 ### Test:
 

@@ -98,11 +98,27 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 
 ### How it works?
 
+"30-seconds guide":
+```bash
+  # Install
+  git clone --depth=1 https://github.com/Metnew/suicrux.git
+  cd suicrux
+  npm install
+  # Development
+  npm run dev
+  # Build
+  npm run build
+  # Production
+  npm run start
+```
+
+More detailed:
+
 #### **[Most commonly asked questions are here.](/docs/faq.md)**
 
-#### [Webpack configuration (not finished)](/docs/webpack.md)
+#### [Webpack configuration](/docs/webpack.md)
 
-#### [What's the magic behind `npm run dev`?](/docs/scripts.md)
+#### [Available scripts](/docs/scripts.md)
 
 #### [How i18n works?](/docs/i18n.md)
 
@@ -110,7 +126,7 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 
 #### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
 
-#### [How does SSR work?](/docs/ssr.md)
+#### ~~[How does SSR work?](/docs/ssr.md) Guide in progress~~
 
 #### [Environment variables and configuration. (not finished)](/docs/env_vars.md)
 
@@ -120,6 +136,7 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 
 - CLI app
 - Redux code-splitting
+- Better universal Webpack
 
 ### Something very important:
 
