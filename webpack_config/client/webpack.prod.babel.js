@@ -55,7 +55,7 @@ base.module.rules.push(
 base.plugins.push(
 	new ProgressPlugin(),
 	new ExtractTextPlugin({
-		filename: '[name].[chunkhash:8].css',
+		filename: '[name].[hash:6].css',
 		allChunks: true
 	}),
 	new OptimizeCssAssetsPlugin({
