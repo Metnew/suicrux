@@ -60,7 +60,6 @@ const app = (
 )
 
 asyncBootstrapper(app).then(() => {
-	console.log('FROM SERVER:', document.getElementById('app').innerHTML)
 	hydrate(app, document.getElementById('app'))
 })
 
