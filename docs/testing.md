@@ -12,22 +12,34 @@ You can run tests using `npm run test` that is an alias to `jest --config=jest_c
 Jest configuration in `jest_config/jest.config.json` looks like:
 ```json
 {
-  "moduleFileExtensions": ["js", "jsx"],
-  "rootDir": "../",
-  "setupFiles": ["<rootDir>/jest_config/setupJest.js"],
-  "automock": false,
-  "moduleNameMapper": {}
+	"moduleFileExtensions": ["js", "jsx"],
+	"rootDir": "../",
+	"setupFiles": ["<rootDir>/jest_config/setupJest.js"],
+	"automock": false,
+	"moduleNameMapper": {
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/jest_config/__mocks__/fileMock.js",
+		"\\.(css|less|scss|sass)$": "<rootDir>/jest_config/__mocks__/styleMock.js"
+	},
+	"coveragePathIgnorePatterns": ["style.jsx", "/styles"]
 }
+
 ```
 Jest doesn't know about webpack aliases, so we have to provide them inside `.babelrc` (using `"module-resolver"` plugin). It's more recommended than writing all aliases inside `"moduleNameMapper"`
 Then we have to provide additional configuration for Jest using `setupFiles` property in Jest config object.
 
 `jest_config/setupJest.js`
 ```js
+import {configure} from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+
 // Add fetch polyfill for node
-global.fetch = require('node-fetch')
+global.fetch = require('isomorphic-fetch')
 // Add `BASE_API` env variable
-process.env.BASE_API = process.env.BASE_API || 'http://localhost:4000/api/v1'
+process.env.BASE_API = process.env.BASE_API || 'http://localhost:3000/api/v1'
+process.env.BROWSER = false
+
+const adapter = new Adapter()
+configure({adapter})
 ```
 
 That's all. Jest is ready.

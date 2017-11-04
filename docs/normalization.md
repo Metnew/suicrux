@@ -2,7 +2,7 @@
 ### Normalization
 Normalization using `normalizr` is recommended but not a must. You can ignore it if you want. Concept of normalization is strongly connected with state-management. The idea behind normalization is to make an in-memory DB inside the state. Think of it like NoSQL collection (table) in the state.
 
-Typical script for normalization of arrays:
+Typical script for arrays normalization:
 
 ```js
 // @flow

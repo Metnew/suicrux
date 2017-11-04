@@ -1,20 +1,6 @@
 # Webpack
 
-## Isomorphism
+## Universal Webpack
+Check **[`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-skeleton)** for more info on webpack's "universality".
 
-## Frontend
-
-### Development
-
-
-### Production
-#### `ANALYZE_BUNDLE (default: false)`:   
-Run [webpack-bundle-analyzer]() after production build. Not used for configuration.
-
-## Server
-
-### Development
-
-### Production
-#### `ANALYZE_BUNDLE (default: false)`:   
-Run [webpack-bundle-analyzer]() after production build. Not used for configuration.
+More info soon.
