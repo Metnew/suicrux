@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
 import RouteAuth from 'components/addons/RouteAuth'
 import {shallow} from 'enzyme'
-import {routes as routing} from 'routing'
+import {getRouterRoutes} from 'routing'
 
 const accessToInboxOnly = path => {
 	return path === '/inbox'
@@ -11,10 +11,10 @@ const accessExceptInbox = path => {
 	return path !== '/inbox'
 }
 
-const sampleRouteItem = routing.filter(a => a.component && a.tag)[0]
+const sampleRouteItem = getRouterRoutes()[0]
 
 describe('RouteAuth component', () => {
-	it('creates <Redirect /> if user doesn\'t have access', () => {
+	it("creates <Redirect /> if user doesn't have access", () => {
 		const gotRedirect = {
 			...sampleRouteItem,
 			canAccess: accessExceptInbox,
