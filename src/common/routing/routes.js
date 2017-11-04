@@ -8,16 +8,8 @@ import _ from 'lodash'
 import type {RouteItem} from 'types'
 
 function asyncComponentCreator (url) {
-	const importCreator = (name: string) => {
-		// Read Webpack docs about code-splitting for more info.
-		if (process.env.BROWSER) {
-			return import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${name}/index.jsx`)
-		}
-		return import(/* webpackMode: "eager" */ `containers/${name}/index.jsx`)
-	}
-
 	return asyncComponent({
-		resolve: () => importCreator(url),
+		resolve: () => import(`containers/${url}/index.jsx`),
 		LoadingComponent () {
 			return (
 				<Dimmer active>
