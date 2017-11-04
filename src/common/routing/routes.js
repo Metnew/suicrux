@@ -5,24 +5,19 @@ import RouteAuth from 'components/addons/RouteAuth'
 import {asyncComponent} from 'react-async-component'
 import {Loader, Dimmer, Header, Icon} from 'semantic-ui-react'
 import _ from 'lodash'
-import Dashboard from 'containers/Dashboard'
-import Links from 'containers/Links'
-import Login from 'containers/Login'
-import NotFound from 'containers/NotFound'
 import type {RouteItem} from 'types'
 
 function asyncComponentCreator (url) {
-	const importCreator = (url: string) => async () => {
+	const importCreator = (name: string) => {
 		// Read Webpack docs about code-splitting for more info.
 		if (process.env.BROWSER) {
-			// const resolve = import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
-			return import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${url}/index.jsx`)
+			return import(/* webpackMode: "lazy", webpackChunkName: "[request].lazy" */ `containers/${name}/index.jsx`)
 		}
-		return import(/* webpackMode: "eager" */ `containers/${url}/index.jsx`)
+		return import(/* webpackMode: "eager" */ `containers/${name}/index.jsx`)
 	}
 
 	return asyncComponent({
-		resolve: importCreator(url),
+		resolve: () => importCreator(url),
 		LoadingComponent () {
 			return (
 				<Dimmer active>
@@ -67,7 +62,7 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			name: 'Dashboard',
 			sidebarVisible: true,
 			tag: RouteAuth,
-			component: Dashboard
+			component: AsyncDashoard
 		},
 		{
 			path: '/links',
@@ -76,7 +71,7 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			icon: 'bookmark',
 			sidebarVisible: true,
 			tag: RouteAuth,
-			component: Links
+			component: AsyncLinks
 		},
 		{
 			external: true,
@@ -90,13 +85,13 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 			name: 'Auth',
 			exact: true,
 			tag: Route,
-			component: Login
+			component: AsyncLogin
 		},
 		// Find the way to add/remove routes conditionally
 		{
 			name: '404',
 			tag: RouteAuth,
-			component: NotFound
+			component: AsyncNotFound
 		},
 		{
 			tag: Redirect,
