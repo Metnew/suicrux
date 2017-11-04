@@ -3,26 +3,16 @@
  * @file
  */
 import express from 'express'
-import http from 'http'
-import spdy from 'spdy'
 import chalk from 'chalk'
-// Mount our server-side code to dev server
+// Mount our server-side code to server
 import server from '../../webpack_config/devServer'
-import {serverOptions as options} from './config'
 
 const app: express$Application = express()
-const httpsPORT: number = +process.env.HTTPS_PORT || 3030
 const httpPORT: number = +process.env.HTTP_PORT || 3000
 
 server(app)
 
-spdy.createServer(options, app).listen(httpsPORT, () => {
-	console.log(
-		chalk.red(`HTTPS SERVER IS LISTENING ON https://127.0.0.1:${httpsPORT}`)
-	)
-})
-
-http.createServer(app).listen(httpPORT, () => {
+app.listen(httpPORT, () => {
 	console.log(
 		chalk.green(`HTTP SERVER IS LISTENING ON http://localhost:${httpPORT}`)
 	)

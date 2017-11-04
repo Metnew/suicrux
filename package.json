@@ -47,7 +47,6 @@
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.75.1",
     "serialize-javascript": "^1.4.0",
-    "spdy": "^3.4.7",
     "store2": "^2.5.9",
     "styled-components": "^2.2.3"
   },
@@ -152,7 +151,6 @@
     "frontend_build": "NODE_ENV=production webpack --config webpack_config/client/webpack.prod.babel.js",
     "test": "NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --forceExit || true",
     "snapshot_update": "NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --updateSnapshot",
-    "genssl": "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout ./src/server/config/ssl/server.key -out ./src/server/config/ssl/server.crt",
     "start": "node ./dist/server",
     "lint:styles": "stylelint ./src/common/**/*.scss -s scss --config ./.stylelintrc --fix",
     "lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist",
