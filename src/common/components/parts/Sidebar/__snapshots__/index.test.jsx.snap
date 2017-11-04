@@ -31,7 +31,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
       as="i"
       name="newspaper"
     />
-
+     
     Dashboard
   </style__SidebarItem>
   <style__SidebarItem
@@ -47,7 +47,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
       as="i"
       name="bookmark"
     />
-
+     
     Links
   </style__SidebarItem>
   <style__SidebarItem
@@ -61,7 +61,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
       as="i"
       name="github"
     />
-
+     
     Github
   </style__SidebarItem>
   <base__Spacer />

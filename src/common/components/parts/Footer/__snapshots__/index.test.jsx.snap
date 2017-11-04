@@ -27,7 +27,7 @@ exports[`Footer component same snapshot 1`] = `
               <HeaderContent>
                 Suicrux
                 <HeaderSubheader>
-                  Starter for
+                  Starter for 
                   <s>
                     blade
                   </s>
