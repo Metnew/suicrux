@@ -11,9 +11,7 @@ describe('LINKS REDUCER', () => {
 	})
 
 	it('should handle GET_LINKS_SUCCESS', () => {
-		const payload = {
-			item: 'payload'
-		}
+		const payload = [{item: 'payload'}]
 
 		const success = {
 			type: GET_LINKS_SUCCESS,
@@ -21,6 +19,7 @@ describe('LINKS REDUCER', () => {
 		}
 		expect(reducer(initialState, success)).toEqual({
 			...initialState,
+			count: 1,
 			entities: payload,
 			isLoaded: true,
 			isLoading: false
@@ -38,6 +37,7 @@ describe('LINKS REDUCER', () => {
 		}
 		expect(reducer(initialState, fail)).toEqual({
 			...initialState,
+			count: 0,
 			errors: {
 				hmm: 'thatsanerror'
 			},
