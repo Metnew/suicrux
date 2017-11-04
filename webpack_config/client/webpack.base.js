@@ -115,7 +115,7 @@ const baseBuild = {
 			// add theme-color property
 			background: manifest.theme,
 			prefix: `favicons/`,
-			logo: path.join(rootPath, './static/images/Logo.svg'),
+			logo: path.join(rootPath, './static/images/Logo.png'),
 			title,
 			emitStats: true,
 			statsFilename: 'favicons-stats.json',
