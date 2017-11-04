@@ -5,7 +5,6 @@ import CompressionPlugin from 'compression-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import ProgressPlugin from 'webpack/lib/ProgressPlugin'
 import OfflinePlugin from 'offline-plugin'
-import {Plugin as ShakePlugin} from 'webpack-common-shake'
 import OptimizeJsPlugin from 'optimize-js-plugin'
 // NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
 // import WebpackShellPlugin from 'webpack-shell-plugin'
@@ -14,7 +13,7 @@ import base from './webpack.base'
 import config from '../config'
 
 // Clean build dir
-rimraf(`${config.distPath}/server`, {}, () => {})
+rimraf(`${config.distPath}/client`, {}, () => {})
 
 // Do you want to use bundle analyzer?
 if (config.ANALYZE_BUNDLE) {
@@ -68,7 +67,6 @@ base.plugins.push(
 		}
 	}),
 	new webpack.optimize.ModuleConcatenationPlugin(),
-	new ShakePlugin(),
 	new webpack.optimize.UglifyJsPlugin({
 		sourceMap: true,
 		compress: {
@@ -76,7 +74,7 @@ base.plugins.push(
 			unused: true,
 			dead_code: true,
 			// This option removes console.log in production
-			drop_console: true
+			drop_console: false
 		},
 		output: {
 			comments: false
@@ -85,8 +83,6 @@ base.plugins.push(
 	new OptimizeJsPlugin({
 		sourceMap: true
 	}),
-	// NOTE: Prepack is currently in alpha, be carefull with it
-	// new PrepackWebpackPlugin(),
 	// extract vendor chunks
 	new webpack.optimize.CommonsChunkPlugin({
 		name: 'vendor',

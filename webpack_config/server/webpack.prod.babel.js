@@ -2,7 +2,6 @@ import webpack from 'webpack'
 import config from '../config'
 import baseWebpackConfig from './webpack.base'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
-import {Plugin as ShakePlugin} from 'webpack-common-shake'
 import OptimizeJsPlugin from 'optimize-js-plugin'
 
 const analyzePlugins = config.ANALYZE_BUNDLE
@@ -11,7 +10,6 @@ const analyzePlugins = config.ANALYZE_BUNDLE
 const plugins = [
 	new webpack.ProgressPlugin(),
 	new webpack.optimize.ModuleConcatenationPlugin(),
-	new ShakePlugin(),
 	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
 	new webpack.optimize.UglifyJsPlugin({
 		sourceMap: true,
@@ -20,7 +18,7 @@ const plugins = [
 			unused: true,
 			dead_code: true,
 			// This option removes console.log in production
-			drop_console: true
+			drop_console: false
 		},
 		output: {
 			comments: false
