@@ -8,7 +8,7 @@ import manifest from '../static/manifest'
 const {
 	BASE_API = '/api/v1',
 	NODE_ENV = 'development',
-	SENTRY_DSN_PUBLIC,
+	SENTRY_PUBLIC_DSN,
 	GA_ID,
 	JWT_SECRET = 'secret',
 	ANALYZE_BUNDLE,
@@ -36,7 +36,7 @@ export default {
 	// Env vars
 	BASE_API,
 	NODE_ENV,
-	SENTRY_DSN_PUBLIC,
+	SENTRY_PUBLIC_DSN,
 	ANALYZE_BUNDLE,
 	GA_ID,
 	CLIENT_DIST_PATH,
