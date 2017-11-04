@@ -2,9 +2,6 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/suicrux.svg)](https://greenkeeper.io/)
 
-<center style="text-align:center;">
-  <img width="250px" height="250px" src="./static/images/Logo.png" />
-</center>
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
 ## Demo: [suicrux.now.sh](https://suicrux.now.sh/auth)
