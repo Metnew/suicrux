@@ -14,7 +14,7 @@ exports[`Footer component same snapshot 1`] = `
           width={12}
         >
           <a
-            href="https://github.com/Metnew/noir"
+            href="https://github.com/Metnew/suicrux"
           >
             <Header
               as="h3"
@@ -25,9 +25,9 @@ exports[`Footer component same snapshot 1`] = `
                 name="github"
               />
               <HeaderContent>
-                Noir
+                Suicrux
                 <HeaderSubheader>
-                  Starter for 
+                  Starter for
                   <s>
                     blade
                   </s>

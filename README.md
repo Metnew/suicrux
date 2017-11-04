@@ -1,4 +1,4 @@
-# React-Semantic.UI-Starter
+# Suicrux
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/react-semantic.ui-starter.svg)](https://greenkeeper.io/)
 
@@ -98,15 +98,15 @@ MIT
 
 ### Goals
 Small Intro from creator: I don't like any other starters/boilerplates/solutions, and that's why:
-1. They are mostly unmaitained. Check the number of issues and PRs in other starter-kits, the average is 100-150 issues per repo. Noir is currently maintained. I use this setup for every React app I start.
-2. They are outdated. Some starters use react-router@3.0, webpack@1, etc. Noir use only latest dependencies.
-3. Custom code in internal tools. Some starters monkey-patch webpack compilers to achieve universality, add custom code, relies on unmaitained/outdated/too complex solutions. universality inside Noir achieved by very simple hack described here.
+1. They are mostly unmaitained. Check the number of issues and PRs in other starter-kits, the average is 100-150 issues per repo. Suicrux is currently maintained. I use this setup for every React app I start.
+2. They are outdated. Some starters use react-router@3.0, webpack@1, etc. Suicrux use only latest dependencies.
+3. Custom code in internal tools. Some starters monkey-patch webpack compilers to achieve universality, add custom code, relies on unmaitained/outdated/too complex solutions. universality inside Suicrux achieved by very simple hack described here.
 4. Trying to sell you a product. E.g: Our starter is so good that it can be deployed/build with our service in one click. That's not an OSS, guys.
-5. Too much custom code. Hard to eject libraries from starter. Indeed, Noir is very modular and flexible.
-6. Bad project structure. Noir follows Atarax. Atarax is a subset of recommendations for development with component-based(React) and flux-architectures(Redux) libraries.
-7. No explanations how things really work. Just "Add your code, run `abracadabra` and project compiles.". Noir has a good docs.
+5. Too much custom code. Hard to eject libraries from starter. Indeed, Suicrux is very modular and flexible.
+6. Bad project structure. Suicrux follows Atarax. Atarax is a subset of recommendations for development with component-based(React) and flux-architectures(Redux) libraries.
+7. No explanations how things really work. Just "Add your code, run `abracadabra` and project compiles.". Suicrux has a good docs.
 
 
 ### Cons
 1. Project deploys new features as they are availiable. Probably, there will no be any major changes.
-2. Probably, you'll move from version to version manually. Currently, there is no cli like `react-scripts` for Noir, but it's in progress :smiling_imp:
+2. Probably, you'll move from version to version manually. Currently, there is no cli like `react-scripts` for Suicrux, but it's in progress :smiling_imp:

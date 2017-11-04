@@ -37,7 +37,7 @@ HTTPS_PORT = HTTPS_PORT || 3030
 const isProduction = process.env.NODE_ENV === 'production'
 
 export default {
-	title: 'Noir',
+	title: 'Suicrux',
 	publicPath: '/',
 	// i18n object
 	isProduction,
@@ -60,7 +60,7 @@ export default {
 	rootPath,
 	// text for WebpackBannerPlugin
 	banner:
-		'Apache 2 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/noir',
+		'Apache 2 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/suicrux',
 	// your manifest.json
 	manifest,
 	vendor: [

@@ -1,5 +1,5 @@
 {
-  "name": "react-semantic.ui-starter",
+  "name": "suicrux",
   "version": "0.3.0",
   "main": "src/client/index.jsx",
   "description": "Advanced universal React starter built with a scale in mind.",
@@ -174,7 +174,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Metnew/react-semantic.ui-starter.git"
+    "url": "git+https://github.com/Metnew/suicrux.git"
   },
   "keywords": [
     "react",
@@ -186,9 +186,9 @@
     "webpack"
   ],
   "bugs": {
-    "url": "https://github.com/Metnew/react-semantic.ui-starter/issues"
+    "url": "https://github.com/Metnew/suicrux/issues"
   },
-  "homepage": "https://github.com/Metnew/react-semantic.ui-starter#readme",
+  "homepage": "https://github.com/Metnew/suicrux#readme",
   "moduleRoots": [
     "./src/common",
     "./src"

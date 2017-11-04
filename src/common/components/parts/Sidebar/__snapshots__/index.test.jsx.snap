@@ -10,7 +10,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
   width="thin"
 >
   <style__SidebarLogoContainer
-    href="https://github.com/Metnew/noir"
+    href="https://github.com/Metnew/suicrux"
   >
     <style__SidebarLogo
       alt="logo"
@@ -31,7 +31,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
       as="i"
       name="newspaper"
     />
-     
+
     Dashboard
   </style__SidebarItem>
   <style__SidebarItem
@@ -47,7 +47,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
       as="i"
       name="bookmark"
     />
-     
+
     Links
   </style__SidebarItem>
   <style__SidebarItem
@@ -61,7 +61,7 @@ exports[`Sidebar component same snapshot for Sidebar 1`] = `
       as="i"
       name="github"
     />
-     
+
     Github
   </style__SidebarItem>
   <base__Spacer />
