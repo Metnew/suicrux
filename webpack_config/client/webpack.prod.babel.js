@@ -74,7 +74,7 @@ base.plugins.push(
 			unused: true,
 			dead_code: true,
 			// This option removes console.log in production
-			drop_console: false
+			drop_console: true
 		},
 		output: {
 			comments: false
