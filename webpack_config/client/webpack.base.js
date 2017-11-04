@@ -27,7 +27,8 @@ const definePluginArgs = {
 }
 
 // use hash filename to support long-term caching in production
-const filename = isProduction ? '[name].[chunkhash:8].js' : '[name].js'
+// NOTE: [chunkhash] leads to high memory consumption
+const filename = isProduction ? '[name].[hash:6].js' : '[name].js'
 const hints = isProduction ? 'warning' : false
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
 
@@ -41,7 +42,7 @@ const baseBuild = {
 		filename,
 		publicPath,
 		path: CLIENT_DIST_PATH,
-		chunkFilename: '[name].[chunkhash:6].js',
+		chunkFilename: '[name].[hash:6].js',
 		crossOriginLoading: 'anonymous'
 	},
 	performance: {
@@ -67,7 +68,7 @@ const baseBuild = {
 		rules: isomorphicWebpackConfig.module.rules.concat([
 			{
 				test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
-				use: `file-loader?limit=100000&name=assets/[name].[hash:8].[ext]`
+				use: `file-loader?limit=100000&name=assets/[name].[hash:6].[ext]`
 			},
 			{
 				test: /\.(jpe?g|png|gif|svg)$/,
@@ -77,7 +78,7 @@ const baseBuild = {
 						options: {
 							limit: 4096,
 							// path: '/images',
-							name: 'images/[name].[hash:8].[ext]'
+							name: 'images/[name].[hash:6].[ext]'
 						}
 					},
 					'img-loader'
