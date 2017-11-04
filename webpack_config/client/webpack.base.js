@@ -125,10 +125,10 @@ const baseBuild = {
 			icons: {
 				android: false,
 				appleIcon: true,
-				appleStartup: true,
+				appleStartup: false,
 				coast: false,
 				favicons: true,
-				firefox: true,
+				firefox: false,
 				opengraph: false,
 				twitter: true,
 				yandex: false,
