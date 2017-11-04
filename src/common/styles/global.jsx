@@ -4,7 +4,7 @@ injectGlobal`
   * {
     box-sizing: border-box;
   }
-
+  ${'Styles of container elements duplicated to make SSR version without css looks prettier'}
   body {
     margin: 0;
 	  padding: 0;
@@ -25,7 +25,8 @@ injectGlobal`
     transform: translate3d(0, 0, 0);
   }
 
-  ${''/* body ::-webkit-scrollbar {
+  ${'Check: https://github.com/Metnew/react-semantic.ui-starter/issues/27 for more info'}
+  ${'' /* body ::-webkit-scrollbar {
     width: 0;
   }
 
