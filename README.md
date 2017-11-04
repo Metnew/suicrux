@@ -60,9 +60,8 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 
 Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-skeleton) and includes:
 
-- **[Webpack 3](https://webpack.js.org)**:
-
-- Babel (stage-1),
+- Latest Webpack
+- Babel: `stage-1` and few cool plugins for development and production.
 - **HMR**, hotMiddleware,
 - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
 - **[Offline-plugin](https://github.com/NekR/offline-plugin)**
