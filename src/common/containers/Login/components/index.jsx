@@ -51,7 +51,7 @@ class LoginComponent extends Component {
 				style={{height: '100%'}}
 			>
 				<Helmet>
-					<title>Noir:Login</title>
+					<title>Suicrux:Login</title>
 				</Helmet>
 				<Grid.Row>
 					<Grid.Column tablet={10} mobile={16} computer={6}>

@@ -12,11 +12,11 @@ const Footer = () => {
 				<Grid relaxed>
 					<Grid.Row verticalAlign="middle">
 						<Grid.Column width={12} mobile={16}>
-							<a href="https://github.com/Metnew/noir">
+							<a href="https://github.com/Metnew/suicrux">
 								<Header as="h3" inverted>
 									<Icon name="github" />
 									<Header.Content>
-										Noir
+										Suicrux
 										<Header.Subheader>
 											Starter for <s>blade</s> bleeding-edge runners
 										</Header.Subheader>

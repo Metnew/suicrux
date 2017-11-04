@@ -67,7 +67,7 @@ class SidebarComponent extends Component {
 
 		return (
 			<StyledSidebar {...sidebarProps}>
-				<SidebarLogoContainer href="https://github.com/Metnew/noir">
+				<SidebarLogoContainer href="https://github.com/Metnew/suicrux">
 					<SidebarLogo alt="logo" shape="circular" centered />
 				</SidebarLogoContainer>
 				{routes}

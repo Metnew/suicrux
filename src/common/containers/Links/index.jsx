@@ -36,7 +36,7 @@ class Links extends Component {
 		return (
 			<div>
 				<Helmet>
-					<title>Noir:Links</title>
+					<title>Suicrux:Links</title>
 				</Helmet>
 				{isLinksLoading ? (
 					<Loader active>Loading data...</Loader>

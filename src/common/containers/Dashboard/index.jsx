@@ -13,7 +13,7 @@ class Dashboard extends Component {
 		return (
 			<div>
 				<Helmet>
-					<title>Noir:Dashboard</title>
+					<title>Suicrux:Dashboard</title>
 				</Helmet>
 				<DashboardComponent />
 			</div>

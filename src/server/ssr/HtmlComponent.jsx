@@ -53,7 +53,7 @@ const HTMLComponent = ({
 		beforeAppTag: `<html lang="${i18n.lang}">
 			<head>
 				<meta charset="utf-8" />
-				<title>Noir</title>
+				<title>Suicrux</title>
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 				<meta
 					name="description"
