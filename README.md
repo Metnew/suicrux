@@ -6,9 +6,9 @@
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
 <div>
-  <a href="https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/react-semantic-ui-starter" rel="nofollow">
-  <img src="https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/react-semantic-ui-starter.svg" style="width: 888px; height: 68px;" alt="Sponsor">
-</a>
+  <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux'>
+    <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux.svg' />
+  </a>
 </div>
 
 <div><a href="https://travis-ci.org/Metnew/suicrux">
