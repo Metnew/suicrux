@@ -54,7 +54,7 @@ You're always free to use any other UI framework with `suicrux`.
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
-- **[react-async-component]** - the best library for lazy-loading
+- **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
 - **[react-intl](https://github.com/yahoo/react-intl)** - i18n.
 
