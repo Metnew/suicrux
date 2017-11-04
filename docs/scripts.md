@@ -3,8 +3,8 @@
 ### Install:
 ```bash
 # clone repo without full git history
-git clone --depth=1 https://github.com/Metnew/react-semantic.ui-starter.git
-cd react-semantic.ui-starter
+git clone --depth=1 https://github.com/Metnew/suicrux.git
+cd suicrux
 # You can remove .git folder if you don't want to pull new features or need your own repo
 # to remove folder run: rm -rf .git
 # install dependencies

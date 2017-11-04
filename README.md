@@ -1,18 +1,18 @@
 # Suicrux
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/react-semantic.ui-starter.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/suicrux.svg)](https://greenkeeper.io/)
 
-![](https://github.com/Metnew/react-semantic.ui-starter/blob/for-gh/screen.gif)
+![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif)
 
 ### Demo: ~~[reatty.now.sh](https://reatty.now.sh/auth)~~ Temporarily unavailable:(
 <div>
-<a href="https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/react-semantic.ui-starter" rel="nofollow"><img src="https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/react-semantic.ui-starter.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
+<a href="https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux" rel="nofollow"><img src="https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
 
-[![Build Status](https://travis-ci.org/Metnew/react-semantic.ui-starter.svg?branch=master)](https://travis-ci.org/Metnew/react-semantic.ui-starter)
+[![Build Status](https://travis-ci.org/Metnew/suicrux.svg?branch=master)](https://travis-ci.org/Metnew/suicrux)
 [![Join the chat at https://gitter.im/react-semantic-ui-starter/Lobby](https://badges.gitter.im/react-semantic-ui-starter/Lobby.svg)](https://gitter.im/react-semantic-ui-starter/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![bitHound Code](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/code.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
-[![bitHound Overall Score](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/score.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter)
-<!-- [![codecov](https://codecov.io/gh/Metnew/react-semantic.ui-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/Metnew/react-semantic.ui-starter) -->
+[![bitHound Code](https://www.bithound.io/github/Metnew/suicrux/badges/code.svg)](https://www.bithound.io/github/Metnew/suicrux)
+[![bitHound Overall Score](https://www.bithound.io/github/Metnew/suicrux/badges/score.svg)](https://www.bithound.io/github/Metnew/suicrux)
+<!-- [![codecov](https://codecov.io/gh/Metnew/suicrux/branch/master/graph/badge.svg)](https://codecov.io/gh/Metnew/suicrux) -->
 
 </div>
 
@@ -27,8 +27,8 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 
 ### What's inside?
 
-[![bitHound Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
-[![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/react-semantic.ui-starter/master/dependencies/npm)
+[![bitHound Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm)
+[![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm)
 
 #### Frontend:
 - **[React 16](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
@@ -58,7 +58,7 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 
 #### Other:
 - **[Jest](https://facebook.github.io/jest/)** - awesome testing framework.
-- [And more tools for building and testing...](https://github.com/Metnew/react-semantic.ui-starter/blob/master/package.json)
+- [And more tools for building and testing...](https://github.com/Metnew/suicrux/blob/master/package.json)
 
 ### Usage
 

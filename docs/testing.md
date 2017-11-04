@@ -43,7 +43,7 @@ The starter *doesn't include* tests for React components. Feel free to submit PR
 
 ## How to test Redux?
 
-One of the simplest ways to test redux actions and reducers is to use [`redux-mock-store`](https://github.com/Metnew/react-semantic.ui-starter/blob/master/src/common/actions/auth/index.test.js) library.
+One of the simplest ways to test redux actions and reducers is to use [`redux-mock-store`](https://github.com/Metnew/suicrux/blob/master/src/common/actions/auth/index.test.js) library.
 
 ### Actions
 For example, tests for `auth` actions in `src/common/actions/auth/index.test.js` look like:
