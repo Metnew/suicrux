@@ -10,7 +10,7 @@ import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
 import asyncBootstrapper from 'react-async-bootstrapper'
 import {AsyncComponentProvider, createAsyncContext} from 'react-async-component'
-import HtmlComponent from './HtmlComponent'
+import HTMLComponent from './HTMLComponent'
 // $FlowFixMe
 import assets from 'webpack-assets'
 // $FlowFixMe
@@ -67,7 +67,7 @@ export default async (req: express$Request, res: express$Response) => {
 			i18n
 		}
 
-		const {beforeAppTag, afterAppTag} = HtmlComponent(props)
+		const {beforeAppTag, afterAppTag} = HTMLComponent(props)
 		const responseStatusCode = noRequestURLMatch ? 404 : 200
 
 		res.writeHead(responseStatusCode, {

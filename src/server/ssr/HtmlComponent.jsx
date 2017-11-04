@@ -17,7 +17,7 @@ const DLLScripts =
 	<script src="/vendor.js"></script>
 `
 
-const HtmlComponent = ({
+const HTMLComponent = ({
 	css,
 	asyncState,
 	initialState,
@@ -59,6 +59,7 @@ const HtmlComponent = ({
 					name="description"
 					content="Advanced universal React starter built with a scale in mind."
 				/>
+				<meta name="theme-color" content="#1b1e2f"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<base href="/" />
 				<meta name="msapplication-tap-highlight" content="no" />
@@ -83,4 +84,4 @@ const HtmlComponent = ({
 	}
 }
 
-export default HtmlComponent
+export default HTMLComponent
