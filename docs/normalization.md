@@ -1,6 +1,5 @@
-
 ### Normalization
-Normalization using `normalizr` is recommended but not a must. You can ignore it if you want. Concept of normalization is strongly connected with state-management. The idea behind normalization is to make an in-memory DB inside the state. Think of it like NoSQL collection (table) in the state.
+`normalizr` is recommended. Concept of normalization is strongly connected with state-management. The idea behind normalization is to make an in-memory DB inside the state. Think of it like NoSQL collection (table) in the state.
 
 Typical script for arrays normalization:
 
@@ -16,8 +15,8 @@ import _ from 'lodash'
 //   normalizedData[post.id] = post
 // }
 //
-// XXX: normalization is recommended, but not a must
-// you still can write a bunch of custom code in your reducers to normalize every reqests
+// NOTE: normalization is recommended
+// But you still can write a bunch of custom code in your reducers to normalize every reqests
 
 export const normalizeArrayOfItems = (array) => {
 	// Flat array, if it had 2 levels of depth
