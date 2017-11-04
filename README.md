@@ -30,12 +30,14 @@
 ## What is this?
 
 **Universal** starter with **lazy-loading** for your **new Progressive Web App**.
+> [Previous release lives here.](https://github.com/Metnew/suicrux/tree/previous-3.0.0)
 
 ## Quick intro
 
 ### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
+> SPOILER: because SUI and SUIR are awesome
 
-TL;DR: You're always free to use your own UI framework. The starter is "UI-framework-agnostic".<br>
+You're always free to use any other UI framework with `suicrux`.
 **[UI framework comparison here.](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651)**
 
 ## What's inside?
