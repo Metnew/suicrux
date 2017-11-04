@@ -60,16 +60,6 @@ export function layout (state: State = initialState, action: Action): State {
 			...state,
 			sidebarOpened: false
 		}
-	// See actions/layout for more info
-	// case APPLY_STYLES:{
-	// 	const {element, styles} = payload
-	// 	return {
-	// 		...state,
-	// 		styles: {
-	// 			[element]: styles
-	// 		}
-	// 	}
-	// }
 	default:
 		return state
 	}
