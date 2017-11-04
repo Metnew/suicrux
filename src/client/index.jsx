@@ -1,42 +1,67 @@
+// @flow
 // Styles
-import 'semantic-ui-css/semantic.css'
-import 'styles/global'
-// Fetch and promise polyfill
+// If you want full SUI CSS:
+// import 'semantic-ui-css/semantic.css'
+// If you want only some components from SUI:
+import 'semantic-ui-css/components/button.css'
+// import 'semantic-ui-css/components/card.css'
+import 'semantic-ui-css/components/container.css'
+import 'semantic-ui-css/components/dimmer.css'
+import 'semantic-ui-css/components/divider.css'
+import 'semantic-ui-css/components/grid.css'
+import 'semantic-ui-css/components/header.css'
+import 'semantic-ui-css/components/form.css'
+import 'semantic-ui-css/components/icon.css'
+import 'semantic-ui-css/components/image.css'
+import 'semantic-ui-css/components/input.css'
+import 'semantic-ui-css/components/menu.css'
+import 'semantic-ui-css/components/label.css'
+import 'semantic-ui-css/components/list.css'
+import 'semantic-ui-css/components/loader.css'
+import 'semantic-ui-css/components/reset.css'
+import 'semantic-ui-css/components/sidebar.css'
+import 'semantic-ui-css/components/site.css'
+import 'semantic-ui-css/components/statistic.css'
+// Polyfill for IE 11
+// P.S: i don't know does starter works in IE 11
 import 'promise-polyfill'
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 // Application
-import {render} from 'react-dom'
-import {configureStore, configureRootComponent} from 'common/index.jsx'
+import React from 'react'
+import {hydrate} from 'react-dom'
+import {AsyncComponentProvider} from 'react-async-component'
+import asyncBootstrapper from 'react-async-bootstrapper'
+import {configureApp, configureRootComponent} from 'common/app'
+import type {GlobalState} from 'reducers'
+import type {i18nConfigObject} from 'types'
 
 if (process.env.NODE_ENV === 'production') {
 	require('common/pwa')
 } else if (process.env.NODE_ENV === 'development') {
-	// Devtools
-	// NOTE: whyDidYouUpdate package is temporary broken, waiting for a patch.
-
-	/*eslint-disable */
-	// NOTE: But if you really want to run `why-did-you-update`
-	// You can uncomment this block:
-	/*
-    Object.defineProperty(React, 'createClass', {
-      set: nextCreateClass => {
-        createClass = nextCreateClass
-      }
-    })
-
-   const {whyDidYouUpdate} = require('why-did-you-update')
-    whyDidYouUpdate(React)
-  */
-	/*eslint-enable */
-	window.Perf = require('react-addons-perf')
 }
 
-const preloadedState = window.__PRELOADED_STATE__ || {}
-delete window.__PRELOADED_STATE__
+const initialState: GlobalState = window.__INITIAL_STATE__ || {}
+const i18n: i18nConfigObject = window.__I18N__ || {}
+const asyncState: Object = window.__ASYNC_STATE__ || {}
+// NOTE: V8 doesn't optimize  `delete`
+// delete window.__INITIAL_STATE__
+const {store, routes, history} = configureApp(initialState)
+const RootComponent = configureRootComponent({
+	store,
+	routes,
+	history,
+	i18n
+})
 
-const store = configureStore(preloadedState)
-const RootComponent = configureRootComponent({store})
-render(RootComponent, document.getElementById('app'))
+const app = (
+	<AsyncComponentProvider rehydrateState={asyncState}>
+		{RootComponent}
+	</AsyncComponentProvider>
+)
+
+asyncBootstrapper(app).then(() => {
+	hydrate(app, document.getElementById('app'))
+})
 
 if (module.hot) {
 	module.hot.accept()

@@ -7,17 +7,13 @@ You can store static assets (images, videos) in `/static` folder.
 You can find it in `webpack_config/config.js`
 
 #### Is SSR available?
-Yes! Check `/src/server/ssr/`. App uses rapscallion for async rendering on server.
+Yes! Check `/src/server/ssr/`.
 
 #### How lazy-loading implemented:
-Check `src/common/routing/index.js` and `src/common/components/addons/LazyLoad`. TL;DR: dynamic `import()`.
+Using the best solution I've found ever - `react-async-component`
 
 #### Is theming available?
 Yes, with styled-components's `<ThemeProvider>` you can specify your own theme. By default, app uses theme from [www.materialpallette.com](https://www.materialpalette.com/).
-
-#### How it differs from other starters?
-App is designed for big projects. Personally, I use almost similar boilerplate in production project.
-**Main purpose - build highly customizable isomorphic(!) skeleton for PWA, with SSR, code-splitting, following best practices.**
 
 #### "You have a components folder and containers folder..and in the container you have another components folder?"
 

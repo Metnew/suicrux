@@ -1,37 +1,36 @@
-import React, {Component} from 'react'
+// @flow
+import React from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
-import {LOGIN_AUTH, LOGIN_AUTH_PENDING} from 'actions'
+import {LOGIN_AUTH} from 'actions/auth'
 import LoginComponent from './components'
+import {getAuthState} from 'selectors'
+import type {GlobalState} from 'reducers'
 
-class Login extends Component {
-	static propTypes = {
-		login: PropTypes.func.isRequired,
-		errors: PropTypes.object.isRequired
-	}
-
-	render () {
-		const {login, errors} = this.props
-		const props = {login, errors}
-		return <LoginComponent {...props} />
-	}
+type Props = {
+	login: (data: Object) => void,
+	errors: Object
 }
 
-function mapStateToProps (state) {
-	const {errors} = state.me.auth
+const Login = ({login, errors}: Props) => {
+	const props = {
+		login,
+		errors
+	}
+	return <LoginComponent {...props} />
+}
+
+const mapStateToProps = (state: GlobalState) => {
+	const authState = getAuthState(state)
+	const {errors} = authState
 	return {
 		errors
 	}
 }
 
-function mapDispatchToProps (dispatch) {
-	return {
-		login: async data => {
-			dispatch({type: LOGIN_AUTH_PENDING})
-			const result = await LOGIN_AUTH(data)
-			return dispatch(result)
-		}
+const mapDispatchToProps = dispatch => ({
+	login (payload) {
+		dispatch(LOGIN_AUTH(payload))
 	}
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

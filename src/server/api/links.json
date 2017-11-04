@@ -1,0 +1,46 @@
+[
+	{
+		"link": "https://github.com/Metnew/tiny-universal-example",
+		"icon": "github",
+		"header": "SSR + Webpack (in development)",
+		"desc":
+			"Step by step guide with working example of server and client with hot-reloading and SSR with Webpack (in development)."
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux/tree/master/docs",
+		"icon": "bug",
+		"header": "Testing",
+		"desc": "How to test actions, reducers, components?"
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux/tree/master/docs",
+		"icon": "paint brush",
+		"header": "Why semantic-ui-react?",
+		"desc": "Notes about SUI. Why SUIR is a good (or bad) choise."
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux/tree/master/docs",
+		"icon": "globe",
+		"header": "How i18n works?",
+		"desc": "How i18n is implemented and how to customize it."
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux/tree/master/docs",
+		"header": "How Webpack is configured?",
+		"icon": "code",
+		"desc":
+			"Webpack configuration for server/client in production and development."
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux/tree/master/docs",
+		"icon": "terminal",
+		"header": "npm scripts and ENV vars",
+		"desc": "Docs about every npm script and ENV variable."
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux/tree/master/docs",
+		"icon": "folder",
+		"header": "Folder structure",
+		"desc": "Why this folder structure and how to adapt it in own project."
+	}
+]

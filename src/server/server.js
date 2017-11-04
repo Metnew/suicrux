@@ -1,14 +1,27 @@
-import app from './express'
+/*
+ * @flow
+ */
+import addMiddlewares from './middlewares'
 import API from './api'
-import useSSR from './ssr'
-import chalk from 'chalk'
+import SSR from './ssr'
+import fetch from 'isomorphic-fetch'
+import FormData from 'form-data'
 
-const {BASE_API, PORT} = process.env
-// Add API route
-app.use(BASE_API, API)
-// Add SSR handler
-app.use(useSSR)
-// Start server
-app.listen(PORT, () => {
-	console.log(chalk.magenta(`\nServer is running on ${PORT} port!\n`))
-})
+global.fetch = fetch
+global.window = {}
+global.FormData = FormData
+
+/**
+ * Mount API, SSR and middlewares to app.
+ * @param  {express$Application} app - Express server instance
+ * @return {express$Application}     - Decorated server instance
+ */
+export default (app: express$Application): express$Application => {
+	// Add global middlewares
+	addMiddlewares(app)
+	// Add API
+	app.use(process.env.BASE_API, API)
+	// Add SSR
+	app.use(SSR)
+	return app
+}

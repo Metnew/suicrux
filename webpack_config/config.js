@@ -3,21 +3,18 @@
  */
 
 import path from 'path'
-import i18n from '../i18n'
-import manifest from './assets/manifest'
+import manifest from '../static/manifest'
 
-function ternary (a, b) {
-	return a ? a : b
-}
-
-// Vars for both server and frontend
-const BASE_API = ternary(process.env.BASE_API, '/api/v1')
-const APP_LANGUAGE = ternary(process.env.APP_LANGUAGE, 'en')
-const NODE_ENV = ternary(process.env.NODE_ENV, 'development')
-
-// Vars for frontend only
-const SENTRY_DSN_PUBLIC = ternary(process.env.SENTRY_DSN_PUBLIC)
-const GA_ID = ternary(process.env.GA_ID)
+const {
+	BASE_API = '/api/v1',
+	NODE_ENV = 'development',
+	SENTRY_PUBLIC_DSN,
+	GA_ID,
+	JWT_SECRET = 'secret',
+	ANALYZE_BUNDLE,
+	SENTRY_DSN,
+	HTTP_PORT = 3000
+} = process.env
 
 // Paths
 const rootPath = path.join(__dirname, '../') // = "/"
@@ -26,27 +23,26 @@ const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 
 // Vars for server only
-const DIST_PATH = ternary(process.env.DIST_PATH, path.join(distPath, './client', APP_LANGUAGE))
-const JWT_SECRET = ternary(process.env.JWT_SECRET, 'secret')
-const SENTRY_DSN = ternary(process.env.SENTRY_DSN)
-const PORT = ternary(process.env.PORT, 4000)
+const CLIENT_DIST_PATH = path.join(distPath, './client') // = "/dist/client"
 
+// compute isProduction based on NODE_ENV
+const isProduction = process.env.NODE_ENV === 'production'
 
 export default {
-	title: 'React-Semantic.UI-Starter',
+	title: 'Suicrux',
 	publicPath: '/',
 	// i18n object
-	i18n,
+	isProduction,
 	// Env vars
 	BASE_API,
-	APP_LANGUAGE,
 	NODE_ENV,
-	SENTRY_DSN_PUBLIC,
+	SENTRY_PUBLIC_DSN,
+	ANALYZE_BUNDLE,
 	GA_ID,
-	DIST_PATH,
+	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	SENTRY_DSN,
-	PORT,
+	HTTP_PORT,
 	// It's better to define pathes in one file
 	// and then use everywhere across app
 	srcPath,
@@ -55,7 +51,27 @@ export default {
 	rootPath,
 	// text for WebpackBannerPlugin
 	banner:
-		'MIT License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/react-semantic.ui-starter',
+		'Apache 2 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/suicrux',
 	// your manifest.json
-	manifest
+	manifest,
+	vendor: [
+		'react',
+		'react-dom',
+		'redux',
+		'history',
+		'react-router',
+		'react-router-dom',
+		'react-router-redux',
+		'semantic-ui-react',
+		'redux-thunk',
+		'react-helmet',
+		'lodash',
+		'normalizr',
+		'js-cookie',
+		'prop-types',
+		'store2',
+		'styled-components',
+		'react-headroom'
+	],
+	polyfills: ['promise-polyfill', 'isomorphic-fetch']
 }

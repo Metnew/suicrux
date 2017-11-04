@@ -1,26 +1,64 @@
 {
 	"plugins": [
-		"lodash",
+		["lodash", {"id": ["lodash"]}],
 		[
 			"transform-runtime",
 			{
 				"helpers": false,
-				"polyfill": false,
+				"polyfill": true,
 				"regenerator": true,
 				"moduleName": "babel-runtime"
 			}
 		],
-		"transform-decorators-legacy",
-		"syntax-dynamic-import"
+		"syntax-dynamic-import",
+		[
+			"babel-plugin-styled-components",
+			{
+				"ssr": true
+			}
+		]
 	],
-	"presets": ["es2015", "react", "stage-0"],
+	"presets": [
+		[
+			"env",
+			{
+				"targets": {
+					"browsers": ["last 2 versions", "> 1%"]
+				}
+			}
+		],
+		"stage-1",
+		"react",
+		"flow"
+	],
 	"env": {
 		"production": {
 			"presets": ["react-optimize"]
 		},
 		"development": {
+			"plugins": ["react-hot-loader/babel"]
+		},
+		"test": {
 			"plugins": [
-				"react-hot-loader/babel"
+				"dynamic-import-node",
+				[
+					"module-resolver",
+					{
+						"root": ["./"],
+						"alias": {
+							"actions": "./src/common/actions",
+							"api": "./src/common/api",
+							"components": "./src/common/components",
+							"containers": "./src/common/containers",
+							"reducers": "./src/common/reducers",
+							"routing": "./src/common/routing",
+							"selectors": "./src/common/selectors",
+							"styles": "./src/common/styles",
+							"images": "./static/images"
+						},
+						"extensions": [".js", ".jsx", ".json"]
+					}
+				]
 			]
 		}
 	}

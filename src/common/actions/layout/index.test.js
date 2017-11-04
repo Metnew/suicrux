@@ -1,40 +1,49 @@
-/* eslint-disable */
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import * as actions from 'actions'
+import {
+	UI_CLOSE_SIDEBAR,
+	CLOSE_SIDEBAR,
+	UI_OPEN_SIDEBAR,
+	OPEN_SIDEBAR,
+	UI_WINDOW_RESIZE,
+	WINDOW_RESIZE
+} from 'actions/layout'
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Layout actions', () => {
 	it('creates UI_CLOSE_SIDEBAR after CLOSE_SIDEBAR was dispatched', () => {
-		const expectedAction = {
-			type: actions.UI_CLOSE_SIDEBAR
-		}
+		const expectedAction = [{
+			type: UI_CLOSE_SIDEBAR
+		}]
 
 		const store = mockStore({})
-		const result = store.dispatch(actions.CLOSE_SIDEBAR)
+		store.dispatch(CLOSE_SIDEBAR())
 
-		expect(result).toEqual(expectedAction)
+		expect(store.getActions()).toEqual(expectedAction)
 	})
 
 	it('creates UI_OPEN_SIDEBAR after OPEN_SIDEBAR was dispatched', () => {
-		const expectedAction = {
-			type: actions.UI_OPEN_SIDEBAR
-		}
+		const expectedAction = [{
+			type: UI_OPEN_SIDEBAR
+		}]
 
 		const store = mockStore({})
-		const result = store.dispatch(actions.OPEN_SIDEBAR)
+		store.dispatch(OPEN_SIDEBAR())
 
-		expect(result).toEqual(expectedAction)
+		expect(store.getActions()).toEqual(expectedAction)
 	})
 
 	it('creates UI_WINDOW_RESIZE after WINDOW_RESIZE was dispatched', () => {
-		const expectedAction = {
-			type: actions.UI_WINDOW_RESIZE
-		}
+		const expectedAction = [{
+			type: UI_WINDOW_RESIZE,
+			payload: {
+				innerWidth: 480
+			}
+		}]
 
 		const store = mockStore({})
-		const result = store.dispatch(actions.WINDOW_RESIZE)
-		expect(result).toEqual(expectedAction)
+		store.dispatch(WINDOW_RESIZE(480))
+		expect(store.getActions()).toEqual(expectedAction)
 	})
 })
