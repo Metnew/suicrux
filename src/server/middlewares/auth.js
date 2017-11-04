@@ -42,7 +42,6 @@ export default (
 				isLoggedIn: true
 			}
 			console.log(chalk.magenta('TOKEN SUCCESSFULLY DECODED'))
-			// FIXME: set user language in jwt token
 		}
 
 		console.log(
