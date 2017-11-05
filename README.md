@@ -114,6 +114,8 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 
 More detailed:
 
+#### **[v1.0.0 Release notes](https://github.com/Metnew/suicrux/releases/tag/v1.0.0)**
+
 #### **[Most commonly asked questions are here.](/docs/faq.md)**
 
 #### [Webpack configuration](/docs/webpack.md)
