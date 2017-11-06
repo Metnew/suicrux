@@ -11,12 +11,16 @@ import {configureRootComponent, configureApp} from 'common/app'
 import asyncBootstrapper from 'react-async-bootstrapper'
 import {AsyncComponentProvider, createAsyncContext} from 'react-async-component'
 import HTMLComponent from './HTMLComponent'
-// $FlowFixMe
-import assets from 'webpack-assets'
-// $FlowFixMe
-import faviconsAssets from 'favicons-assets'
 import getI18nData from 'server/i18n'
 import {matchPath} from 'react-router'
+import getStats from './stats'
+
+// it's better to define these objs in global scope (less memory consumption)
+let {assets, faviconsAssets} = {}
+getStats().then(result => {
+	assets = result.assets
+	faviconsAssets = result.faviconsAssets
+})
 
 export default async (req: express$Request, res: express$Response) => {
 	const {isLoggedIn, language} = req.user
