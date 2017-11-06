@@ -36,7 +36,6 @@ const HTMLComponent = ({
 	}
 	const assetsOrdered = ['manifest', 'vendor', 'client']
 	const getTags = assets => funcs => ext => {
-		console.log(assets)
 		// sort assets to be injected in right order
 		// const assetsOrdered = ['manifest', 'vendor', 'client']
 		return Object.keys(assets)
