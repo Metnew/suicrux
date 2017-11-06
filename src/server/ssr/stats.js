@@ -1,18 +1,18 @@
 // @flow
 import fs from 'fs'
+import chokidar from 'chokidar'
 
 let cache = {}
 
 async function getFile (path) {
 	// Cache file forever
 	if (cache[path]) {
-		console.log('from cache')
 		return Promise.resolve(cache[path])
 	}
 
 	return new Promise((resolve, reject) => {
-		// Give Webpack some time on first stats generation
-		setTimeout(() => {
+		// This `readFile` func is looking like it escaped from procedure programming
+		const readFile = () => {
 			fs.readFile(path, 'utf8', (err, data) => {
 				if (err) {
 					throw err
@@ -21,7 +21,17 @@ async function getFile (path) {
 				cache[path] = json
 				resolve(json)
 			})
-		}, 4000)
+		}
+		// does file exist?
+		fs.access(path, fs.constants.R_OK, err => {
+			if (err) {
+				// No. Watch for changes, resolve on `add`.
+				chokidar.watch(path).on('add', readFile)
+			} else {
+				// Yes. resolve!
+				readFile()
+			}
+		})
 	})
 }
 
