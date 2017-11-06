@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/Metnew/suicrux/compare/v1.0.1...v1.1.0) (2017-11-06)
+
+
+### Bug Fixes
+
+* **package:** update semantic-ui-react to version 0.76.0 ([eff0262](https://github.com/Metnew/suicrux/commit/eff0262))
+* **server:** remove console.log ([d82f045](https://github.com/Metnew/suicrux/commit/d82f045))
+* **webpack_config:** clean `dist/client` dir on run ([b5b8ff3](https://github.com/Metnew/suicrux/commit/b5b8ff3))
+
+
+### Features
+
+* **server:** get webpack stats using `fs` ([5221391](https://github.com/Metnew/suicrux/commit/5221391))
+* **server:** resolve assets and faviconsAssets async using `getStats()` ([ca8ae99](https://github.com/Metnew/suicrux/commit/ca8ae99))
+* **server/ssr:** wait for stats file before reading it using chokidar ([a968954](https://github.com/Metnew/suicrux/commit/a968954))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/Metnew/suicrux/compare/v1.0.0...v1.0.1) (2017-11-04)
 
