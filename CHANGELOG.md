@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/Metnew/suicrux/compare/v1.1.0...v1.1.1) (2017-11-06)
+
+
+### Bug Fixes
+
+* **.babelrc:** add "dynamic-import-node" in production ([17060b7](https://github.com/Metnew/suicrux/commit/17060b7))
+* **webpack_config/client:** different chunkFilename in prod/dev ([3e32c02](https://github.com/Metnew/suicrux/commit/3e32c02))
+* **webpack_config/server:** remove unused aliases, different chunkFilename in prod/dev ([9ce7a7a](https://github.com/Metnew/suicrux/commit/9ce7a7a))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/Metnew/suicrux/compare/v1.0.1...v1.1.0) (2017-11-06)
 
