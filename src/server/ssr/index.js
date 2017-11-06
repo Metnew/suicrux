@@ -56,7 +56,6 @@ export default async (req: express$Request, res: express$Response) => {
 		const appStream = renderToNodeStream(app)
 		const css: string = sheet.getStyleTags()
 		const preloadedState: Object = store.getState()
-
 		const asyncState = asyncContext.getState()
 		const props = {
 			css,
