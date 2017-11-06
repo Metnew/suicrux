@@ -29,6 +29,7 @@ const definePluginArgs = {
 // use hash filename to support long-term caching in production
 // NOTE: [chunkhash] leads to high memory consumption
 const filename = isProduction ? '[name].[hash:6].js' : '[name].js'
+const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
 const hints = isProduction ? 'warning' : false
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
 
@@ -42,7 +43,7 @@ const baseBuild = {
 		filename,
 		publicPath,
 		path: CLIENT_DIST_PATH,
-		chunkFilename: '[name].[hash:6].js',
+		chunkFilename,
 		crossOriginLoading: 'anonymous'
 	},
 	performance: {
