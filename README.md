@@ -6,9 +6,9 @@
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
 <div>
-  <a href="https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/react-semantic-ui-starter" rel="nofollow">
-  <img src="https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/react-semantic-ui-starter.svg" style="width: 888px; height: 68px;" alt="Sponsor">
-</a>
+  <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux'>
+    <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux.svg' />
+  </a>
 </div>
 
 <div><a href="https://travis-ci.org/Metnew/suicrux">
@@ -30,12 +30,14 @@
 ## What is this?
 
 **Universal** starter with **lazy-loading** for your **new Progressive Web App**.
+> [Previous release lives here.](https://github.com/Metnew/suicrux/tree/previous-3.0.0)
 
 ## Quick intro
 
 ### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
+> SPOILER: because SUI and SUIR are awesome
 
-TL;DR: You're always free to use your own UI framework. The starter is "UI-framework-agnostic".<br>
+You're always free to use any other UI framework with `suicrux`.
 **[UI framework comparison here.](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651)**
 
 ## What's inside?
@@ -52,7 +54,7 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
-- **[react-async-component]** - the best library for lazy-loading
+- **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
 - **[react-intl](https://github.com/yahoo/react-intl)** - i18n.
 
@@ -60,9 +62,8 @@ TL;DR: You're always free to use your own UI framework. The starter is "UI-frame
 
 Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-skeleton) and includes:
 
-- **[Webpack 3](https://webpack.js.org)**:
-
-- Babel (stage-1),
+- Latest Webpack
+- Babel: `stage-1` and few cool plugins for development and production.
 - **HMR**, hotMiddleware,
 - Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
 - **[Offline-plugin](https://github.com/NekR/offline-plugin)**
@@ -112,6 +113,8 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 ```
 
 More detailed:
+
+#### **[v1.0.0 Release notes](https://github.com/Metnew/suicrux/releases/tag/v1.0.0)**
 
 #### **[Most commonly asked questions are here.](/docs/faq.md)**
 
