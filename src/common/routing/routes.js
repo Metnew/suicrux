@@ -9,7 +9,7 @@ import type {RouteItem} from 'types'
 
 function asyncComponentCreator (url) {
 	return asyncComponent({
-		resolve: () => import(`containers/${url}/index.jsx`),
+		resolve: () => import(/* webpackChunkName:"[index].[request]" */ `containers/${url}/index.jsx`),
 		LoadingComponent () {
 			return (
 				<Dimmer active>
