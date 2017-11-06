@@ -3,7 +3,6 @@ import {readFileSync} from 'fs' // readFile
 import path from 'path'
 import {sync as globSync} from 'glob'
 import chokidar from 'chokidar'
-// import {addLocaleData} from 'react-intl'
 import enLocaleData from 'react-intl/locale-data/en'
 import ruLocaleData from 'react-intl/locale-data/ru'
 import type {i18nConfigObject} from 'types'
@@ -22,8 +21,8 @@ const getTranslations = () => {
 }
 
 let translations = getTranslations()
+// NOTE: re-update `locals` if they were changed (in development)
 if (process.env.NODE_ENV === 'development') {
-	// re-update locals if they were changed (in development)
 	const watcher = chokidar.watch('locals/*.json')
 
 	watcher.on('all', () => {

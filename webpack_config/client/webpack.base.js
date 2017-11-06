@@ -18,7 +18,7 @@ const {
 	manifest
 } = config
 
-rimraf(`${config.distPath}/server`, {}, () => {})
+rimraf(`${config.distPath}/client`, {}, () => {})
 
 const definePluginArgs = {
 	'process.env.GA_ID': JSON.stringify(GA_ID),

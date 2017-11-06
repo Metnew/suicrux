@@ -1,5 +1,6 @@
 // @flow
 import serealize from 'serialize-javascript'
+import _ from 'lodash'
 type args = {
 	css: string,
 	asyncState: Object,
@@ -33,9 +34,10 @@ const HTMLComponent = ({
 		css: ({path}) => `<link rel="stylesheet" href="${path}" />`,
 		js: ({path}) => `<script src="${path}" type="text/javascript"></script>`
 	}
+	const assetsOrdered = ['manifest', 'vendor', 'client']
 	const getTags = assets => funcs => ext => {
 		// sort assets to be injected in right order
-		const assetsOrdered = ['manifest', 'vendor', 'client']
+		// const assetsOrdered = ['manifest', 'vendor', 'client']
 		return Object.keys(assets)
 			.filter(bundleName => assets[bundleName][ext])
 			.sort((a, b) => assetsOrdered.indexOf(a) - assetsOrdered.indexOf(b))
@@ -45,7 +47,7 @@ const HTMLComponent = ({
 			})
 			.join('')
 	}
-	const getTagsFromAssets = getTags(assets)(wrapFuncs)
+	const getTagsFromAssets = getTags(_.pick(assets, assetsOrdered))(wrapFuncs)
 	const cssTags = getTagsFromAssets('css')
 	const jsTags = getTagsFromAssets('js')
 

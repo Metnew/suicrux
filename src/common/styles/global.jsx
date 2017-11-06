@@ -1,10 +1,7 @@
 import {injectGlobal} from 'styled-components'
 
+// NOTE: Styles of container elements duplicated to make SSR version without css looks prettier
 injectGlobal`
-  * {
-    box-sizing: border-box;
-  }
-  ${'Styles of container elements duplicated to make SSR version without css looks prettier'}
   body {
     margin: 0;
 	  padding: 0;
@@ -24,24 +21,6 @@ injectGlobal`
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
-
-  ${'Check: https://github.com/Metnew/react-semantic.ui-starter/issues/27 for more info'}
-  ${'' /* body ::-webkit-scrollbar {
-    width: 0;
-  }
-
-  body ::-webkit-scrollbar-track {
-    all: unset!important;
-  }
-
-  body ::-webkit-scrollbar-thumb {
-      all: unset!important;
-    }
-
-  body ::-webkit-scrollbar-thumb:window-inactive {
-      all: unset!important;
-    } */}
-
 
   #app {
     width: 100%;
