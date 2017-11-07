@@ -154,7 +154,7 @@
     "cz": "git-cz",
     "release": "standard-version",
     "precommit": "echo \"$(tput bold)$(tput setaf 5) It'd be better to run tests before commit. $(tput sgr 0)\"t",
-    "prepush": "echo \"$(tput bold)$(tput setaf 5) I hope you tested app. $(tput sgr 0)\"",
+    "prepush": "npm run test",
     "commitmsg": "commitlint -e $GIT_PARAMS"
   },
   "engines": {
@@ -176,7 +176,8 @@
     "starter",
     "template",
     "boilerplate",
-    "webpack"
+    "webpack",
+    "universal"
   ],
   "bugs": {
     "url": "https://github.com/Metnew/suicrux/issues"
