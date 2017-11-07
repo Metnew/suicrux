@@ -10,7 +10,7 @@ You can find it in `webpack_config/config.js`
 Yes! Check `/src/server/ssr/`.
 
 #### How lazy-loading implemented:
-Using the best solution I've found ever - `react-async-component`
+Using the best solution I've ever found - `react-async-component`
 
 #### Is theming available?
 Yes, with styled-components's `<ThemeProvider>` you can specify your own theme. By default, app uses theme from [www.materialpallette.com](https://www.materialpalette.com/).
