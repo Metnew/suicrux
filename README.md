@@ -52,7 +52,7 @@ You're always free to use any other UI framework with `suicrux`.
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
 - **[Fetch polyfill](https://github.com/matthew-andrews/isomorphic-fetch)**, **[Promise polyfill](https://github.com/stefanpenner/es6-promise)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
-- **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
+- **[js-cookie](https://github.com/js-cookie/js-cookie)** - Cookies.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
 - **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React

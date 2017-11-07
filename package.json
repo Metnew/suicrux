@@ -43,7 +43,6 @@
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.76.0",
     "serialize-javascript": "^1.4.0",
-    "store2": "^2.5.9",
     "styled-components": "^2.2.3"
   },
   "devDependencies": {
