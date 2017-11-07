@@ -73,19 +73,6 @@ const baseWebpackConfig = {
 			//     }
 			//   ]
 			// }
-			{
-				test: /\.(jpe?g|png|gif|svg)$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 4096,
-							name: 'images/[name].[hash:6].[ext]'
-						}
-					},
-					'img-loader'
-				]
-			}
 		])
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([

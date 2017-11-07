@@ -54,6 +54,19 @@ export default {
 				test: /\.(js|jsx)$/,
 				use: 'babel-loader',
 				exclude: [/node_modules/]
+			},
+			{
+				test: /\.(jpe?g|png|gif|svg)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 4096,
+							name: 'images/[name].[hash:6].[ext]'
+						}
+					},
+					'img-loader'
+				]
 			}
 		]
 	},
