@@ -6,6 +6,7 @@ import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 
+// NOTE: optional code, feel free to remove
 /**
  * Create request wrapper for certain method
  * @param  {String} method - Request method
@@ -29,7 +30,13 @@ const requestWrapper = (
 		cb: (request: Object) => Object = a => a
 	) => {
 		// get decorated url and request params
-		const {requestURL, request} = decorateRequest({method, url, data, options, cb})
+		const {requestURL, request} = decorateRequest({
+			method,
+			url,
+			data,
+			options,
+			cb
+		})
 		// create request!
 		return fetch(requestURL, request)
 			.then(checkStatus)
@@ -114,7 +121,9 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 	}
 	const token: string | null = getLocalToken()
 	const isRequestToExternalResource = /(http|https):\/\//.test(url)
-	const requestURL = isRequestToExternalResource ? url : process.env.BASE_API + url
+	const requestURL = isRequestToExternalResource
+		? url
+		: process.env.BASE_API + url
 
 	const requestAuthDecoration =
 		!isRequestToExternalResource && token
@@ -123,19 +132,21 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 
 	const requestHeadersDataDecoration = getHeaderDataDecoration(data)
 
-	const request = cb(_.merge(
-		{},
-		defaults,
-		options,
-		requestAuthDecoration,
-		requestHeadersDataDecoration
-	))
+	const request = cb(
+		_.merge(
+			{},
+			defaults,
+			options,
+			requestAuthDecoration,
+			requestHeadersDataDecoration
+		)
+	)
 
-	if (!isRequestToExternalResource) {
-		// console.log(`Request ${url} was sent to our domain`, request)
-	} else {
-		// console.log(`Request ${url} was sent to external domain`, request)
-	}
+	// if (!isRequestToExternalResource) {
+	// console.log(`Request ${url} was sent to our domain`, request)
+	// } else {
+	// console.log(`Request ${url} was sent to external domain`, request)
+	// }
 
 	return {
 		request,
