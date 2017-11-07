@@ -24,7 +24,6 @@
     "node-noop": "^1.0.0",
     "offline-plugin": "^4.8.4",
     "promise-polyfill": "6.0.2",
-    "query-string": "^5.0.1",
     "raven": "^2.2.1",
     "react": "^16.0.0",
     "react-async-bootstrapper": "^1.1.2",
@@ -136,7 +135,8 @@
     "write-file-webpack-plugin": "^4.2.0"
   },
   "optionalDependencies": {
-    "webpack-shell-plugin": "^0.5.0"
+    "webpack-shell-plugin": "^0.5.0",
+    "query-string": "^5.0.1"
   },
   "scripts": {
     "build": "npm run frontend_build && npm run server_build",
