@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/Metnew/suicrux/compare/v1.1.3...v1.2.0) (2017-11-07)
+
+
+### Bug Fixes
+
+* move query-string to optional deps ([4535628](https://github.com/Metnew/suicrux/commit/4535628))
+* **package:** move store2 to optional deps ([65df8fa](https://github.com/Metnew/suicrux/commit/65df8fa))
+
+
+### Features
+
+* **package:** remove validate-commit-msg, install commitlint ([d27b81d](https://github.com/Metnew/suicrux/commit/d27b81d))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/Metnew/suicrux/compare/v1.1.2...v1.1.3) (2017-11-07)
 
