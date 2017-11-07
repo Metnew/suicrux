@@ -18,6 +18,7 @@ const definePluginArgs = {
 }
 
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
+const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
 const entry = isProduction
 	? path.join(config.srcPath, './server')
 	: path.join(config.srcPath, './server/server')
@@ -40,6 +41,7 @@ const baseWebpackConfig = {
 	output: {
 		path: path.join(config.distPath, './server'),
 		filename: 'index.js',
+		chunkFilename,
 		libraryTarget: 'commonjs2'
 	},
 	externals: nodeModules,
@@ -51,8 +53,6 @@ const baseWebpackConfig = {
 		modules: isomorphicWebpackConfig.resolve.modules,
 		alias: {
 			...isomorphicWebpackConfig.resolve.alias,
-			'webpack-assets': `${CLIENT_DIST_PATH}/webpack-assets.json`,
-			'favicons-assets': `${CLIENT_DIST_PATH}/favicons-stats.json`,
 			locals: `${config.rootPath}/locals`
 		}
 	},
@@ -73,19 +73,6 @@ const baseWebpackConfig = {
 			//     }
 			//   ]
 			// }
-			{
-				test: /\.(jpe?g|png|gif|svg)$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 25000,
-							name: 'images/[name].[hash:8].[ext]'
-						}
-					},
-					'img-loader'
-				]
-			}
 		])
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([

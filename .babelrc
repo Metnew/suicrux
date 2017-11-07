@@ -36,7 +36,7 @@
 			"presets": ["react-optimize"]
 		},
 		"development": {
-			"plugins": ["react-hot-loader/babel"]
+			"plugins": ["react-hot-loader/babel", "dynamic-import-node"]
 		},
 		"test": {
 			"plugins": [

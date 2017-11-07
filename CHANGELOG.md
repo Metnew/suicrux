@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/Metnew/suicrux/compare/v1.2.0...v1.2.1) (2017-11-07)
+
+
+
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/Metnew/suicrux/compare/v1.1.3...v1.2.0) (2017-11-07)
+
+
+### Bug Fixes
+
+* move query-string to optional deps ([4535628](https://github.com/Metnew/suicrux/commit/4535628))
+* **package:** move store2 to optional deps ([65df8fa](https://github.com/Metnew/suicrux/commit/65df8fa))
+
+
+### Features
+
+* **package:** remove validate-commit-msg, install commitlint ([d27b81d](https://github.com/Metnew/suicrux/commit/d27b81d))
+
+
+
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/Metnew/suicrux/compare/v1.1.2...v1.1.3) (2017-11-07)
+
+
+### Bug Fixes
+
+* remove store2 from project ([c3658e7](https://github.com/Metnew/suicrux/commit/c3658e7))
+
+
+
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/Metnew/suicrux/compare/v1.1.1...v1.1.2) (2017-11-07)
+
+
+### Bug Fixes
+
+* **webpack_config:** remove url-loader duplication in server and client configs ([7cea591](https://github.com/Metnew/suicrux/commit/7cea591))
+
+
+
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/Metnew/suicrux/compare/v1.1.0...v1.1.1) (2017-11-06)
+
+
+### Bug Fixes
+
+* **.babelrc:** add "dynamic-import-node" in production ([17060b7](https://github.com/Metnew/suicrux/commit/17060b7))
+* **webpack_config/client:** different chunkFilename in prod/dev ([3e32c02](https://github.com/Metnew/suicrux/commit/3e32c02))
+* **webpack_config/server:** remove unused aliases, different chunkFilename in prod/dev ([9ce7a7a](https://github.com/Metnew/suicrux/commit/9ce7a7a))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/Metnew/suicrux/compare/v1.0.1...v1.1.0) (2017-11-06)
 
