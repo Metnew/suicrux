@@ -6,7 +6,7 @@
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
 <div>
-  <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux'>
+  <a target='\_blank' rel='nofollow' href='https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux'>
     <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux.svg' />
   </a>
 </div>
@@ -57,6 +57,8 @@ You're always free to use any other UI framework with `suicrux`.
 - **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
 - **[react-intl](https://github.com/yahoo/react-intl)** - i18n.
+- **[immutable](https://facebook.github.io/immutable-js/)**, **[reselect](https://github.com/reactjs/reselect)** and **[normalizr](https://github.com/paularmstrong/normalizr)**
+
 
 ### Build (Webpack):
 
@@ -114,7 +116,7 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 
 More detailed:
 
-#### **[v1.0.0 Release notes](https://github.com/Metnew/suicrux/releases/tag/v1.0.0)**
+#### **[v1.0.0 Release notes](https://github.com/Metnew/suicrux/releases/tag/v1.0.0)** - most detailed description of the latest changes
 
 #### **[Most commonly asked questions are here.](/docs/faq.md)**
 
@@ -122,15 +124,13 @@ More detailed:
 
 #### [Available scripts](/docs/scripts.md)
 
-#### [How i18n works?](/docs/i18n.md)
+#### [How does i18n work?](/docs/i18n.md)
 
-#### [Testing.](/docs/testing.md)
+#### [Testing](/docs/testing.md)
 
-#### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
+#### [Why does this starter use `react-semantic-ui`?](/docs/SUI.md)
 
-#### ~~[How does SSR work?](/docs/ssr.md) Guide in progress~~
-
-#### [Environment variables and configuration. (not finished)](/docs/env_vars.md)
+#### [Environment variables and configuration.](/docs/env_vars.md)
 
 #### ~~[Starter architecture and design. (not finished)](/docs/design.md)~~
 
@@ -138,7 +138,6 @@ More detailed:
 
 - CLI app
 - Redux code-splitting
-- Better universal Webpack
 
 ### Something very important:
 
