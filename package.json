@@ -1,6 +1,6 @@
 {
   "name": "suicrux",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "src/client/index.jsx",
   "description": "Advanced universal React starter built with a scale in mind.",
   "dependencies": {
