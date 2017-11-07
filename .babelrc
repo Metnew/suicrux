@@ -48,6 +48,7 @@
 						"alias": {
 							"actions": "./src/common/actions",
 							"api": "./src/common/api",
+							"app": "./src/common/app",
 							"components": "./src/common/components",
 							"containers": "./src/common/containers",
 							"reducers": "./src/common/reducers",
