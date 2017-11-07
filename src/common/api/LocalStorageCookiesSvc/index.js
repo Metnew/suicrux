@@ -1,5 +1,7 @@
 // @flow
 import Cookies from 'js-cookie'
+// By default, we don't use localStorage, but store2 is already installed
+// import store from 'store2'
 import decodeJWT from 'jwt-decode'
 
 export const JWT_TOKEN = 'JWT_TOKEN'
