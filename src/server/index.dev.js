@@ -8,7 +8,7 @@ import chalk from 'chalk'
 import server from '../../webpack_config/devServer'
 
 const app: express$Application = express()
-const port: number = +process.env.PORT
+const port: number = +process.env.PORT || 3000
 
 server(app)
 
