@@ -33,7 +33,7 @@ export default (
 	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			console.log(chalk.red('CANT DECODE JWT TOKEN!', err))
-			token = null
+			token = ''
 		} else {
 			const {username} = decoded
 			req.user = {
