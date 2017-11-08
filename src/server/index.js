@@ -8,12 +8,12 @@ import chalk from 'chalk'
 import server from './server'
 
 const app: express$Application = express()
-const httpPORT: number = +process.env.HTTP_PORT
+const port: number = +process.env.PORT
 
 server(app)
 
-app.listen(httpPORT, () => {
+app.listen(port, () => {
 	console.log(
-		chalk.green(`HTTP SERVER IS LISTENING ON http://localhost:${httpPORT}`)
+		chalk.green(`HTTP SERVER IS LISTENING ON http://localhost:${port}`)
 	)
 })

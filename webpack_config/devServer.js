@@ -18,7 +18,7 @@ const webpackConfig = [client, server]
 const compiler = webpack(webpackConfig)
 // Apply some commonly used plugins
 compiler.apply(new FriendlyErrors())
-compiler.apply(new LogPlugin(config.HTTP_PORT))
+compiler.apply(new LogPlugin(config.PORT))
 compiler.apply(new webpack.NoEmitOnErrorsPlugin())
 // Create devMiddleWare
 const devMiddleWare = webpackDevMiddleware(compiler, {
