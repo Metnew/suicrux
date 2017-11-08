@@ -170,8 +170,8 @@ class App extends Component {
 								<MainContainer id="main-container">
 									{children}
 								</MainContainer>
+								<Footer />
 							</MainContent>
-							<Footer />
 						</MainLayout>
 					</SidebarSemanticPusherStyledPatch>
 				</SidebarSemanticPushableStyled>

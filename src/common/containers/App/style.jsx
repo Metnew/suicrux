@@ -9,27 +9,16 @@ export const MainLayout = styled.div`
 	flex-direction: column;
 	color: ${props => props.theme.primaryTextColor};
 	background-color: ${props => props.theme.primaryColorText};
-	${'100% - Header height - Footer height'};
-	height: 100%;
-	max-height: calc(100% - 72px);
 `
 
 export const MainContent = styled.main`
-	height: 100%;
+	height: calc(100% - 72px);
 	display: flex;
-	flex-grow: 1;
-	padding-left: 1rem;
-	padding-right: 1rem;
+	flex-direction: column;
 `
 
-// 	${'' /* height: 100%; */}
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
   -webkit-overflow-scrolling: touch;
-	${''}
-
-  ::-webkit-scrollbar {
-	  width: 0px!important;
-	}
 `
 
 export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
@@ -39,11 +28,12 @@ export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
 	}
 `
 
-//  Margin - just to fill empty space
 export const MainContainer = styled(Container)`
-	height: 100%;
-  margin-top: 2em;
-  margin-bottom: 1em;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	flex-grow: 1;
 
   &#main-container {
 		${media.mdOnly`
