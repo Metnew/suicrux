@@ -119,6 +119,7 @@ base.plugins.push(
 			navigateFallbackURL: '/auth?offline=true',
 			navigateFallbackForRedirects: false
 		},
+		safeToUseOptionalCaches: true,
 		AppCache: false
 	})
 )
