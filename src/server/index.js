@@ -4,6 +4,7 @@
  */
 import express from 'express'
 import chalk from 'chalk'
+import 'babel-polyfill'
 // Mount our server-side code to server
 import server from './server'
 
