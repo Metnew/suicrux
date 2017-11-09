@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {media} from 'styles/utils'
 import {Dimmer, Sidebar, Container} from 'semantic-ui-react'
 
 export const PageLayout = styled.div`height: 100%;`
@@ -18,13 +17,13 @@ export const MainContent = styled.main`
 `
 
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
-  -webkit-overflow-scrolling: touch;
+	-webkit-overflow-scrolling: touch;
 `
 
 export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
 	display: initial;
 	> .pusher {
-		overflow: visible!important;
+		overflow: visible !important;
 	}
 `
 
@@ -34,19 +33,9 @@ export const MainContainer = styled(Container)`
 	margin-top: 2em;
 	margin-bottom: 1em;
 	flex-grow: 1;
-
-  &#main-container {
-		${media.mdOnly`
-			width: 100% !important;
-		`}
-
-		${media.smOnly`
-		  width: 100% !important;
-		`}
-	}
 `
 
 export const StyledDimmer = styled(Dimmer)`
-	z-index: 55!important;
+	z-index: 55 !important;
 	cursor: pointer;
 `
