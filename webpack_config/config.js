@@ -66,12 +66,10 @@ export default {
 		'redux-thunk',
 		'react-helmet',
 		'lodash',
-		'normalizr',
 		'js-cookie',
-		'prop-types',
 		'store2',
 		'styled-components',
 		'react-headroom'
 	],
-	polyfills: ['promise-polyfill', 'isomorphic-fetch']
+	polyfills: ['isomorphic-fetch']
 }
