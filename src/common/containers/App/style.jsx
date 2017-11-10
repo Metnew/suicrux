@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 import {Dimmer, Sidebar, Container} from 'semantic-ui-react'
 
 export const PageLayout = styled.div`height: 100%;`
@@ -18,6 +18,7 @@ export const MainContent = styled.main`
 
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	-webkit-overflow-scrolling: touch;
+	${({isloggedin, ismobile}) => isloggedin && !ismobile && css`max-width: calc(100% - 150px);`}}
 `
 
 export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`
