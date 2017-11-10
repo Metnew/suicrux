@@ -1,9 +1,8 @@
 // @flow
 import React, {Component} from 'react'
-import {Form, Message, Grid} from 'semantic-ui-react'
+import {Form, Message, Grid, Button} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 import _ from 'lodash'
-import {LoginButton} from './style'
 
 type Props = {
 	login: (data: Object) => void,
@@ -48,7 +47,7 @@ class LoginComponent extends Component {
 				textAlign="center"
 				relaxed
 				stretched
-				style={{height: '100%'}}
+				style={{flexGrow: 1}}
 			>
 				<Helmet>
 					<title>Suicrux:Login</title>
@@ -80,7 +79,9 @@ class LoginComponent extends Component {
 								value={password}
 								onChange={this.handleChange.bind(this)}
 							/>
-							<LoginButton content="Login" icon="sign in" />
+							<div style={{textAlign: 'center'}}>
+								<Button content="Login" icon="sign in" />
+							</div>
 						</Form>
 					</Grid.Column>
 				</Grid.Row>

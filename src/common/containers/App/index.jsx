@@ -159,7 +159,7 @@ class App extends Component {
 						<Header {...headerProps} />
 						<MainLayout>
 							<MainContent>
-								<MainContainer id="main-container">
+								<MainContainer>
 									{children}
 								</MainContainer>
 								<Footer />

@@ -11,7 +11,7 @@ export const MainLayout = styled.div`
 `
 
 export const MainContent = styled.main`
-	height: calc(100% - 72px);
+	min-height: calc(100% - 72px);
 	display: flex;
 	flex-direction: column;
 `
@@ -36,6 +36,8 @@ export const MainContainer = styled(Container)`
 	padding-right: 1rem;
 	margin-top: 2em;
 	margin-bottom: 1em;
+	flex-direction: column;
+	display: flex !important;
 	flex-grow: 1;
 `
 
