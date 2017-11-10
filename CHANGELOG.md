@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.5"></a>
+## [1.2.5](https://github.com/Metnew/suicrux/compare/v1.2.4...v1.2.5) (2017-11-10)
+
+
+### Bug Fixes
+
+* **.babelrc:** add ie11 to supported browsers ([b91b0e4](https://github.com/Metnew/suicrux/commit/b91b0e4))
+* **.babelrc:** remove transform-runtime, add ie11 in env ([e3cab45](https://github.com/Metnew/suicrux/commit/e3cab45))
+* **client:** remove statistic.css, add babyl-polyfill ([f22d0a2](https://github.com/Metnew/suicrux/commit/f22d0a2))
+* **components:** make footer smaller [height] ([8b7fb7f](https://github.com/Metnew/suicrux/commit/8b7fb7f))
+* **containers:** App styles formatting, remove unused code ([7ec19b8](https://github.com/Metnew/suicrux/commit/7ec19b8))
+* **containers:** fix SidebarSemanticPusherStyled max-width from SSR ([b2e136b](https://github.com/Metnew/suicrux/commit/b2e136b))
+* **containers:** make footer sticky in App/style ([1c7522a](https://github.com/Metnew/suicrux/commit/1c7522a))
+* **server:** add babel-polyfill in production ([8df5ff4](https://github.com/Metnew/suicrux/commit/8df5ff4))
+* **server:** default port in dev ([e9d22eb](https://github.com/Metnew/suicrux/commit/e9d22eb))
+* **server:** remove express-useragent ([fe054c3](https://github.com/Metnew/suicrux/commit/fe054c3))
+* **server:** remove useragent, layoutState, move getStats in req ([64c7ff6](https://github.com/Metnew/suicrux/commit/64c7ff6))
+* **styles:** make primaryColorText: white ([824d548](https://github.com/Metnew/suicrux/commit/824d548))
+* **styles:** remove unused .pushable styles ([307027e](https://github.com/Metnew/suicrux/commit/307027e))
+* **styles:** remove unused code for media ([9302da2](https://github.com/Metnew/suicrux/commit/9302da2))
+* **xhr_wrapper:** remove `getLocalToken` because we use cookies ([033c886](https://github.com/Metnew/suicrux/commit/033c886))
+
+
+
 <a name="1.2.4"></a>
 ## [1.2.4](https://github.com/Metnew/suicrux/compare/v1.2.3...v1.2.4) (2017-11-07)
 
