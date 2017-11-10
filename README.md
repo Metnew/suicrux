@@ -50,7 +50,7 @@ You're always free to use any other UI framework with `suicrux`.
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)** support.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
-- **[Fetch polyfill](https://github.com/matthew-andrews/isomorphic-fetch)**, **[Promise polyfill](https://github.com/stefanpenner/es6-promise)**
+- **[Fetch polyfill](https://github.com/matthew-andrews/isomorphic-fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
@@ -87,7 +87,6 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 - **[cookie-parser](https://www.npmjs.com/package/cookie-parser)** - cookie parsing middleware.
 - **[body-parser](https://github.com/expressjs/body-parser)** - body parsing middleware
 - **[compression](https://github.com/expressjs/compression)** - compression middleware (gzip).
-- **[express-useragent](https://github.com/biggora/express-useragent)** - detects device screen size on server
 - **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~.
 - **[raven](https://docs.sentry.io/clients/node/)** - Sentry for Node
 
