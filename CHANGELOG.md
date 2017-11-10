@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/Metnew/suicrux/compare/v1.3.2...v1.3.3) (2017-11-10)
+
+
+### Bug Fixes
+
+* **containers:** fix App styles ([56baaa0](https://github.com/Metnew/suicrux/commit/56baaa0))
+* **containers:** fix Login height ([e379234](https://github.com/Metnew/suicrux/commit/e379234))
+* **containers:** fix NotFound height ([e81d2de](https://github.com/Metnew/suicrux/commit/e81d2de))
+* **containers:** NotFoundLayout height ([635eb9e](https://github.com/Metnew/suicrux/commit/635eb9e))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/Metnew/suicrux/compare/v1.3.1...v1.3.2) (2017-11-10)
 
