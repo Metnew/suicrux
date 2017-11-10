@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/Metnew/suicrux/compare/v1.3.1...v1.3.2) (2017-11-10)
+
+
+### Features
+
+* **package:** remove "precommit" hook, add cross-env ([875ab6a](https://github.com/Metnew/suicrux/commit/875ab6a))
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/Metnew/suicrux/compare/v1.3.0...v1.3.1) (2017-11-10)
 
