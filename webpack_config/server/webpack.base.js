@@ -57,23 +57,7 @@ const baseWebpackConfig = {
 		}
 	},
 	module: {
-		rules: isomorphicWebpackConfig.module.rules.concat([
-			// NOTE: LQIP loader doesn't work with file-loader and url-loader :(
-			// `npm i --save-dev lqip-loader`
-			// {
-			//   test: /\.(jpe?g|png)$/i,
-			//   enforce: 'pre',
-			//   loaders: [
-			//     {
-			//       loader: 'lqip-loader',
-			//       options: {
-			//         path: '/images-lqip', // your image going to be in media folder in the output dir
-			//         name: '[name]-lqip.[hash:8].[ext]' // you can use [hash].[ext] too if you wish
-			//       }
-			//     }
-			//   ]
-			// }
-		])
+		rules: isomorphicWebpackConfig.module.rules
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.NormalModuleReplacementPlugin(
