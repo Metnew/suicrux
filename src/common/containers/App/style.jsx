@@ -18,7 +18,10 @@ export const MainContent = styled.main`
 
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	-webkit-overflow-scrolling: touch;
-	${({isloggedin, ismobile}) => isloggedin && !ismobile && css`max-width: calc(100% - 150px);`}}
+	${({isloggedin, ismobile}) => {
+		// using `ismobile` attr instead of `media` util is much smoother
+		return isloggedin && !ismobile && css`max-width: calc(100% - 150px);`
+	}};
 `
 
 export const SidebarSemanticPushableStyled = styled(Sidebar.Pushable)`

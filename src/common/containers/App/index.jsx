@@ -154,7 +154,7 @@ class App extends Component {
 			<PageLayout>
 				<SidebarSemanticPushableStyled>
 					{isLoggedIn && <Sidebar {...sidebarProps} />}
-					<SidebarSemanticPusherStyled isloggedin={isLoggedIn ? 'y' : ''} ismobile={isMobile ? 'y' : ''}>
+					<SidebarSemanticPusherStyled isloggedin={isLoggedIn ? '1' : ''} ismobile={isMobile ? '1' : ''}>
 						<StyledDimmer {...dimmerProps} />
 						<Header {...headerProps} />
 						<MainLayout>
