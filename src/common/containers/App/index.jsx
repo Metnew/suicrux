@@ -46,7 +46,7 @@ type Props = {
 	checkAuthLogic: Function,
 	toggleSidebar: Function,
 	// IsMobile can force component to re-render
-	isMobile: string,
+	isMobile: boolean,
 	isMobileXS: boolean,
 	isMobileSM: boolean
 }
@@ -147,22 +147,14 @@ class App extends Component {
 			//  page: true,
 			onClick: closeSidebar
 		}
-
-		// {/* XXX: There is an issue with props and styled-components, so we use .extend and re-render the component when isMobile/isLoggedIn change triggered. Using `style` attribute isn't a good solution.
-		//   Please, check: https://github.com/styled-components/styled-components/issues/439 */}
-		//   {/* <SidebarSemanticPusherStyled style={SidebarSemanticPusherStyleProps}> */}
-		const SidebarSemanticPusherStyledPatch =
-			!isMobile && isLoggedIn
-				? SidebarSemanticPusherStyled.extend`
-						max-width: calc(100% - 150px);
-					`
-				: SidebarSemanticPusherStyled
+		// XXX: There is an issue with props and styled-components, so we use custom attributes and handle them inside styled component
+		/** {@link: https://github.com/styled-components/styled-components/issues/439} */
 
 		return (
 			<PageLayout>
 				<SidebarSemanticPushableStyled>
 					{isLoggedIn && <Sidebar {...sidebarProps} />}
-					<SidebarSemanticPusherStyledPatch>
+					<SidebarSemanticPusherStyled isloggedin={isLoggedIn ? '1' : ''} ismobile={isMobile ? '1' : ''}>
 						<StyledDimmer {...dimmerProps} />
 						<Header {...headerProps} />
 						<MainLayout>
@@ -170,10 +162,10 @@ class App extends Component {
 								<MainContainer id="main-container">
 									{children}
 								</MainContainer>
+								<Footer />
 							</MainContent>
-							<Footer />
 						</MainLayout>
-					</SidebarSemanticPusherStyledPatch>
+					</SidebarSemanticPusherStyled>
 				</SidebarSemanticPushableStyled>
 			</PageLayout>
 		)

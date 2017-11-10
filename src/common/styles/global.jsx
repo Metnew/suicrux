@@ -17,8 +17,7 @@ injectGlobal`
   .pushable {
 	  height: 100%;
 	  overflow-x: hidden;
-	  padding: 0em !important;
-    -webkit-transform: translate3d(0, 0, 0);
+	  padding: 0;
     transform: translate3d(0, 0, 0);
   }
 

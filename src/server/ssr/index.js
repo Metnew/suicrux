@@ -3,7 +3,6 @@
  * @desc
  */
 import React from 'react'
-import chalk from 'chalk'
 import _ from 'lodash'
 import {renderToNodeStream} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
@@ -15,22 +14,12 @@ import getI18nData from 'server/i18n'
 import {matchPath} from 'react-router'
 import getStats from './stats'
 
-// it's better to define these objs in global scope (less memory consumption)
-let {assets, faviconsAssets} = {}
-getStats().then(result => {
-	assets = result.assets
-	faviconsAssets = result.faviconsAssets
-})
-
 export default async (req: express$Request, res: express$Response) => {
+	// probably, it'd better to define these objs in global scope
+	const {assets, faviconsAssets} = await getStats()
 	const {isLoggedIn, language} = req.user
-	const {isMobile} = req.useragent
-	console.log(chalk.cyan(`MOBILE DEVICE: ${isMobile}`))
 	const meState = {auth: {isLoggedIn}}
-	const layoutState = {isMobile}
-	const initialState: Object = isLoggedIn
-		? {me: meState, layout: layoutState}
-		: {layout: layoutState}
+	const initialState: Object = {me: meState}
 	const i18n = getI18nData(language)
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url

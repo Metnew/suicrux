@@ -8,12 +8,12 @@ import chalk from 'chalk'
 import server from '../../webpack_config/devServer'
 
 const app: express$Application = express()
-const httpPORT: number = +process.env.HTTP_PORT || 3000
+const port: number = +process.env.PORT || 3000
 
 server(app)
 
-app.listen(httpPORT, () => {
+app.listen(port, () => {
 	console.log(
-		chalk.green(`HTTP SERVER IS LISTENING ON http://localhost:${httpPORT}`)
+		chalk.green(`SERVER IS LISTENING ON http://localhost:${port}`)
 	)
 })

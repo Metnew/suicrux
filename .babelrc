@@ -1,15 +1,6 @@
 {
 	"plugins": [
 		["lodash", {"id": ["lodash"]}],
-		[
-			"transform-runtime",
-			{
-				"helpers": false,
-				"polyfill": true,
-				"regenerator": true,
-				"moduleName": "babel-runtime"
-			}
-		],
 		"syntax-dynamic-import",
 		[
 			"babel-plugin-styled-components",
@@ -23,7 +14,7 @@
 			"env",
 			{
 				"targets": {
-					"browsers": ["last 2 versions", "> 1%"]
+					"browsers": ["ie 11", "last 2 versions"]
 				}
 			}
 		],

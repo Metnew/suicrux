@@ -21,10 +21,10 @@ import 'semantic-ui-css/components/loader.css'
 import 'semantic-ui-css/components/reset.css'
 import 'semantic-ui-css/components/sidebar.css'
 import 'semantic-ui-css/components/site.css'
-import 'semantic-ui-css/components/statistic.css'
-// Polyfill for IE 11
-// P.S: i don't know does starter works in IE 11
-import 'promise-polyfill'
+// Polyfill fetch
+/** {@link: https://github.com/NYTimes/kyt/issues/227} */
+// NOTE: have some questions about polyfilling server
+import 'babel-polyfill'
 import 'isomorphic-fetch'
 // Application
 import React from 'react'

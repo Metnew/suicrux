@@ -13,7 +13,7 @@ const {
 	JWT_SECRET = 'secret',
 	ANALYZE_BUNDLE,
 	SENTRY_DSN,
-	HTTP_PORT = 3000
+	PORT = 3000
 } = process.env
 
 // Paths
@@ -42,7 +42,7 @@ export default {
 	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	SENTRY_DSN,
-	HTTP_PORT,
+	PORT,
 	// It's better to define pathes in one file
 	// and then use everywhere across app
 	srcPath,

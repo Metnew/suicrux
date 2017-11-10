@@ -8,7 +8,6 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
-import useragent from 'express-useragent'
 import Raven from 'raven'
 import authMiddleware from './auth'
 
@@ -30,7 +29,6 @@ export default (app: express$Application): express$Application => {
 		})
 	)
 	app.use(bodyParser.json())
-	app.use(useragent.express())
 	app.use(authMiddleware)
 	// The error handler must be before any other error middleware
 	app.use(Raven.errorHandler())

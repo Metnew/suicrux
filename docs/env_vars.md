@@ -24,7 +24,7 @@ Prefix of server API. This prefix is used by both client and server.
 
 ### Server:
 
-#### `HTTP_PORT (default: 3000)`:
+#### `PORT (default: 3000)`:
 Port on which your app will run.
 
 #### `JWT_SECRET (default: 'secret')`:

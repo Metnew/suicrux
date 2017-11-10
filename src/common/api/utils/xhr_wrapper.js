@@ -2,7 +2,7 @@
  * @flow
  */
 
-import {getLocalToken, resetLocalToken} from 'api/LocalStorageCookiesSvc'
+import {resetLocalToken} from 'api/LocalStorageCookiesSvc'
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 
@@ -117,18 +117,14 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 	// Default params for fetch = method + (Content-Type)
 	const defaults = {
 		method,
-		headers: {}
+		headers: {},
+		credentials: 'same-origin'
 	}
-	const token: string | null = getLocalToken()
+
 	const isRequestToExternalResource = /(http|https):\/\//.test(url)
 	const requestURL = isRequestToExternalResource
 		? url
 		: process.env.BASE_API + url
-
-	const requestAuthDecoration =
-		!isRequestToExternalResource && token
-			? {headers: {Authorization: `JWT ${token}`}}
-			: {}
 
 	const requestHeadersDataDecoration = getHeaderDataDecoration(data)
 
@@ -137,16 +133,9 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 			{},
 			defaults,
 			options,
-			requestAuthDecoration,
 			requestHeadersDataDecoration
 		)
 	)
-
-	// if (!isRequestToExternalResource) {
-	// console.log(`Request ${url} was sent to our domain`, request)
-	// } else {
-	// console.log(`Request ${url} was sent to external domain`, request)
-	// }
 
 	return {
 		request,
@@ -170,8 +159,3 @@ export const post = requestWrapper('POST')
 export const put = requestWrapper('PUT')
 export const patch = requestWrapper('PATCH')
 export const del = requestWrapper('DELETE')
-
-// USAGE:
-// get('https://www.google.com', options)
-//
-// post('https://www.google.com', data, options)
