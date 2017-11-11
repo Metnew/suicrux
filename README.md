@@ -44,8 +44,10 @@ You're always free to use any other UI framework with `suicrux`.
 
 [![bitHound Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm) [![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm)
 
-### Client:
+[PureCrux](https://github.com/Metnew/purecrux) - same as `suicrux`, but without i18n, rarely used features(manifest, favicons generation, etc) and example app.
 
+### Client:
+- **[Flow](https://flow.org/en/)** - static typing rocks!
 - **[React 16](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)** support.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
@@ -102,9 +104,10 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 "30-seconds guide":
 ```bash
   # Install
-  git clone --depth=1 https://github.com/Metnew/suicrux.git
+  git clone --depth=1 --single-branch https://github.com/Metnew/suicrux.git
   cd suicrux
   npm install
+  flow-typed install # install flow typings for libraries
   # Development
   npm run dev
   # Build
