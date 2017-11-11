@@ -14,9 +14,7 @@
 		}
 	},
 	"globals": {
-		"i18n": true,
-		"Raven": true,
-		"ga": true
+		"Raven": true	
 	},
 	"env": {
 		"browser": true,
