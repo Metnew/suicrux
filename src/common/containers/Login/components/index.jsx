@@ -64,6 +64,7 @@ class LoginComponent extends Component {
 								/>
 							)}
 							<Form.Input
+								id="username"
 								placeholder="Username"
 								name="username"
 								label="Username"
@@ -71,6 +72,7 @@ class LoginComponent extends Component {
 								onChange={this.handleChange.bind(this)}
 							/>
 							<Form.Input
+								id="password"
 								autoComplete="current-password"
 								placeholder="Password"
 								type="password"
