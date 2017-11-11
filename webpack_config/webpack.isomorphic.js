@@ -15,14 +15,10 @@ const definePluginArgs = {
 
 export default {
 	resolve: {
-		// Aliases that both server and client use
-		// Probably, it's a bad example, because here we defined only client's aliases.
 		alias: {
-			// locals: `${srcCommonPath}/i18n/`,
 			actions: `${srcCommonPath}/actions/`,
 			api: `${srcCommonPath}/api/`,
 			components: `${srcCommonPath}/components/`,
-			const: `${srcCommonPath}/const/`,
 			containers: `${srcCommonPath}/containers/`,
 			reducers: `${srcCommonPath}/reducers/`,
 			routing: `${srcCommonPath}/routing/`,
