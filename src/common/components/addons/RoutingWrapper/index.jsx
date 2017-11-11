@@ -26,7 +26,7 @@ export default class RoutingWrapper extends Component {
     * Maybe, It'd be even better to store this logic in a plain function rather than in a method.
     * {@link - src/common/components/addons/RouteAuth/index.jsx}
     */
-	authCheck (path: string): boolean {
+	authCheck = (path: string): boolean => {
 		const {store} = this.props
 		const {isLoggedIn} = getAuthState(store.getState())
 		const authPath = '/auth'
@@ -48,7 +48,7 @@ export default class RoutingWrapper extends Component {
 			// Is it "RouteAuth" (e.g. `protected route`) or "Route"?
 			const Tag = a.tag
 			// Determinates is user allowed to visit certain route
-			const canAccess = this.authCheck.bind(this)
+			const canAccess = this.authCheck
 			// Select only props that we need
 			const b = {canAccess, ...a}
 

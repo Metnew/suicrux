@@ -21,13 +21,13 @@ class LoginComponent extends Component {
 		password: ''
 	}
 
-	handleSubmit (e: Event) {
+	handleSubmit = (e: Event) => {
 		e.preventDefault()
 		const {username, password} = this.state
 		this.props.login({username, password})
 	}
 
-	handleChange (e: Event, {name, value}) {
+	handleChange = (e: Event, {name, value}) => {
 		this.setState({
 			[name]: value
 		})
@@ -55,7 +55,7 @@ class LoginComponent extends Component {
 				<Grid.Row>
 					<Grid.Column tablet={10} mobile={16} computer={6}>
 						{/* Consider using Redux-Form */}
-						<Form onSubmit={this.handleSubmit.bind(this)} {...loginFormProps}>
+						<Form onSubmit={this.handleSubmit} {...loginFormProps}>
 							{errors && (
 								<Message
 									error
@@ -68,7 +68,7 @@ class LoginComponent extends Component {
 								name="username"
 								label="Username"
 								value={username}
-								onChange={this.handleChange.bind(this)}
+								onChange={this.handleChange}
 							/>
 							<Form.Input
 								autoComplete="current-password"
@@ -77,7 +77,7 @@ class LoginComponent extends Component {
 								name="password"
 								label="Password"
 								value={password}
-								onChange={this.handleChange.bind(this)}
+								onChange={this.handleChange}
 							/>
 							<div style={{textAlign: 'center'}}>
 								<Button content="Login" icon="sign in" />
