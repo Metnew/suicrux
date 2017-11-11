@@ -14,7 +14,7 @@ type State = {
 	password: string
 }
 
-class LoginComponent extends Component {
+class LoginComponent extends Component <Props, State> {
 	props: Props
 	state: State = {
 		username: '',

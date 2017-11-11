@@ -51,7 +51,7 @@ type Props = {
 	isMobileSM: boolean
 }
 
-class App extends Component {
+class App extends Component <Props> {
 	props: Props
 	componentWillMount () {
 		const {isLoggedIn} = this.props

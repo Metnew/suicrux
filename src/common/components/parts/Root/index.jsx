@@ -25,7 +25,7 @@ type Props = {
 	routes: Array<RouteItem>
 }
 
-export default class Root extends Component {
+export default class Root extends Component <Props> {
 	props: Props
 
 	static defaultProps = {
