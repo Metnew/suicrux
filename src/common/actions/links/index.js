@@ -23,4 +23,11 @@ export type GET_LINKS_PENDING_TYPE = {
 	type: 'GET_LINKS_PENDING'
 }
 
+/**
+  Awral is not recommended for production usage now
+  But it can make your work with actions even simpler.
+  NOTE: I strongly recommend you check Awral's sources!
+  Awral is 910 bytes gzipped!
+  {@link https://github.com/Metnew/awral}
+*/
 export const GET_LINKS = awral(getLinksAPI)('GET_LINKS')
