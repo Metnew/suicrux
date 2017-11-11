@@ -1,7 +1,11 @@
 // @flow
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {Menu, Icon} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
+import {LOGOUT_AUTH} from 'actions/auth'
+import {getSidebarRoutes} from 'routing'
+import {getLayoutState} from 'selectors'
 import {
 	StyledSidebar,
 	SidebarLogo,
@@ -35,7 +39,8 @@ class SidebarComponent extends Component {
 		}
 
 		const routes = routing.map((route, i) => {
-			const {external, path, icon, name, strict, exact} = route
+			const {external, path, strict, exact, meta} = route
+			const {icon, name} = meta
 			// Props that are common for both "<a>" and "RR Link"
 			const basicProps = {
 				as: external ? 'a' : NavLink,
@@ -81,4 +86,21 @@ class SidebarComponent extends Component {
 	}
 }
 
-export default SidebarComponent
+const mapStateToProps = (state) => {
+	const {isMobile, sidebarOpened} = getLayoutState(state)
+	const routing = getSidebarRoutes()
+
+	return {
+		routing,
+		open: sidebarOpened,
+		isMobile
+	}
+}
+
+const mapDispatchToProps = (dispatch) => ({
+	logout () {
+		dispatch(LOGOUT_AUTH())
+	}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarComponent)

@@ -2,8 +2,11 @@
  * @flow
  */
 import React from 'react'
+import {connect} from 'react-redux'
 import {Icon} from 'semantic-ui-react'
-// import {FormattedMessage} from 'react-intl'
+import {withRouter, matchPath} from 'react-router'
+import _ from 'lodash'
+import {OPEN_SIDEBAR} from 'actions/layout'
 import {
 	StyledHeader,
 	HeaderInner,
@@ -12,6 +15,8 @@ import {
 	// HeaderButton
 } from './style'
 import {Spacer} from 'styles/base'
+import {getMetaRoutes} from 'routing'
+import {getAuthState, getLayoutState} from 'selectors'
 import Headroom from 'react-headroom'
 
 type Props = {
@@ -40,4 +45,25 @@ const Header = ({title, toggleSidebar, isLoggedIn, isMobile}: Props) => {
 	)
 }
 
-export default Header
+const mapStateToProps = (state, props) => {
+	console.log(props)
+	const {location: {pathname}} = props
+	const currentRoute = _.find(getMetaRoutes(), a => matchPath(pathname, a)) || {}
+	console.log(currentRoute)
+	const title = currentRoute.meta.name
+	const {isLoggedIn} = getAuthState(state)
+	const {isMobile} = getLayoutState(state)
+	return {
+		title,
+		isLoggedIn,
+		isMobile
+	}
+}
+
+const mapDispatchToProps = dispatch => ({
+	toggleSidebar () {
+		dispatch(OPEN_SIDEBAR())
+	}
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
