@@ -17,7 +17,7 @@ type Props = {
 	isLinksLoaded: boolean
 }
 
-class Links extends Component {
+class Links extends Component <Props> {
 	props: Props
 
 	componentDidMount () {

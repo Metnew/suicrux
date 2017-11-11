@@ -16,7 +16,7 @@ type Props = {
  * @desc This function returns JSX, so we can think about it as "stateless component"
  * @param {Function} authCheck checks is user logged in
  */
-export default class RoutingWrapper extends Component {
+export default class RoutingWrapper extends Component <Props> {
 	props: Props
 	/**
     * Checks Auth logic. Is user allowed to visit certain path?
