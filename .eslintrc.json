@@ -14,7 +14,7 @@
 		}
 	},
 	"globals": {
-		"Raven": true	
+		"Raven": true
 	},
 	"env": {
 		"browser": true,

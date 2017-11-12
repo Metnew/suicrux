@@ -46,8 +46,7 @@ type Props = {
 	isMobileSM: boolean
 }
 
-class App extends Component {
-	props: Props
+class App extends Component <Props> {
 	componentWillMount () {
 		const {isLoggedIn} = this.props
 		if (process.env.BROWSER) {

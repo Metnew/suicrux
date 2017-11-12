@@ -17,9 +17,7 @@ type Props = {
 	isLinksLoaded: boolean
 }
 
-class Links extends Component {
-	props: Props
-
+class Links extends Component <Props> {
 	componentDidMount () {
 		const {isLinksLoaded} = this.props
 		if (!isLinksLoaded) {

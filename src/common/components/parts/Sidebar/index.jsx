@@ -23,7 +23,7 @@ type Props = {
 	isMobile: boolean
 }
 
-class SidebarComponent extends Component {
+class SidebarComponent extends Component <Props> {
 	props: Props
 
 	render () {

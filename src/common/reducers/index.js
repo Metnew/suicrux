@@ -20,6 +20,9 @@ export default combineReducers({
 		links
 	}),
 	routing: routerReducer,
+	// NOTE: metaRouting is an addon for react-router-redux
+	// metaRouting allows you storing meta info (e.g. `meta` field) about the current route
+	// metaRouting is avaliable as package: `react-router-redux-meta`
 	metaRouting: metaRouting(getMetaRoutes())
 })
 

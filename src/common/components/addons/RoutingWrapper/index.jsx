@@ -19,7 +19,9 @@ const RoutingWrapper = (props: Props) => {
 	const routesRendered = routesToRender.map((a: RouteItem, i) => {
 		// Get tag for Route.
 		const Tag = a.tag
-		return <Tag key={i} {...a} />
+		const {component, path, exact, strict} = a
+		const b = {component, path, exact, strict}
+		return <Tag key={i} {...b} />
 	})
 	console.log(routesRendered)
 
