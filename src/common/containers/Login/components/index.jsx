@@ -1,8 +1,17 @@
 // @flow
 import React, {Component} from 'react'
-import {Form, Message, Grid, Button} from 'semantic-ui-react'
 import {Helmet} from 'react-helmet'
 import _ from 'lodash'
+import {
+	Form,
+	Grid,
+	StyledGrid,
+	GridColumn,
+	ErrorMessage,
+	FormInput,
+	LoginButton,
+	LoginButtonDiv
+} from './styles.js'
 
 type Props = {
 	login: (data: Object) => void,
@@ -40,52 +49,31 @@ class LoginComponent extends Component {
 		const loginFormProps = {error: !_.isEmpty(errors)}
 
 		return (
-			<Grid
-				verticalAlign="middle"
-				centered
-				columns={1}
-				textAlign="center"
-				relaxed
-				stretched
-				style={{flexGrow: 1}}
-			>
+			<StyledGrid>
 				<Helmet>
 					<title>Suicrux:Login</title>
 				</Helmet>
 				<Grid.Row>
-					<Grid.Column tablet={10} mobile={16} computer={6}>
+					<GridColumn>
 						{/* Consider using Redux-Form */}
 						<Form onSubmit={this.handleSubmit} {...loginFormProps}>
-							{errors && (
-								<Message
-									error
-									header={'Invalid credentials'}
-									content={'Your credentials are invalid.'}
-								/>
-							)}
-							<Form.Input
-								placeholder="Username"
-								name="username"
-								label="Username"
+							{errors && <ErrorMessage />}
+							<FormInput
 								value={username}
 								onChange={this.handleChange}
 							/>
-							<Form.Input
-								autoComplete="current-password"
-								placeholder="Password"
+							<FormInput
 								type="password"
-								name="password"
-								label="Password"
 								value={password}
 								onChange={this.handleChange}
 							/>
-							<div style={{textAlign: 'center'}}>
-								<Button content="Login" icon="sign in" />
-							</div>
+							<LoginButtonDiv>
+								<LoginButton />
+							</LoginButtonDiv>
 						</Form>
-					</Grid.Column>
+					</GridColumn>
 				</Grid.Row>
-			</Grid>
+			</StyledGrid>
 		)
 	}
 }
