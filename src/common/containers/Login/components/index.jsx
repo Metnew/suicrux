@@ -27,7 +27,7 @@ class LoginComponent extends Component {
 		this.props.login({username, password})
 	}
 
-	handleChange = (e: Event, {name, value}) => {
+	handleChange = (e: Event, {name, value}: {name: string, value: string}) => {
 		this.setState({
 			[name]: value
 		})
