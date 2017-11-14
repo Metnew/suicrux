@@ -13,3 +13,4 @@ all=warn
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=src/common
 module.system.node.resolve_dirname=src
+suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
