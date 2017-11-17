@@ -1,4 +1,5 @@
 # Suicrux: [demo](https://suicrux.now.sh/auth)
+> Demo sometimes becomes frozen by `now`. Retry in a few minutes, if it doesn't work.
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/suicrux.svg)](https://greenkeeper.io/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd637f7c63e74da199cec17f3f0e3fd9)](https://www.codacy.com/app/Metnew/suicrux?utm_source=github.com&utm_medium=referral&utm_content=Metnew/suicrux&utm_campaign=badger)
