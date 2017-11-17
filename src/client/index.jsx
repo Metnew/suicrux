@@ -4,7 +4,6 @@
 // import 'semantic-ui-css/semantic.css'
 // If you want only some components from SUI:
 import 'semantic-ui-css/components/button.css'
-// import 'semantic-ui-css/components/card.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/dimmer.css'
 import 'semantic-ui-css/components/divider.css'
@@ -21,9 +20,7 @@ import 'semantic-ui-css/components/loader.css'
 import 'semantic-ui-css/components/reset.css'
 import 'semantic-ui-css/components/sidebar.css'
 import 'semantic-ui-css/components/site.css'
-// Polyfill fetch
-/** {@link: https://github.com/NYTimes/kyt/issues/227} */
-// NOTE: have some questions about polyfilling server
+// Polyfills
 import 'babel-polyfill'
 import 'isomorphic-fetch'
 // Application
