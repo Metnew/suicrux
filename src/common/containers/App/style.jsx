@@ -39,6 +39,9 @@ export const MainContainer = styled(Container)`
 	flex-direction: column;
 	display: flex !important;
 	flex-grow: 1;
+	& > *:last-child {
+		flex-grow: 1;
+	}
 `
 
 export const StyledDimmer = styled(Dimmer)`
