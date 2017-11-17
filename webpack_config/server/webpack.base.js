@@ -9,6 +9,12 @@ const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, isProduction} = config
 // Clear dist dir before run
 rimraf(`${config.distPath}/server`, {}, () => {})
 
+const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
+const devtool = isProduction ? 'cheap-source-map' : 'eval'
+const entry = isProduction
+	? path.join(config.srcPath, './server')
+	: path.join(config.srcPath, './server/server')
+
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
 	'process.env.PORT': JSON.stringify(PORT),
@@ -16,12 +22,6 @@ const definePluginArgs = {
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
 	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH)
 }
-
-const devtool = isProduction ? 'cheap-source-map' : 'eval'
-const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
-const entry = isProduction
-	? path.join(config.srcPath, './server')
-	: path.join(config.srcPath, './server/server')
 
 let nodeModules = {}
 fs
