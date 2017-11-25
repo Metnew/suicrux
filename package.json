@@ -37,7 +37,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.76.0",
+    "semantic-ui-react": "^0.77.0",
     "serialize-javascript": "^1.4.0",
     "styled-components": "^2.2.3"
   },
