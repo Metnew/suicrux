@@ -4,6 +4,7 @@ import {Dimmer, Sidebar, Container} from 'semantic-ui-react'
 export const PageLayout = styled.div`height: 100%;`
 
 export const MainLayout = styled.div`
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	color: ${props => props.theme.primaryTextColor};
