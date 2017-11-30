@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.7"></a>
+## [1.3.7](https://github.com/Metnew/suicrux/compare/v1.3.3...v1.3.7) (2017-11-30)
+
+
+### Bug Fixes
+
+* **containers:** fix sticky footer on FF ([77f37ca](https://github.com/Metnew/suicrux/commit/77f37ca))
+* **package:** move pseudossl to optinalDeps ([c6c2146](https://github.com/Metnew/suicrux/commit/c6c2146))
+* **package:** update packages ([05bb1c6](https://github.com/Metnew/suicrux/commit/05bb1c6))
+* **package:** update semantic-ui-react to version 0.77.0 ([a4dc873](https://github.com/Metnew/suicrux/commit/a4dc873))
+* **package:** use [@commitlint](https://github.com/commitlint)/config-(angular -> conventional) ([b3a80d9](https://github.com/Metnew/suicrux/commit/b3a80d9))
+* **package:** use config-(angular -> conventional) ([4e0c96c](https://github.com/Metnew/suicrux/commit/4e0c96c))
+* **webpack_config:** clean autodll libraries list ([e289153](https://github.com/Metnew/suicrux/commit/e289153))
+
+
+
 <a name="1.3.6"></a>
 ## [1.3.6](https://github.com/Metnew/suicrux/compare/v1.3.3...v1.3.6) (2017-11-30)
 
