@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.5"></a>
+## [1.3.5](https://github.com/Metnew/suicrux/compare/v1.3.3...v1.3.5) (2017-11-30)
+
+
+### Bug Fixes
+
+* **containers:** fix sticky footer on FF ([77f37ca](https://github.com/Metnew/suicrux/commit/77f37ca))
+* **package:** update packages ([05bb1c6](https://github.com/Metnew/suicrux/commit/05bb1c6))
+* **package:** update semantic-ui-react to version 0.77.0 ([a4dc873](https://github.com/Metnew/suicrux/commit/a4dc873))
+* **webpack_config:** clean autodll libraries list ([e289153](https://github.com/Metnew/suicrux/commit/e289153))
+
+
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/Metnew/suicrux/compare/v1.3.3...v1.3.4) (2017-11-10)
 
