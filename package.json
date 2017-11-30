@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^5.1.1",
-    "@commitlint/config-angular": "^5.1.1",
+    "@commitlint/config-conventional": "^5.1.1",
     "assets-webpack-plugin": "^3.5.1",
     "autodll-webpack-plugin": "^0.3.5",
     "autoprefixer": "^7.1.6",
@@ -67,7 +67,6 @@
     "babel-runtime": "^6.26.0",
     "caniuse-lite": "^1.0.30000775",
     "circular-dependency-plugin": "^4.2.1",
-    "commitizen": "^2.9.6",
     "compression-webpack-plugin": "^1.0.1",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
@@ -151,7 +150,6 @@
     "lint:styles": "stylelint ./src/common/**/*.scss -s scss --config ./.stylelintrc --fix",
     "lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist",
     "flow": "flow",
-    "cz": "git-cz",
     "release": "standard-version",
     "prepush": "npm run test",
     "commitmsg": "commitlint -e $GIT_PARAMS"
