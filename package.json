@@ -4,7 +4,6 @@
   "main": "src/client/index.jsx",
   "description": "Advanced universal React starter built with a scale in mind.",
   "dependencies": {
-    "awral": "^1.2.1",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "chalk": "^2.3.0",
