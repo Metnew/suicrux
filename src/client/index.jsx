@@ -21,9 +21,7 @@ import 'semantic-ui-css/components/loader.css'
 import 'semantic-ui-css/components/reset.css'
 import 'semantic-ui-css/components/sidebar.css'
 import 'semantic-ui-css/components/site.css'
-// Polyfill fetch
-/** {@link: https://github.com/NYTimes/kyt/issues/227} */
-// NOTE: have some questions about polyfilling server
+// babel polyfill (ie 10-11) + fetch polyfill
 import 'babel-polyfill'
 import 'isomorphic-fetch'
 // Application
@@ -32,19 +30,18 @@ import {hydrate} from 'react-dom'
 import {AsyncComponentProvider} from 'react-async-component'
 import asyncBootstrapper from 'react-async-bootstrapper'
 import {configureApp, configureRootComponent} from 'common/app'
+import {AppContainer} from 'react-hot-loader'
 import type {GlobalState} from 'reducers'
 import type {i18nConfigObject} from 'types'
 
 if (process.env.NODE_ENV === 'production') {
 	require('common/pwa')
-} else if (process.env.NODE_ENV === 'development') {
 }
 
 const initialState: GlobalState = window.__INITIAL_STATE__ || {}
 const i18n: i18nConfigObject = window.__I18N__ || {}
 const asyncState: Object = window.__ASYNC_STATE__ || {}
-// NOTE: V8 doesn't optimize  `delete`
-// delete window.__INITIAL_STATE__
+
 const {store, routes, history} = configureApp(initialState)
 const RootComponent = configureRootComponent({
 	store,
@@ -54,9 +51,11 @@ const RootComponent = configureRootComponent({
 })
 
 const app = (
-	<AsyncComponentProvider rehydrateState={asyncState}>
-		{RootComponent}
-	</AsyncComponentProvider>
+	<AppContainer warnings={false}>
+		<AsyncComponentProvider rehydrateState={asyncState}>
+			{RootComponent}
+		</AsyncComponentProvider>
+	</AppContainer>
 )
 
 asyncBootstrapper(app).then(() => {

@@ -1,2 +1,2 @@
 // @flow
-export {get, post, put, patch, del} from './xhr_wrapper'
+export {get, post} from './xhr_wrapper'
