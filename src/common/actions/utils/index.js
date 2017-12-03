@@ -1,5 +1,5 @@
 // @flow
-import Awral from 'awral'
+import Awral from './awral'
 /**
  * `parseJSON()` adds property "ok"
  *  that identicates that response is OK
@@ -10,19 +10,15 @@ import Awral from 'awral'
  * @return {Boolean} - indicates was request successful or not
  */
 const check = (result: Object = {ok: false}): boolean => result.ok
-const beforeCheck = a => a
-const afterCheck = a => a.data
+const failBeforePending = a => a
+const transformResult = a => a.data
 // disable dispatch of *_FINALLY actions
 const finallyAction = null
-// disable dispatch of *_BEFORE_PENDING actions
-const beforePending = null
 
 /**
   Create default Awral
   Awral is not recommended for production usage now
   But it can make your work with actions even simpler.
   NOTE: I strongly recommend you check Awral sources!
-  Awral is 910 bytes gzipped!
-  {@link https://github.com/Metnew/awral}
 */
-export const awral = Awral.of({check, beforeCheck, afterCheck, finally: finallyAction, beforePending})
+export const awral = Awral.of({check, failBeforePending, transformResult, finally: finallyAction})
