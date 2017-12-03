@@ -6,7 +6,7 @@ import path from 'path'
 import manifest from '../static/manifest'
 
 const {
-	BASE_API = '/api/v1',
+	BASE_API = 'http://localhost:3000/api/v1',
 	NODE_ENV = 'development',
 	SENTRY_PUBLIC_DSN,
 	GA_ID,
