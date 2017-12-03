@@ -4,7 +4,7 @@ import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, isProduction} = config
+const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, publicPath, isProduction} = config
 
 // Clear dist dir before run
 rimraf(`${config.distPath}/server`, {}, () => {})
@@ -42,6 +42,7 @@ const baseWebpackConfig = {
 		path: path.join(config.distPath, './server'),
 		filename: 'index.js',
 		chunkFilename,
+		publicPath,
 		libraryTarget: 'commonjs2'
 	},
 	externals: nodeModules,
