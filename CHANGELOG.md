@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/Metnew/suicrux/compare/v1.3.3...v1.5.0) (2017-12-03)
+
+
+### Bug Fixes
+
+* **actions:** fix Awral configuration ([7344e04](https://github.com/Metnew/suicrux/commit/7344e04))
+* **api/utils:** fix FormData reqs, add fetch `mode` ([0ce99be](https://github.com/Metnew/suicrux/commit/0ce99be))
+* **client:** disable react-hot-loader warnings ([46fb13e](https://github.com/Metnew/suicrux/commit/46fb13e))
+* **containers:** fix sticky footer on FF ([77f37ca](https://github.com/Metnew/suicrux/commit/77f37ca))
+* **package:** move pseudossl to optinalDeps ([c6c2146](https://github.com/Metnew/suicrux/commit/c6c2146))
+* **package:** remove awral ([9952102](https://github.com/Metnew/suicrux/commit/9952102))
+* **package:** update packages ([05bb1c6](https://github.com/Metnew/suicrux/commit/05bb1c6))
+* **package:** update semantic-ui-react to version 0.77.0 ([a4dc873](https://github.com/Metnew/suicrux/commit/a4dc873))
+* **package:** update versions ([b11348c](https://github.com/Metnew/suicrux/commit/b11348c))
+* **package:** use [@commitlint](https://github.com/commitlint)/config-(angular -> conventional) ([b3a80d9](https://github.com/Metnew/suicrux/commit/b3a80d9))
+* **package:** use config-(angular -> conventional) ([4e0c96c](https://github.com/Metnew/suicrux/commit/4e0c96c))
+* **webpack_config:** add publicPath in webpack server config ([bb91d69](https://github.com/Metnew/suicrux/commit/bb91d69))
+* **webpack_config:** clean autodll libraries list ([e289153](https://github.com/Metnew/suicrux/commit/e289153))
+
+
+### Features
+
+* **actions:** add Awral directly to project ([9e34091](https://github.com/Metnew/suicrux/commit/9e34091))
+* **containers:** add data fetching in Links ([2e653e9](https://github.com/Metnew/suicrux/commit/2e653e9))
+* **webpack_config:** default BASE_API is not relative ([e6ef3ca](https://github.com/Metnew/suicrux/commit/e6ef3ca))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/Metnew/suicrux/compare/v1.3.3...v1.4.0) (2017-12-03)
 
