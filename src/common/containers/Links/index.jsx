@@ -20,15 +20,19 @@ type Props = {
 class Links extends Component {
 	props: Props
 
-	componentDidMount () {
-		const {isLinksLoaded} = this.props
+	async asyncBootstrap () {
+		const {isLinksLoaded, getLinks} = this.props
 		if (!isLinksLoaded) {
-			this.getLinks()
+			await getLinks()
 		}
+		return true
 	}
 
-	getLinks () {
-		this.props.getLinks()
+	componentDidMount () {
+		const {isLinksLoaded, getLinks} = this.props
+		if (!isLinksLoaded) {
+			getLinks()
+		}
 	}
 
 	render () {
@@ -57,8 +61,8 @@ function mapStateToProps (state: GlobalState) {
 }
 
 const mapDispatchToProps = dispatch => ({
-	getLinks () {
-		dispatch(GET_LINKS())
+	async getLinks () {
+		return dispatch(GET_LINKS())
 	}
 })
 
