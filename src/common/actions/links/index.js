@@ -9,18 +9,22 @@ export const GET_LINKS_PENDING = 'GET_LINKS_PENDING'
 
 export type GET_LINKS_SUCCESS_TYPE = {
 	type: 'GET_LINKS_SUCCESS',
+	meta: any,
 	payload: Array<LinkItem>
 }
 
 export type GET_LINKS_FAIL_TYPE = {
 	type: 'GET_LINKS_FAIL',
+	error: true,
+	meta: any,
 	payload: {
 		errors?: void | Object
 	}
 }
 
 export type GET_LINKS_PENDING_TYPE = {
-	type: 'GET_LINKS_PENDING'
+	type: 'GET_LINKS_PENDING',
+	meta: any
 }
 
 /**
