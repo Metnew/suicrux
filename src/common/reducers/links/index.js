@@ -27,7 +27,6 @@ export const initialState: State = {
 export function links (state: State = initialState, action: Action): State {
 	switch (action.type) {
 	case GET_LINKS_PENDING: {
-		console.log(action)
 		return {
 			...state,
 			errors: {},
@@ -35,7 +34,6 @@ export function links (state: State = initialState, action: Action): State {
 		}
 	}
 	case GET_LINKS_SUCCESS: {
-		console.log(action)
 		const entities = action.payload
 		return {
 			...state,
@@ -44,8 +42,7 @@ export function links (state: State = initialState, action: Action): State {
 		}
 	}
 	case GET_LINKS_FAIL: {
-		console.log(action)
-		const errors = action.payload
+		const {errors} = action.payload
 		return {
 			...state,
 			errors,
