@@ -25,9 +25,7 @@ type Props = {
 	routes: Array<RouteItem>
 }
 
-export default class Root extends Component <Props> {
-	props: Props
-
+export default class Root extends Component<Props> {
 	static defaultProps = {
 		SSR: {}
 	}
@@ -55,10 +53,7 @@ export default class Root extends Component <Props> {
 					<ThemeProvider theme={theme}>
 						<Router {...routerProps}>
 							<App routes={routes}>
-								<RoutingWrapper
-									store={store}
-									routes={getRouterRoutes(routes)}
-								/>
+								<RoutingWrapper routes={getRouterRoutes(routes)} />
 							</App>
 						</Router>
 					</ThemeProvider>
