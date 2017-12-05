@@ -4,10 +4,8 @@ import {auth as reducer, initialState} from 'reducers/auth'
 import {
 	LOGIN_AUTH_SUCCESS,
 	LOGIN_AUTH_FAIL,
-	LOGIN_AUTH_PENDING,
 	LOGOUT_AUTH_SUCCESS
 } from 'actions/auth'
-import {APPLICATION_INIT} from 'actions/common'
 
 describe('AUTH REDUCER', () => {
 	// Does reducer return `initialState` on empty action type?
@@ -17,10 +15,7 @@ describe('AUTH REDUCER', () => {
 
 	const loggedInState = {
 		...initialState,
-		isLoggedIn: true,
-		isLoading: false,
-		isLoaded: true,
-		token: 'iamnotatoken'
+		isLoggedIn: true
 	}
 	// Create test actions for our reducer.
 
@@ -28,22 +23,11 @@ describe('AUTH REDUCER', () => {
 		type: LOGOUT_AUTH_SUCCESS
 	}
 
-	const loginPending = {
-		type: LOGIN_AUTH_PENDING
-	}
-
-	const appInit = {
-		type: APPLICATION_INIT
-	}
-
 	it('should handle LOGOUT_AUTH_SUCCESS if already logged in', () => {
 		// User is logged out after LOGOUT_AUTH_SUCCESS
 		expect(reducer(loggedInState, logoutSuccess)).toEqual({
 			...loggedInState,
-			errors: {},
-			isLoggedIn: false,
-			isLoading: false,
-			isLoaded: true
+			isLoggedIn: false
 		})
 	})
 
@@ -59,12 +43,7 @@ describe('AUTH REDUCER', () => {
 		// User is logged out and has `errors` after LOGIN_AUTH_FAIL
 		expect(reducer(initialState, action)).toEqual({
 			...initialState,
-			isLoggedIn: false,
-			isLoaded: true,
-			isLoading: false,
-			errors: {
-				hello: 'world'
-			}
+			isLoggedIn: false
 		})
 	})
 
@@ -78,32 +57,7 @@ describe('AUTH REDUCER', () => {
 		// User is logged in and has `token` after LOGIN_AUTH_SUCCESS
 		expect(reducer(initialState, action)).toEqual({
 			...initialState,
-			isLoaded: true,
-			isLoading: false,
 			isLoggedIn: true
-		})
-	})
-
-	it('should handle LOGIN_AUTH_PENDING', () => {
-		// User is logged in and has `token` after LOGIN_AUTH_SUCCESS
-		expect(reducer(initialState, loginPending)).toEqual({
-			...initialState,
-			isLoading: true,
-			isLoaded: false
-		})
-	})
-
-	const customState = {
-		isLoading: false,
-		isLoaded: true
-	}
-
-	it('should merge initialState with current state on APPLICATION_INIT', () => {
-		// User is logged in and has `token` after LOGIN_AUTH_SUCCESS
-		expect(reducer(customState, appInit)).toEqual({
-			...initialState,
-			isLoading: false,
-			isLoaded: true
 		})
 	})
 })
