@@ -20,7 +20,7 @@ export default (app: express$Application): express$Application => {
 	// Add global middlewares
 	addMiddlewares(app)
 	// Add API
-	app.use(process.env.BASE_API, API)
+	app.use(process.env.API_PREFIX, API)
 	// Add SSR
 	app.use(SSR)
 	return app

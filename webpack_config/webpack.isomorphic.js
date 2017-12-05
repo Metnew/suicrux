@@ -6,23 +6,20 @@ import config from './config'
 import webpack from 'webpack'
 import CircularDependencyPlugin from 'circular-dependency-plugin'
 
-const {srcPath, rootPath, srcCommonPath, BASE_API, NODE_ENV} = config
+const {srcPath, rootPath, srcCommonPath, NODE_ENV, GA_ID, SENTRY_PUBLIC_DSN} = config
 
 const definePluginArgs = {
 	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-	'process.env.BASE_API': JSON.stringify(BASE_API)
+	'process.env.GA_ID': JSON.stringify(GA_ID),
+	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN)
 }
 
 export default {
 	resolve: {
-		// Aliases that both server and client use
-		// Probably, it's a bad example, because here we defined only client's aliases.
 		alias: {
-			// locals: `${srcCommonPath}/i18n/`,
 			actions: `${srcCommonPath}/actions/`,
 			api: `${srcCommonPath}/api/`,
 			components: `${srcCommonPath}/components/`,
-			const: `${srcCommonPath}/const/`,
 			containers: `${srcCommonPath}/containers/`,
 			reducers: `${srcCommonPath}/reducers/`,
 			routing: `${srcCommonPath}/routing/`,

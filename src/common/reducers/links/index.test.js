@@ -19,10 +19,8 @@ describe('LINKS REDUCER', () => {
 		}
 		expect(reducer(initialState, success)).toEqual({
 			...initialState,
-			count: 1,
 			entities: payload,
-			isLoaded: true,
-			isLoading: false
+			fetchStatus: 'loaded'
 		})
 	})
 
@@ -37,12 +35,10 @@ describe('LINKS REDUCER', () => {
 		}
 		expect(reducer(initialState, fail)).toEqual({
 			...initialState,
-			count: 0,
 			errors: {
 				hmm: 'thatsanerror'
 			},
-			isLoaded: true,
-			isLoading: false
+			fetchStatus: 'loaded'
 		})
 	})
 
@@ -53,8 +49,7 @@ describe('LINKS REDUCER', () => {
 		expect(reducer(initialState, pending)).toEqual({
 			...initialState,
 			errors: {},
-			isLoaded: false,
-			isLoading: true
+			fetchStatus: 'loading'
 		})
 	})
 })

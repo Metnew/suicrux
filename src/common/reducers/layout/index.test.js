@@ -1,17 +1,9 @@
 import {layout as reducer, initialState} from 'reducers/layout'
-import {
-	UI_CLOSE_SIDEBAR,
-	UI_OPEN_SIDEBAR,
-	UI_WINDOW_RESIZE
-} from 'actions/layout'
+import {UI_TOGGLE_SIDEBAR, UI_WINDOW_RESIZE} from 'actions/layout'
 import {LOCATION_CHANGE} from 'actions/common'
 
-const closeSidebar = {
-	type: UI_CLOSE_SIDEBAR
-}
-
-const openSidebar = {
-	type: UI_OPEN_SIDEBAR
+const toggleSidebar = {
+	type: UI_TOGGLE_SIDEBAR
 }
 
 const locationChange = {
@@ -37,10 +29,19 @@ describe('LAYOUT REDUCER', () => {
 		expect(reducer(undefined, {x: 'string'})).toEqual(initialState)
 	})
 
-	it('should handle UI_OPEN_SIDEBAR', () => {
-		expect(reducer(initialState, openSidebar)).toEqual({
+	it('should handle UI_TOGGLE_SIDEBAR (if sidebar is opened)', () => {
+		expect(reducer(initialState, toggleSidebar)).toEqual({
 			...initialState,
 			sidebarOpened: true
+		})
+	})
+
+	it('should handle UI_TOGGLE_SIDEBAR (if sidebar is closed)', () => {
+		expect(
+			reducer({...initialState, sidebarOpened: true}, toggleSidebar)
+		).toEqual({
+			...initialState,
+			sidebarOpened: false
 		})
 	})
 
@@ -48,26 +49,15 @@ describe('LAYOUT REDUCER', () => {
 		it('should handle WINDOW_RESIZE with 360px screen', () => {
 			expect(reducer(initialState, appInit)).toEqual({
 				...initialState,
-				isMobile: true,
-				isMobileXS: true,
-				isMobileSM: false
+				innerWidth: 360
 			})
 		})
 
 		it('should handle WINDOW_RESIZE with 1280px screen', () => {
 			expect(reducer(initialState, windowResize)).toEqual({
 				...initialState,
-				isMobile: false,
-				isMobileXS: false,
-				isMobileSM: false
+				innerWidth: 1280
 			})
-		})
-	})
-
-	it('should handle UI_CLOSE_SIDEBAR', () => {
-		expect(reducer(initialState, closeSidebar)).toEqual({
-			...initialState,
-			sidebarOpened: false
 		})
 	})
 

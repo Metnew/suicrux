@@ -29,7 +29,6 @@ const HTMLComponent = ({
 	const stringifiedAsyncState: string = serealize(asyncState)
 	const stringifiedState: string = serealize(initialState)
 	const stringifiedI18N: string = serealize(i18n)
-	const safeStringifiedState: string = stringifiedState.replace(/</g, '\\u003c')
 	const wrapFuncs = {
 		css: ({path}) => `<link rel="stylesheet" href="${path}" />`,
 		js: ({path}) => `<script src="${path}" type="text/javascript"></script>`
@@ -73,7 +72,7 @@ const HTMLComponent = ({
 			<body>`,
 		afterAppTag: `
 			<script>window.__ASYNC_STATE__ = ${stringifiedAsyncState}</script>
-			<script>window.__INITIAL_STATE__ = ${safeStringifiedState}</script>
+			<script>window.__INITIAL_STATE__ = ${stringifiedState}</script>
 			<script>window.__I18N__ = ${stringifiedI18N}</script>
 			${DLLScripts}
 			${jsTags}

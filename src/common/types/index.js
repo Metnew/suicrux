@@ -9,14 +9,16 @@ export type LinkItem = {
 export type RouteItem = {
 	path: string,
 	exact?: boolean,
-	external?: boolean,
-	lazy?: boolean,
 	strict?: boolean,
-	icon?: string,
-	name?: string,
-	sidebarVisible?: boolean,
-	tag?: React$Node | Function,
-	component?: React$Node | Function
+	tag: React$Node,
+  // RR4 <Redirect /> doesn't have component property
+	component?: React$Node,
+	external?: boolean,
+	meta: {
+		icon?: string,
+		name?: string,
+		sidebarVisible?: boolean,
+	}
 }
 
 export type i18nConfigObject = {

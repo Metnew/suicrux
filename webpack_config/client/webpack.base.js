@@ -7,9 +7,8 @@ import AssetsPlugin from 'assets-webpack-plugin'
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
 const {
-	GA_ID,
-	SENTRY_PUBLIC_DSN,
 	CLIENT_DIST_PATH,
+	BASE_API,
 	rootPath,
 	srcPath,
 	publicPath,
@@ -21,8 +20,7 @@ const {
 rimraf(`${config.distPath}/client`, {}, () => {})
 
 const definePluginArgs = {
-	'process.env.GA_ID': JSON.stringify(GA_ID),
-	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
+	'process.env.BASE_API': JSON.stringify(BASE_API),
 	'process.env.BROWSER': JSON.stringify(true)
 }
 

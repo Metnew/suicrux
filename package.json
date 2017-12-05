@@ -1,6 +1,6 @@
 {
   "name": "suicrux",
-  "version": "1.5.0",
+  "version": "2.2.0",
   "main": "src/client/index.jsx",
   "description": "Advanced universal React starter built with a scale in mind.",
   "dependencies": {
@@ -34,6 +34,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.0",
@@ -133,7 +134,6 @@
     "immutable": "^3.8.2",
     "normalizr": "^3.2.4",
     "query-string": "^5.0.1",
-    "pseudossl": "^1.0.1",
     "reselect": "^3.0.1",
     "store2": "^2.5.9",
     "webpack-shell-plugin": "^0.5.0"
@@ -160,7 +160,7 @@
     "name": "Vladimir Metnew",
     "email": "vladimirmetnew@gmail.com"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Metnew/suicrux.git"

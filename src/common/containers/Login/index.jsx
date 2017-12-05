@@ -1,36 +1,30 @@
 // @flow
 import React from 'react'
-import {connect} from 'react-redux'
-import {LOGIN_AUTH} from 'actions/auth'
-import LoginComponent from './components'
-import {getAuthState} from 'selectors'
-import type {GlobalState} from 'reducers'
-
-type Props = {
-	login: (data: Object) => void,
-	errors: Object
-}
+import LoginForm from './components/LoginForm'
+import {Helmet} from 'react-helmet'
+import {Grid} from 'semantic-ui-react'
 
 const Login = ({login, errors}: Props) => {
-	const props = {
-		login,
-		errors
-	}
-	return <LoginComponent {...props} />
+	return (
+		<Grid
+			verticalAlign="middle"
+			centered
+			columns={1}
+			textAlign="center"
+			relaxed
+			stretched
+			style={{flexGrow: 1}}
+		>
+			<Helmet>
+				<title>Suicrux:Login</title>
+			</Helmet>
+			<Grid.Row>
+				<Grid.Column tablet={10} mobile={16} computer={6}>
+					<LoginForm />
+				</Grid.Column>
+			</Grid.Row>
+		</Grid>
+	)
 }
 
-const mapStateToProps = (state: GlobalState) => {
-	const authState = getAuthState(state)
-	const {errors} = authState
-	return {
-		errors
-	}
-}
-
-const mapDispatchToProps = dispatch => ({
-	login (payload) {
-		dispatch(LOGIN_AUTH(payload))
-	}
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

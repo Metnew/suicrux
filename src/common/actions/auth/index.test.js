@@ -19,14 +19,6 @@ const mockStore = configureMockStore(middlewares)
 
 describe('Auth actions', () => {
 	describe('LOGIN_AUTH', () => {
-		const loginPending = {
-			meta: null,
-			type: LOGIN_AUTH_PENDING
-		}
-		/**
-	 * @arg {Function} done - is a callback that you need to execute,
-	 * If your action performing async task (e.g. request to API)
-	 */
 		test('creates LOGIN_AUTH_SUCCESS when LOGIN_AUTH was successful', done => {
 			const successPayload = {
 				token: 'nothing'
@@ -37,7 +29,6 @@ describe('Auth actions', () => {
 				.reply(200, successPayload)
 			// Create expected output of your action
 			const expectedActions = [
-				loginPending,
 				{
 					type: LOGIN_AUTH_SUCCESS,
 					payload: successPayload
@@ -61,7 +52,6 @@ describe('Auth actions', () => {
 			}
 
 			const expectedActions = [
-				loginPending,
 				{
 					type: LOGIN_AUTH_FAIL,
 					error: true,

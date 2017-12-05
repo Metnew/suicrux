@@ -1,34 +1,46 @@
 /**
  * @flow
  */
-import React, {Component} from 'react'
+import React from 'react'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import {Switch} from 'react-router-dom'
 import {getAuthState} from 'selectors'
+import _ from 'lodash'
 import type {RouteItem} from 'types'
 
 type Props = {
-	routes: RouteItem[],
-	store: Object
+	routesToRender: RouteItem[],
+	routes: RouteItem[]
 }
 
-/**
- * Returns application routing with protected by AuthCheck func routes
- * @desc This function returns JSX, so we can think about it as "stateless component"
- * @param {Function} authCheck checks is user logged in
- */
-export default class RoutingWrapper extends Component {
-	props: Props
+const RoutingWrapper = (props: Props) => {
+	const {routesToRender} = props
+	// render components that are inside Switch (main view)
+	const routesRendered = routesToRender.map((a: RouteItem, i) => {
+		// Get tag for Route.
+		const Tag = a.tag
+		return (
+			<Tag
+				key={i}
+				{..._.pick(a, 'component', 'path', 'exact', 'strict', 'to')}
+			/>
+		)
+	})
+
+	return <Switch>{routesRendered}</Switch>
+}
+
+function mapStateToProps (state, props) {
+	const {routes} = props
+	const {isLoggedIn} = getAuthState(state)
+
 	/**
-    * Checks Auth logic. Is user allowed to visit certain path?
-    * @param  {String} path next path to visit
-    * @return {Bool} is user allowed to visit next location?
-    * @desc Think about this method as static.
-    * Maybe, It'd be even better to store this logic in a plain function rather than in a method.
-    * {@link - src/common/components/addons/RouteAuth/index.jsx}
-    */
-	authCheck = (path: string): boolean => {
-		const {store} = this.props
-		const {isLoggedIn} = getAuthState(store.getState())
+	 * Checks Auth logic. Is user allowed to visit certain path?
+	 * @param  {String} path next path to visit
+	 * @return {Bool} is user allowed to visit next location?
+	 */
+	const authCheck = ({path}): boolean => {
 		const authPath = '/auth'
 		const allowedToVisitPath = [authPath]
 
@@ -40,21 +52,14 @@ export default class RoutingWrapper extends Component {
 		return true
 	}
 
-	render () {
-		const {routes} = this.props
-		// render components that are inside Switch (main view)
-		const routesRendered = routes.map((a: RouteItem, i) => {
-			// Get tag for Route.
-			// Is it "RouteAuth" (e.g. `protected route`) or "Route"?
-			const Tag = a.tag
-			// Determinates is user allowed to visit certain route
-			const canAccess = this.authCheck
-			// Select only props that we need
-			const b = {canAccess, ...a}
+	const onlyRealRoutes = routes.filter(a => a.component)
+	const onlyAllowedRealRoutes = onlyRealRoutes.filter(authCheck)
+	const onlyRedirects = routes.filter(a => a.to)
+	const routesToRender = onlyAllowedRealRoutes.concat(onlyRedirects)
 
-			return <Tag key={i} {...b} />
-		})
-
-		return <Switch>{routesRendered}</Switch>
+	return {
+		routesToRender
 	}
 }
+
+export default connect(mapStateToProps)(withRouter(RoutingWrapper))

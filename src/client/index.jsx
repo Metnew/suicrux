@@ -4,7 +4,6 @@
 // import 'semantic-ui-css/semantic.css'
 // If you want only some components from SUI:
 import 'semantic-ui-css/components/button.css'
-// import 'semantic-ui-css/components/card.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/dimmer.css'
 import 'semantic-ui-css/components/divider.css'
@@ -59,6 +58,7 @@ const app = (
 )
 
 asyncBootstrapper(app).then(() => {
+	console.log('__INITIAL_STATE__:', initialState)
 	hydrate(app, document.getElementById('app'))
 })
 

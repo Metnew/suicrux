@@ -12,8 +12,7 @@ const getDefaultBehaviours = () => {
 		'pending',
 		'success',
 		'fail',
-		'finally',
-		'failBeforePending'
+		'finally'
 	].map(a => {
 		return {[a]: actionCreator(a)}
 	})
@@ -40,7 +39,6 @@ const getDefaultBehaviours = () => {
 */
 function Awral (asyncFunction) {
 	return ACTION_NAME => (...args) => async (dispatch, getState) => {
-		// this.left, this.right
 		const basicArgs = {dispatch, getState, ACTION_NAME}
 		const meta = this.meta.apply(basicArgs, args) || null
 		const defaultArgs = {...basicArgs, meta}
@@ -71,7 +69,7 @@ function Awral (asyncFunction) {
 		if (isSuccess) {
 			this.success({...defaultArgs, payload})
 		} else {
-			this.fail({...defaultArgs, payload, status})
+			this.fail({...defaultArgs, payload, error: true})
 		}
 		this.finally && this.finally(defaultArgs)
 		return this.resolve({payload, status})

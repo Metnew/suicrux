@@ -45,30 +45,33 @@ You're always free to use any other UI framework with `suicrux`.
 
 [![bitHound Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm) [![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm)
 
-### Client:
+[PureCrux](https://github.com/Metnew/purecrux) - same as `suicrux`, but without i18n, rarely used features(manifest, favicons generation, etc) and example app.
 
+### Client:
+- **[Flow](https://flow.org/en/)** - static typing rocks!
 - **[React 16](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)** support.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
-- **[Fetch polyfill](https://github.com/matthew-andrews/isomorphic-fetch)**
+- **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
 - **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
+- **[react-async-bootstrapper](https://github.com/ctrlplusb/react-async-bootstrapper)** - for server-side data fetching
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
 - **[react-intl](https://github.com/yahoo/react-intl)** - i18n.
 - **[immutable](https://facebook.github.io/immutable-js/)**, **[reselect](https://github.com/reactjs/reselect)** and **[normalizr](https://github.com/paularmstrong/normalizr)**
+- **[redux-form](https://github.com/erikras/redux-form)** - most known React/Redux library for forms
 
 
 ### Build (Webpack):
 
-Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-skeleton) and includes:
-
 - Latest Webpack
+- both hot server and hot client, only one port and one filesystem used
 - Babel: `stage-1` and few cool plugins for development and production.
 - **HMR**, hotMiddleware,
-- Check your code with **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (that you can uncomment inside `postcss.config.js`)
+- **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (could be uncommented inside `postcss.config.js`)
 - **[Offline-plugin](https://github.com/NekR/offline-plugin)**
 - **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**
 - **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**
@@ -103,9 +106,10 @@ Based on [`tiny-universal-skeleton`](https://github.com/Metnew/tiny-universal-sk
 "30-seconds guide":
 ```bash
   # Install
-  git clone --depth=1 https://github.com/Metnew/suicrux.git
+  git clone --depth=1 --single-branch https://github.com/Metnew/suicrux.git
   cd suicrux
   npm install
+  flow-typed install # install flow typings for libraries
   # Development
   npm run dev
   # Build

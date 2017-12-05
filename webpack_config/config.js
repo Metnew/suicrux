@@ -6,7 +6,7 @@ import path from 'path'
 import manifest from '../static/manifest'
 
 const {
-	BASE_API = 'http://localhost:3000/api/v1',
+	BASE_API = '/api/v1',
 	NODE_ENV = 'development',
 	SENTRY_PUBLIC_DSN,
 	GA_ID,
@@ -35,6 +35,8 @@ export default {
 	isProduction,
 	// Env vars
 	BASE_API,
+	API_PREFIX: BASE_API,
+	BASE_API_SSR: `http://localhost:${PORT}${BASE_API}`,
 	NODE_ENV,
 	SENTRY_PUBLIC_DSN,
 	ANALYZE_BUNDLE,

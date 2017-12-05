@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
-import RouteAuth from 'components/addons/RouteAuth'
 import {asyncComponent} from 'react-async-component'
 import {Loader, Dimmer, Header, Icon} from 'semantic-ui-react'
 import _ from 'lodash'
+
 import type {RouteItem} from 'types'
 
 function asyncComponentCreator (url) {
@@ -37,54 +37,65 @@ function asyncComponentCreator (url) {
 	})
 }
 
-function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
-	const [AsyncDashoard, AsyncLinks, AsyncLogin, AsyncNotFound] = [
+function routingFnCreator (useFor: 'sidebar' | 'routing' | 'meta' | 'all' = 'all') {
+	const [AsyncDashoard, AsyncLogin, AsyncLinks, AsyncNotFound] = [
 		'Dashboard',
-		'Links',
 		'Login',
+		'Links',
 		'NotFound'
-	].map(a => {
-		return asyncComponentCreator(a)
-	})
+	].map(a => asyncComponentCreator(a))
+
+	const sidebarExternalLinks = [
+		{
+			external: true,
+			path: 'https://github.com/Metnew/suicrux',
+			meta: {
+				sidebarVisible: true,
+				icon: 'github',
+				name: 'Github'
+			}
+		}
+	]
 
 	const routes: Array<RouteItem> = [
 		{
 			path: '/',
 			exact: true,
-			icon: 'newspaper',
-			name: 'Dashboard',
-			sidebarVisible: true,
-			tag: RouteAuth,
-			component: AsyncDashoard
+			tag: Route,
+			component: AsyncDashoard,
+			meta: {
+				icon: 'newspaper',
+				name: 'Dashboard',
+				sidebarVisible: true
+			}
 		},
 		{
 			path: '/links',
-			name: 'Links',
 			exact: true,
-			icon: 'bookmark',
-			sidebarVisible: true,
-			tag: RouteAuth,
-			component: AsyncLinks
-		},
-		{
-			external: true,
-			path: 'https://github.com/Metnew/react-semantic.ui-starter',
-			icon: 'github',
-			name: 'Github',
-			sidebarVisible: true
+			tag: Route,
+			component: AsyncLinks,
+			meta: {
+				name: 'Links',
+				icon: 'bookmark',
+				sidebarVisible: true
+			}
 		},
 		{
 			path: '/auth',
-			name: 'Auth',
 			exact: true,
 			tag: Route,
-			component: AsyncLogin
+			component: AsyncLogin,
+			meta: {
+				name: 'Auth'
+			}
 		},
 		// Find the way to add/remove routes conditionally
 		{
-			name: '404',
-			tag: RouteAuth,
-			component: AsyncNotFound
+			tag: Route,
+			component: AsyncNotFound,
+			meta: {
+				name: '404'
+			}
 		},
 		{
 			tag: Redirect,
@@ -94,26 +105,36 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 
 	const fns = {
 		// Returns routing for sidebar menu
-		sidebar (x: Array<RouteItem> = routes) {
+		sidebar (x: Array<RouteItem> = routes.concat(sidebarExternalLinks)) {
 			return x
-				.filter(a => a.sidebarVisible)
-				.map(a =>
-					_.pick(a, ['path', 'name', 'icon', 'external', 'strict', 'exact'])
-				)
+				.filter(a => a.meta && a.meta.sidebarVisible)
+				.map(a => _.pick(a, ['path', 'meta', 'external', 'strict', 'exact']))
 		},
 		// Returns routing for React-Router
 		routing (x: Array<RouteItem> = routes) {
 			return x
-				.filter(a => !!a.tag)
+				.filter(a => a.tag)
 				.map(a =>
 					_.pick(a, [
 						'path',
-						'name',
 						'strict',
 						'exact',
 						'component',
 						'tag',
 						'to'
+					])
+				)
+		},
+		// Returns `meta` + path. used in Header
+		meta (x: Array<RouteItem> = routes) {
+			return x
+				.filter(a => a.tag)
+				.map(a =>
+					_.pick(a, [
+						'path',
+						'strict',
+						'exact',
+						'meta'
 					])
 				)
 		},
@@ -126,5 +147,6 @@ function routingFnCreator (useFor: 'sidebar' | 'routing' | 'all' = 'all') {
 }
 
 export const getRoutes = routingFnCreator()
+export const getMetaRoutes = routingFnCreator('meta')
 export const getSidebarRoutes = routingFnCreator('sidebar')
 export const getRouterRoutes = routingFnCreator('routing')
