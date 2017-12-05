@@ -5,7 +5,7 @@ import {Menu, Icon} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {getSidebarRoutes} from 'routing'
-import {getLayoutState} from 'selectors'
+import {getLayoutState, getLayoutMobileStatuses} from 'selectors'
 import {
 	StyledSidebar,
 	SidebarLogo,
@@ -87,7 +87,8 @@ class SidebarComponent extends Component <Props> {
 }
 
 const mapStateToProps = (state) => {
-	const {isMobile, sidebarOpened} = getLayoutState(state)
+	const {sidebarOpened} = getLayoutState(state)
+	const {isMobile} = getLayoutMobileStatuses(state)
 	const routing = getSidebarRoutes()
 
 	return {
