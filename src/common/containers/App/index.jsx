@@ -10,8 +10,8 @@ import Sidebar from 'components/parts/Sidebar'
 import Footer from 'components/parts/Footer'
 import Header from 'components/parts/Header'
 // Import actions
-import {CLOSE_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
-import {getAuthState, getLayoutState, getWindowInnerWidth} from 'selectors'
+import {TOGGLE_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
+import {getAuthState, getLayoutState, getWindowInnerWidth, getLayoutMobileStatuses} from 'selectors'
 import ReactGA from 'react-ga'
 // Import styled components
 import {
@@ -35,15 +35,13 @@ type Props = {
 	history: any,
 	// SidebarOpened can force component to re-render
 	sidebarOpened: boolean,
-	closeSidebar: Function,
+	toggleSidebar: Function,
 	// IsLoggedIn can force component to re-render
 	isLoggedIn: boolean,
 	handleWindowResize: Function,
 	checkAuthLogic: Function,
 	// IsMobile can force component to re-render
-	isMobile: boolean,
-	isMobileXS: boolean,
-	isMobileSM: boolean
+	isMobile: boolean
 }
 
 class App extends Component <Props> {
@@ -58,15 +56,14 @@ class App extends Component <Props> {
 	}
 
 	/**
-   * Checks that user is still allowed to visit path after props changed
-   * @param  {Object} nextProps
+   * Check that user is still allowed to visit path after props changed
    */
-	componentWillReceiveProps (nextProps: Props) {
-		this.checkAppAuthLogic(nextProps.isLoggedIn)
+	componentWillReceiveProps ({isLoggedIn}: Props) {
+		this.checkAppAuthLogic(isLoggedIn)
 	}
 
 	componentDidMount () {
-		if (process.env.SENTRY_PUBLIC_DSN) {
+		if (process.env.BROWSER && process.env.SENTRY_PUBLIC_DSN) {
 			const script = document.createElement('script')
 			script.type = 'text/javascript'
 			script.crossorigin = 'anonymous'
@@ -78,7 +75,7 @@ class App extends Component <Props> {
 			document.body.appendChild(script)
 		}
 
-		if (process.env.GA_ID) {
+		if (process.env.BROWSER && process.env.GA_ID) {
 			ReactGA.initialize(process.env.GA_ID)
 		}
 	}
@@ -97,18 +94,15 @@ class App extends Component <Props> {
 		const {
 			children,
 			sidebarOpened,
-			closeSidebar,
+			toggleSidebar,
 			isLoggedIn,
 			isMobile
 		} = this.props
 
 		const dimmerProps = {
-			//  Dimmed: true,
 			active: isLoggedIn && sidebarOpened,
 			page: true,
-			//  Blurring: true,
-			//  page: true,
-			onClick: closeSidebar
+			onClick: toggleSidebar
 		}
 		/** NOTE: There is an issue with props and styled-components,
 			So we use custom attributes and handle them inside styled component
@@ -139,15 +133,13 @@ class App extends Component <Props> {
 }
 
 function mapStateToProps (state: GlobalState) {
-	const layoutState = getLayoutState(state)
-	const authState = getAuthState(state)
-	const {sidebarOpened, isMobile, isMobileXS, isMobileSM} = layoutState
-	const {isLoggedIn} = authState
+	const {sidebarOpened} = getLayoutState(state)
+	const {isLoggedIn} = getAuthState(state)
+	const {isMobile} = getLayoutMobileStatuses(state)
+
 	return {
 		sidebarOpened,
 		isMobile,
-		isMobileXS,
-		isMobileSM,
 		isLoggedIn
 	}
 }
@@ -155,8 +147,8 @@ function mapStateToProps (state: GlobalState) {
 function mapDispatchToProps (dispatch) {
 	let resizer
 	return {
-		closeSidebar () {
-			dispatch(CLOSE_SIDEBAR())
+		toggleSidebar () {
+			dispatch(TOGGLE_SIDEBAR())
 		},
 		/**
          * Immediately push to homePath('/'), if user is logged.
