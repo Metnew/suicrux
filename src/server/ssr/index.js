@@ -18,8 +18,8 @@ export default async (req: express$Request, res: express$Response) => {
 	// probably, it'd better to define these objs in global scope
 	const {assets, faviconsAssets} = await getStats()
 	const {isLoggedIn, language} = req.user
-	const meState = {auth: {isLoggedIn}}
-	const initialState: Object = {me: meState}
+	const authState = {auth: {isLoggedIn}}
+	const initialState: Object = {...authState}
 	const i18n = getI18nData(language)
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url
