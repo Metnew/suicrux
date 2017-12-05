@@ -2,6 +2,60 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/Metnew/suicrux/compare/v1.3.3...v2.1.0) (2017-12-05)
+
+
+### Bug Fixes
+
+* **actions:** fix awral config ([e729bee](https://github.com/Metnew/suicrux/commit/e729bee))
+* **actions:** in awral fix this.fail ([af4ae75](https://github.com/Metnew/suicrux/commit/af4ae75))
+* **actions:** insert awral directly in project ([1a79238](https://github.com/Metnew/suicrux/commit/1a79238))
+* **actions:** no pending for Login Auth ([84f8aa8](https://github.com/Metnew/suicrux/commit/84f8aa8))
+* **actions/links:** fix flow types ([f471a58](https://github.com/Metnew/suicrux/commit/f471a58))
+* **actoins:** fix tests ([ad3fcf6](https://github.com/Metnew/suicrux/commit/ad3fcf6))
+* **client:** log initial state ([50ba267](https://github.com/Metnew/suicrux/commit/50ba267))
+* **components:** fix rendering of Redirects in RoutingWrapper ([4b72701](https://github.com/Metnew/suicrux/commit/4b72701))
+* **components:** in Root don't pass store to RoutingWrapper ([4c15942](https://github.com/Metnew/suicrux/commit/4c15942))
+* **components:** in Sidebar use getLayoutMobileStatuses ([dfb6eb0](https://github.com/Metnew/suicrux/commit/dfb6eb0))
+* **components:** remove components tests ([91fa196](https://github.com/Metnew/suicrux/commit/91fa196))
+* **components:** RoutingWrapper -> container, render only allowed routes ([d6b3a05](https://github.com/Metnew/suicrux/commit/d6b3a05))
+* **componets:** in Sidebar don't pass routing as props ([d35af3b](https://github.com/Metnew/suicrux/commit/d35af3b))
+* merge master ([d84d865](https://github.com/Metnew/suicrux/commit/d84d865))
+* **containers:** add "id" property to Login inputs ([d6c3beb](https://github.com/Metnew/suicrux/commit/d6c3beb))
+* **containers:** in App use getLayoutMobileStatuses selector ([70bbf9d](https://github.com/Metnew/suicrux/commit/70bbf9d))
+* **containers:** make Dashboard simpler ([2384c6b](https://github.com/Metnew/suicrux/commit/2384c6b))
+* **containers:** remove LinksComponent ([0e97e37](https://github.com/Metnew/suicrux/commit/0e97e37))
+* **containers:** rename LinkItemComponent -> LinkItem ([2b33eac](https://github.com/Metnew/suicrux/commit/2b33eac))
+* **eslint:** disable "jsx-a11y/label-has-for" rule ([5e5c950](https://github.com/Metnew/suicrux/commit/5e5c950))
+* **manifest:** add correct start_url property ([59da7fb](https://github.com/Metnew/suicrux/commit/59da7fb))
+* **reducers:** don't handle LOGIN_AUTH_PENDING ([ca39340](https://github.com/Metnew/suicrux/commit/ca39340))
+* **reducers:** fix tests ([b260685](https://github.com/Metnew/suicrux/commit/b260685))
+* **reducers:** in links fix GET_LINKS_FAIL ([4a5f6bb](https://github.com/Metnew/suicrux/commit/4a5f6bb))
+* **server:** fix initialState creation ([82c73c4](https://github.com/Metnew/suicrux/commit/82c73c4))
+* merge master ([5528074](https://github.com/Metnew/suicrux/commit/5528074))
+* **server:** remove safeStringifiedState from HTMLComponent ([106fef0](https://github.com/Metnew/suicrux/commit/106fef0))
+* **webpack_config:** clean autodll libraries list ([e289153](https://github.com/Metnew/suicrux/commit/e289153))
+* **webpack_config:** GA_ID/sentr to global conf, add BASE_API_SSR var ([c836e7c](https://github.com/Metnew/suicrux/commit/c836e7c))
+* **webpack_config:** remove unused alias from webpack.isomorphic ([d30c0f8](https://github.com/Metnew/suicrux/commit/d30c0f8))
+
+
+### Features
+
+* **server:** use API_PREFIX env var for api prefix ([00ff85c](https://github.com/Metnew/suicrux/commit/00ff85c))
+* make Sidebar and Header autonomous containers ([9b8192a](https://github.com/Metnew/suicrux/commit/9b8192a))
+* **actions:** layout - OPEN/CLOSE_SIDEBAR -> TOGGLE_SIDEBAR ([fbcfc67](https://github.com/Metnew/suicrux/commit/fbcfc67))
+* **actions:** pass `meta` to LOGIN_AUTH_SUCCESS ([e2de72f](https://github.com/Metnew/suicrux/commit/e2de72f))
+* **components:** in header add getLayoutMobileStatuses ([3cd0ce1](https://github.com/Metnew/suicrux/commit/3cd0ce1))
+* **containers:** rewrite Login using redux-form ([ba56d6d](https://github.com/Metnew/suicrux/commit/ba56d6d))
+* **containers:** simplify Links container, add data fetching ([a303334](https://github.com/Metnew/suicrux/commit/a303334))
+* **reducers:** add `metarouter` reducer ([eaeffed](https://github.com/Metnew/suicrux/commit/eaeffed))
+* **reducers:** simplify redurecers, remove metarouter ([7bc8676](https://github.com/Metnew/suicrux/commit/7bc8676))
+* **routing:** add getMetaRoutes func ([44732f4](https://github.com/Metnew/suicrux/commit/44732f4))
+* **selectors:** fix getAuthState, add getLayoutMobileStatuses selector ([757c302](https://github.com/Metnew/suicrux/commit/757c302))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/Metnew/suicrux/compare/v1.3.3...v2.0.0) (2017-12-05)
 
