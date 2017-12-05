@@ -4,10 +4,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Helmet from 'react-helmet'
-import {Loader} from 'semantic-ui-react'
+import {Loader, Grid, List} from 'semantic-ui-react'
 import {GET_LINKS} from 'actions/links'
-import LinksComponent from './components'
+import LinkItem from './components/LinkItem'
 import {getEntitiesLinksState} from 'selectors'
+import _ from 'lodash'
 import type {GlobalState} from 'reducers'
 
 type Props = {
@@ -17,16 +18,22 @@ type Props = {
 	isLinksLoaded: boolean
 }
 
-class Links extends Component <Props> {
-	componentDidMount () {
-		const {isLinksLoaded} = this.props
+class Links extends Component {
+	props: Props
+
+	async asyncBootstrap () {
+		const {isLinksLoaded, getLinks} = this.props
 		if (!isLinksLoaded) {
-			this.getLinks()
+			await getLinks()
 		}
+		return true
 	}
 
-	getLinks () {
-		this.props.getLinks()
+	componentDidMount () {
+		const {isLinksLoaded, getLinks} = this.props
+		if (!isLinksLoaded) {
+			getLinks()
+		}
 	}
 
 	render () {
@@ -39,7 +46,15 @@ class Links extends Component <Props> {
 				{isLinksLoading ? (
 					<Loader active>Loading data...</Loader>
 				) : (
-					<LinksComponent links={links} />
+					<Grid stackable>
+						<Grid.Column width={16}>
+							<List relaxed divided animated>
+								{_.map(links, (link: LinkItem, i) => {
+									return <LinkItem key={i} item={link} />
+								})}
+							</List>
+						</Grid.Column>
+					</Grid>
 				)}
 			</div>
 		)
@@ -49,14 +64,14 @@ class Links extends Component <Props> {
 function mapStateToProps (state: GlobalState) {
 	const linksState = getEntitiesLinksState(state)
 	const links = linksState.entities
-	const isLinksLoading = linksState.isLoading
-	const isLinksLoaded = linksState.isLoaded
+	const isLinksLoading = linksState.fetchStatus === 'loading'
+	const isLinksLoaded = linksState.fetchStatus === 'loaded'
 	return {links, isLinksLoading, isLinksLoaded}
 }
 
 const mapDispatchToProps = dispatch => ({
-	getLinks () {
-		dispatch(GET_LINKS())
+	async getLinks () {
+		return dispatch(GET_LINKS())
 	}
 })
 
