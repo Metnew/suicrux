@@ -6,7 +6,6 @@ import {resetLocalToken} from 'api/LocalStorageCookiesSvc'
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 
-// NOTE: optional code, feel free to remove
 /**
  * Create request wrapper for certain method
  * @param  {String} method - Request method
@@ -37,7 +36,7 @@ const requestWrapper = (
 			options,
 			cb
 		})
-		// create request!
+
 		return fetch(requestURL, request)
 			.then(checkStatus)
 			.then(parseJSON)
@@ -84,7 +83,7 @@ function checkStatus (response: Response): Response {
 	if (status >= 200 && status < 300) {
 		// Everything is ok
 	} else if (status >= 300 && status < 400) {
-		// 300 Multiple Choices
+		// 300 - Multiple Choices
 		// 301 - Moved Permanently,
 		// 302 - Found, Moved Temporarily
 		// 304 - not modified
@@ -118,23 +117,16 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 	const defaults = {
 		method,
 		headers: {},
-		credentials: 'same-origin'
+		mode: process.env.NODE_ENV === 'development' ? 'cors' : 'same-origin'
 	}
-
 	const isRequestToExternalResource = /(http|https):\/\//.test(url)
 	const requestURL = isRequestToExternalResource
 		? url
 		: process.env.BASE_API + url
 
 	const requestHeadersDataDecoration = getHeaderDataDecoration(data)
-
 	const request = cb(
-		_.merge(
-			{},
-			defaults,
-			options,
-			requestHeadersDataDecoration
-		)
+		_.merge({}, defaults, options, requestHeadersDataDecoration)
 	)
 
 	return {
@@ -144,18 +136,38 @@ function decorateRequest ({method, url, data, options, cb}): Object {
 }
 
 function getHeaderDataDecoration (data): Object {
-	const requesDataDecoration = data ? {body: JSON.stringify(data)} : {}
+	const isDataExist = !!data
+	const isFormData = data instanceof FormData
+	const transform = {
+		formdata (data) {
+			return {
+				body: data
+			}
+		},
+		json (data) {
+			return {
+				headers: {'Content-Type': 'application/json; charset=UTF-8'},
+				body: JSON.stringify(data)
+			}
+		},
+		noop () {
+			return {}
+		}
+	}
 
-	const requestContentTypeDecoration =
-		data instanceof FormData
-			? {}
-			: {headers: {'Content-Type': 'application/json; charset=UTF-8'}}
+	// if no data -> return empty obj
+	// if data -> js obj or else?
+	// if isnot obj -> just data
+	// if is js obj => jsonify
+	const type = !isDataExist ? 'noop' : isFormData ? 'formdata' : 'json'
 
-	return {...requesDataDecoration, ...requestContentTypeDecoration}
+	return transform[type](data)
 }
 
 export const get = requestWrapper('GET')
 export const post = requestWrapper('POST')
-export const put = requestWrapper('PUT')
-export const patch = requestWrapper('PATCH')
-export const del = requestWrapper('DELETE')
+
+// USAGE:
+// get('https://www.google.com', options)
+//
+// post('https://www.google.com', data, options)
