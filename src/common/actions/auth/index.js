@@ -28,9 +28,9 @@ export type LOGOUT_AUTH_SUCCESS_TYPE = {type: 'LOGOUT_AUTH_SUCCESS'}
   {@link https://github.com/Metnew/awral}
 */
 const awralLogin = awral.of({
-	success ({payload, dispatch}) {
+	success ({payload, dispatch, meta}) {
 		setLocalToken(payload.token)
-		dispatch({type: LOGIN_AUTH_SUCCESS, payload})
+		dispatch({type: LOGIN_AUTH_SUCCESS, payload, meta})
 	}
 })
 
