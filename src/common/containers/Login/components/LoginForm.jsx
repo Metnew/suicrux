@@ -13,7 +13,7 @@ import {LOGIN_AUTH} from 'actions/auth'
 import type {FormProps} from 'redux-form'
 
 type Props = {
-	login: (data: Object) => void,
+	login: (data: Object) => void
 } & FormProps
 
 class LoginComponent extends Component<Props, State> {
@@ -89,8 +89,7 @@ const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
 	async login (data) {
-		const res = await dispatch(LOGIN_AUTH(data))
-		return res
+		return dispatch(LOGIN_AUTH(data))
 	}
 })
 
