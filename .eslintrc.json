@@ -26,6 +26,7 @@
 	"rules": {
 		"no-tabs": 0,
 		"no-unused-vars": 1,
-		"indent": [2, "tab"]
+		"indent": [2, "tab"],
+		"jsx-a11y/label-has-for": 0
 	}
 }
