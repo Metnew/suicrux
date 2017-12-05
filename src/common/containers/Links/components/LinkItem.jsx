@@ -2,12 +2,12 @@
 import React from 'react'
 import {List} from 'semantic-ui-react'
 
-import type {LinkItem} from 'types'
+import type {LinkItem as LinkItemType} from 'types'
 type Props = {
-	item: LinkItem
+	item: LinkItemType
 }
 
-const LinkItemComponent = ({item}: Props) => {
+const LinkItem = ({item}: Props) => {
 	const {header, icon, desc, link} = item
 	return (
 		<List.Item>
@@ -20,4 +20,4 @@ const LinkItemComponent = ({item}: Props) => {
 	)
 }
 
-export default LinkItemComponent
+export default LinkItem
