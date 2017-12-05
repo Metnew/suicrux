@@ -7,7 +7,7 @@ import {
 	LOGOUT_AUTH_SUCCESS
 } from 'actions/auth'
 import {APPLICATION_INIT} from 'actions/common'
-//
+
 import type {
 	LOGIN_AUTH_FAIL_TYPE,
 	LOGIN_AUTH_PENDING_TYPE,
@@ -17,8 +17,6 @@ import type {
 import type {APPLICATION_INIT_TYPE} from 'actions/common'
 
 export type State = {
-	isLoading: boolean,
-	isLoaded: boolean,
 	isLoggedIn: boolean,
 	errors: Object
 }
@@ -31,8 +29,6 @@ type Action =
 	| LOGOUT_AUTH_SUCCESS_TYPE
 
 export const initialState: State = {
-	isLoading: false,
-	isLoaded: false,
 	isLoggedIn: hasLocalToken(),
 	errors: {}
 }
@@ -44,8 +40,6 @@ export function auth (state: State = initialState, action: Action): State {
 	case LOGOUT_AUTH_SUCCESS: {
 		return {
 			...state,
-			isLoading: false,
-			isLoaded: true,
 			isLoggedIn: false,
 			errors: {}
 		}
@@ -54,8 +48,6 @@ export function auth (state: State = initialState, action: Action): State {
 		const {errors} = action.payload
 		return {
 			...state,
-			isLoading: false,
-			isLoaded: true,
 			isLoggedIn: false,
 			errors
 		}
@@ -63,16 +55,12 @@ export function auth (state: State = initialState, action: Action): State {
 	case LOGIN_AUTH_SUCCESS: {
 		return {
 			...state,
-			isLoading: false,
-			isLoaded: true,
 			isLoggedIn: true
 		}
 	}
 	case LOGIN_AUTH_PENDING: {
 		return {
-			...state,
-			isLoading: true,
-			isLoaded: false
+			...state
 		}
 	}
 	default:

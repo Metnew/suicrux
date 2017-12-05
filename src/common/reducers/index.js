@@ -1,31 +1,27 @@
 // @flow
 import {combineReducers} from 'redux'
 import {routerReducer} from 'react-router-redux'
-import {getMetaRoutes} from 'routing'
+import {reducer as reduxFormReducer} from 'redux-form'
 
 import type {State as AuthState} from 'reducers/auth'
 import type {State as LayoutState} from 'reducers/layout'
 import type {State as EntitiesLinksState} from 'reducers/links'
 
 import {layout} from './layout'
-import {metaRouting} from './metarouter'
 import {links} from './links'
 import {auth} from './auth'
 
 // Root reducer
 export default combineReducers({
 	layout,
-	me: combineReducers({auth}),
+	auth,
 	entities: combineReducers({
 		links
 	}),
 	routing: routerReducer,
-	// NOTE: metaRouting is an addon for react-router-redux
-	// metaRouting allows you storing meta info (e.g. `meta` field) about the current route
-	// metaRouting is avaliable as package: `react-router-redux-meta`
-	metaRouting: metaRouting(getMetaRoutes())
+	form: reduxFormReducer
 })
 
-export type GlobalState = {layout: LayoutState} & {me: {auth: AuthState}} & {
+export type GlobalState = {layout: LayoutState} & {auth: AuthState} & {
 		entities: {links: EntitiesLinksState}
 	}

@@ -10,8 +10,7 @@ import type {GET_LINKS_SUCCESS_TYPE, GET_LINKS_FAIL_TYPE, GET_LINKS_PENDING_TYPE
 export type State = {
 	entities: Array<LinkItem>,
 	errors: Object,
-	isLoading: boolean,
-	isLoaded: boolean
+	fetchStatus: 'none' | 'loaded' | 'loading'
 }
 
 type Action =
@@ -22,41 +21,35 @@ type Action =
 export const initialState: State = {
 	entities: [],
 	errors: {},
-	isLoading: false,
-	isLoaded: false,
-	count: 0
+	fetchStatus: 'none'
 }
 
 export function links (state: State = initialState, action: Action): State {
 	switch (action.type) {
 	case GET_LINKS_PENDING: {
+		console.log(action)
 		return {
 			...state,
 			errors: {},
-			isLoaded: false,
-			isLoading: true
+			fetchStatus: 'loading'
 		}
 	}
 	case GET_LINKS_SUCCESS: {
+		console.log(action)
 		const entities = action.payload
-		const count = entities.length
 		return {
 			...state,
-			isLoaded: true,
-			isLoading: false,
 			entities,
-			count
+			fetchStatus: 'loaded'
 		}
 	}
 	case GET_LINKS_FAIL: {
-		const {errors} = action.payload
+		console.log(action)
+		const errors = action.payload
 		return {
 			...state,
 			errors,
-			isLoaded: true,
-			isLoading: false,
-			entities: [],
-			count: 0
+			fetchStatus: 'loaded'
 		}
 	}
 	default:
