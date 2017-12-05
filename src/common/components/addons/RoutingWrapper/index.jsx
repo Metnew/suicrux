@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {Switch} from 'react-router-dom'
 import {getAuthState} from 'selectors'
+import _ from 'lodash'
 import type {RouteItem} from 'types'
 
 type Props = {
@@ -19,11 +20,13 @@ const RoutingWrapper = (props: Props) => {
 	const routesRendered = routesToRender.map((a: RouteItem, i) => {
 		// Get tag for Route.
 		const Tag = a.tag
-		const {component, path, exact, strict} = a
-		const b = {component, path, exact, strict}
-		return <Tag key={i} {...b} />
+		return (
+			<Tag
+				key={i}
+				{..._.pick(a, 'component', 'path', 'exact', 'strict', 'to')}
+			/>
+		)
 	})
-	console.log(routesRendered)
 
 	return <Switch>{routesRendered}</Switch>
 }
@@ -33,10 +36,10 @@ function mapStateToProps (state, props) {
 	const {isLoggedIn} = getAuthState(state)
 
 	/**
-    * Checks Auth logic. Is user allowed to visit certain path?
-    * @param  {String} path next path to visit
-    * @return {Bool} is user allowed to visit next location?
-    */
+	 * Checks Auth logic. Is user allowed to visit certain path?
+	 * @param  {String} path next path to visit
+	 * @return {Bool} is user allowed to visit next location?
+	 */
 	const authCheck = ({path}): boolean => {
 		const authPath = '/auth'
 		const allowedToVisitPath = [authPath]
@@ -59,10 +62,4 @@ function mapStateToProps (state, props) {
 	}
 }
 
-function mapDispatchToProps () {
-	return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-	withRouter(RoutingWrapper)
-)
+export default connect(mapStateToProps)(withRouter(RoutingWrapper))
