@@ -22,6 +22,6 @@ const finallyAction = null
   But it can make your work with actions even simpler.
   NOTE: I strongly recommend you check Awral's sources!
   Awral is 910 bytes gzipped!
-  {@link https://github.com/Metnew/awral}
+  some docs here: {@link https://github.com/Metnew/awral}
 */
 export const awral = Awral.of({check, failBeforePending, transformResult, finally: finallyAction})
