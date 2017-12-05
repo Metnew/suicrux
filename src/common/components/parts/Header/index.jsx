@@ -6,17 +6,16 @@ import {connect} from 'react-redux'
 import {Icon} from 'semantic-ui-react'
 import {withRouter, matchPath} from 'react-router'
 import _ from 'lodash'
-import {OPEN_SIDEBAR} from 'actions/layout'
+import {TOGGLE_SIDEBAR} from 'actions/layout'
 import {
 	StyledHeader,
 	HeaderInner,
 	Navicon,
 	PageTitle
-	// HeaderButton
 } from './style'
 import {Spacer} from 'styles/base'
 import {getMetaRoutes} from 'routing'
-import {getAuthState, getLayoutState} from 'selectors'
+import {getAuthState, getLayoutMobileStatuses} from 'selectors'
 import Headroom from 'react-headroom'
 
 type Props = {
@@ -46,13 +45,11 @@ const Header = ({title, toggleSidebar, isLoggedIn, isMobile}: Props) => {
 }
 
 const mapStateToProps = (state, props) => {
-	console.log(props)
 	const {location: {pathname}} = props
 	const currentRoute = _.find(getMetaRoutes(), a => matchPath(pathname, a)) || {}
-	console.log(currentRoute)
 	const title = currentRoute.meta.name
 	const {isLoggedIn} = getAuthState(state)
-	const {isMobile} = getLayoutState(state)
+	const {isMobile} = getLayoutMobileStatuses(state)
 	return {
 		title,
 		isLoggedIn,
@@ -62,7 +59,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => ({
 	toggleSidebar () {
-		dispatch(OPEN_SIDEBAR())
+		dispatch(TOGGLE_SIDEBAR())
 	}
 })
 
