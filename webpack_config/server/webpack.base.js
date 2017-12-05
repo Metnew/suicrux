@@ -4,7 +4,7 @@ import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, isProduction} = config
+const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, publicPath, BASE_API_SSR, API_PREFIX, isProduction} = config
 
 // Clear dist dir before run
 rimraf(`${config.distPath}/server`, {}, () => {})
@@ -20,7 +20,9 @@ const definePluginArgs = {
 	'process.env.PORT': JSON.stringify(PORT),
 	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET),
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
-	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH)
+	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH),
+	'process.env.BASE_API': JSON.stringify(BASE_API_SSR),
+	'process.env.API_PREFIX': JSON.stringify(API_PREFIX)
 }
 
 let nodeModules = {}
@@ -42,6 +44,7 @@ const baseWebpackConfig = {
 		path: path.join(config.distPath, './server'),
 		filename: 'index.js',
 		chunkFilename,
+		publicPath,
 		libraryTarget: 'commonjs2'
 	},
 	externals: nodeModules,

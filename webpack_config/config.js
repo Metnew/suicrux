@@ -35,6 +35,8 @@ export default {
 	isProduction,
 	// Env vars
 	BASE_API,
+	API_PREFIX: BASE_API,
+	BASE_API_SSR: `http://localhost:${PORT}${BASE_API}`,
 	NODE_ENV,
 	SENTRY_PUBLIC_DSN,
 	ANALYZE_BUNDLE,
