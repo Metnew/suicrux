@@ -69,7 +69,7 @@ function Awral (asyncFunction) {
 		if (isSuccess) {
 			this.success({...defaultArgs, payload})
 		} else {
-			this.fail({...defaultArgs, payload, status})
+			this.fail({...defaultArgs, payload, error: true})
 		}
 		this.finally && this.finally(defaultArgs)
 		return this.resolve({payload, status})
