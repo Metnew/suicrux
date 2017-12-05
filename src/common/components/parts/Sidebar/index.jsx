@@ -19,15 +19,15 @@ import type {RouteItem} from 'types'
 type Props = {
 	open: boolean,
 	logout: () => void,
-	routing: Array<RouteItem>,
 	isMobile: boolean
 }
 
-class SidebarComponent extends Component <Props> {
+class SidebarComponent extends Component<Props> {
 	props: Props
 
 	render () {
-		const {open, logout, routing, isMobile} = this.props
+		const {open, logout, isMobile} = this.props
+		const routing: RouteItem[] = getSidebarRoutes()
 
 		const sidebarProps = {
 			visible: open || !isMobile,
@@ -86,19 +86,17 @@ class SidebarComponent extends Component <Props> {
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	const {sidebarOpened} = getLayoutState(state)
 	const {isMobile} = getLayoutMobileStatuses(state)
-	const routing = getSidebarRoutes()
 
 	return {
-		routing,
 		open: sidebarOpened,
 		isMobile
 	}
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
 	logout () {
 		dispatch(LOGOUT_AUTH())
 	}
