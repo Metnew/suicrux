@@ -9,8 +9,8 @@ import type {RouteItem} from 'types'
 
 function asyncComponentCreator (url) {
 	return asyncComponent({
-		resolve: () =>
-			import(/* webpackChunkName:"[index].[request]" */ `containers/${url}/index.jsx`),
+		// flow-disable-next-line: The parameter passed to import() must be a literal string
+		resolve: () => import(/* webpackChunkName:"[index].[request]" */ `containers/${url}/index.jsx`),
 		LoadingComponent () {
 			return (
 				<Dimmer active>

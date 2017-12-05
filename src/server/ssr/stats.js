@@ -37,7 +37,9 @@ async function getFile (path) {
 
 export default async function () {
 	const basePath = process.env.CLIENT_DIST_PATH
+	// flow-disable-next-line: This type cannot be coerced to string
 	const assets = await getFile(`${basePath}/webpack-assets.json`)
+	// flow-disable-next-line: This type cannot be coerced to string
 	const faviconsAssets = await getFile(`${basePath}/favicons-stats.json`)
 
 	return {
