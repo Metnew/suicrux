@@ -122,7 +122,7 @@ More detailed:
 
 #### **[v1.0.0 Release notes](https://github.com/Metnew/suicrux/releases/tag/v1.0.0)** - most detailed description of the latest changes
 
-#### **[Most commonly asked questions are here.](/docs/faq.md)**
+#### **[Most commonly asked questions are here.](/docs/FAQ.md)**
 
 #### [Webpack configuration](/docs/webpack.md)
 
