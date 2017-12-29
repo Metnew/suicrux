@@ -7,7 +7,7 @@
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "chalk": "^2.3.0",
-    "chokidar": "^1.7.0",
+    "chokidar": "^2.0.0",
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
