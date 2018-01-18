@@ -6,12 +6,6 @@
 
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
-<div>
-  <a target='\_blank' rel='nofollow' href='https://app.codesponsor.io/link/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux'>
-    <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/cFthevq5iGu9WkCHS316WqmS/Metnew/suicrux.svg' />
-  </a>
-</div>
-
 <div><a href="https://travis-ci.org/Metnew/suicrux">
   <img src="https://travis-ci.org/Metnew/suicrux.svg?branch=master" alt="Build Status">
 </a>
