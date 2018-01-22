@@ -1,8 +1,8 @@
-import webpack from 'webpack'
-import config from '../config'
-import baseWebpackConfig from './webpack.base'
-import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
-import OptimizeJsPlugin from 'optimize-js-plugin'
+const webpack = require('webpack')
+const config = require('../config')
+const baseWebpackConfig = require('./webpack.base')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+const OptimizeJsPlugin = require('optimize-js-plugin')
 
 const analyzePlugins = config.ANALYZE_BUNDLE
 	? [new BundleAnalyzerPlugin({analyzerMode: 'static'})]
@@ -30,6 +30,6 @@ const plugins = [
 	...analyzePlugins
 ]
 
-export default Object.assign({}, baseWebpackConfig, {
+module.exports = Object.assign({}, baseWebpackConfig, {
 	plugins: baseWebpackConfig.plugins.concat(plugins)
 })

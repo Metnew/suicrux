@@ -1,16 +1,14 @@
-import webpack from 'webpack'
-import rimraf from 'rimraf'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import CompressionPlugin from 'compression-webpack-plugin'
-import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
-import ProgressPlugin from 'webpack/lib/ProgressPlugin'
-import OfflinePlugin from 'offline-plugin'
-import OptimizeJsPlugin from 'optimize-js-plugin'
-// NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
-// import WebpackShellPlugin from 'webpack-shell-plugin'
-import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
-import base from './webpack.base'
-import config from '../config'
+const webpack = require('webpack')
+const rimraf = require('rimraf')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const ProgressPlugin = require('webpack/lib/ProgressPlugin')
+const OfflinePlugin = require('offline-plugin')
+const OptimizeJsPlugin = require('optimize-js-plugin')
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+const base = require('./webpack.base')
+const config = require('../config')
 
 // Clean build dir
 rimraf(`${config.distPath}/client`, {}, () => {})
@@ -87,7 +85,7 @@ base.plugins.push(
 	new webpack.optimize.CommonsChunkPlugin({
 		name: 'vendor',
 		minChunks: module => {
-			// this assumes your vendor imports exist in the node_modules directory
+			// this assumes your vendor consts exist in the node_modules directory
 			return module.context && module.context.indexOf('node_modules') !== -1
 		}
 	}),

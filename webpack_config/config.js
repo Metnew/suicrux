@@ -2,8 +2,8 @@
  * @file for config stuff that's used for webpack configuration, but isn't passed to webpack compiler
  */
 
-import path from 'path'
-import manifest from '../static/manifest'
+const path = require('path')
+const manifest = require('../public/manifest')
 
 const {
 	BASE_API = '/api/v1',
@@ -17,18 +17,15 @@ const {
 } = process.env
 
 // Paths
-const rootPath = path.join(__dirname, '../') // = "/"
+const rootPath = path.join(__dirname, '..') // = "/"
 const distPath = path.join(rootPath, './dist') // = "/dist"
 const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
 
-// Vars for server only
-const CLIENT_DIST_PATH = path.join(distPath, './client') // = "/dist/client"
-
 // compute isProduction based on NODE_ENV
 const isProduction = process.env.NODE_ENV === 'production'
 
-export default {
+module.exports = {
 	title: 'Suicrux',
 	publicPath: '/',
 	// i18n object
@@ -41,7 +38,6 @@ export default {
 	SENTRY_PUBLIC_DSN,
 	ANALYZE_BUNDLE,
 	GA_ID,
-	CLIENT_DIST_PATH,
 	JWT_SECRET,
 	SENTRY_DSN,
 	PORT,
@@ -53,7 +49,7 @@ export default {
 	rootPath,
 	// text for WebpackBannerPlugin
 	banner:
-		'Apache 2 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/suicrux',
+		'Apache-2.0 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/suicrux',
 	// your manifest.json
 	manifest,
 	vendor: [

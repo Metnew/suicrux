@@ -1,9 +1,7 @@
-import baseWebpackConfig from './webpack.base'
+const baseWebpackConfig = require('./webpack.base')
 
 const plugins = []
 
-const build = Object.assign({}, baseWebpackConfig, {
+module.exports = Object.assign({}, baseWebpackConfig, {
 	plugins: baseWebpackConfig.plugins.concat(plugins)
 })
-
-export default build
