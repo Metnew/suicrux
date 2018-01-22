@@ -1,10 +1,9 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Build
 dist
+build
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Runtime data
 pids
@@ -27,9 +26,6 @@ coverage
 
 # node-waf configuration
 .lock-wscript
-
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
 
 # Dependency directories
 node_modules
