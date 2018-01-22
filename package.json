@@ -39,7 +39,7 @@
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.0",
     "serialize-javascript": "^1.4.0",
-    "styled-components": "^2.2.4"
+    "styled-components": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.0",
