@@ -6,10 +6,9 @@ const router: express$Router = Router()
 
 router.post('/', (req: express$Request, res: express$Response) => {
 	// NOTE: if user is already logged in, but wants to change language
-	// we have to update his JWT token
+	// it'd be better to update his JWT token
 	const data = {username: 'cool_username_for_testing'}
-	const jwtOptions = {expiresIn: '7d'}
-	jwt.sign(data, process.env.JWT_SECRET, jwtOptions, (err, token) => {
+	jwt.sign(data, process.env.JWT_SECRET, (err, token) => {
 		if (err) {
 			throw new Error(
 				`Cant create JWT token based on input data: ${JSON.stringify(data)}`,
