@@ -4,8 +4,6 @@ import links from './links.json'
 const router = Router()
 
 router.use('/auth', auth)
-router.get('/links', (req, res) => {
-	res.send(links)
-})
+router.get('/links', (req, res) => res.send(links))
 
 export default router
