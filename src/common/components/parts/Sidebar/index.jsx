@@ -1,18 +1,12 @@
 // @flow
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Menu, Icon} from 'semantic-ui-react'
+import {Menu, Icon, Image} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
 import {LOGOUT_AUTH} from 'actions/auth'
 import {getSidebarRoutes} from 'routing'
 import {getLayoutState, getLayoutMobileStatuses} from 'selectors'
-import {
-	StyledSidebar,
-	SidebarLogo,
-	SidebarLogoContainer,
-	SidebarItem,
-	SidebarLogoutItem
-} from './style'
+import {StyledSidebar} from './style'
 import {Spacer} from 'styles/base'
 import type {RouteItem} from 'types'
 
@@ -64,34 +58,34 @@ class SidebarComponent extends Component<Props> {
 			}
 
 			return (
-				<SidebarItem key={i} {...propsMenuItem} icon>
+				<Menu.Item key={i} {...propsMenuItem} icon>
 					<Icon name={icon} /> {name}
-				</SidebarItem>
+				</Menu.Item>
 			)
 		})
 
 		return (
 			<StyledSidebar {...sidebarProps}>
-				<SidebarLogoContainer href="https://github.com/Metnew/suicrux">
-					<SidebarLogo alt="logo" shape="circular" centered />
-				</SidebarLogoContainer>
+				<a className="logo-container" href="https://github.com/Metnew/suicrux">
+					<Image src={require('public/Logo.png')} alt="logo" shape="circular" centered />
+				</a>
 				{routes}
 				<Spacer />
-				<SidebarLogoutItem onClick={logout}>
+				<Menu.Item className="logout-item" onClick={logout}>
 					<Icon name="sign out" />
 					Logout
-				</SidebarLogoutItem>
+				</Menu.Item>
 			</StyledSidebar>
 		)
 	}
 }
 
 const mapStateToProps = state => {
-	const {sidebarOpened} = getLayoutState(state)
+	const {sidebarOpened: open} = getLayoutState(state)
 	const {isMobile} = getLayoutMobileStatuses(state)
 
 	return {
-		open: sidebarOpened,
+		open,
 		isMobile
 	}
 }
