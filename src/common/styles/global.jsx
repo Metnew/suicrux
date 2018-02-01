@@ -14,13 +14,6 @@ injectGlobal`
 	  color: rgba(0, 0, 0, 0.87);
   }
 
-  .pushable {
-	  height: 100%;
-	  overflow-x: hidden;
-	  padding: 0;
-    transform: translate3d(0, 0, 0);
-  }
-
   #app {
     width: 100%;
     height: 100%;

@@ -16,13 +16,11 @@ import ReactGA from 'react-ga'
 // Import styled components
 import {
 	PageLayout,
-	MainLayout,
-	MainContent,
 	SidebarSemanticPusherStyled,
-	SidebarSemanticPushableStyled,
-	MainContainer,
+	SidebarSemanticPushable,
 	StyledDimmer
 } from './style'
+import {Container} from 'semantic-ui-react'
 import type {RouteItem} from 'types'
 import type {GlobalState} from 'reducers'
 
@@ -111,7 +109,7 @@ class App extends Component <Props> {
 
 		return (
 			<PageLayout>
-				<SidebarSemanticPushableStyled>
+				<SidebarSemanticPushable>
 					{isLoggedIn && <Sidebar />}
 					<SidebarSemanticPusherStyled
 						isloggedin={isLoggedIn ? '1' : ''}
@@ -119,14 +117,14 @@ class App extends Component <Props> {
 					>
 						<StyledDimmer {...dimmerProps} />
 						<Header />
-						<MainLayout>
-							<MainContent>
-								<MainContainer>{children}</MainContainer>
+						<div className="main-layout">
+							<main className="main-content">
+								<Container className="main-container">{children}</Container>
 								<Footer />
-							</MainContent>
-						</MainLayout>
+							</main>
+						</div>
 					</SidebarSemanticPusherStyled>
-				</SidebarSemanticPushableStyled>
+				</SidebarSemanticPushable>
 			</PageLayout>
 		)
 	}

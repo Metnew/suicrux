@@ -3,12 +3,12 @@
  */
 import React from 'react'
 import {Grid, Header, Icon} from 'semantic-ui-react'
-import {StyledFooter, StyledFooterInner} from './style'
+import {StyledFooter} from './style'
 
 const Footer = () => {
 	return (
 		<StyledFooter>
-			<StyledFooterInner>
+			<div className="footer-inner">
 				<Grid relaxed>
 					<Grid.Row verticalAlign="middle">
 						<Grid.Column width={12} mobile={16}>
@@ -26,7 +26,7 @@ const Footer = () => {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-			</StyledFooterInner>
+			</div>
 		</StyledFooter>
 	)
 }
