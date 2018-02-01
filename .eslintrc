@@ -2,11 +2,10 @@
 	"extends": [
 		"plugin:flowtype/recommended",
 		"plugin:react/recommended",
-		"plugin:jsx-a11y/recommended",
 		"standard"
 	],
 	"parser": "babel-eslint",
-	"plugins": ["react", "babel", "jsx-a11y", "flowtype"],
+	"plugins": ["react", "babel", "flowtype"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true,
@@ -24,9 +23,9 @@
 		"jest": true
 	},
 	"rules": {
+		"react/prop-types": 0,
 		"no-tabs": 0,
 		"no-unused-vars": 1,
-		"indent": [2, "tab"],
-		"jsx-a11y/label-has-for": 0
+		"indent": [2, "tab"]
 	}
 }
