@@ -12,11 +12,10 @@ import {AsyncComponentProvider, createAsyncContext} from 'react-async-component'
 import HTMLComponent from './HTMLComponent'
 import getI18nData from 'server/i18n'
 import {matchPath} from 'react-router'
-import getStats from './stats'
 
 export default async (req: express$Request, res: express$Response) => {
 	// probably, it'd better to define these objs in global scope
-	const {assets, faviconsAssets} = await getStats()
+	const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 	const {isLoggedIn, language} = req.user
 	const authState = {auth: {isLoggedIn}}
 	const initialState: Object = {...authState}
@@ -53,7 +52,6 @@ export default async (req: express$Request, res: express$Response) => {
 		const props = {
 			css,
 			assets,
-			faviconsAssets,
 			asyncState,
 			initialState: preloadedState,
 			i18n

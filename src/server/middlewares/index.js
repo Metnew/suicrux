@@ -24,7 +24,7 @@ export default (app: express$Application): express$Application => {
 	app.use(morgan('dev'))
 	app.use(cookieParser())
 	app.use(
-		express.static(process.env.CLIENT_DIST_PATH, {
+		express.static(process.env.RAZZLE_PUBLIC_DIR, {
 			index: false
 		})
 	)
