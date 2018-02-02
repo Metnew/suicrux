@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import Raven from 'raven'
-import authMiddleware from './auth'
+import languageMiddleware from './language'
 
 export default (app: express$Application): express$Application => {
 	// Must configure Raven before doing anything else with it
@@ -29,7 +29,7 @@ export default (app: express$Application): express$Application => {
 		})
 	)
 	app.use(bodyParser.json())
-	app.use(authMiddleware)
+	app.use(languageMiddleware)
 	// The error handler must be before any other error middleware
 	app.use(Raven.errorHandler())
 	// Optional fallthrough error handler
