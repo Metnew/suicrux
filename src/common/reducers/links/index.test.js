@@ -1,7 +1,7 @@
 import {links as reducer, initialState} from 'reducers/links'
 import {
-	GET_LINKS_SUCCESS,
-	GET_LINKS_FAIL,
+	GET_LINKS_FULFILLED,
+	GET_LINKS_REJECTED,
 	GET_LINKS_PENDING
 } from 'actions/links'
 
@@ -14,7 +14,7 @@ describe('LINKS REDUCER', () => {
 		const payload = [{item: 'payload'}]
 
 		const success = {
-			type: GET_LINKS_SUCCESS,
+			type: GET_LINKS_FULFILLED,
 			payload
 		}
 		expect(reducer(initialState, success)).toEqual({
@@ -26,7 +26,7 @@ describe('LINKS REDUCER', () => {
 
 	it('should handle GET_LINKS_FAIL', () => {
 		const fail = {
-			type: GET_LINKS_FAIL,
+			type: GET_LINKS_REJECTED,
 			payload: {
 				errors: {
 					hmm: 'thatsanerror'
