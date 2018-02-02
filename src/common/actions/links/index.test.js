@@ -3,9 +3,9 @@ import thunk from 'redux-thunk'
 import nock from 'nock'
 import {
 	GET_LINKS,
-	GET_LINKS_SUCCESS,
+	GET_LINKS_FULFILLED,
 	GET_LINKS_PENDING,
-	GET_LINKS_FAIL
+	GET_LINKS_REJECTED
 } from 'actions/links'
 
 const middlewares = [thunk]
@@ -18,7 +18,7 @@ describe('Links actions', () => {
 			type: GET_LINKS_PENDING
 		}
 
-		it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', done => {
+		it('creates GET_LINKS_FULFILLED when GET_LINKS was successful', done => {
 			const store = mockStore({})
 			const payload = [
 				{
@@ -35,7 +35,7 @@ describe('Links actions', () => {
 				const actions = store.getActions()
 				const success = {
 					meta: null,
-					type: GET_LINKS_SUCCESS,
+					type: GET_LINKS_FULFILLED,
 					payload
 				}
 				const expectedActions = [pending, success]
@@ -45,7 +45,7 @@ describe('Links actions', () => {
 			})
 		})
 
-		it('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', async done => {
+		it('creates GET_LINKS_REJECTED when GET_LINKS was unsuccessful', async done => {
 			const payload = {errors: {}}
 			nock(process.env.BASE_API)
 				.get('/links')
@@ -56,7 +56,7 @@ describe('Links actions', () => {
 			const actions = store.getActions()
 			const fail = {
 				meta: null,
-				type: GET_LINKS_FAIL,
+				type: GET_LINKS_REJECTED,
 				error: true,
 				payload
 			}
