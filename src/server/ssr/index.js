@@ -4,7 +4,7 @@
  */
 import React from 'react'
 import _ from 'lodash'
-import {renderToNodeStream} from 'react-dom/server'
+import {renderToString} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
 import asyncBootstrapper from 'react-async-bootstrapper'
@@ -14,11 +14,9 @@ import getI18nData from 'server/i18n'
 import {matchPath} from 'react-router'
 
 export default async (req: express$Request, res: express$Response) => {
-	// probably, it'd better to define these objs in global scope
 	const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
-	const {isLoggedIn, language} = req.user
-	const authState = {auth: {isLoggedIn}}
-	const initialState: Object = {...authState}
+	const {language} = req.user
+	const initialState: Object = {}
 	const i18n = getI18nData(language)
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url
@@ -26,8 +24,8 @@ export default async (req: express$Request, res: express$Response) => {
 	const {store, history, routes} = configureApp(initialState)
 	const RootComponent: React$Node = configureRootComponent({
 		store,
-		history,
 		routes,
+		history,
 		i18n,
 		SSR: {location, context}
 	})
@@ -45,32 +43,20 @@ export default async (req: express$Request, res: express$Response) => {
 	const noRequestURLMatch = !_.find(routes, a => matchPath(req.url, a.path))
 
 	asyncBootstrapper(app).then(() => {
-		const appStream = renderToNodeStream(app)
+		const renderedApp = renderToString(app)
 		const css: string = sheet.getStyleTags()
 		const preloadedState: Object = store.getState()
+		const responseStatusCode = noRequestURLMatch ? 404 : 200
 		const asyncState = asyncContext.getState()
 		const props = {
 			css,
 			assets,
 			asyncState,
 			initialState: preloadedState,
+			app: renderedApp,
 			i18n
 		}
 
-		const {beforeAppTag, afterAppTag} = HTMLComponent(props)
-		const responseStatusCode = noRequestURLMatch ? 404 : 200
-
-		res.writeHead(responseStatusCode, {
-			'Content-Type': 'text/html'
-		})
-		res.write(beforeAppTag)
-		res.write(`<div id="app">`)
-		appStream.pipe(res, {end: false})
-
-		appStream.on('end', () => {
-			res.write('</div>')
-			res.write(afterAppTag)
-			res.end()
-		})
+		res.status(responseStatusCode).send(HTMLComponent(props))
 	})
 }
