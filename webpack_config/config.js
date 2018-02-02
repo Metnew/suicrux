@@ -6,11 +6,9 @@ const path = require('path')
 const manifest = require('../public/manifest')
 
 const {
-	BASE_API = '/api/v1',
 	NODE_ENV = 'development',
 	SENTRY_PUBLIC_DSN,
 	GA_ID,
-	JWT_SECRET = 'secret',
 	ANALYZE_BUNDLE,
 	SENTRY_DSN,
 	PORT = 3000
@@ -31,14 +29,10 @@ module.exports = {
 	// i18n object
 	isProduction,
 	// Env vars
-	BASE_API,
-	API_PREFIX: BASE_API,
-	BASE_API_SSR: `http://localhost:${PORT}${BASE_API}`,
 	NODE_ENV,
 	SENTRY_PUBLIC_DSN,
 	ANALYZE_BUNDLE,
 	GA_ID,
-	JWT_SECRET,
 	SENTRY_DSN,
 	PORT,
 	// It's better to define pathes in one file
@@ -49,7 +43,7 @@ module.exports = {
 	rootPath,
 	// text for WebpackBannerPlugin
 	banner:
-		'Apache-2.0 License. Copyright (c) 2017 Vladimir Metnew All Rights Reserved. Repo: https://github.com/Metnew/suicrux',
+		'Apache-2.0 License. Copyright (c) 2018 Vladimir Metnew https://github.com/Metnew/suicrux',
 	// your manifest.json
 	manifest,
 	vendor: [
@@ -64,8 +58,6 @@ module.exports = {
 		'redux-thunk',
 		'react-helmet',
 		'lodash',
-		'js-cookie',
-		'store2',
 		'styled-components',
 		'react-headroom'
 	],
