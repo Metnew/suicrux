@@ -1,9 +1,7 @@
 import {css} from 'styled-components'
 import _ from 'lodash'
 
-const pxToEm = px => {
-	return px / 16 + 'em'
-}
+const pxToEm = px => px / 16 + 'em'
 
 const iWantToUseEm = true
 // NOTE: This grid don't match SUI's grid.

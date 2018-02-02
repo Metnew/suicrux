@@ -1,6 +1,6 @@
 import {injectGlobal} from 'styled-components'
 
-// NOTE: Styles of container elements duplicated to make SSR version without css looks prettier
+// NOTE: some styles are duplicated to make SSRed app looks better
 injectGlobal`
   body {
     margin: 0;
