@@ -5,10 +5,9 @@ export const SidebarSemanticPushable = Sidebar.Pushable
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	height: 100%;
 	-webkit-overflow-scrolling: touch;
-	${({isloggedin, ismobile}) => {
-		// using `ismobile` attr instead of `media` util is much smoother
+	${({ismobile}) => {
+		// using `ismobile` attr instead of `media` util -> SSRed app looks better
 		return (
-			isloggedin &&
 			!ismobile &&
 			css`
 				max-width: calc(100% - 150px);
@@ -23,9 +22,9 @@ export const PageLayout = styled.div`
 	.pushable {
 		display: initial;
 		height: 100%;
-	  overflow-x: hidden;
-	  padding: 0;
-    transform: translate3d(0, 0, 0);
+		overflow-x: hidden;
+		padding: 0;
+		transform: translate3d(0, 0, 0);
 		> ${SidebarSemanticPusherStyled} {
 			overflow: visible !important;
 		}
