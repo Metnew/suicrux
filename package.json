@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "razzle start",
     "build": "razzle build",
-    "test": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --forceExit || true",
     "start": "NODE_ENV=production node build/server.js",
+    "test": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --forceExit || true",
     "snapshot_update": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --updateSnapshot",
-    "lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist",
+    "lint:scripts": "eslint -c ./.eslintrc ./src ./webpack_config --ignore-pattern dist",
     "flow": "flow",
     "glow": "glow --watch",
     "release": "standard-version",
