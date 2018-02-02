@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from 'components/parts/Footer'
+import Footer from 'components/Footer'
 import {shallow} from 'enzyme'
 import toJson from 'enzyme-to-json'
 

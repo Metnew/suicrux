@@ -2,7 +2,9 @@
 
 exports[`Footer component same snapshot 1`] = `
 <style__StyledFooter>
-  <style__StyledFooterInner>
+  <div
+    className="footer-inner"
+  >
     <Grid
       relaxed={true}
     >
@@ -27,11 +29,7 @@ exports[`Footer component same snapshot 1`] = `
               <HeaderContent>
                 Suicrux
                 <HeaderSubheader>
-                  Starter for 
-                  <s>
-                    blade
-                  </s>
-                   bleeding-edge runners
+                  Pure React power out-of-box.
                 </HeaderSubheader>
               </HeaderContent>
             </Header>
@@ -39,6 +37,6 @@ exports[`Footer component same snapshot 1`] = `
         </GridColumn>
       </GridRow>
     </Grid>
-  </style__StyledFooterInner>
+  </div>
 </style__StyledFooter>
 `;

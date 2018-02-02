@@ -46,8 +46,7 @@
 							"reducers": "./src/common/reducers",
 							"routing": "./src/common/routing",
 							"selectors": "./src/common/selectors",
-							"styles": "./src/common/styles",
-							"images": "./static/images"
+							"styles": "./src/common/styles"
 						},
 						"extensions": [".js", ".jsx", ".json"]
 					}
