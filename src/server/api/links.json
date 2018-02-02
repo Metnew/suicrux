@@ -1,35 +1,9 @@
 [
 	{
-		"link": "https://github.com/Metnew/tiny-universal-example",
-		"icon": "github",
-		"header": "SSR + Webpack",
-		"desc":
-			"Universal rendering + hot-reloading technique. README requires some update, but it's still actual."
-	},
-	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/testing.md",
-		"icon": "bug",
-		"header": "Testing",
-		"desc": "How to test actions, reducers, components?"
-	},
-	{
 		"link": "https://github.com/Metnew/suicrux/tree/master/docs/SUI.md",
 		"icon": "paint brush",
 		"header": "Why semantic-ui-react?",
 		"desc": "Notes about SUIR. Why SUIR is a good (or bad) choise."
-	},
-	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/i18n.md",
-		"icon": "globe",
-		"header": "How does i18n work?",
-		"desc": "How i18n is implemented and how to customize it."
-	},
-	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/webpack.md",
-		"header": "Webpack configuration. [in progress]",
-		"icon": "code",
-		"desc":
-			"Webpack configuration for server/client in production and development."
 	},
 	{
 		"link": "https://github.com/Metnew/suicrux/tree/master/docs/env_vars.md",
