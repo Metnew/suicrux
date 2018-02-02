@@ -5,8 +5,6 @@ const config = require('../config')
 const isomorphicWebpackConfig = require('../webpack.isomorphic')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const {
-	BASE_API,
-	rootPath,
 	srcPath,
 	publicPath,
 	isProduction,
@@ -17,7 +15,6 @@ const {
 rimraf(`${config.distPath}/client`, {}, () => {})
 
 const definePluginArgs = {
-	'process.env.BASE_API': JSON.stringify(BASE_API),
 	'process.env.BROWSER': JSON.stringify(true)
 }
 
@@ -50,12 +47,7 @@ const baseBuild = {
 		modules: isomorphicWebpackConfig.resolve.modules
 	},
 	module: {
-		rules: isomorphicWebpackConfig.module.rules.concat([
-			{
-				test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
-				use: `file-loader?limit=100000&name=assets/[name].[hash:6].[ext]`
-			}
-		])
+		rules: isomorphicWebpackConfig.module.rules
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
