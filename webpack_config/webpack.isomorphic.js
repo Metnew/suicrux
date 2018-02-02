@@ -31,7 +31,6 @@ module.exports = {
 			reducers: `${srcCommonPath}/reducers`,
 			routing: `${srcCommonPath}/routing`,
 			styles: `${srcCommonPath}/styles`,
-			types: `${srcCommonPath}/types`,
 			selectors: `${srcCommonPath}/selectors`,
 			public: `${rootPath}/public`
 		},
@@ -39,28 +38,28 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			// {
-			// 	test: /\.(js|jsx)$/,
-			// 	enforce: 'pre',
-			// 	use: [
-			// 		{
-			// 			loader: 'eslint-loader',
-			// 			options: {
-			// 				fix: true
-			// 			}
-			// 		}
-			// 	],
-			// 	exclude: [/node_modules/]
-			// },
+			{
+				test: /\.(js|jsx)$/,
+				enforce: 'pre',
+				use: [
+					{
+						loader: 'eslint-loader',
+						options: {
+							fix: true
+						}
+					}
+				],
+				exclude: [/node_modules/]
+			}
 		]
 	},
 	plugins: [
 		new webpack.BannerPlugin({
 			banner: config.banner
 		}),
-		// new CircularDependencyPlugin({
-		// 	exclude: /node_modules/
-		// }),
+		new CircularDependencyPlugin({
+			exclude: /node_modules/
+		}),
 		new webpack.DefinePlugin(definePluginArgs)
 	]
 }
