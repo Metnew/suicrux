@@ -49,9 +49,9 @@ export default class Root extends Component<Props> {
 				messages={defineMessages(i18n.messages)}>
 				<Provider store={store} key={Date.now()}>
 					<ThemeProvider theme={theme}>
-						<Router {...routerProps} key={Math.random()}>
+						<Router {...routerProps}>
 							<App>
-								<RoutingWrapper SSR={SSR} history={history} routes={routes} />
+								<RoutingWrapper routes={routes} />
 							</App>
 						</Router>
 					</ThemeProvider>
