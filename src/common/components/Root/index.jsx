@@ -5,25 +5,23 @@ import {IntlProvider, defineMessages, addLocaleData} from 'react-intl'
 import {APPLICATION_INIT} from 'actions/common'
 import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
+import RoutingWrapper from 'components/RoutingWrapper'
 import App from 'containers/App'
-import RoutingWrapper from 'components/addons/RoutingWrapper'
-import {getRouterRoutes} from 'routing'
-import type {RouteItem, i18nConfigObject} from 'types'
-
-const Router = process.env.BROWSER
-	? require('react-router-redux').ConnectedRouter
-	: require('react-router').StaticRouter
 
 type Props = {
 	store: Object,
-	i18n: i18nConfigObject,
+	i18n: Object,
 	SSR: {
 		location?: Object,
 		context?: Object
 	},
 	history: any,
-	routes: Array<RouteItem>
+	routes: any[]
 }
+
+const Router = process.env.BROWSER
+	? require('react-router-redux').ConnectedRouter
+	: require('react-router').StaticRouter
 
 export default class Root extends Component<Props> {
 	static defaultProps = {
@@ -37,7 +35,8 @@ export default class Root extends Component<Props> {
 	}
 
 	render () {
-		const {SSR, store, history, routes, i18n} = this.props
+		const {SSR, store, routes, history, i18n} = this.props
+		// const {routes, SSR} = this.props
 		const routerProps = process.env.BROWSER
 			? {history}
 			: {location: SSR.location, context: SSR.context}
@@ -47,13 +46,12 @@ export default class Root extends Component<Props> {
 			<IntlProvider
 				key={i18n.locale}
 				locale={i18n.locale}
-				messages={defineMessages(i18n.messages)}
-			>
+				messages={defineMessages(i18n.messages)}>
 				<Provider store={store} key={Date.now()}>
 					<ThemeProvider theme={theme}>
-						<Router {...routerProps}>
-							<App routes={routes}>
-								<RoutingWrapper routes={getRouterRoutes(routes)} />
+						<Router {...routerProps} key={Math.random()}>
+							<App>
+								<RoutingWrapper SSR={SSR} history={history} routes={routes} />
 							</App>
 						</Router>
 					</ThemeProvider>

@@ -4,8 +4,6 @@ import {media} from 'styles/utils'
 export const StyledHeader = styled.header`
 	background: ${props => props.theme.primaryColor};
 	border-bottom: 1px solid ${props => props.theme.primaryColorDark};
-	box-shadow: inset 0 0 0 0 ${props => props.theme.primaryColorDark},
-		0 2px 1px 0 ${props => props.theme.primaryColorDark};
 	color: ${props => props.theme.primaryColorText};
 	display: flex;
 	justify-content: center;

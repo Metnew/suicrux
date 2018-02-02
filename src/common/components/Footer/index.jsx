@@ -18,7 +18,7 @@ const Footer = () => {
 									<Header.Content>
 										Suicrux
 										<Header.Subheader>
-											Starter for <s>blade</s> bleeding-edge runners
+											Pure React power out-of-box.
 										</Header.Subheader>
 									</Header.Content>
 								</Header>
