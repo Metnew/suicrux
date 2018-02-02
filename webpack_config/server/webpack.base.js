@@ -1,16 +1,11 @@
 const path = require('path')
-const fs = require('fs')
 const webpack = require('webpack')
 const rimraf = require('rimraf')
 const config = require('../config')
 const isomorphicWebpackConfig = require('../webpack.isomorphic')
 const {
 	SENTRY_DSN,
-	JWT_SECRET,
-	PORT,
 	publicPath,
-	BASE_API_SSR,
-	API_PREFIX,
 	isProduction
 } = config
 
@@ -19,28 +14,12 @@ rimraf(`${config.distPath}/server`, {}, () => {})
 
 const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
-const entry = isProduction
-	? path.join(config.srcPath, './server')
-	: path.join(config.srcPath, './server/server')
+const entry = path.join(config.srcPath, './server')
 
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
-	'process.env.PORT': JSON.stringify(PORT),
-	'process.env.JWT_SECRET': JSON.stringify(JWT_SECRET),
-	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
-	'process.env.BASE_API': JSON.stringify(BASE_API_SSR),
-	'process.env.API_PREFIX': JSON.stringify(API_PREFIX)
+	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN)
 }
-
-let nodeModules = {}
-fs
-	.readdirSync('node_modules')
-	.filter(x => {
-		return ['.bin'].indexOf(x) === -1
-	})
-	.forEach(mod => {
-		nodeModules[mod] = 'commonjs ' + mod
-	})
 
 const baseWebpackConfig = {
 	name: 'server',
@@ -50,10 +29,8 @@ const baseWebpackConfig = {
 	output: {
 		filename: 'index.js',
 		chunkFilename,
-		publicPath,
-		// libraryTarget: 'commonjs2'
+		publicPath
 	},
-	// externals: nodeModules,
 	performance: {
 		hints: false
 	},
