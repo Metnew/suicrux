@@ -3,7 +3,6 @@
  * @desc
  */
 import React from 'react'
-import _ from 'lodash'
 import {renderToNodeStream} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
@@ -42,8 +41,9 @@ export default async (req: express$Request, res: express$Response) => {
 		</AsyncComponentProvider>
 	)
 
+	// match url against browseable routes
 	// if true - > throw 404, if match found -> 200
-	const noRequestURLMatch = !_.find(routes, a => matchPath(req.url, a.path))
+	const noRequestURLMatch = !routes.filter(r => !!r.path).find(r => matchPath(req.url, r))
 
 	asyncBootstrapper(app).then(() => {
 		const appStream = renderToNodeStream(app)
