@@ -12,9 +12,6 @@ import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import base from './webpack.base'
 import config from '../config'
 
-// Clean build dir
-rimraf(`${config.distPath}/client`, {}, () => {})
-
 // Do you want to use bundle analyzer?
 if (config.ANALYZE_BUNDLE) {
 	base.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
