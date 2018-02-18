@@ -9,10 +9,9 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import Raven from 'raven'
-import authMiddleware from './auth'
+import languageMiddleware from './language'
 
 export default (app: express$Application): express$Application => {
-	// Must configure Raven before doing anything else with it
 	Raven.config(process.env.SENTRY_DSN).install()
 	// The request handler must be the first middleware on the app
 	app.use(Raven.requestHandler())
@@ -24,29 +23,14 @@ export default (app: express$Application): express$Application => {
 	app.use(morgan('dev'))
 	app.use(cookieParser())
 	app.use(
-		express.static(process.env.CLIENT_DIST_PATH, {
+		express.static(process.env.CLIENT_STATIC_PATH, {
 			index: false
 		})
 	)
 	app.use(bodyParser.json())
-	app.use(authMiddleware)
+	app.use(languageMiddleware)
 	// The error handler must be before any other error middleware
 	app.use(Raven.errorHandler())
-	// Optional fallthrough error handler
-	// eslint-disable-next-line
-	app.use(function onError(
-		err,
-		req: express$Request,
-		res: express$Response,
-		next: express$NextFunction
-	) {
-		// NOTE: @Metnew: line disabled by ESlint, because err is already handled by sentry
-		//
-		// The error id is attached to `res.sentry` to be returned
-		// and optionally displayed to the user for support.
-		res.statusCode = 500
-		res.end(res.sentry + '\n')
-	})
 
 	return app
 }
