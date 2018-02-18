@@ -1,64 +1,43 @@
 // @flow
 import {
-	UI_OPEN_SIDEBAR,
-	UI_CLOSE_SIDEBAR,
+	UI_TOGGLE_SIDEBAR,
 	UI_WINDOW_RESIZE
 } from 'actions/layout'
 import {LOCATION_CHANGE} from 'actions/common'
-//
-import type {LOCATION_CHANGE_TYPE} from 'actions/common'
-import type {
-	UI_OPEN_SIDEBAR_TYPE,
-	UI_CLOSE_SIDEBAR_TYPE,
-	UI_WINDOW_RESIZE_TYPE
-} from 'actions/layout'
+import {computeLayoutMobileStatuses} from 'selectors'
 
 export type State = {
 	sidebarOpened: boolean,
-	isMobile: boolean,
-	isMobileXS: boolean,
-	isMobileSM: boolean
+	innerWidth?: number
 }
 
-type Action =
-	| UI_OPEN_SIDEBAR_TYPE
-	| UI_CLOSE_SIDEBAR_TYPE
-	| UI_WINDOW_RESIZE_TYPE
-	| LOCATION_CHANGE_TYPE
-
+// NOTE: sidebar is opened by default and rendered as visible on server
 export const initialState: State = {
-	sidebarOpened: false,
-	isMobile: false,
-	isMobileXS: false,
-	isMobileSM: false
+	sidebarOpened: true,
+	innerWidth: 993
 }
 
-export function layout (state: State = initialState, action: Action): State {
-	const computeMobileStatuses = (innerWidth: number) => {
-		const isMobile: boolean = innerWidth < 1025 // 1024px - is the main breakpoint in ui
-		const isMobileXS: boolean = innerWidth < 481
-		const isMobileSM: boolean = innerWidth > 480 && innerWidth < 767
-		return {isMobileSM, isMobileXS, isMobile}
-	}
+export function layout (state: State = initialState, action): State {
 	switch (action.type) {
 	case UI_WINDOW_RESIZE: {
 		const {innerWidth} = action.payload
-		const mobileStates = computeMobileStatuses(innerWidth)
+		const {isMobile} = computeLayoutMobileStatuses({innerWidth})
+
 		return {
-			...state,
-			...mobileStates
+			innerWidth,
+			sidebarOpened: !isMobile
 		}
 	}
-	case UI_OPEN_SIDEBAR:
+	case UI_TOGGLE_SIDEBAR:
 		return {
 			...state,
-			sidebarOpened: true
+			sidebarOpened: !state.sidebarOpened
 		}
 	case LOCATION_CHANGE:
-	case UI_CLOSE_SIDEBAR:
+		const {isMobile} = computeLayoutMobileStatuses(state)
 		return {
 			...state,
-			sidebarOpened: false
+			sidebarOpened: !isMobile
 		}
 	default:
 		return state
