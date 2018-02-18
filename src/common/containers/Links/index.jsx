@@ -4,60 +4,64 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Helmet from 'react-helmet'
-import {Loader} from 'semantic-ui-react'
+import {Loader, Grid, List} from 'semantic-ui-react'
 import {GET_LINKS} from 'actions/links'
-import LinksComponent from './components'
-import {getEntitiesLinksState} from 'selectors'
-import type {GlobalState} from 'reducers'
+import LinkItem from './components/LinkItem'
+import {getEntitiesLinksState, isLoaded} from 'selectors'
+import _ from 'lodash'
 
 type Props = {
 	links: Object,
 	getLinks: () => void,
-	isLinksLoading: boolean,
 	isLinksLoaded: boolean
 }
 
 class Links extends Component {
 	props: Props
 
-	async asyncBootstrap () {
-		const {isLinksLoaded, getLinks} = this.props
-		if (!isLinksLoaded) {
-			await getLinks()
-		}
-		return true
-	}
+	// async asyncBootstrap () {
+	// 	if (!this.props.isLinksLoaded) {
+	// 		await this.props.getLinks()
+	// 	}
+	// 	return true
+	// }
 
 	componentDidMount () {
-		const {isLinksLoaded, getLinks} = this.props
-		if (!isLinksLoaded) {
-			getLinks()
+		if (!this.props.isLinksLoaded) {
+			this.props.getLinks()
 		}
 	}
 
 	render () {
-		const {links, isLinksLoading} = this.props
+		const {links, isLinksLoaded} = this.props
 		return (
 			<div>
 				<Helmet>
 					<title>Suicrux:Links</title>
 				</Helmet>
-				{isLinksLoading ? (
+				{!isLinksLoaded ? (
 					<Loader active>Loading data...</Loader>
 				) : (
-					<LinksComponent links={links} />
+					<Grid stackable>
+						<Grid.Column width={16}>
+							<List relaxed divided animated>
+								{_.map(links, (linkItem, i) => {
+									return <LinkItem key={i} {...linkItem} />
+								})}
+							</List>
+						</Grid.Column>
+					</Grid>
 				)}
 			</div>
 		)
 	}
 }
 
-function mapStateToProps (state: GlobalState) {
+function mapStateToProps (state) {
 	const linksState = getEntitiesLinksState(state)
 	const links = linksState.entities
-	const isLinksLoading = linksState.isLoading
-	const isLinksLoaded = linksState.isLoaded
-	return {links, isLinksLoading, isLinksLoaded}
+	const isLinksLoaded = isLoaded(linksState)
+	return {links, isLinksLoaded}
 }
 
 const mapDispatchToProps = dispatch => ({
