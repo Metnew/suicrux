@@ -22,18 +22,31 @@ const Router = process.env.BROWSER
 	? require('react-router-redux').ConnectedRouter
 	: require('react-router').StaticRouter
 
-export default class Root extends Component<Props> {
+let initAlready = false
+// react-async-bootstrapper renders <Root /> twice, because it's based on react-tree-walker
+// react-tree-walker walks in React node tree and resolves promises.
+// This behaviour allow apps to make server-side data fetching.
+// But this approach has 2 drawbacks:
+// Root rendered twice + APPLICATION_INIT dispatched twice
+// `initAlready` ensures that `APPLICATION_INIT` was dispatched only once.
+class Root extends Component<Props> {
 	static defaultProps = {
 		SSR: {}
 	}
 
 	componentWillMount () {
 		const {store, i18n} = this.props
-		store.dispatch({type: APPLICATION_INIT})
-		addLocaleData(i18n.localeData)
+		if (!initAlready) {
+			store.dispatch({type: APPLICATION_INIT})
+			addLocaleData(i18n.localeData)
+		}
+		initAlready = true
 	}
 
 	render () {
+		if (!initAlready) {
+			return null
+		}
 		const {SSR, store, history, i18n} = this.props
 		const routerProps = process.env.BROWSER
 			? {history}
@@ -59,3 +72,5 @@ export default class Root extends Component<Props> {
 		)
 	}
 }
+
+export default Root
