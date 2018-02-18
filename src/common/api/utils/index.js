@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch'
 
 // USAGE:
 export const get = requestWrapper('GET')
-// get('https://www.google.com', options)
+// get('https://www.google.com')
 export const post = requestWrapper('POST')
 // post('https://www.google.com', data)
 
@@ -24,7 +24,7 @@ function requestWrapper (method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH') {
 		}
 
 		return fetch(url, request)
-			.then(checkStatus)
+			// .then(checkStatus)
 			.then(parseJSON)
 			.catch((err: any) => err)
 	}
@@ -32,8 +32,8 @@ function requestWrapper (method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH') {
 
 async function parseJSON (res: Response): Object {
 	let json: Object
+	// response status field
 	const {status} = res
-	// status response field in return object
 	try {
 		json = await res.json()
 	} catch (e) {
@@ -47,26 +47,26 @@ async function parseJSON (res: Response): Object {
 	}
 	return {data: json, ok: true, status}
 }
-
-function checkStatus (response: Response): Response {
-	const {status} = response
-	if (status >= 200 && status < 300) {
-		// Everything is ok
-	} else if (status >= 300 && status < 400) {
-		// 300 - Multiple Choices
-		// 301 - Moved Permanently,
-		// 302 - Found, Moved Temporarily
-		// 304 - not modified
-		// 307 - Temporary Redirect
-	} else if (status === 400) {
-		// Probably is a validation error
-	} else if (status === 403 || status === 401) {
-		// 401 - Forbidden
-		// 403 - Unauthorized
-	} else if (status === 404) {
-		// Not Found
-	} else if (status >= 500) {
-		// Server error
-	}
-	return response
-}
+// Could save you some time:
+// function checkStatus (response: Response): Response {
+// 	const {status} = response
+// 	if (status >= 200 && status < 300) {
+// 		// Everything is ok
+// 	} else if (status >= 300 && status < 400) {
+// 		// 300 - Multiple Choices
+// 		// 301 - Moved Permanently,
+// 		// 302 - Found, Moved Temporarily
+// 		// 304 - not modified
+// 		// 307 - Temporary Redirect
+// 	} else if (status === 400) {
+// 		// Probably is a validation error
+// 	} else if (status === 403 || status === 401) {
+// 		// 401 - Forbidden
+// 		// 403 - Unauthorized
+// 	} else if (status === 404) {
+// 		// Not Found
+// 	} else if (status >= 500) {
+// 		// Server error
+// 	}
+// 	return response
+// }
