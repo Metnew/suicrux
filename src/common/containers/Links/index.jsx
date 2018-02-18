@@ -16,20 +16,18 @@ type Props = {
 	isLinksLoaded: boolean
 }
 
-class Links extends Component {
-	props: Props
-
-	// async asyncBootstrap () {
-	// 	if (!this.props.isLinksLoaded) {
-	// 		await this.props.getLinks()
-	// 	}
-	// 	return true
-	// }
-
+class Links extends Component<Props> {
 	componentDidMount () {
 		if (!this.props.isLinksLoaded) {
 			this.props.getLinks()
 		}
+	}
+
+	async asyncBootstrap () {
+		if (!this.props.isLinksLoaded) {
+			await this.props.getLinks()
+		}
+		return true
 	}
 
 	render () {
