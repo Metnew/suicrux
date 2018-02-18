@@ -28,9 +28,7 @@ describe('LINKS REDUCER', () => {
 		const fail = {
 			type: GET_LINKS_REJECTED,
 			payload: {
-				errors: {
-					hmm: 'thatsanerror'
-				}
+				hmm: 'thatsanerror'
 			}
 		}
 		expect(reducer(initialState, fail)).toEqual({
@@ -38,7 +36,7 @@ describe('LINKS REDUCER', () => {
 			errors: {
 				hmm: 'thatsanerror'
 			},
-			fetchStatus: 'loaded'
+			fetchStatus: 'error'
 		})
 	})
 

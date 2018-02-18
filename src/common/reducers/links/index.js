@@ -27,7 +27,7 @@ export function links (state: State = initialState, action): State {
 		}
 	}
 	case GET_LINKS_FULFILLED: {
-		const entities = action.payload.data
+		const entities = action.payload
 		return {
 			...state,
 			entities,
@@ -35,7 +35,7 @@ export function links (state: State = initialState, action): State {
 		}
 	}
 	case GET_LINKS_REJECTED: {
-		const errors = action.payload.data
+		const errors = action.payload
 		return {
 			...state,
 			errors,
