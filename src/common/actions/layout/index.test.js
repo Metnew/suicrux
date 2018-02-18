@@ -1,10 +1,8 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import {
-	UI_CLOSE_SIDEBAR,
-	CLOSE_SIDEBAR,
-	UI_OPEN_SIDEBAR,
-	OPEN_SIDEBAR,
+	UI_TOGGLE_SIDEBAR,
+	TOGGLE_SIDEBAR,
 	UI_WINDOW_RESIZE,
 	WINDOW_RESIZE
 } from 'actions/layout'
@@ -12,24 +10,13 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Layout actions', () => {
-	it('creates UI_CLOSE_SIDEBAR after CLOSE_SIDEBAR was dispatched', () => {
+	it('creates UI_TOGGLE_SIDEBAR after TOGGLE_SIDEBAR was dispatched', () => {
 		const expectedAction = [{
-			type: UI_CLOSE_SIDEBAR
+			type: UI_TOGGLE_SIDEBAR
 		}]
 
 		const store = mockStore({})
-		store.dispatch(CLOSE_SIDEBAR())
-
-		expect(store.getActions()).toEqual(expectedAction)
-	})
-
-	it('creates UI_OPEN_SIDEBAR after OPEN_SIDEBAR was dispatched', () => {
-		const expectedAction = [{
-			type: UI_OPEN_SIDEBAR
-		}]
-
-		const store = mockStore({})
-		store.dispatch(OPEN_SIDEBAR())
+		store.dispatch(TOGGLE_SIDEBAR)
 
 		expect(store.getActions()).toEqual(expectedAction)
 	})
