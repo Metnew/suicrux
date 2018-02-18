@@ -1,19 +1,13 @@
 import webpack from 'webpack'
-import rimraf from 'rimraf'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import ProgressPlugin from 'webpack/lib/ProgressPlugin'
 import OfflinePlugin from 'offline-plugin'
 import OptimizeJsPlugin from 'optimize-js-plugin'
-// NOTE: WebpackShellPlugin allows you to run custom shell commands before and after build
-// import WebpackShellPlugin from 'webpack-shell-plugin'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import base from './webpack.base'
 import config from '../config'
-
-// Clean build dir
-rimraf(`${config.distPath}/client`, {}, () => {})
 
 // Do you want to use bundle analyzer?
 if (config.ANALYZE_BUNDLE) {
@@ -111,14 +105,8 @@ base.plugins.push(
 			optional: [':rest:']
 		},
 		externals: [
-			'/auth',
 			'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin'
 		],
-		ServiceWorker: {
-			events: true,
-			navigateFallbackURL: '/auth?offline=true',
-			navigateFallbackForRedirects: false
-		},
 		safeToUseOptionalCaches: true,
 		AppCache: false
 	})

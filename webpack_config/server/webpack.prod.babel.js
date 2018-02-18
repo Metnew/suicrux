@@ -4,13 +4,13 @@ import baseWebpackConfig from './webpack.base'
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 import OptimizeJsPlugin from 'optimize-js-plugin'
 
-const analyzePlugins = config.ANALYZE_BUNDLE
-	? [new BundleAnalyzerPlugin({analyzerMode: 'static'})]
-	: []
-const plugins = [
+if (config.ANALYZE_BUNDLE) {
+	baseWebpackConfig.plugins.push(new BundleAnalyzerPlugin({analyzerMode: 'static'}))
+}
+
+baseWebpackConfig.plugins.push(
 	new webpack.ProgressPlugin(),
 	new webpack.optimize.ModuleConcatenationPlugin(),
-	// NOTE: you can use BabiliPlugin as an alternative to UglifyJSPlugin
 	new webpack.optimize.UglifyJsPlugin({
 		sourceMap: true,
 		compress: {
@@ -26,10 +26,7 @@ const plugins = [
 	}),
 	new OptimizeJsPlugin({
 		sourceMap: true
-	}),
-	...analyzePlugins
-]
+	})
+)
 
-export default Object.assign({}, baseWebpackConfig, {
-	plugins: baseWebpackConfig.plugins.concat(plugins)
-})
+export default baseWebpackConfig
