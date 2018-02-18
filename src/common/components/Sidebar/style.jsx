@@ -1,6 +1,5 @@
 import {Sidebar} from 'semantic-ui-react'
 import styled from 'styled-components'
-import {media} from 'styles/utils'
 
 export const StyledSidebar = styled(Sidebar)`
 	z-index: 111 !important;
@@ -15,7 +14,7 @@ export const StyledSidebar = styled(Sidebar)`
 		text-align: center;
 	
 		img {
-				filter: invert(1);
+			filter: invert(1);
 		}
 	}
 `
