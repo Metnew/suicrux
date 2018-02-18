@@ -5,29 +5,24 @@ import {IntlProvider, defineMessages, addLocaleData} from 'react-intl'
 import {APPLICATION_INIT} from 'actions/common'
 import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
+import RoutingWrapper from 'components/RoutingWrapper'
 import App from 'containers/App'
-import RoutingWrapper from 'components/addons/RoutingWrapper'
-import {getRouterRoutes} from 'routing'
-import type {RouteItem, i18nConfigObject} from 'types'
+
+type Props = {
+	store: Object,
+	i18n: Object,
+	SSR: {
+		location?: Object,
+		context?: Object
+	},
+	history: any
+}
 
 const Router = process.env.BROWSER
 	? require('react-router-redux').ConnectedRouter
 	: require('react-router').StaticRouter
 
-type Props = {
-	store: Object,
-	i18n: i18nConfigObject,
-	SSR: {
-		location?: Object,
-		context?: Object
-	},
-	history: any,
-	routes: Array<RouteItem>
-}
-
-export default class Root extends Component {
-	props: Props
-
+export default class Root extends Component<Props> {
 	static defaultProps = {
 		SSR: {}
 	}
@@ -39,26 +34,23 @@ export default class Root extends Component {
 	}
 
 	render () {
-		const {SSR, store, history, routes, i18n} = this.props
+		const {SSR, store, history, i18n} = this.props
 		const routerProps = process.env.BROWSER
 			? {history}
 			: {location: SSR.location, context: SSR.context}
-		// key={Math.random()} = hack for HMR from https://github.com/webpack/webpack-dev-server/issues/395
 
 		return (
 			<IntlProvider
-				key={i18n.locale}
 				locale={i18n.locale}
-				messages={defineMessages(i18n.messages)}
-			>
+				messages={defineMessages(i18n.messages)}>
+				{/* key={Math.random()} = hack for HMR
+					From https://github.com/webpack/webpack-dev-server/issues/395
+				*/}
 				<Provider store={store} key={Date.now()}>
 					<ThemeProvider theme={theme}>
 						<Router {...routerProps}>
-							<App routes={routes}>
-								<RoutingWrapper
-									store={store}
-									routes={getRouterRoutes(routes)}
-								/>
+							<App>
+								<RoutingWrapper />
 							</App>
 						</Router>
 					</ThemeProvider>
