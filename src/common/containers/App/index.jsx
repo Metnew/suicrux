@@ -3,74 +3,31 @@
  */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, matchPath} from 'react-router'
-import {push} from 'react-router-redux'
-import _ from 'lodash'
+import {withRouter} from 'react-router'
 // Import main views
-import Sidebar from 'components/parts/Sidebar'
-import Footer from 'components/parts/Footer'
-import Header from 'components/parts/Header'
+import Sidebar from 'components/Sidebar'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
 // Import actions
-import {CLOSE_SIDEBAR, OPEN_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
-import {LOGOUT_AUTH} from 'actions/auth'
-import {getAuthState, getLayoutState, getWindowInnerWidth} from 'selectors'
-import {getSidebarRoutes} from 'routing'
+import {TOGGLE_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
+import {getLayoutState, getWindowInnerWidth, getLayoutMobileStatuses} from 'selectors'
 import ReactGA from 'react-ga'
 // Import styled components
-import {
-	PageLayout,
-	MainLayout,
-	MainContent,
-	SidebarSemanticPusherStyled,
-	SidebarSemanticPushableStyled,
-	MainContainer,
-	StyledDimmer
-} from './style'
-import type {RouteItem} from 'types'
-import type {GlobalState} from 'reducers'
+import {PageLayout, SidebarSemanticPusherStyled, SidebarSemanticPushable, StyledDimmer} from './style'
+import {Container} from 'semantic-ui-react'
+import _ from 'lodash'
 
 type Props = {
 	children: React$Node,
-	// Routes of app passed as props in `Root`
-	routes: Array<RouteItem>,
-	// React-router `withRouter` props
 	location: any,
 	history: any,
-	// SidebarOpened can force component to re-render
 	sidebarOpened: boolean,
-	closeSidebar: Function,
-	// IsLoggedIn can force component to re-render
-	isLoggedIn: boolean,
-	handleWindowResize: Function,
-	logout: Function,
-	checkAuthLogic: Function,
 	toggleSidebar: Function,
-	// IsMobile can force component to re-render
-	isMobile: boolean,
-	isMobileXS: boolean,
-	isMobileSM: boolean
+	handleWindowResize: Function,
+	isMobile: boolean
 }
 
-class App extends Component {
-	props: Props
-	componentWillMount () {
-		const {isLoggedIn} = this.props
-		if (process.env.BROWSER) {
-			const {handleWindowResize} = this.props
-			handleWindowResize()
-			window.addEventListener('resize', handleWindowResize)
-		}
-		this.checkAppAuthLogic(isLoggedIn)
-	}
-
-	/**
-   * Checks that user is still allowed to visit path after props changed
-   * @param  {Object} nextProps
-   */
-	componentWillReceiveProps (nextProps: Props) {
-		this.checkAppAuthLogic(nextProps.isLoggedIn)
-	}
-
+class App extends Component<Props> {
 	componentDidMount () {
 		if (process.env.SENTRY_PUBLIC_DSN) {
 			const script = document.createElement('script')
@@ -80,138 +37,80 @@ class App extends Component {
 			script.onload = () => {
 				Raven.config(process.env.SENTRY_PUBLIC_DSN).install()
 			}
-			script.src = 'https://cdn.ravenjs.com/3.19.1/raven.min.js'
+			script.src = 'https://cdn.ravenjs.com/3.22.1/raven.min.js'
 			document.body.appendChild(script)
 		}
 
 		if (process.env.GA_ID) {
+			const {location: {search, pathname}} = this.props
 			ReactGA.initialize(process.env.GA_ID)
+			ReactGA.pageview(pathname + search)
 		}
 	}
 
-	/**
-     * Check that user is allowed to visit route
-     * @param  {Boolean} isLoggedIn state.auth.me.isLoggedIn, current prop
-     * @return {Void}
-     */
-	checkAppAuthLogic (isLoggedIn: boolean) {
-		const path: string = this.props.location.pathname
-		this.props.checkAuthLogic(path, isLoggedIn)
+	componentWillReceiveProps ({location: nextLocation}) {
+		const {location} = this.props
+		if (process.env.GA_ID && !_.isEqual(nextLocation, location)) {
+			const {search, pathname} = nextLocation
+			ReactGA.pageview(pathname + search)
+		}
 	}
 
-	/**
-  * Returns title for header
-  * @param  {String} pathname - location.pathname
-  * @return {String} page title
-  */
-	getPageTitle (pathname: string): string {
-		const currentRoute: Object =
-			_.find(this.props.routes, (a: RouteItem) => matchPath(pathname, a)) || {}
-		return currentRoute.name
+	componentWillMount () {
+		if (process.env.BROWSER) {
+			const {handleWindowResize} = this.props
+			handleWindowResize()
+			window.addEventListener('resize', handleWindowResize)
+		}
 	}
 
 	render () {
-		const {
-			children,
-			sidebarOpened,
-			closeSidebar,
-			isLoggedIn,
-			logout,
-			toggleSidebar,
-			location,
-			isMobile,
-			routes
-		} = this.props
-		// Routing for sidebar menu
-		const title: string = this.getPageTitle(location.pathname)
-
-		const sidebarProps = {
-			isMobile,
-			logout,
-			open: sidebarOpened,
-			routing: getSidebarRoutes(routes)
-		}
-
-		const headerProps = {
-			toggleSidebar,
-			title,
-			isLoggedIn,
-			isMobile
-		}
-
+		const {children, sidebarOpened, toggleSidebar, isMobile} = this.props
 		const dimmerProps = {
-			//  Dimmed: true,
-			active: isLoggedIn && sidebarOpened,
+			active: sidebarOpened && isMobile,
 			page: true,
-			//  Blurring: true,
-			//  page: true,
-			onClick: closeSidebar
+			onClick: toggleSidebar
 		}
-		// XXX: There is an issue with props and styled-components, so we use custom attributes and handle them inside styled component
-		/** {@link: https://github.com/styled-components/styled-components/issues/439} */
+		/** NOTE: There is an issue with props and styled-components,
+			So we use custom attributes and handle them inside styled component
+			{@link: https://github.com/styled-components/styled-components/issues/439}
+		*/
 
 		return (
 			<PageLayout>
-				<SidebarSemanticPushableStyled>
-					{isLoggedIn && <Sidebar {...sidebarProps} />}
-					<SidebarSemanticPusherStyled isloggedin={isLoggedIn ? '1' : ''} ismobile={isMobile ? '1' : ''}>
+				<SidebarSemanticPushable>
+					<Sidebar />
+					<SidebarSemanticPusherStyled sidebar_opened={sidebarOpened ? '1' : ''}>
 						<StyledDimmer {...dimmerProps} />
-						<Header {...headerProps} />
-						<MainLayout>
-							<MainContent>
-								<MainContainer>
-									{children}
-								</MainContainer>
+						<Header />
+						<div className="main-layout">
+							<main className="main-content">
+								<Container className="main-container">{children}</Container>
 								<Footer />
-							</MainContent>
-						</MainLayout>
+							</main>
+						</div>
 					</SidebarSemanticPusherStyled>
-				</SidebarSemanticPushableStyled>
+				</SidebarSemanticPushable>
 			</PageLayout>
 		)
 	}
 }
 
-function mapStateToProps (state: GlobalState) {
-	const layoutState = getLayoutState(state)
-	const authState = getAuthState(state)
-	const {sidebarOpened, isMobile, isMobileXS, isMobileSM} = layoutState
-	const {isLoggedIn} = authState
+const mapStateToProps = (state) => {
+	const {sidebarOpened} = getLayoutState(state)
+	const {isMobile} = getLayoutMobileStatuses(state)
+
 	return {
 		sidebarOpened,
-		isMobile,
-		isMobileXS,
-		isMobileSM,
-		isLoggedIn
+		isMobile
 	}
 }
 
-function mapDispatchToProps (dispatch) {
+const mapDispatchToProps = (dispatch) => {
 	let resizer
 	return {
-		closeSidebar () {
-			dispatch(CLOSE_SIDEBAR())
-		},
-		logout () {
-			dispatch(LOGOUT_AUTH())
-		},
 		toggleSidebar () {
-			dispatch(OPEN_SIDEBAR())
-		},
-		/**
-         * Immediately push to homePath('/'), if user is logged.
-         * Can be used for other auth logic checks.
-         * Useful, because we don't need to dispatch `push(homePath)` action
-         * from `Login` container after LOGIN_AUTH_SUCCESS action
-         * @param  {String}  path       [current location path]
-         * @param  {Boolean} isLoggedIn [is user logged in?]
-         */
-		checkAuthLogic (path: string, isLoggedIn: boolean) {
-			const authPath = '/auth'
-			const homePath = '/'
-			if (isLoggedIn && path === authPath) {
-				dispatch(push(homePath))
-			}
+			dispatch(TOGGLE_SIDEBAR)
 		},
 		handleWindowResize () {
 			clearTimeout(resizer)
