@@ -4,7 +4,6 @@
 // import 'semantic-ui-css/semantic.css'
 // If you want only some components from SUI:
 import 'semantic-ui-css/components/button.css'
-// import 'semantic-ui-css/components/card.css'
 import 'semantic-ui-css/components/container.css'
 import 'semantic-ui-css/components/dimmer.css'
 import 'semantic-ui-css/components/divider.css'
@@ -31,16 +30,14 @@ import {AsyncComponentProvider} from 'react-async-component'
 import asyncBootstrapper from 'react-async-bootstrapper'
 import {configureApp, configureRootComponent} from 'common/app'
 import {AppContainer} from 'react-hot-loader'
-import type {GlobalState} from 'reducers'
-import type {i18nConfigObject} from 'types'
 
 if (process.env.NODE_ENV === 'production') {
 	require('common/pwa')
 }
 
-const initialState: GlobalState = window.__INITIAL_STATE__ || {}
-const i18n: i18nConfigObject = window.__I18N__ || {}
-const asyncState: Object = window.__ASYNC_STATE__ || {}
+const initialState = window.__INITIAL_STATE__ || {}
+const i18n = window.__I18N__ || {}
+const asyncState = window.__ASYNC_STATE__ || {}
 
 const {store, routes, history} = configureApp(initialState)
 const RootComponent = configureRootComponent({
@@ -59,6 +56,7 @@ const app = (
 )
 
 asyncBootstrapper(app).then(() => {
+	console.log('__INITIAL_STATE__:', initialState)
 	hydrate(app, document.getElementById('app'))
 })
 
