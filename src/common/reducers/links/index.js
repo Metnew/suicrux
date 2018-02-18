@@ -1,62 +1,45 @@
 // @flow
 import {
-	GET_LINKS_SUCCESS,
-	GET_LINKS_FAIL,
+	GET_LINKS_FULFILLED,
+	GET_LINKS_REJECTED,
 	GET_LINKS_PENDING
 } from 'actions/links'
-import type {LinkItem} from 'types'
-import type {GET_LINKS_SUCCESS_TYPE, GET_LINKS_FAIL_TYPE, GET_LINKS_PENDING_TYPE} from 'actions/links'
 
 export type State = {
-	entities: Array<LinkItem>,
+	entities: any[],
 	errors: Object,
-	isLoading: boolean,
-	isLoaded: boolean
+	fetchStatus: 'none' | 'loaded' | 'loading' | 'error'
 }
-
-type Action =
-	| GET_LINKS_SUCCESS_TYPE
-	| GET_LINKS_FAIL_TYPE
-	| GET_LINKS_PENDING_TYPE
 
 export const initialState: State = {
 	entities: [],
 	errors: {},
-	isLoading: false,
-	isLoaded: false,
-	count: 0
+	fetchStatus: 'none'
 }
 
-export function links (state: State = initialState, action: Action): State {
+export function links (state: State = initialState, action): State {
 	switch (action.type) {
 	case GET_LINKS_PENDING: {
 		return {
 			...state,
 			errors: {},
-			isLoaded: false,
-			isLoading: true
+			fetchStatus: 'loading'
 		}
 	}
-	case GET_LINKS_SUCCESS: {
-		const entities = action.payload
-		const count = entities.length
+	case GET_LINKS_FULFILLED: {
+		const entities = action.payload.data
 		return {
 			...state,
-			isLoaded: true,
-			isLoading: false,
 			entities,
-			count
+			fetchStatus: 'loaded'
 		}
 	}
-	case GET_LINKS_FAIL: {
-		const {errors} = action.payload
+	case GET_LINKS_REJECTED: {
+		const errors = action.payload.data
 		return {
 			...state,
 			errors,
-			isLoaded: true,
-			isLoading: false,
-			entities: [],
-			count: 0
+			fetchStatus: 'error'
 		}
 	}
 	default:
