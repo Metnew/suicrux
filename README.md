@@ -122,7 +122,6 @@ Ultimate **universal** starter with **lazy-loading**, **SSR** and **i18n**.
 
 `/static` folder + `url-loader`.
 Everything in `/static/public/` is copied to `/dist/client` with _copy-webpack-plugin_.
-<!-- `/public` folder. Static assets are handled by razzle. -->
 
 #### Is it possible to change Webpack config?
 
