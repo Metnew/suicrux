@@ -15,6 +15,8 @@ async function getFile (path) {
 	}
 
 	return new Promise((resolve, reject) => {
+		const watcher = chokidar.watch(path)
+
 		// This `readFile` func is looking like it escaped from procedure programming
 		const readFile = () => {
 			fs.readFile(path, 'utf8', (err, data) => {
@@ -23,6 +25,7 @@ async function getFile (path) {
 				}
 				const json = JSON.parse(data)
 				cache[path] = json
+				watcher.close()
 				resolve(json)
 			})
 		}
@@ -30,7 +33,7 @@ async function getFile (path) {
 		fs.access(path, fs.constants.R_OK, err => {
 			if (err) {
 				// No. Watch for changes, resolve on `add`.
-				chokidar.watch(path).on('add', readFile)
+				watcher.on('add', readFile)
 			} else {
 				// Yes. resolve!
 				readFile()
@@ -44,16 +47,17 @@ export default async function () {
 	const assets = await getFile(process.env.CLIENT_ASSETS_MANIFEST)
 	// AutoDLL assets aren't included in CLIENT_ASSET_MANIFEST (webpack stats)
 	// So they are hardcoded here
-	const AutoDLLDevOnly = process.env.NODE_ENV === 'development'
-		? {
-			vendor: {
-				js: 'http://localhost:3000/vendor.js'
-			},
-			polyfills: {
-				js: 'http://localhost:3000/polyfills.js'
+	const AutoDLLDevOnly =
+		process.env.NODE_ENV === 'development'
+			? {
+				vendor: {
+					js: 'http://localhost:3000/vendor.js'
+				},
+				polyfills: {
+					js: 'http://localhost:3000/polyfills.js'
+				}
 			}
-		}
-		: {}
+			: {}
 
 	return {
 		...assets,
