@@ -1,40 +1,26 @@
 [
 	{
-		"link": "https://github.com/Metnew/tiny-universal-example",
-		"icon": "github",
-		"header": "SSR + Webpack",
-		"desc":
-			"Universal rendering + hot-reloading technique. README requires some update, but it's still actual."
+		"link": "https://github.com/Metnew/suicrux#whats-inside",
+		"icon": "settings",
+		"header": "What's inside?",
+		"desc": "Client, Server and Webpack libs and plugins"
 	},
 	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/testing.md",
-		"icon": "bug",
-		"header": "Testing",
-		"desc": "How to test actions, reducers, components?"
-	},
-	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/SUI.md",
+		"link": "https://github.com/Metnew/suicrux#semanticui--react--suir",
 		"icon": "paint brush",
 		"header": "Why semantic-ui-react?",
 		"desc": "Notes about SUIR. Why SUIR is a good (or bad) choise."
 	},
 	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/i18n.md",
-		"icon": "globe",
-		"header": "How does i18n work?",
-		"desc": "How i18n is implemented and how to customize it."
-	},
-	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/webpack.md",
-		"header": "Webpack configuration. [in progress]",
-		"icon": "code",
-		"desc":
-			"Webpack configuration for server/client in production and development."
-	},
-	{
-		"link": "https://github.com/Metnew/suicrux/tree/master/docs/env_vars.md",
+		"link": "https://github.com/Metnew/suicrux#environment-variables",
 		"icon": "terminal",
-		"header": "npm scripts and ENV vars",
-		"desc": "Docs about every npm script and ENV variable."
+		"header": "ENV vars",
+		"desc": "Docs about ENV variables."
+	},
+	{
+		"link": "https://github.com/Metnew/suicrux#faq",
+		"icon": "question",
+		"header": "FAQ",
+		"desc": "Commonly asked questions."
 	}
 ]
