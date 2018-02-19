@@ -142,7 +142,7 @@
 		"lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist",
 		"flow": "flow",
 		"release": "standard-version",
-		"prepush": "npm run test && npm run lint:scripts",
+		"prepush": "npm run lint:scripts",
 		"commitmsg": "commitlint -e $GIT_PARAMS"
 	},
 	"engines": {
