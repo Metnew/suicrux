@@ -31,21 +31,9 @@ function requestWrapper (method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH') {
 }
 
 async function parseJSON (res: Response): Object {
-	let json: Object
-	// response status field
-	const {status} = res
-	try {
-		json = await res.json()
-	} catch (e) {
-		if (res.status === 204) {
-			return {ok: true, data: {}, status}
-		}
-		return {ok: false, status}
-	}
-	if (!res.ok) {
-		return {data: json, ok: false, status}
-	}
-	return {data: json, ok: true, status}
+	const data = await res.json()
+	const {status, ok} = res
+	return {data, ok, status}
 }
 // Could save you some time:
 // function checkStatus (response: Response): Response {
