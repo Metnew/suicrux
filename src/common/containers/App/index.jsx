@@ -10,7 +10,7 @@ import Footer from 'components/Footer'
 import Header from 'components/Header'
 // Import actions
 import {TOGGLE_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
-import {getLayoutState, getWindowInnerWidth, getLayoutMobileStatuses} from 'selectors'
+import {getLayoutState, getLayoutMobileStatuses} from 'selectors'
 import ReactGA from 'react-ga'
 // Import styled components
 import {PageLayout, SidebarSemanticPusherStyled, SidebarSemanticPushable, StyledDimmer} from './style'
@@ -114,8 +114,8 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		handleWindowResize () {
 			clearTimeout(resizer)
-			const innerWidth: number = getWindowInnerWidth(window)
-			resizer = setTimeout(() => dispatch(WINDOW_RESIZE(innerWidth)), 100)
+			const innerWidth: number = window.innerWidth
+			resizer = setTimeout(() => dispatch(WINDOW_RESIZE(innerWidth)), 85)
 		}
 	}
 }

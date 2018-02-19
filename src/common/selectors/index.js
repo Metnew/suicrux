@@ -5,13 +5,6 @@ export const isLoaded = state => state.fetchStatus === 'loaded'
 export const getLayoutState = state => state.layout
 export const getEntitiesLinksState = state => state.entities.links
 
-export const getWindowInnerWidth = (window: Object): number => {
-	const defaultWindowInnerWidth = 1025
-	return window && window.innerWidth
-		? window.innerWidth
-		: defaultWindowInnerWidth
-}
-
 export const computeLayoutMobileStatuses = ({innerWidth}) => {
 	const isMobile: boolean = innerWidth < 993
 	const isMobileXS: boolean = innerWidth < 481
