@@ -13,9 +13,11 @@ import {TOGGLE_SIDEBAR, WINDOW_RESIZE} from 'actions/layout'
 import {getLayoutState, getLayoutMobileStatuses} from 'selectors'
 import ReactGA from 'react-ga'
 // Import styled components
-import {PageLayout, SidebarSemanticPusherStyled, SidebarSemanticPushable, StyledDimmer} from './style'
-import {Container} from 'semantic-ui-react'
+import {PageLayout, SidebarSemanticPusherStyled, SidebarSemanticPushable} from './style'
+import {Container, Dimmer} from 'semantic-ui-react'
 import _ from 'lodash'
+// Scss is written as a case study and a proof of CSS support
+import './App.scss'
 
 type Props = {
 	children: React$Node,
@@ -82,7 +84,7 @@ class App extends Component<Props> {
 					<Sidebar />
 					<SidebarSemanticPusherStyled sidebar_opened={sidebarOpened ? '1' : ''}>
 						{/* React throws warnings about no "key" prop in this <div> */}
-						<StyledDimmer key={1} {...dimmerProps} />
+						<Dimmer id="page-dimmer" key={1} {...dimmerProps} />
 						<Header />
 						<div className="main-layout">
 							<main className="main-content">
@@ -97,7 +99,7 @@ class App extends Component<Props> {
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	const {sidebarOpened} = getLayoutState(state)
 	const {isMobile} = getLayoutMobileStatuses(state)
 
@@ -107,7 +109,7 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
 	let resizer
 	return {
 		toggleSidebar () {

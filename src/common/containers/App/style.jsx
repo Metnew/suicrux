@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components'
-import {Dimmer, Sidebar} from 'semantic-ui-react'
+import {Sidebar} from 'semantic-ui-react'
 
 export const SidebarSemanticPushable = Sidebar.Pushable
 export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
@@ -7,12 +7,7 @@ export const SidebarSemanticPusherStyled = styled(Sidebar.Pusher)`
 	-webkit-overflow-scrolling: touch;
 	${({sidebar_opened: sidebarOpened}) => {
 		// `sidebar_opened` attr instead of `media` util -> SSRed app looks better
-		return (
-			sidebarOpened &&
-			css`
-				max-width: calc(100% - 150px);
-			`
-		)
+		return sidebarOpened && css`max-width: calc(100% - 150px);`
 	}};
 `
 
@@ -57,9 +52,4 @@ export const PageLayout = styled.div`
 			}
 		}
 	}
-`
-
-export const StyledDimmer = styled(Dimmer)`
-	z-index: 55 !important;
-	cursor: pointer;
 `
