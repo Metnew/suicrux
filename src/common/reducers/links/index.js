@@ -1,14 +1,13 @@
 // @flow
 import {
 	GET_LINKS_FULFILLED,
-	GET_LINKS_REJECTED,
 	GET_LINKS_PENDING
 } from 'actions/links'
 
 export type State = {
 	entities: any[],
 	errors: Object,
-	fetchStatus: 'none' | 'loaded' | 'loading' | 'error'
+	fetchStatus: 'none' | 'loaded' | 'loading'
 }
 
 export const initialState: State = {
@@ -27,19 +26,11 @@ export function links (state: State = initialState, action): State {
 		}
 	}
 	case GET_LINKS_FULFILLED: {
-		const entities = action.payload
+		const entities = action.payload.data
 		return {
 			...state,
 			entities,
 			fetchStatus: 'loaded'
-		}
-	}
-	case GET_LINKS_REJECTED: {
-		const errors = action.payload
-		return {
-			...state,
-			errors,
-			fetchStatus: 'error'
 		}
 	}
 	default:
