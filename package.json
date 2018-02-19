@@ -121,7 +121,6 @@
 		"write-file-webpack-plugin": "^4.2.0"
 	},
 	"optionalDependencies": {
-		"jwt-decode": "^2.2.0",
 		"immutable": "^3.8.2",
 		"normalizr": "^3.2.4",
 		"query-string": "^5.1.0",
