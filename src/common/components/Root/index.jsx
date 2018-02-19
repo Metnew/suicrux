@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import {Provider} from 'react-redux'
 import {IntlProvider, defineMessages, addLocaleData} from 'react-intl'
+import Helmet from 'react-helmet'
 import {APPLICATION_INIT} from 'actions/common'
 import {ThemeProvider} from 'styled-components'
 import theme from 'styles/theme'
@@ -48,14 +49,10 @@ class Root extends Component<Props> {
 			return null
 		}
 		const {SSR, store, history, i18n} = this.props
-		const routerProps = process.env.BROWSER
-			? {history}
-			: {location: SSR.location, context: SSR.context}
+		const routerProps = process.env.BROWSER ? {history} : {location: SSR.location, context: SSR.context}
 
 		return (
-			<IntlProvider
-				locale={i18n.locale}
-				messages={defineMessages(i18n.messages)}>
+			<IntlProvider locale={i18n.locale} messages={defineMessages(i18n.messages)}>
 				{/* key={Math.random()} = hack for HMR
 					From https://github.com/webpack/webpack-dev-server/issues/395
 				*/}
@@ -63,6 +60,28 @@ class Root extends Component<Props> {
 					<ThemeProvider theme={theme}>
 						<Router {...routerProps}>
 							<App>
+								<Helmet>
+									<html lang={i18n.lang} />
+									<meta charSet="utf-8" />
+									<title>Suicrux</title>
+									<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+									<meta
+										name="description"
+										content="Universal React starter with SSR/lazy-loading/i18n"
+									/>
+									<meta name="theme-color" content="#1b1e2f" />
+									<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+									<base href="/" />
+
+									<meta name="msapplication-tap-highlight" content="no" />
+									<link rel="manifest" href="manifest.json" />
+									<noscript
+										dangerouslySetInnerHTML={{
+											__html: `You are using outdated browser. You can install modern browser here:
+										<a href="http://outdatedbrowser.com/">http://outdatedbrowser.com</a>.`
+										}}
+									/>
+								</Helmet>
 								<RoutingWrapper />
 							</App>
 						</Router>
