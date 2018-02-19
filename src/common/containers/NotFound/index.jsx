@@ -8,10 +8,10 @@ const NotFound = () => {
 	return (
 		<NotFoundLayout>
 			<Header as="h2" icon textAlign="center">
-				<Icon name="users" circular />
-				<Header.Content>404</Header.Content>
+				<Icon name="warning sign" circular />
+				<Header.Content>Thank you Mario!</Header.Content>
 				<Header.Subheader>
-					<Link to="/">Dashboard lives here</Link>
+					<Link to="/">But our princess is in another castle.</Link>
 				</Header.Subheader>
 			</Header>
 		</NotFoundLayout>
