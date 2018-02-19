@@ -76,7 +76,7 @@ function routingFnCreator (useFor) {
 		// Returns `name` + `path`. used in Header
 		meta () {
 			return routes
-				.map(a => _.pick(a, ['path', 'name']))
+				.map(a => _.pick(a, ['path', 'name', 'exact', 'strict']))
 		}
 	}
 
