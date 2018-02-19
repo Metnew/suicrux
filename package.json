@@ -1,6 +1,6 @@
 {
   "name": "suicrux",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "src/client/index.jsx",
   "description": "Ultimate universal starter with code-splitting, server-side rendering and i18n",
   "dependencies": {
