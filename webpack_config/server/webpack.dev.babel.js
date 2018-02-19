@@ -3,12 +3,14 @@ import StartServerPlugin from 'start-server-webpack-plugin'
 import webpack from 'webpack'
 import config from '../config'
 
-const {CLIENT_ASSETS_MANIFEST} = config
+const {CLIENT_ASSETS_MANIFEST, INSPECT_ENABLED} = config
+const inspectEnabled = INSPECT_ENABLED ? ['--inspect'] : []
+const nodeArgs = ['-r', 'source-map-support/register', ...inspectEnabled]
 const plugins = [
 	new webpack.HotModuleReplacementPlugin(),
 	new StartServerPlugin({
 		name: 'index.js',
-		nodeArgs: process.env.INSPECT_ENABLED ? ['--inspect'] : []
+		nodeArgs
 	}),
 	// Ignore assets.json to avoid infinite recompile bug
 	new webpack.WatchIgnorePlugin([CLIENT_ASSETS_MANIFEST])

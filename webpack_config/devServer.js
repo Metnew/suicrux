@@ -9,10 +9,6 @@ import client from './client/webpack.dev.babel'
 import server from './server/webpack.dev.babel'
 
 const {DEV_SERVER_PORT} = config
-if (process.argv.includes('--inspect')) {
-	process.env.INSPECT_ENABLED = true
-}
-
 const serverCompiler = compile(server)
 
 // Start our server webpack instance in watch mode.

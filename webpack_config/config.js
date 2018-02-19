@@ -12,7 +12,8 @@ const {
 	ANALYZE_BUNDLE,
 	SENTRY_DSN,
 	PORT = 3000,
-	HOST = 'localhost'
+	HOST = 'localhost',
+	INSPECT_ENABLED = true
 } = process.env
 
 // Paths
@@ -41,6 +42,7 @@ export default {
 	SENTRY_DSN,
 	PORT,
 	HOST,
+	INSPECT_ENABLED,
 	// Client's webpack-dev-server port
 	DEV_SERVER_PORT,
 	// Paths
