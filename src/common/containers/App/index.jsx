@@ -81,7 +81,8 @@ class App extends Component<Props> {
 				<SidebarSemanticPushable>
 					<Sidebar />
 					<SidebarSemanticPusherStyled sidebar_opened={sidebarOpened ? '1' : ''}>
-						<StyledDimmer {...dimmerProps} />
+						{/* React throws warnings about no "key" prop in this <div> */}
+						<StyledDimmer key={1} {...dimmerProps} />
 						<Header />
 						<div className="main-layout">
 							<main className="main-content">
