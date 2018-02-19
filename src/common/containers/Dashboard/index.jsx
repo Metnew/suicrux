@@ -13,20 +13,16 @@ const Dashboard = () => {
 			<Grid columns={1}>
 				<Grid.Row centered>
 					<Grid.Column width={16}>
-						<Header as="h1">
-							<FormattedMessage id="Dashboard.h1" />
-						</Header>
-						<Header as="h2">
-							<FormattedMessage id="Dashboard.h2-1" />
-						</Header>
+						<Header as="h1">Suicrux</Header>
+						<Header as="h2">Ultimate universal starter with lazy-loading, SSR and i18n</Header>
 						<p>
-							<FormattedMessage id="Dashboard.p-1" />
+							<FormattedMessage id="Dashboard.p" />
 						</p>
-						<Header as="h2">
-							<FormattedMessage id="Dashboard.h2-2" />
-						</Header>
 						<p>
-							<FormattedMessage id="Dashboard.p-2" />
+							<FormattedMessage id="Dashboard.p1" />
+						</p>
+						<p>
+							<FormattedMessage id="Dashboard.p2" />
 						</p>
 					</Grid.Column>
 				</Grid.Row>

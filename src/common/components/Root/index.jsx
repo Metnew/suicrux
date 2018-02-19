@@ -67,7 +67,7 @@ class Root extends Component<Props> {
 									<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 									<meta
 										name="description"
-										content="Universal React starter with SSR/lazy-loading/i18n"
+										content="Ultimate universal starter with lazy-loading, SSR and i18n"
 									/>
 									<meta name="theme-color" content="#1b1e2f" />
 									<meta name="viewport" content="width=device-width, initial-scale=1.0" />

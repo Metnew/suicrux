@@ -1,6 +1,6 @@
 # Suicrux: [demo](https://suicrux.now.sh) :smiling_imp:
 
-**Universal** starter based on [**Razzle**](https://github.com/jaredpalmer/razzle) with **lazy-loading** for your **new Progressive Web App**.
+Ultimate **universal** starter with **lazy-loading**, **SSR** and **i18n**.
 
 > [Previous release](https://github.com/Metnew/suicrux/tree/previous)
 > Demo sometimes becomes frozen by `now`. Retry in a few minutes, if it doesn't work.
@@ -125,7 +125,7 @@
 
 #### Is it possible to change Webpack config?
 
-Of course! Webpack universality is inspired by Razzle and intuitive. 
+Of course, config is intuitive! Webpack universality is inspired by Razzle. 
 
 #### SSR?
 

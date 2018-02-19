@@ -2,7 +2,7 @@
 	"name": "suicrux",
 	"version": "2.2.0",
 	"main": "src/client/index.jsx",
-	"description": "Advanced universal React starter built with a scale in mind.",
+	"description": "Ultimate universal starter with code-splitting, server-side rendering and i18n",
 	"dependencies": {
 		"babel-polyfill": "^6.26.0",
 		"body-parser": "^1.18.2",
@@ -135,7 +135,8 @@
 		"server_build": "cross-env NODE_ENV=production webpack --config webpack_config/server/webpack.prod.babel.js",
 		"frontend_build": "cross-env NODE_ENV=production webpack --config webpack_config/client/webpack.prod.babel.js",
 		"test": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --forceExit || true",
-		"snapshot_update": "cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --updateSnapshot",
+		"snapshot_update":
+			"cross-env NODE_ENV=test jest --config=jest_config/jest.config.json --coverage --updateSnapshot",
 		"start": "node ./dist/server",
 		"lint:styles": "stylelint ./src/common/**/*.scss -s scss --config ./.stylelintrc --fix",
 		"lint:scripts": "eslint -c ./.eslintrc.json ./src ./webpack_config --ignore-pattern dist",
@@ -156,22 +157,10 @@
 		"type": "git",
 		"url": "git+https://github.com/Metnew/suicrux.git"
 	},
-	"keywords": [
-		"react",
-		"redux",
-		"react-redux",
-		"starter",
-		"template",
-		"boilerplate",
-		"webpack",
-		"universal"
-	],
+	"keywords": ["react", "redux", "react-redux", "starter", "template", "boilerplate", "webpack", "universal"],
 	"bugs": {
 		"url": "https://github.com/Metnew/suicrux/issues"
 	},
 	"homepage": "https://github.com/Metnew/suicrux#readme",
-	"moduleRoots": [
-		"./src/common",
-		"./src"
-	]
+	"moduleRoots": ["./src/common", "./src"]
 }

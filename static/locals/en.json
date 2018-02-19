@@ -1,9 +1,5 @@
 {
-  "Dashboard.h1": "Suicrux.",
-  "Dashboard.h2-1": "Intro",
-  "Dashboard.h2-2": "How it works?",
-  "Dashboard.h3-1": "Suicrux.",
-  "Dashboard.h3-2": "Suicrux.",
-  "Dashboard.p-1": "In progress.",
-  "Dashboard.p-2": "In progress."
+	"Dashboard.p": "Suicrux - \"easy-to-start\" boilerplate with optimal default config.",
+	"Dashboard.p1": "Only best libs and most essential functionality.",
+	"Dashboard.p2": "Nothing useless is included."
 }
