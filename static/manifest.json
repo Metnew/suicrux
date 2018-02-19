@@ -1,9 +1,9 @@
 {
-   "name": "Suicrux",
-   "short_name": "Suicrux",
-   "description": "https://github.com/Metnew/suicrux",
-   "start_url": "https://suicrux.now.sh",
-   "display": "standalone",
-   "background_color": "#f7f7f7",
-   "theme_color": "#009688"
+	"name": "Suicrux",
+	"short_name": "Suicrux",
+	"description": "https://github.com/Metnew/suicrux",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#f7f7f7",
+	"theme_color": "#009688"
 }
