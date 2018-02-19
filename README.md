@@ -1,8 +1,8 @@
-# Suicrux: [demo](https://suicrux.now.sh)
+# Suicrux: [demo](https://suicrux.now.sh) :smiling_imp:
 
 **Universal** starter based on [**Razzle**](https://github.com/jaredpalmer/razzle) with **lazy-loading** for your **new Progressive Web App**.
 
-> [Previous release lives here.](https://github.com/Metnew/suicrux/tree/previous)
+> [Previous release](https://github.com/Metnew/suicrux/tree/previous)
 > Demo sometimes becomes frozen by `now`. Retry in a few minutes, if it doesn't work.
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/suicrux.svg)](https://greenkeeper.io/)
@@ -79,7 +79,7 @@
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)** and **[redux-promise-middleware]()**
 - **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
-- **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
+- **[Lodash](https://lodash.com/)** - SUIR dependency.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
@@ -99,7 +99,7 @@
 ### Webpack
 
 * Latest Webpack with **HMR**
-* Babel: `stage-0` and few cool plugins for development and production.
+* Babel: `stage-0` and few known plugins.
 * **[Eslint](https://github.com/eslint/eslint)** and Standard.js
 * **[Offline-plugin](https://github.com/NekR/offline-plugin)**
 * **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**
@@ -113,32 +113,37 @@
 
 ### Other:
 
-- **[Jest](https://facebook.github.io/jest/)** - awesome testing framework.
+- **[Jest](https://facebook.github.io/jest/)** - testing framework.
 - [And more tools for building and testing...](https://github.com/Metnew/suicrux/blob/master/package.json)
 
 ## Suicrux FAQ
 
-### Static assets?
+#### Static assets?
 
-`/public` folder. Static assets are handled by razzle.
+`/static` folder + `url-loader`.
+<!-- `/public` folder. Static assets are handled by razzle. -->
 
-### SSR?
+#### Is it possible to change Webpack config?
+
+Of course! Webpack universality is inspired by Razzle and intuitive. 
+
+#### SSR?
 
 Check `/src/server/ssr/`.
 
-### Code-splitting?
+#### Code-splitting?
 
-`react-async-component`.
+**[react-async-component](https://github.com/ctrlplusb/react-async-component)**.
 
-### Server-side data-fetching?
+#### Server-side data-fetching?
 
-Using `react-async-bootstrapper` - a wrapper around `react-tree-walker`.
+Using **[react-async-bootstrapper](https://github.com/ctrlplusb/react-async-bootstrapper)** - a wrapper around `react-tree-walker`. 
 
-### Theming?
+#### Theming?
 
-Yes, with `styled-components`s `<ThemeProvider>` you can specify your own theme.
+Yes, with `styled-components'` `<ThemeProvider>` it's possible to specify a color theme.
 
-### Browser support
+#### Browser support
 
 Without `react-intl`:
 - Safari 7+
@@ -146,16 +151,15 @@ Without `react-intl`:
 
 ## Environment variables
 
--  `ANALYZE_BUNDLE (default: false)`: Run `webpack-bundle-analyzer` after a production build. _Webpack only._
-
--  `GA_ID (default:false)`: Your Google analytics ID. If set, `react-ga` will be initialized inside `<App>` container on `componentDidMount()`. _Browser only._
-
-- `SENTRY_PUBLIC_DSN (default: false)`: Similar to `GA_ID`, but for [Sentry](https://sentry.io). _Browser only._
-
-- `BROWSER`: Your environment. `true` - browser, `false` - Node.
-**NOTE:** Remember, you can't run code which uses browser global object in Node environment!
-
-- `SENTRY_DSN (default: false)`: Sentry full(private) DSN.  _Server only._
+- `process.env.HOST (default: 'localhost')`: Application host. _Browser and Server._
+- `process.env.PORT (default: 3000)`: Application port. _Browser and Server._
+- `process.env.INSPECT_ENABLED (default: true)`: add `--inspect` arg to server in development. _Webpack only._
+- `process.env.ANALYZE_BUNDLE (default: false)`: Run `webpack-bundle-analyzer` on production build. _Webpack _
+- `process.env.GA_ID (default: false)`: Google analytics ID. If set, `react-ga` initialize itself inside >` container on `componentDidMount()`. _Browser only._
+- `process.env.SENTRY_PUBLIC_DSN (default: false)`: Similar to `GA_ID`, but for [Sentry](https://sentry.io). _Browser only._
+- `process.env.BROWSER`: Your environment. `true` - browser, `false` - Node.
+> **NOTE:** Remember, you can't run code which uses browser global object in Node environment!
+- `process.env.SENTRY_DSN (default: false)`: Sentry full(private) DSN.  _Server only._
 
 ## Semantic.UI + React = SUIR
 
@@ -169,28 +173,24 @@ You're always free to use any other UI framework with `suicrux`.
 ### Good parts
 
 1. Big UI library
-
-2. Based on SUI: When you use SUIR you still use SUI CSS.
-
+2. Based on SUI: SUIR uses SUI CSS under the hood.
 3. Modular: Import only what you use required components.
 
 ### Bad parts
 
 1. Import of unused styles.
-> You can import styles only for required components. Check **`src/client/index.jsx`**.
-> PurifyCss won't help.
+> It's possible to import only required components' styles. Check **`src/client/index.jsx`**.
+> PurifyCss cannot help. Only browser-based tools probably could.
 
-2. SUI styles are huge and block rendering.
-   > You can split SUI styles into 2 smaller chunks that would be downloaded faster if you use HTTP2.
-   > You can import styles only for required components. Check **`src/client/index.jsx`**.
-
+2. SUI styles are costly(548kb) and block rendering.
+> It's possible to split SUI styles into several smaller chunks that would be downloaded faster if you use HTTP2.
 
 ## Contributing
 
 > Have a question? Ask! :wink: 
-> Make sure you ask a right question related to Suicrux.
+> Make sure you ask a right question. :smiling_imp:
 
-PRs, issues, questions, enhancements are always welcome.
+PRs, issues, enhancements are always welcome.
 
 ### Author
 
