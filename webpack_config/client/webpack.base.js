@@ -5,7 +5,19 @@ import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import AssetsPlugin from 'assets-webpack-plugin'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
-const {GA_ID, SENTRY_PUBLIC_DSN, CLIENT_STATIC_PATH, srcPath, publicPath, isProduction, manifest, distPath} = config
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+
+const {
+	GA_ID,
+	SENTRY_PUBLIC_DSN,
+	CLIENT_STATIC_PATH,
+	srcPath,
+	publicPath,
+	rootPath,
+	isProduction,
+	manifest,
+	distPath
+} = config
 
 rimraf(`${distPath}/client`, {}, () => {})
 
@@ -58,7 +70,13 @@ const baseBuild = {
 		}),
 		new WebpackAssetsManifest({
 			assets: manifest
-		})
+		}),
+		new CopyWebpackPlugin([
+			{
+				from: `${rootPath}/static/public`,
+				to: './'
+			}
+		])
 	]),
 	target: 'web'
 }
