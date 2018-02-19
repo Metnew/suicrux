@@ -1,4 +1,4 @@
-# Suicrux: [demo](https://suicrux.now.sh/auth)
+# Suicrux: [demo](https://suicrux.now.sh)
 
 **Universal** starter based on [**Razzle**](https://github.com/jaredpalmer/razzle) with **lazy-loading** for your **new Progressive Web App**.
 
@@ -76,8 +76,8 @@
 - **[React 16](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)**.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
-* **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)** and **[redux-promise-middleware]()**
-* **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
+- **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)** and **[redux-promise-middleware]()**
+- **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
@@ -98,15 +98,14 @@
 
 ### Webpack
 
-* Latest Webpack
+* Latest Webpack with **HMR**
 * Babel: `stage-0` and few cool plugins for development and production.
-* **HMR**, hotMiddleware,
-* **[Eslint](https://github.com/eslint/eslint)**
+* **[Eslint](https://github.com/eslint/eslint)** and Standard.js
 * **[Offline-plugin](https://github.com/NekR/offline-plugin)**
 * **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**
 * **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**
 * **[optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)**
-- **[autodll-webpack-plugin](https://github.com/asfktz/autodll-webpack-plugin)**
+* **[autodll-webpack-plugin](https://github.com/asfktz/autodll-webpack-plugin)**
 * **[optimize-js-plugin](https://github.com/vigneshshanmugam/optimize-js-plugin)**
 * **[wepback-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest)**
 * **[circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin)**
