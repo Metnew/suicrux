@@ -110,7 +110,7 @@ Ultimate **universal** starter with **lazy-loading**, **SSR** and **i18n**.
 * **[wepback-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest)**
 * **[circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin)**
 * **[extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)**
-
+* **[copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin)**
 ### Other:
 
 - **[Jest](https://facebook.github.io/jest/)** - testing framework.
@@ -121,6 +121,7 @@ Ultimate **universal** starter with **lazy-loading**, **SSR** and **i18n**.
 #### Static assets?
 
 `/static` folder + `url-loader`.
+Everything in `/static/public/` is copied to `/dist/client` with _copy-webpack-plugin_.
 <!-- `/public` folder. Static assets are handled by razzle. -->
 
 #### Is it possible to change Webpack config?
