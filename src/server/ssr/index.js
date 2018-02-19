@@ -3,6 +3,7 @@
  * @desc
  */
 import React from 'react'
+import Helmet from 'react-helmet'
 import {renderToString} from 'react-dom/server'
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
@@ -33,9 +34,7 @@ export default async (req: express$Request, res: express$Response) => {
 
 	const app = (
 		<AsyncComponentProvider asyncContext={asyncContext}>
-			<StyleSheetManager sheet={sheet.instance}>
-				{RootComponent}
-			</StyleSheetManager>
+			<StyleSheetManager sheet={sheet.instance}>{RootComponent}</StyleSheetManager>
 		</AsyncComponentProvider>
 	)
 
@@ -45,6 +44,7 @@ export default async (req: express$Request, res: express$Response) => {
 
 	asyncBootstrapper(app).then(() => {
 		const renderedApp = renderToString(app)
+		const helmet = Helmet.renderStatic()
 		const css: string = sheet.getStyleTags()
 		const preloadedState: Object = store.getState()
 		const responseStatusCode = noRequestURLMatch ? 404 : 200
@@ -55,7 +55,8 @@ export default async (req: express$Request, res: express$Response) => {
 			asyncState,
 			initialState: preloadedState,
 			app: renderedApp,
-			i18n
+			i18n,
+			helmet
 		}
 
 		res.status(responseStatusCode).send(HTMLComponent(props))
