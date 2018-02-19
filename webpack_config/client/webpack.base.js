@@ -5,16 +5,7 @@ import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import AssetsPlugin from 'assets-webpack-plugin'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
-const {
-	GA_ID,
-	SENTRY_PUBLIC_DSN,
-	CLIENT_STATIC_PATH,
-	srcPath,
-	publicPath,
-	isProduction,
-	manifest,
-	distPath
-} = config
+const {GA_ID, SENTRY_PUBLIC_DSN, CLIENT_STATIC_PATH, srcPath, publicPath, isProduction, manifest, distPath} = config
 
 rimraf(`${distPath}/client`, {}, () => {})
 
@@ -49,11 +40,7 @@ const baseBuild = {
 	resolve: {
 		alias: isomorphicWebpackConfig.resolve.alias,
 		modules: isomorphicWebpackConfig.resolve.modules,
-		extensions: isomorphicWebpackConfig.resolve.extensions.concat([
-			'.css',
-			'.scss',
-			'.sass'
-		])
+		extensions: isomorphicWebpackConfig.resolve.extensions.concat(['.css', '.scss', '.sass'])
 	},
 	module: {
 		rules: isomorphicWebpackConfig.module.rules.concat([

@@ -16,19 +16,20 @@ const {
 	INSPECT_ENABLED = true
 } = process.env
 
+// compute isProduction based on NODE_ENV
+const isProduction = process.env.NODE_ENV === 'production'
+const DEV_SERVER_PORT = +PORT + 1
+
 // Paths
 const rootPath = path.join(__dirname, '../') // = "/"
 const distPath = path.join(rootPath, './dist') // = "/dist"
 const srcPath = path.join(rootPath, './src') // = "/src"
 const srcCommonPath = path.join(srcPath, './common') // = "/src/common"
-const publicPath = process.env.NODE_ENV === 'development' ? `http://localhost:${PORT}/` : '/'
+const publicPath = !isProduction ? `http://localhost:${PORT}/` : '/'
 
 // Vars for server only
 const CLIENT_STATIC_PATH = path.join(distPath, './client') // = "/dist/client"
 const CLIENT_ASSETS_MANIFEST = path.join(CLIENT_STATIC_PATH, './webpack-assets.json')
-// compute isProduction based on NODE_ENV
-const isProduction = process.env.NODE_ENV === 'production'
-const DEV_SERVER_PORT = +PORT + 1
 
 export default {
 	isProduction,
@@ -52,8 +53,7 @@ export default {
 	rootPath,
 	publicPath,
 	// text for WebpackBannerPlugin
-	banner:
-		'Apache 2 License. Copyright (c) 2018 Vladimir Metnew. Repo: https://github.com/Metnew/suicrux',
+	banner: 'Apache 2 License. Copyright (c) 2018 Vladimir Metnew. Repo: https://github.com/Metnew/suicrux',
 	// your manifest.json
 	manifest,
 	vendor: [

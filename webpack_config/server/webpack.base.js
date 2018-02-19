@@ -1,11 +1,10 @@
 import path from 'path'
-import fs from 'fs'
 import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import nodeExternals from 'webpack-node-externals'
-const {SENTRY_DSN, CLIENT_STATIC_PATH, CLIENT_ASSETS_MANIFEST, publicPath, isProduction} = config
+const {SENTRY_DSN, CLIENT_STATIC_PATH, CLIENT_ASSETS_MANIFEST, isProduction, publicPath} = config
 
 // Clear dist dir before run
 rimraf(`${config.distPath}/server`, {}, () => {})
@@ -58,7 +57,8 @@ const baseWebpackConfig = {
 		new webpack.optimize.LimitChunkCountPlugin({
 			maxChunks: 1
 		}),
-		new webpack.NormalModuleReplacementPlugin(/\.(css|sass|less|scss)$/, 'node-noop')
+		// ignore styles, because server hasn't got style-loader
+		new webpack.NormalModuleReplacementPlugin(/\.(css|sass|less|scss|sss)$/, 'node-noop')
 	]),
 	node: {
 		__dirname: true,
