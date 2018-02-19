@@ -6,20 +6,11 @@ import webpack from 'webpack'
 import CircularDependencyPlugin from 'circular-dependency-plugin'
 import config from './config'
 
-<<<<<<< HEAD
-const {srcPath, rootPath, srcCommonPath, NODE_ENV, GA_ID, SENTRY_PUBLIC_DSN} = config
-
-const definePluginArgs = {
-	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-	'process.env.GA_ID': JSON.stringify(GA_ID),
-	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN)
-=======
 const {srcPath, rootPath, srcCommonPath, PORT, NODE_ENV, HOST} = config
 const definePluginArgs = {
 	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
 	'process.env.PORT': JSON.stringify(PORT),
 	'process.env.HOST': JSON.stringify(HOST)
->>>>>>> feat/3.0-release
 }
 
 export default {

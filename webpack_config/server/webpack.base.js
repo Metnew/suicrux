@@ -4,32 +4,15 @@ import webpack from 'webpack'
 import rimraf from 'rimraf'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
-<<<<<<< HEAD
-const {SENTRY_DSN, CLIENT_DIST_PATH, JWT_SECRET, PORT, publicPath, BASE_API_SSR, API_PREFIX, isProduction} = config
-=======
 import nodeExternals from 'webpack-node-externals'
 const {SENTRY_DSN, CLIENT_STATIC_PATH, CLIENT_ASSETS_MANIFEST, publicPath, isProduction} = config
->>>>>>> feat/3.0-release
 
 // Clear dist dir before run
 rimraf(`${config.distPath}/server`, {}, () => {})
 
-const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
-const devtool = isProduction ? 'cheap-source-map' : 'eval'
-const entry = isProduction
-	? path.join(config.srcPath, './server')
-	: path.join(config.srcPath, './server/server')
-
 const definePluginArgs = {
 	'process.env.BROWSER': JSON.stringify(false),
 	'process.env.SENTRY_DSN': JSON.stringify(SENTRY_DSN),
-<<<<<<< HEAD
-	'process.env.CLIENT_DIST_PATH': JSON.stringify(CLIENT_DIST_PATH),
-	'process.env.BASE_API': JSON.stringify(BASE_API_SSR),
-	'process.env.API_PREFIX': JSON.stringify(API_PREFIX)
-}
-
-=======
 	'process.env.CLIENT_STATIC_PATH': JSON.stringify(CLIENT_STATIC_PATH),
 	'process.env.CLIENT_ASSETS_MANIFEST': JSON.stringify(CLIENT_ASSETS_MANIFEST)
 }
@@ -37,7 +20,6 @@ const definePluginArgs = {
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
 const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
 
->>>>>>> feat/3.0-release
 let nodeModules = {}
 fs
 	.readdirSync('node_modules')
@@ -80,7 +62,23 @@ const baseWebpackConfig = {
 		alias: isomorphicWebpackConfig.resolve.alias
 	},
 	module: {
-		rules: isomorphicWebpackConfig.module.rules
+		rules: isomorphicWebpackConfig.module.rules.concat([
+			// NOTE: LQIP loader doesn't work with file-loader and url-loader :(
+			// `npm i --save-dev lqip-loader`
+			// {
+			//   test: /\.(jpe?g|png)$/i,
+			//   enforce: 'pre',
+			//   loaders: [
+			//     {
+			//       loader: 'lqip-loader',
+			//       options: {
+			//         path: '/images-lqip', // your image going to be in media folder in the output dir
+			//         name: '[name]-lqip.[hash:8].[ext]' // you can use [hash].[ext] too if you wish
+			//       }
+			//     }
+			//   ]
+			// }
+		])
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),

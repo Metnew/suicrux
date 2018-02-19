@@ -18,9 +18,6 @@ type Props = {
 	history: any
 }
 
-<<<<<<< HEAD:src/common/components/parts/Root/index.jsx
-export default class Root extends Component<Props> {
-=======
 const Router = process.env.BROWSER
 	? require('react-router-redux').ConnectedRouter
 	: require('react-router').StaticRouter
@@ -33,7 +30,6 @@ let initAlready = false
 // Root rendered twice + APPLICATION_INIT dispatched twice
 // `initAlready` ensures that `APPLICATION_INIT` was dispatched only once.
 class Root extends Component<Props> {
->>>>>>> feat/3.0-release:src/common/components/Root/index.jsx
 	static defaultProps = {
 		SSR: {}
 	}
@@ -66,13 +62,8 @@ class Root extends Component<Props> {
 				<Provider store={store} key={Date.now()}>
 					<ThemeProvider theme={theme}>
 						<Router {...routerProps}>
-<<<<<<< HEAD:src/common/components/parts/Root/index.jsx
-							<App routes={routes}>
-								<RoutingWrapper routes={getRouterRoutes(routes)} />
-=======
 							<App>
 								<RoutingWrapper />
->>>>>>> feat/3.0-release:src/common/components/Root/index.jsx
 							</App>
 						</Router>
 					</ThemeProvider>

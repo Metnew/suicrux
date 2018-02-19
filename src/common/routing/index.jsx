@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-export history from './history'
-export {getSidebarRoutes, getRouterRoutes, getMetaRoutes, getRoutes} from './routes'
-=======
 // @flow
 import React from 'react'
 import {createBrowserHistory, createMemoryHistory} from 'history'
@@ -92,4 +88,3 @@ const createRequiredHistory = process.env.BROWSER
 export const getMetaRoutes = routingFnCreator('meta')
 export const getRouterRoutes = routingFnCreator('routing')
 export const history = createRequiredHistory()
->>>>>>> feat/3.0-release

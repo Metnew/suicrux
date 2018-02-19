@@ -30,18 +30,6 @@ export const PageLayout = styled.div`
 		}
 	}
 
-<<<<<<< HEAD
-export const MainContainer = styled(Container)`
-	padding-left: 1rem;
-	padding-right: 1rem;
-	margin-top: 2em;
-	margin-bottom: 1em;
-	flex-direction: column;
-	display: flex !important;
-	flex-grow: 1;
-	& > *:last-child {
-		flex-grow: 1;
-=======
 	.main-layout {
 		min-height: calc(100% - 72px);
 		display: flex;
@@ -68,7 +56,6 @@ export const MainContainer = styled(Container)`
 				}
 			}
 		}
->>>>>>> feat/3.0-release
 	}
 `
 

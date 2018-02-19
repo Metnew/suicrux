@@ -25,28 +25,12 @@ export function links (state: State = initialState, action): State {
 			fetchStatus: 'loading'
 		}
 	}
-<<<<<<< HEAD
-	case GET_LINKS_SUCCESS: {
-		const entities = action.payload
-=======
 	case GET_LINKS_FULFILLED: {
 		const entities = action.payload.data
->>>>>>> feat/3.0-release
 		return {
 			...state,
 			entities,
 			fetchStatus: 'loaded'
-<<<<<<< HEAD
-		}
-	}
-	case GET_LINKS_FAIL: {
-		const {errors} = action.payload
-		return {
-			...state,
-			errors,
-			fetchStatus: 'loaded'
-=======
->>>>>>> feat/3.0-release
 		}
 	}
 	default:

@@ -11,23 +11,7 @@ describe('LINKS REDUCER', () => {
 
 	it('should handle GET_LINKS_FULFILLED', () => {
 		const success = {
-<<<<<<< HEAD
-			type: GET_LINKS_SUCCESS,
-			payload
-		}
-		expect(reducer(initialState, success)).toEqual({
-			...initialState,
-			entities: payload,
-			fetchStatus: 'loaded'
-		})
-	})
-
-	it('should handle GET_LINKS_FAIL', () => {
-		const fail = {
-			type: GET_LINKS_FAIL,
-=======
 			type: GET_LINKS_FULFILLED,
->>>>>>> feat/3.0-release
 			payload: {
 				data: [{item: 'payload'}],
 				ok: false,
@@ -36,13 +20,7 @@ describe('LINKS REDUCER', () => {
 		}
 		expect(reducer(initialState, success)).toEqual({
 			...initialState,
-<<<<<<< HEAD
-			errors: {
-				hmm: 'thatsanerror'
-			},
-=======
 			entities: [{item: 'payload'}],
->>>>>>> feat/3.0-release
 			fetchStatus: 'loaded'
 		})
 	})

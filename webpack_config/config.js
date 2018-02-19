@@ -6,10 +6,6 @@ import path from 'path'
 import manifest from '../static/manifest'
 
 const {
-<<<<<<< HEAD
-	BASE_API = '/api/v1',
-=======
->>>>>>> feat/3.0-release
 	NODE_ENV = 'development',
 	SENTRY_PUBLIC_DSN,
 	GA_ID,
@@ -36,12 +32,6 @@ const DEV_SERVER_PORT = +PORT + 1
 export default {
 	isProduction,
 	// Env vars
-<<<<<<< HEAD
-	BASE_API,
-	API_PREFIX: BASE_API,
-	BASE_API_SSR: `http://localhost:${PORT}${BASE_API}`,
-=======
->>>>>>> feat/3.0-release
 	NODE_ENV,
 	SENTRY_PUBLIC_DSN,
 	ANALYZE_BUNDLE,

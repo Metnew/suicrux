@@ -7,14 +7,8 @@ import Helmet from 'react-helmet'
 import {Loader, Grid, List} from 'semantic-ui-react'
 import {GET_LINKS} from 'actions/links'
 import LinkItem from './components/LinkItem'
-<<<<<<< HEAD
-import {getEntitiesLinksState} from 'selectors'
-import _ from 'lodash'
-import type {GlobalState} from 'reducers'
-=======
 import {getEntitiesLinksState, isLoaded} from 'selectors'
 import _ from 'lodash'
->>>>>>> feat/3.0-release
 
 type Props = {
 	links: Object,
@@ -49,13 +43,8 @@ class Links extends Component<Props> {
 					<Grid stackable>
 						<Grid.Column width={16}>
 							<List relaxed divided animated>
-<<<<<<< HEAD
-								{_.map(links, (link: LinkItem, i) => {
-									return <LinkItem key={i} item={link} />
-=======
 								{_.map(links, (linkItem, i) => {
 									return <LinkItem key={i} {...linkItem} />
->>>>>>> feat/3.0-release
 								})}
 							</List>
 						</Grid.Column>
@@ -69,14 +58,8 @@ class Links extends Component<Props> {
 function mapStateToProps (state) {
 	const linksState = getEntitiesLinksState(state)
 	const links = linksState.entities
-<<<<<<< HEAD
-	const isLinksLoading = linksState.fetchStatus === 'loading'
-	const isLinksLoaded = linksState.fetchStatus === 'loaded'
-	return {links, isLinksLoading, isLinksLoaded}
-=======
 	const isLinksLoaded = isLoaded(linksState)
 	return {links, isLinksLoaded}
->>>>>>> feat/3.0-release
 }
 
 const mapDispatchToProps = dispatch => ({

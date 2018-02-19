@@ -10,25 +10,6 @@
 
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
-<<<<<<< HEAD
-<div><a href="https://travis-ci.org/Metnew/suicrux">
-  <img src="https://travis-ci.org/Metnew/suicrux.svg?branch=master" alt="Build Status">
-</a>
-<a href="https://gitter.im/suicrux/Lobby?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">
-  <img src="https://badges.gitter.im/suicrux/Lobby.svg" alt="Join the chat at https://gitter.im/suicrux/Lobby">
-</a>
-<a href="https://www.bithound.io/github/Metnew/suicrux">
-  <img src="https://www.bithound.io/github/Metnew/suicrux/badges/code.svg" alt="bitHound Code">
-</a>
-<a href="https://www.bithound.io/github/Metnew/suicrux">
-  <img src="https://www.bithound.io/github/Metnew/suicrux/badges/score.svg" alt="bitHound Overall Score">
-</a>
- <a href="https://codecov.io/gh/Metnew/suicrux">
-  <img src="https://codecov.io/gh/Metnew/suicrux/branch/master/graph/badge.svg" alt="codecov">
-</a></div>
-
-## What is this?
-=======
 <div>
   <a href="https://travis-ci.org/Metnew/suicrux">
     <img src="https://travis-ci.org/Metnew/suicrux.svg?branch=master" alt="Build Status">
@@ -48,7 +29,6 @@
 </div>
 
 ## Quick start
->>>>>>> feat/3.0-release
 
 ```bash
   # Install
@@ -90,32 +70,21 @@
 
 [![bitHound Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/dependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm) [![bitHound Dev Dependencies](https://www.bithound.io/github/Metnew/suicrux/badges/devDependencies.svg)](https://www.bithound.io/github/Metnew/suicrux/master/dependencies/npm)
 
-[PureCrux](https://github.com/Metnew/purecrux) - same as `suicrux`, but without i18n, rarely used features(manifest, favicons generation, etc) and example app.
-
-<<<<<<< HEAD
 ### Client:
-=======
->>>>>>> feat/3.0-release
+
 - **[Flow](https://flow.org/en/)** - static typing rocks!
 - **[React 16](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
 - **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)**.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
-<<<<<<< HEAD
-- **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
-- **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
-=======
 * **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)** and **[redux-promise-middleware]()**
 * **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
->>>>>>> feat/3.0-release
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
 - **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
-- **[react-async-bootstrapper](https://github.com/ctrlplusb/react-async-bootstrapper)** - for server-side data fetching
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
 - **[react-intl](https://github.com/yahoo/react-intl)** - i18n.
 - **[immutable](https://facebook.github.io/immutable-js/)**, **[reselect](https://github.com/reactjs/reselect)** and **[normalizr](https://github.com/paularmstrong/normalizr)**
-- **[redux-form](https://github.com/erikras/redux-form)** - most known React/Redux library for forms
 
 ### Server:
 
@@ -126,27 +95,8 @@
 * **[compression](https://github.com/expressjs/compression)** - compression middleware (gzip).
 * **[raven](https://docs.sentry.io/clients/node/)** - Sentry for Node
 
-<<<<<<< HEAD
-- Latest Webpack
-- both hot server and hot client, only one port and one filesystem used
-- Babel: `stage-1` and few cool plugins for development and production.
-- **HMR**, hotMiddleware,
-- **[Eslint](https://github.com/eslint/eslint)** and **[Stylelint](https://github.com/stylelint/stylelint)** (could be uncommented inside `postcss.config.js`)
-- **[Offline-plugin](https://github.com/NekR/offline-plugin)**
-- **[favicons-webpack-plugin](https://github.com/jantimon/favicons-webpack-plugin)**
-- **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**
-- **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**
-- **[optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)**
-- **[autodll-webpack-plugin](https://github.com/asfktz/autodll-webpack-plugin)**
-- **[assets-webpack-plugin](https://github.com/kossnocorp/assets-webpack-plugin)**
-- **[optimize-js-plugin](https://github.com/vigneshshanmugam/optimize-js-plugin)**
-- **[wepback-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest)**
-- **[circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin)**
-- **[extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)**
-=======
 
 ### Webpack
->>>>>>> feat/3.0-release
 
 * Latest Webpack
 * Babel: `stage-0` and few cool plugins for development and production.
@@ -171,22 +121,6 @@
 
 ### Static assets?
 
-<<<<<<< HEAD
-"30-seconds guide":
-```bash
-  # Install
-  git clone --depth=1 --single-branch https://github.com/Metnew/suicrux.git
-  cd suicrux
-  npm install
-  flow-typed install # install flow typings for libraries
-  # Development
-  npm run dev
-  # Build
-  npm run build
-  # Production
-  npm run start
-```
-=======
 `/public` folder. Static assets are handled by razzle.
 
 ### SSR?
@@ -194,17 +128,12 @@
 Check `/src/server/ssr/`.
 
 ### Code-splitting?
->>>>>>> feat/3.0-release
 
 `react-async-component`.
 
 ### Server-side data-fetching?
 
-<<<<<<< HEAD
-#### **[Most commonly asked questions are here.](/docs/FAQ.md)**
-=======
 Using `react-async-bootstrapper` - a wrapper around `react-tree-walker`.
->>>>>>> feat/3.0-release
 
 ### Theming?
 

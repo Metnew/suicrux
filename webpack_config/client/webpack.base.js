@@ -19,7 +19,8 @@ const {
 rimraf(`${distPath}/client`, {}, () => {})
 
 const definePluginArgs = {
-	'process.env.BASE_API': JSON.stringify(BASE_API),
+	'process.env.GA_ID': JSON.stringify(GA_ID),
+	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
 	'process.env.BROWSER': JSON.stringify(true)
 }
 
