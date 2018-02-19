@@ -6,11 +6,14 @@ import {Loader, Dimmer, Header, Icon} from 'semantic-ui-react'
 import _ from 'lodash'
 import Dashboard from 'containers/Dashboard'
 import Links from 'containers/Links'
-import NotFound from 'containers/NotFound'
 
 function asyncComponentCreator (url) {
 	return asyncComponent({
 		resolve: () => {
+			if (!process.env.BROWSER) {
+				// flow-disable-next-line
+				return require(`containers/${url}/index.jsx`).default
+			}
 			// flow-disable-next-line: The parameter passed to import() must be a literal string
 			return import(/* webpackChunkName:"[index].[request]" */ `containers/${url}/index.jsx`)
 		},
@@ -58,7 +61,7 @@ function routingFnCreator (useFor) {
 			name: 'Links'
 		},
 		{
-			component: NotFound,
+			component: asyncComponentCreator('NotFound'),
 			name: '404'
 		}
 	]
@@ -66,24 +69,18 @@ function routingFnCreator (useFor) {
 	const fns = {
 		// Returns routing for React-Router
 		routing () {
-			return routes
-				.map(a =>
-					_.pick(a, ['path', 'strict', 'exact', 'component'])
-				)
+			return routes.map(a => _.pick(a, ['path', 'strict', 'exact', 'component', 'lazy']))
 		},
 		// Returns `name` + `path`. used in Header
 		meta () {
-			return routes
-				.map(a => _.pick(a, ['path', 'name', 'exact', 'strict']))
+			return routes.map(a => _.pick(a, ['path', 'name', 'exact', 'strict']))
 		}
 	}
 
 	return fns[useFor]
 }
 
-const createRequiredHistory = process.env.BROWSER
-	? createBrowserHistory
-	: createMemoryHistory
+const createRequiredHistory = process.env.BROWSER ? createBrowserHistory : createMemoryHistory
 
 export const getMetaRoutes = routingFnCreator('meta')
 export const getRouterRoutes = routingFnCreator('routing')
