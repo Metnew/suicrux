@@ -20,16 +20,6 @@ const definePluginArgs = {
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
 const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
 
-let nodeModules = {}
-fs
-	.readdirSync('node_modules')
-	.filter(x => {
-		return ['.bin'].indexOf(x) === -1
-	})
-	.forEach(mod => {
-		nodeModules[mod] = 'commonjs ' + mod
-	})
-
 const baseWebpackConfig = {
 	name: 'server',
 	entry: config.srcPath,
@@ -39,8 +29,7 @@ const baseWebpackConfig = {
 		path: path.join(config.distPath, './server'),
 		filename: 'index.js',
 		chunkFilename,
-		publicPath,
-		libraryTarget: 'commonjs2'
+		publicPath
 	},
 	externals: [
 		nodeExternals({
@@ -62,23 +51,7 @@ const baseWebpackConfig = {
 		alias: isomorphicWebpackConfig.resolve.alias
 	},
 	module: {
-		rules: isomorphicWebpackConfig.module.rules.concat([
-			// NOTE: LQIP loader doesn't work with file-loader and url-loader :(
-			// `npm i --save-dev lqip-loader`
-			// {
-			//   test: /\.(jpe?g|png)$/i,
-			//   enforce: 'pre',
-			//   loaders: [
-			//     {
-			//       loader: 'lqip-loader',
-			//       options: {
-			//         path: '/images-lqip', // your image going to be in media folder in the output dir
-			//         name: '[name]-lqip.[hash:8].[ext]' // you can use [hash].[ext] too if you wish
-			//       }
-			//     }
-			//   ]
-			// }
-		])
+		rules: isomorphicWebpackConfig.module.rules
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
