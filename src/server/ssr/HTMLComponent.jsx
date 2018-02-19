@@ -1,31 +1,24 @@
-// @flow
+/// @flow
 import serealize from 'serialize-javascript'
 import _ from 'lodash'
 type args = {
+	// rendered to string application
+	app: string,
+	// Styled components' styles
 	css: string,
+	// react-async-component state
 	asyncState: Object,
+	// react-helmet
+	helmet: Object,
+	// redux preloaded state
 	initialState: Object,
+	// client assets manifest
 	assets: Object,
-	faviconsAssets: Object,
+	// prop for react-intl
 	i18n: Object
 }
-// renderToString
-const DLLScripts =
-	process.env.NODE_ENV === 'production'
-		? ''
-		: `
-	<script src="/polyfills.js"></script>
-	<script src="/vendor.js"></script>
-`
 
-const HTMLComponent = ({
-	css,
-	asyncState,
-	initialState,
-	assets,
-	faviconsAssets,
-	i18n
-}: args) => {
+const HTMLComponent = ({css, asyncState, initialState, assets, i18n, app, helmet}: args) => {
 	const stringifiedAsyncState: string = serealize(asyncState)
 	const stringifiedState: string = serealize(initialState)
 	const stringifiedI18N: string = serealize(i18n)
@@ -33,7 +26,7 @@ const HTMLComponent = ({
 		css: ({path}) => `<link rel="stylesheet" href="${path}" />`,
 		js: ({path}) => `<script src="${path}" type="text/javascript"></script>`
 	}
-	const assetsOrdered = ['manifest', 'vendor', 'client']
+	const assetsOrdered = ['manifest', 'polyfills', 'vendor', 'client']
 	const getTags = assets => funcs => ext => {
 		// sort assets to be injected in right order
 		// const assetsOrdered = ['manifest', 'vendor', 'client']
@@ -50,39 +43,26 @@ const HTMLComponent = ({
 	const cssTags = getTagsFromAssets('css')
 	const jsTags = getTagsFromAssets('js')
 
-	return {
-		beforeAppTag: `<html lang="${i18n.lang}">
+	return `<html ${helmet.htmlAttributes.toString()}>
 			<head>
-				<meta charset="utf-8" />
-				<title>Suicrux</title>
-				<meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-				<meta
-					name="description"
-					content="Advanced universal React starter built with a scale in mind."
-				/>
-				<meta name="theme-color" content="#1b1e2f"/>
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<base href="/" />
-				<meta name="msapplication-tap-highlight" content="no" />
-				<link rel="manifest" href="manifest.json" />
-				${faviconsAssets && faviconsAssets.html && faviconsAssets.html.join('')}
+				${helmet.title.toString()}
+				${helmet.meta.toString()}
+				${helmet.base.toString()}
+				${helmet.link.toString()}
+				${helmet.noscript.toString()}
+
 				${css}
 				${cssTags}
 			<head>
-			<body>`,
-		afterAppTag: `
+			<body>
 			<script>window.__ASYNC_STATE__ = ${stringifiedAsyncState}</script>
 			<script>window.__INITIAL_STATE__ = ${stringifiedState}</script>
 			<script>window.__I18N__ = ${stringifiedI18N}</script>
-			${DLLScripts}
+			
+			<div id="app">${app}</div>
 			${jsTags}
-			<noscript>
-				You are using outdated browser. You can install modern browser here:
-				<a href="http://outdatedbrowser.com/">http://outdatedbrowser.com</a>.
-			</noscript>
 			</body>
 			</html>`
-	}
 }
 
 export default HTMLComponent

@@ -2,16 +2,15 @@
  * @file
  */
 import path from 'path'
-import config from './config'
 import webpack from 'webpack'
 import CircularDependencyPlugin from 'circular-dependency-plugin'
+import config from './config'
 
-const {srcPath, rootPath, srcCommonPath, NODE_ENV, GA_ID, SENTRY_PUBLIC_DSN} = config
-
+const {srcPath, rootPath, srcCommonPath, PORT, NODE_ENV, HOST} = config
 const definePluginArgs = {
 	'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-	'process.env.GA_ID': JSON.stringify(GA_ID),
-	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN)
+	'process.env.PORT': JSON.stringify(PORT),
+	'process.env.HOST': JSON.stringify(HOST)
 }
 
 export default {
@@ -24,10 +23,8 @@ export default {
 			reducers: `${srcCommonPath}/reducers/`,
 			routing: `${srcCommonPath}/routing/`,
 			styles: `${srcCommonPath}/styles/`,
-			types: `${srcCommonPath}/types`,
 			selectors: `${srcCommonPath}/selectors`,
-			static: `${rootPath}/static`,
-			images: `${rootPath}/static/images`
+			static: `${rootPath}/static`
 		},
 		extensions: ['.js', '.json', '.jsx'],
 		modules: [srcPath, path.join(rootPath, 'node_modules')]
@@ -61,8 +58,7 @@ export default {
 							limit: 4096,
 							name: 'images/[name].[hash:6].[ext]'
 						}
-					},
-					'img-loader'
+					}
 				]
 			}
 		]

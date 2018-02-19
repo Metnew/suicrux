@@ -16,7 +16,7 @@ describe('Layout actions', () => {
 		}]
 
 		const store = mockStore({})
-		store.dispatch(TOGGLE_SIDEBAR())
+		store.dispatch(TOGGLE_SIDEBAR)
 
 		expect(store.getActions()).toEqual(expectedAction)
 	})

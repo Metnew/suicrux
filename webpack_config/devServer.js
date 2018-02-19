@@ -2,78 +2,47 @@
  * @file
  */
 import webpack from 'webpack'
-import chalk from 'chalk'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
-import webpackGetCodeOnDone from 'webpack-get-code-on-done'
+import DevServer from 'webpack-dev-server'
+import printErrors from 'razzle-dev-utils/printErrors'
 import config from './config'
 import client from './client/webpack.dev.babel'
 import server from './server/webpack.dev.babel'
-// Webpack plugins
-import LogPlugin from './assets/log-plugin'
-import FriendlyErrors from 'friendly-errors-webpack-plugin'
-// Configs for MultiCompiler
-const webpackConfig = [client, server]
-// Get MultiCompiler
-const compiler = webpack(webpackConfig)
-// Apply some commonly used plugins
-compiler.apply(new FriendlyErrors())
-compiler.apply(new LogPlugin(config.PORT))
-compiler.apply(new webpack.NoEmitOnErrorsPlugin())
-// Create devMiddleWare
-const devMiddleWare = webpackDevMiddleware(compiler, {
-	serverRenderer: true,
-	publicPath: webpackConfig[0].output.publicPath,
-	quiet: false,
-	noInfo: true
+
+const {DEV_SERVER_PORT} = config
+const serverCompiler = compile(server)
+
+// Start our server webpack instance in watch mode.
+serverCompiler.watch(
+	{
+		quiet: false,
+		stats: 'info'
+	},
+	/* eslint-disable no-unused-vars */
+	stats => {}
+)
+
+// Compile our assets with webpack
+const clientCompiler = compile(client)
+
+// Create a new instance of Webpack-dev-server for our client assets.
+// This will actually run on a different port than the users app.
+const clientDevServer = new DevServer(clientCompiler, client.devServer)
+
+// Start Webpack-dev-server
+clientDevServer.listen(DEV_SERVER_PORT, err => {
+	if (err) {
+		console.error(err)
+	}
 })
 
-// NOTE: Every time we apply our compiled code to development server
-// We add new middlewares from new code, but don't remove old middlewares from old code
-
-// Number of middlewares that our app should has
-let prevSize = null
-/**
- * @desc Adds dev middlewares + your code to an express server instance
- * @param {ExpressServer} app - Express dev server to which compiled code will be applied
- */
-export default function (app) {
-	/**
-	 * @desc Function that executes after your server-side code compiles
-	 * @param  {Function}  serverSideCode - compiled server-side code
-	 */
-	const done = serverSideCode => {
-		// Get current stack of the app (e.g. applied middlewares)
-		const {stack} = app._router
-		const {length} = stack
-		prevSize = prevSize || length
-		if (length > prevSize) {
-			// Remove old compiled code
-			app._router.stack = stack.slice(0, prevSize)
-		}
-		if (!serverSideCode) {
-			console.log(
-				chalk.red(
-					'Error: no "serverSideCode" got. Check latest changes.'
-				)
-			)
-		} else {
-			// Apply newly compiled code
-			serverSideCode(app)
-		}
+// Webpack compile in a try-catch
+function compile (config) {
+	let compiler
+	try {
+		compiler = webpack(config)
+	} catch (e) {
+		printErrors('Failed to compile.', [e])
+		process.exit(1)
 	}
-
-	app.use(devMiddleWare)
-	app.use(
-		webpackHotMiddleware(
-			compiler.compilers.find(compiler => compiler.name === 'client'),
-			{
-				log: console.log
-			}
-		)
-	)
-	const serverCompiler = compiler.compilers.find(
-		compiler => compiler.name === 'server'
-	)
-	webpackGetCodeOnDone(serverCompiler, done)
+	return compiler
 }

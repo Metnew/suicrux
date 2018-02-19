@@ -3,9 +3,10 @@
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware, compose} from 'redux'
 import {routerMiddleware} from 'react-router-redux'
-// // Application
+import promiseMiddleware from 'redux-promise-middleware'
+// Application
 import rootReducer from 'reducers'
-import {history, getRoutes} from 'routing'
+import {history} from 'routing'
 //
 /**
  * Configure application store
@@ -13,7 +14,7 @@ import {history, getRoutes} from 'routing'
  * @return {Object} - configured store
  */
 const configureStore = (initialState: Object) => {
-	const middlewares = [thunk, routerMiddleware(history)]
+	const middlewares = [thunk, routerMiddleware(history), promiseMiddleware()]
 	const enhancers = middlewares.map(a => applyMiddleware(a))
 
 	const getComposeFunc = () => {
@@ -36,11 +37,9 @@ const configureStore = (initialState: Object) => {
  * @return {Object} Object containting configured store, routes, history
  */
 export default (initialState: Object) => {
-	const routes = getRoutes()
 	const store = configureStore(initialState)
 	return {
 		store,
-		routes,
 		history
 	}
 }

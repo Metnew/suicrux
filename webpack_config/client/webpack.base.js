@@ -4,23 +4,26 @@ import webpack from 'webpack'
 import config from '../config'
 import isomorphicWebpackConfig from '../webpack.isomorphic'
 import AssetsPlugin from 'assets-webpack-plugin'
-import FaviconsWebpackPlugin from 'favicons-webpack-plugin'
 import WebpackAssetsManifest from 'webpack-assets-manifest'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+
 const {
-	CLIENT_DIST_PATH,
-	BASE_API,
-	rootPath,
+	GA_ID,
+	SENTRY_PUBLIC_DSN,
+	CLIENT_STATIC_PATH,
 	srcPath,
 	publicPath,
+	rootPath,
 	isProduction,
-	title,
-	manifest
+	manifest,
+	distPath
 } = config
 
-rimraf(`${config.distPath}/client`, {}, () => {})
+rimraf(`${distPath}/client`, {}, () => {})
 
 const definePluginArgs = {
-	'process.env.BASE_API': JSON.stringify(BASE_API),
+	'process.env.GA_ID': JSON.stringify(GA_ID),
+	'process.env.SENTRY_PUBLIC_DSN': JSON.stringify(SENTRY_PUBLIC_DSN),
 	'process.env.BROWSER': JSON.stringify(true)
 }
 
@@ -30,7 +33,6 @@ const filename = isProduction ? '[name].[hash:6].js' : '[name].js'
 const chunkFilename = isProduction ? '[name].[chunkhash:6].js' : '[name].js'
 const hints = isProduction ? 'warning' : false
 const devtool = isProduction ? 'cheap-source-map' : 'eval'
-
 const baseBuild = {
 	name: 'client',
 	devtool,
@@ -40,7 +42,7 @@ const baseBuild = {
 	output: {
 		filename,
 		publicPath,
-		path: CLIENT_DIST_PATH,
+		path: CLIENT_STATIC_PATH,
 		chunkFilename,
 		crossOriginLoading: 'anonymous'
 	},
@@ -48,20 +50,9 @@ const baseBuild = {
 		hints
 	},
 	resolve: {
-		alias: {
-			...isomorphicWebpackConfig.resolve.alias
-			// NOTE: Preact + preact-compat can save you 148Kb parsed or 14kb gzipped
-			// Preact may breaks your React app, starter by default doesn't aim to support Preact
-			// react: 'preact-compat',
-			// 'react-dom': 'preact-compat',
-			// 'preact-compat': 'preact-compat/dist/preact-compat'
-		},
+		alias: isomorphicWebpackConfig.resolve.alias,
 		modules: isomorphicWebpackConfig.resolve.modules,
-		extensions: isomorphicWebpackConfig.resolve.extensions.concat([
-			'.css',
-			'.scss',
-			'.sass'
-		])
+		extensions: isomorphicWebpackConfig.resolve.extensions.concat(['.css', '.scss', '.sass'])
 	},
 	module: {
 		rules: isomorphicWebpackConfig.module.rules.concat([
@@ -69,61 +60,23 @@ const baseBuild = {
 				test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
 				use: `file-loader?limit=100000&name=assets/[name].[hash:6].[ext]`
 			}
-			// NOTE: LQIP loader doesn't work with file-loader and url-loader :(
-			// `npm i --save-dev lqip-loader`
-			// {
-			//   test: /\.(jpe?g|png)$/i,
-			//   enforce: 'pre',
-			//   loaders: [
-			//     {
-			//       loader: 'lqip-loader',
-			//       options: {
-			//         path: '/images-lqip', // your image going to be in media folder in the output dir
-			//         name: '[name]-lqip.[hash:8].[ext]' // you can use [hash].[ext] too if you wish
-			//       }
-			//     }
-			//   ]
-			// }
 		])
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),
 		new AssetsPlugin({
-			path: CLIENT_DIST_PATH
-		}),
-		// NOTE: this plugin is good, but there are few big issues:
-		// 1. It sets invalid url to browserconfig.xml and manifest.json in index.html.
-		// E.g: in generated index.html you can see:
-		// <meta name="msapplication-config" content="browserconfig.xml">
-		// 2. It looks like generated images aren't minified.(not sure)
-		// NOTE: It would be better to generate favicons without this plugin.
-		new FaviconsWebpackPlugin({
-			// add theme-color property
-			background: manifest.theme,
-			prefix: `favicons/`,
-			logo: path.join(rootPath, './static/images/Logo.png'),
-			title,
-			emitStats: true,
-			statsFilename: 'favicons-stats.json',
-			// Inject generated html into html-webpack-plugin
-			inject: false,
-			// which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
-			icons: {
-				android: false,
-				appleIcon: true,
-				appleStartup: false,
-				coast: false,
-				favicons: true,
-				firefox: false,
-				opengraph: false,
-				twitter: true,
-				yandex: false,
-				windows: false
-			}
+			filename: 'webpack-assets.json',
+			path: CLIENT_STATIC_PATH
 		}),
 		new WebpackAssetsManifest({
-			assets: config.manifest
-		})
+			assets: manifest
+		}),
+		new CopyWebpackPlugin([
+			{
+				from: `${rootPath}/static/public`,
+				to: './'
+			}
+		])
 	]),
 	target: 'web'
 }

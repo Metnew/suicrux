@@ -3,14 +3,20 @@ import fs from 'fs'
 import chokidar from 'chokidar'
 
 let cache = {}
-
+// NOTE: Razzle could `require` CLIENT_ASSETS_MANIFEST
+// In SUIcrux it's currently not possible :(
+// Server requires "missing module"
+// Probably, because CLIENT_ASSETS_MANIFEST isn't ready while it's required
+// So, we read file (only on first request) instead of importing it
 async function getFile (path) {
-	// Cache file forever
+	// Cache file
 	if (cache[path]) {
-		return Promise.resolve(cache[path])
+		return cache[path]
 	}
 
 	return new Promise((resolve, reject) => {
+		const watcher = chokidar.watch(path)
+
 		// This `readFile` func is looking like it escaped from procedure programming
 		const readFile = () => {
 			fs.readFile(path, 'utf8', (err, data) => {
@@ -19,6 +25,7 @@ async function getFile (path) {
 				}
 				const json = JSON.parse(data)
 				cache[path] = json
+				watcher.close()
 				resolve(json)
 			})
 		}
@@ -26,7 +33,7 @@ async function getFile (path) {
 		fs.access(path, fs.constants.R_OK, err => {
 			if (err) {
 				// No. Watch for changes, resolve on `add`.
-				chokidar.watch(path).on('add', readFile)
+				watcher.on('add', readFile)
 			} else {
 				// Yes. resolve!
 				readFile()
@@ -36,14 +43,24 @@ async function getFile (path) {
 }
 
 export default async function () {
-	const basePath = process.env.CLIENT_DIST_PATH
 	// flow-disable-next-line: This type cannot be coerced to string
-	const assets = await getFile(`${basePath}/webpack-assets.json`)
-	// flow-disable-next-line: This type cannot be coerced to string
-	const faviconsAssets = await getFile(`${basePath}/favicons-stats.json`)
+	const assets = await getFile(process.env.CLIENT_ASSETS_MANIFEST)
+	// AutoDLL assets aren't included in CLIENT_ASSET_MANIFEST (webpack stats)
+	// So they are hardcoded here
+	const AutoDLLDevOnly =
+		process.env.NODE_ENV === 'development'
+			? {
+				vendor: {
+					js: 'http://localhost:3000/vendor.js'
+				},
+				polyfills: {
+					js: 'http://localhost:3000/polyfills.js'
+				}
+			}
+			: {}
 
 	return {
-		assets,
-		faviconsAssets
+		...assets,
+		...AutoDLLDevOnly
 	}
 }

@@ -14,11 +14,11 @@
 			"env",
 			{
 				"targets": {
-					"browsers": ["ie 11", "last 2 versions"]
+					"browsers": ["ie 10", "last 2 versions"]
 				}
 			}
 		],
-		"stage-1",
+		"stage-0",
 		"react",
 		"flow"
 	],

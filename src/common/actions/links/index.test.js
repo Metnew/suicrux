@@ -1,66 +1,44 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
+import promiseMiddleware from 'redux-promise-middleware'
 import nock from 'nock'
 import {
 	GET_LINKS,
-	GET_LINKS_SUCCESS,
-	GET_LINKS_PENDING,
-	GET_LINKS_FAIL
+	GET_LINKS_FULFILLED,
+	GET_LINKS_PENDING
 } from 'actions/links'
 
-const middlewares = [thunk]
+const middlewares = [thunk, promiseMiddleware()]
 const mockStore = configureMockStore(middlewares)
 
 describe('Links actions', () => {
 	describe('GET_LINKS', () => {
 		const pending = {
-			meta: null,
 			type: GET_LINKS_PENDING
 		}
 
-		it('creates GET_LINKS_SUCCESS when GET_LINKS was successful', done => {
+		it('creates GET_LINKS_FULFILLED when GET_LINKS was successful', async done => {
 			const store = mockStore({})
-			const payload = [
-				{
-					link: 'string',
-					header: 'string'
-				}
-			]
+			const data = {
+				link: 'string',
+				header: 'string'
+			}
 
-			nock(process.env.BASE_API)
-				.get('/links')
-				.reply(200, payload)
+			nock(/.*/)
+				.get('/api/links')
+				.reply(200, data)
 
-			return store.dispatch(GET_LINKS()).then(res => {
-				const actions = store.getActions()
-				const success = {
-					meta: null,
-					type: GET_LINKS_SUCCESS,
-					payload
-				}
-				const expectedActions = [pending, success]
-
-				expect(actions).toEqual(expectedActions)
-				done()
-			})
-		})
-
-		it('creates GET_LINKS_FAIL when GET_LINKS was unsuccessful', async done => {
-			const payload = {errors: {}}
-			nock(process.env.BASE_API)
-				.get('/links')
-				.reply(400, payload)
-
-			const store = mockStore({})
 			await store.dispatch(GET_LINKS())
 			const actions = store.getActions()
-			const fail = {
-				meta: null,
-				type: GET_LINKS_FAIL,
-				error: true,
-				payload
+			const success = {
+				type: GET_LINKS_FULFILLED,
+				payload: {
+					ok: true,
+					status: 200,
+					data
+				}
 			}
-			const expectedActions = [pending, fail]
+			const expectedActions = [pending, success]
 
 			expect(actions).toEqual(expectedActions)
 			done()

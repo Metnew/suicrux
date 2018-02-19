@@ -3,22 +3,19 @@
  * @desc
  */
 import React from 'react'
-import type {RouteItem} from 'types'
-// Redux stuff
-import Root from 'components/parts/Root'
-// Styled-components's injectGlobal styles
+import Root from 'components/Root'
+// global styles
 import 'styles/global'
 
 type Props = {
 	i18n: Object,
 	store: Object, // unconfigured store
-	SSR: {
+	SSR?: {
 		// SSR options, see `/server` for more info
 		context: Object,
 		location: string
 	},
 	history: Object, // Root node with routing, synced history, store
-	routes: RouteItem[] // app routing
 }
 
 /**

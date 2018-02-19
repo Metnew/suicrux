@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component same snapshot 1`] = `
+<style__StyledFooter>
+  <div
+    className="footer-inner"
+  >
+    <Grid
+      relaxed={true}
+    >
+      <GridRow
+        verticalAlign="middle"
+      >
+        <GridColumn
+          mobile={16}
+          width={12}
+        >
+          <a
+            href="https://github.com/Metnew/suicrux"
+          >
+            <Header
+              as="h3"
+              inverted={true}
+            >
+              <Icon
+                as="i"
+                name="github"
+              />
+              <HeaderContent>
+                Suicrux
+                <HeaderSubheader>
+                  Best carefully selected libs ❤️
+                </HeaderSubheader>
+              </HeaderContent>
+            </Header>
+          </a>
+        </GridColumn>
+      </GridRow>
+    </Grid>
+  </div>
+</style__StyledFooter>
+`;
