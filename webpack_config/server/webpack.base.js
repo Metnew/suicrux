@@ -57,7 +57,8 @@ const baseWebpackConfig = {
 		new webpack.DefinePlugin(definePluginArgs),
 		new webpack.optimize.LimitChunkCountPlugin({
 			maxChunks: 1
-		})
+		}),
+		new webpack.NormalModuleReplacementPlugin(/\.(css|sass|less|scss)$/, 'node-noop')
 	]),
 	node: {
 		__dirname: true,
