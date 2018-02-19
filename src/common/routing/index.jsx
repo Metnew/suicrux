@@ -6,15 +6,13 @@ import {Loader, Dimmer, Header, Icon} from 'semantic-ui-react'
 import _ from 'lodash'
 import Dashboard from 'containers/Dashboard'
 import Links from 'containers/Links'
+import NotFound from 'containers/NotFound'
 
 function asyncComponentCreator (url) {
 	return asyncComponent({
 		resolve: () => {
-			if (process.env.BROWSER) {
-				return require(`containers/${url}/index.jsx`).default
-			}
 			// flow-disable-next-line: The parameter passed to import() must be a literal string
-			return	import(/* webpackChunkName:"[index].[request]" */ `containers/${url}/index.jsx`)
+			return import(/* webpackChunkName:"[index].[request]" */ `containers/${url}/index.jsx`)
 		},
 		LoadingComponent () {
 			return (
@@ -43,7 +41,7 @@ function asyncComponentCreator (url) {
 }
 
 function routingFnCreator (useFor) {
-	const [AsyncNotFound] = ['NotFound'].map(asyncComponentCreator)
+	// const AsyncNotFound = asyncComponentCreator('NotFound')
 	// Dashboard and Links included in build
 	// NotFound(404) is lazy
 	const routes: any[] = [
@@ -60,7 +58,7 @@ function routingFnCreator (useFor) {
 			name: 'Links'
 		},
 		{
-			component: AsyncNotFound,
+			component: NotFound,
 			name: '404'
 		}
 	]
