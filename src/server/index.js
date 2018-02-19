@@ -2,19 +2,22 @@
  * @flow
  * @file
  */
-import express from 'express'
-import chalk from 'chalk'
 import 'babel-polyfill'
-// Mount our server-side code to server
-import server from './server'
+import express from 'express'
+import fetch from 'isomorphic-fetch'
+import addMiddlewares from './middlewares'
+import API from './api'
+import SSR from './ssr'
+
+global.fetch = fetch
 
 const app: express$Application = express()
-const port: number = +process.env.PORT
 
-server(app)
+// Add global middlewares
+addMiddlewares(app)
+// Add API
+app.use('/api', API)
+// Add SSR
+app.use(SSR)
 
-app.listen(port, () => {
-	console.log(
-		chalk.green(`HTTP SERVER IS LISTENING ON http://localhost:${port}`)
-	)
-})
+export default app

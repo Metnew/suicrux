@@ -3,7 +3,11 @@
  * @desc
  */
 import React from 'react'
+<<<<<<< HEAD
 import {renderToNodeStream} from 'react-dom/server'
+=======
+import {renderToString} from 'react-dom/server'
+>>>>>>> feat/3.0-release
 import {ServerStyleSheet, StyleSheetManager} from 'styled-components'
 import {configureRootComponent, configureApp} from 'common/app'
 import asyncBootstrapper from 'react-async-bootstrapper'
@@ -11,23 +15,29 @@ import {AsyncComponentProvider, createAsyncContext} from 'react-async-component'
 import HTMLComponent from './HTMLComponent'
 import getI18nData from 'server/i18n'
 import {matchPath} from 'react-router'
-import getStats from './stats'
+import {getRouterRoutes} from 'routing'
+import getAssets from './stats'
 
 export default async (req: express$Request, res: express$Response) => {
+<<<<<<< HEAD
 	// probably, it'd better to define these objs in global scope
 	const {assets, faviconsAssets} = await getStats()
 	const {isLoggedIn, language} = req.user
 	const authState = {auth: {isLoggedIn}}
 	const initialState: Object = {...authState}
+=======
+	const assets = await getAssets()
+	const {language} = req.user
+	const initialState: Object = {}
+>>>>>>> feat/3.0-release
 	const i18n = getI18nData(language)
 	const sheet = new ServerStyleSheet()
 	const location: string = req.url
 	const context = {}
-	const {store, history, routes} = configureApp(initialState)
+	const {store, history} = configureApp(initialState)
 	const RootComponent: React$Node = configureRootComponent({
 		store,
 		history,
-		routes,
 		i18n,
 		SSR: {location, context}
 	})
@@ -41,38 +51,29 @@ export default async (req: express$Request, res: express$Response) => {
 		</AsyncComponentProvider>
 	)
 
+<<<<<<< HEAD
 	// match url against browseable routes
+=======
+	const routes = getRouterRoutes()
+>>>>>>> feat/3.0-release
 	// if true - > throw 404, if match found -> 200
 	const noRequestURLMatch = !routes.filter(r => !!r.path).find(r => matchPath(req.url, r))
 
 	asyncBootstrapper(app).then(() => {
-		const appStream = renderToNodeStream(app)
+		const renderedApp = renderToString(app)
 		const css: string = sheet.getStyleTags()
 		const preloadedState: Object = store.getState()
+		const responseStatusCode = noRequestURLMatch ? 404 : 200
 		const asyncState = asyncContext.getState()
 		const props = {
 			css,
 			assets,
-			faviconsAssets,
 			asyncState,
 			initialState: preloadedState,
+			app: renderedApp,
 			i18n
 		}
 
-		const {beforeAppTag, afterAppTag} = HTMLComponent(props)
-		const responseStatusCode = noRequestURLMatch ? 404 : 200
-
-		res.writeHead(responseStatusCode, {
-			'Content-Type': 'text/html'
-		})
-		res.write(beforeAppTag)
-		res.write(`<div id="app">`)
-		appStream.pipe(res, {end: false})
-
-		appStream.on('end', () => {
-			res.write('</div>')
-			res.write(afterAppTag)
-			res.end()
-		})
+		res.status(responseStatusCode).send(HTMLComponent(props))
 	})
 }

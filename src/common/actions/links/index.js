@@ -1,12 +1,12 @@
 // @flow
-import {awral} from 'actions/utils'
 import {getLinksAPI} from 'api/LinksSvc'
-import type {LinkItem} from 'types'
 // Define action types
-export const GET_LINKS_SUCCESS = 'GET_LINKS_SUCCESS'
-export const GET_LINKS_FAIL = 'GET_LINKS_FAIL'
+export const GET_LINKS_FULFILLED = 'GET_LINKS_FULFILLED'
+// GET_LINKS_REJECTED isn't handled in the boilerplate.
+// export const GET_LINKS_REJECTED = 'GET_LINKS_REJECTED'
 export const GET_LINKS_PENDING = 'GET_LINKS_PENDING'
 
+<<<<<<< HEAD
 export type GET_LINKS_SUCCESS_TYPE = {
 	type: 'GET_LINKS_SUCCESS',
 	meta: any,
@@ -35,3 +35,9 @@ export type GET_LINKS_PENDING_TYPE = {
   {@link https://github.com/Metnew/awral}
 */
 export const GET_LINKS = awral(getLinksAPI)('GET_LINKS')
+=======
+export const GET_LINKS = () => ({
+	type: 'GET_LINKS',
+	payload: getLinksAPI()
+})
+>>>>>>> feat/3.0-release

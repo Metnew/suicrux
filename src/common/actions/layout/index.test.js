@@ -16,7 +16,11 @@ describe('Layout actions', () => {
 		}]
 
 		const store = mockStore({})
+<<<<<<< HEAD
 		store.dispatch(TOGGLE_SIDEBAR())
+=======
+		store.dispatch(TOGGLE_SIDEBAR)
+>>>>>>> feat/3.0-release
 
 		expect(store.getActions()).toEqual(expectedAction)
 	})

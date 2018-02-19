@@ -1,4 +1,8 @@
 # Suicrux: [demo](https://suicrux.now.sh/auth)
+
+**Universal** starter based on [**Razzle**](https://github.com/jaredpalmer/razzle) with **lazy-loading** for your **new Progressive Web App**.
+
+> [Previous release lives here.](https://github.com/Metnew/suicrux/tree/previous)
 > Demo sometimes becomes frozen by `now`. Retry in a few minutes, if it doesn't work.
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Metnew/suicrux.svg)](https://greenkeeper.io/)
@@ -6,6 +10,7 @@
 
 <!-- ![](https://github.com/Metnew/suicrux/blob/for-gh/screen.gif) -->
 
+<<<<<<< HEAD
 <div><a href="https://travis-ci.org/Metnew/suicrux">
   <img src="https://travis-ci.org/Metnew/suicrux.svg?branch=master" alt="Build Status">
 </a>
@@ -23,17 +28,63 @@
 </a></div>
 
 ## What is this?
+=======
+<div>
+  <a href="https://travis-ci.org/Metnew/suicrux">
+    <img src="https://travis-ci.org/Metnew/suicrux.svg?branch=master" alt="Build Status">
+  </a>
+  <a href="https://gitter.im/suicrux/Lobby?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp; utm_content=badge">
+    <img src="https://badges.gitter.im/suicrux/Lobby.svg" alt="Join the chat at https://gitter.im/suicrux/Lobby">
+  </a>
+  <a href="https://www.bithound.io/github/Metnew/suicrux">
+    <img src="https://www.bithound.io/github/Metnew/suicrux/badges/code.svg" alt="bitHound Code">
+  </a>
+  <a href="https://www.bithound.io/github/Metnew/suicrux">
+    <img src="https://www.bithound.io/github/Metnew/suicrux/badges/score.svg" alt="bitHound Overall Score">
+  </a>
+   <a href="https://codecov.io/gh/Metnew/suicrux">
+    <img src="https://codecov.io/gh/Metnew/suicrux/branch/master/graph/badge.svg" alt="codecov">
+  </a>
+</div>
 
-**Universal** starter with **lazy-loading** for your **new Progressive Web App**.
-> [Previous release lives here.](https://github.com/Metnew/suicrux/tree/previous-3.0.0)
+## Quick start
+>>>>>>> feat/3.0-release
 
-## Quick intro
+```bash
+  # Install
+  git clone --depth=1 --single-branch https://github.com/Metnew/suicrux.git
+  cd suicrux
+  npm install
+  # install flow typings for libraries (optional)
+  flow-typed install
+  # Development
+  npm run dev
+  # Build
+  npm run build
+  # Production
+  npm run start
+```
 
-### [Why this starter uses `react-semantic-ui`?](/docs/SUI.md)
-> SPOILER: because SUI and SUIR are awesome
-
-You're always free to use any other UI framework with `suicrux`.
-**[UI framework comparison here.](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651)**
+- [Quick start](#quick-start)
+- [What's inside?](#whats-inside)
+    - [Client](#client)
+    - [Server](#server)
+    - [Webpack](#webpack)
+    - [Other](#other)
+- [Suicrux FAQ](#faq)
+    - [Static assets?](#static-assets)
+    - [SSR?](#ssr)
+    - [Code-splitting?](#code-splitting)
+    - [Server-side data-fetching?](#server-side-data-fetching)
+    - [Theming?](#theming)
+    - [Browser support](#browser-support)
+- [Environment variables](#environment-variables)
+- [Semantic.UI + React = SUIR](#semanticui--react--suir)
+    - [Good parts](#good-parts)
+    - [Bad parts](#bad-parts)
+- [Contributing](#contributing)
+- [Author](#author)
+- [LICENSE](#license)
 
 ## What's inside?
 
@@ -41,16 +92,24 @@ You're always free to use any other UI framework with `suicrux`.
 
 [PureCrux](https://github.com/Metnew/purecrux) - same as `suicrux`, but without i18n, rarely used features(manifest, favicons generation, etc) and example app.
 
+<<<<<<< HEAD
 ### Client:
+=======
+>>>>>>> feat/3.0-release
 - **[Flow](https://flow.org/en/)** - static typing rocks!
 - **[React 16](https://facebook.github.io/react/)** and **[Redux](http://redux.js.org/)**
-- **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)** support.
+- **SASS**, **[PostCSS](https://github.com/postcss/postcss)**, and **[styled-components](https://github.com/styled-components/styled-components)**.
 - **[React-Router v4](https://github.com/ReactTraining/react-router)** + **[React-Router-Redux v5](https://github.com/reactjs/react-router-redux)**
+<<<<<<< HEAD
 - **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)**
 - **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
+=======
+* **[Redux-thunk](https://github.com/gaearon/redux-thunk)**, **[Redux-Devtools-Extension](https://github.com/zalmoxisus/redux-devtools-extension)** and **[redux-promise-middleware]()**
+* **[isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)**
+>>>>>>> feat/3.0-release
 - **[Semantic-ui-react](http://react.semantic-ui.com/)** - UI components.
-- **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[Lodash](https://lodash.com/)** - is a dependency of SUIR.
+- **[Store2](https://github.com/nbubna/store)** and **[js-cookie](https://github.com/js-cookie/js-cookie)** - LocalStorage and cookies.
 - **[react-async-component](https://github.com/ctrlplusb/react-async-component)** - library for lazy-loading
 - **[react-async-bootstrapper](https://github.com/ctrlplusb/react-async-bootstrapper)** - for server-side data fetching
 - **[react-ga](https://github.com/react-ga/react-ga)** - advanced Google Analytics for React
@@ -58,9 +117,16 @@ You're always free to use any other UI framework with `suicrux`.
 - **[immutable](https://facebook.github.io/immutable-js/)**, **[reselect](https://github.com/reactjs/reselect)** and **[normalizr](https://github.com/paularmstrong/normalizr)**
 - **[redux-form](https://github.com/erikras/redux-form)** - most known React/Redux library for forms
 
+### Server:
 
-### Build (Webpack):
+* **[morgan](https://www.npmjs.com/package/morgan)** - request logger middleware.
+* **[helmet](https://github.com/helmetjs/helmet)** - secure your Express app.
+* **[cookie-parser](https://www.npmjs.com/package/cookie-parser)** - cookie parsing middleware.
+* **[body-parser](https://github.com/expressjs/body-parser)** - body parsing middleware
+* **[compression](https://github.com/expressjs/compression)** - compression middleware (gzip).
+* **[raven](https://docs.sentry.io/clients/node/)** - Sentry for Node
 
+<<<<<<< HEAD
 - Latest Webpack
 - both hot server and hot client, only one port and one filesystem used
 - Babel: `stage-1` and few cool plugins for development and production.
@@ -77,26 +143,35 @@ You're always free to use any other UI framework with `suicrux`.
 - **[wepback-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest)**
 - **[circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin)**
 - **[extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)**
+=======
 
-### Server:
+### Webpack
+>>>>>>> feat/3.0-release
 
-- **[morgan](https://www.npmjs.com/package/morgan)** - request logger middleware.
-- **[helmet](https://github.com/helmetjs/helmet)** - secure your Express app.
-- **[cookie-parser](https://www.npmjs.com/package/cookie-parser)** - cookie parsing middleware.
-- **[body-parser](https://github.com/expressjs/body-parser)** - body parsing middleware
-- **[compression](https://github.com/expressjs/compression)** - compression middleware (gzip).
-- **[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)** - JWT ~~for the win~~.
-- **[raven](https://docs.sentry.io/clients/node/)** - Sentry for Node
+* Latest Webpack
+* Babel: `stage-0` and few cool plugins for development and production.
+* **HMR**, hotMiddleware,
+* **[Eslint](https://github.com/eslint/eslint)**
+* **[Offline-plugin](https://github.com/NekR/offline-plugin)**
+* **[webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)**
+* **[compression-webpack-plugin](https://github.com/webpack-contrib/compression-webpack-plugin)**
+* **[optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin)**
+- **[autodll-webpack-plugin](https://github.com/asfktz/autodll-webpack-plugin)**
+* **[optimize-js-plugin](https://github.com/vigneshshanmugam/optimize-js-plugin)**
+* **[wepback-assets-manifest](https://www.npmjs.com/package/webpack-assets-manifest)**
+* **[circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin)**
+* **[extract-text-webpack-plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin)**
 
 ### Other:
 
 - **[Jest](https://facebook.github.io/jest/)** - awesome testing framework.
 - [And more tools for building and testing...](https://github.com/Metnew/suicrux/blob/master/package.json)
 
-## Usage
+## Suicrux FAQ
 
-### How it works?
+### Static assets?
 
+<<<<<<< HEAD
 "30-seconds guide":
 ```bash
   # Install
@@ -111,37 +186,83 @@ You're always free to use any other UI framework with `suicrux`.
   # Production
   npm run start
 ```
+=======
+`/public` folder. Static assets are handled by razzle.
 
-More detailed:
+### SSR?
 
-#### **[v1.0.0 Release notes](https://github.com/Metnew/suicrux/releases/tag/v1.0.0)** - most detailed description of the latest changes
+Check `/src/server/ssr/`.
 
+### Code-splitting?
+>>>>>>> feat/3.0-release
+
+`react-async-component`.
+
+### Server-side data-fetching?
+
+<<<<<<< HEAD
 #### **[Most commonly asked questions are here.](/docs/FAQ.md)**
+=======
+Using `react-async-bootstrapper` - a wrapper around `react-tree-walker`.
+>>>>>>> feat/3.0-release
 
-#### [Webpack configuration](/docs/webpack.md)
+### Theming?
 
-#### [Available scripts](/docs/scripts.md)
+Yes, with `styled-components`s `<ThemeProvider>` you can specify your own theme.
 
-#### [How does i18n work?](/docs/i18n.md)
+### Browser support
 
-#### [Testing](/docs/testing.md)
+Without `react-intl`:
+- Safari 7+
+- IE 10+
 
-#### [Why does this starter use `react-semantic-ui`?](/docs/SUI.md)
+## Environment variables
 
-#### [Environment variables and configuration.](/docs/env_vars.md)
+-  `ANALYZE_BUNDLE (default: false)`: Run `webpack-bundle-analyzer` after a production build. _Webpack only._
 
-#### ~~[Starter architecture and design. (not finished)](/docs/design.md)~~
+-  `GA_ID (default:false)`: Your Google analytics ID. If set, `react-ga` will be initialized inside `<App>` container on `componentDidMount()`. _Browser only._
 
-### Nearest future:
+- `SENTRY_PUBLIC_DSN (default: false)`: Similar to `GA_ID`, but for [Sentry](https://sentry.io). _Browser only._
 
-- CLI app
-- Redux code-splitting
+- `BROWSER`: Your environment. `true` - browser, `false` - Node.
+**NOTE:** Remember, you can't run code which uses browser global object in Node environment!
 
-### Something very important:
+- `SENTRY_DSN (default: false)`: Sentry full(private) DSN.  _Server only._
 
-> Have a question? Ask! :wink:
+## Semantic.UI + React = SUIR
 
-Any help is highly appreciated. PRs, issues, questions, enhancements are always welcome.
+> SUI = Semantic.UI  
+> SUIR = Semantic-UI-React
+> TL;DR: SUIR is great, but it lacks inline-styles.
+
+You're always free to use any other UI framework with `suicrux`.
+**[UI framework comparison.](https://hackernoon.com/the-coolest-react-ui-frameworks-for-your-new-react-app-ad699fffd651)**
+
+### Good parts
+
+1. Big UI library
+
+2. Based on SUI: When you use SUIR you still use SUI CSS.
+
+3. Modular: Import only what you use required components.
+
+### Bad parts
+
+1. Import of unused styles.
+> You can import styles only for required components. Check **`src/client/index.jsx`**.
+> PurifyCss won't help.
+
+2. SUI styles are huge and block rendering.
+   > You can split SUI styles into 2 smaller chunks that would be downloaded faster if you use HTTP2.
+   > You can import styles only for required components. Check **`src/client/index.jsx`**.
+
+
+## Contributing
+
+> Have a question? Ask! :wink: 
+> Make sure you ask a right question related to Suicrux.
+
+PRs, issues, questions, enhancements are always welcome.
 
 ### Author
 
