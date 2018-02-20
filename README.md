@@ -183,11 +183,12 @@ You're always free to use any other UI framework with `suicrux`.
 > PurifyCss cannot help. Only browser-based tools probably could.
 
 2. SUI styles are costly(548kb) and block rendering.
-> It's possible to split SUI styles into several smaller chunks that would be downloaded faster if you use HTTP2.
+> It's possible to split SUI styles into several smaller chunks which could be downloaded faster.
 
 ## Contributing
 
 > Have a question? Ask! :wink: 
+
 > Make sure you ask a right question. :smiling_imp:
 
 PRs, issues, enhancements are always welcome.
