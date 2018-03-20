@@ -122,7 +122,7 @@
   "optionalDependencies": {
     "immutable": "^3.8.2",
     "normalizr": "^3.2.4",
-    "query-string": "^5.1.0",
+    "query-string": "^6.0.0",
     "reselect": "^3.0.1",
     "store2": "^2.7.0",
     "js-cookie": "^2.2.0",
