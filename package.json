@@ -18,7 +18,7 @@
     "offline-plugin": "^4.9.0",
     "raven": "^2.4.1",
     "react": "^16.2.0",
-    "react-async-bootstrapper": "^1.1.2",
+    "react-async-bootstrapper": "^2.1.0",
     "react-async-component": "^1.0.2",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",

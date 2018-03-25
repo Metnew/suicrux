@@ -55,7 +55,7 @@ const app = (
 	</AppContainer>
 )
 
-asyncBootstrapper(app).then(() => {
+asyncBootstrapper(app, false, { asyncBootstrapPhase: true }).then(() => {
 	console.log('__INITIAL_STATE__:', initialState)
 	hydrate(app, document.getElementById('app'))
 })
