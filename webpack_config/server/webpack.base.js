@@ -50,7 +50,21 @@ const baseWebpackConfig = {
 		alias: isomorphicWebpackConfig.resolve.alias
 	},
 	module: {
-		rules: isomorphicWebpackConfig.module.rules
+		rules: isomorphicWebpackConfig.module.rules.concat(
+			{
+				test: /\.(jpe?g|png|gif|svg)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 4096,
+							name: 'images/[name].[hash:6].[ext]',
+							emitFile: false
+						}
+					}
+				]
+			}
+		)
 	},
 	plugins: isomorphicWebpackConfig.plugins.concat([
 		new webpack.DefinePlugin(definePluginArgs),

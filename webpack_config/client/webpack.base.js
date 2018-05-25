@@ -59,6 +59,18 @@ const baseBuild = {
 			{
 				test: /\.(ico|eot|otf|webp|ttf|woff|woff2)$/i,
 				use: `file-loader?limit=100000&name=assets/[name].[hash:6].[ext]`
+			},
+			{
+				test: /\.(jpe?g|png|gif|svg)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 4096,
+							name: 'images/[name].[hash:6].[ext]'
+						}
+					}
+				]
 			}
 		])
 	},
