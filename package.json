@@ -103,7 +103,7 @@
     "redux-mock-store": "^1.5.1",
     "resolve-url-loader": "^2.2.1",
     "rimraf": "^2.6.2",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^7.0.2",
     "source-map-support": "^0.5.3",
     "standard-version": "^4.3.0",
     "start-server-webpack-plugin": "^2.2.1",
