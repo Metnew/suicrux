@@ -124,7 +124,7 @@
     "immutable": "^3.8.2",
     "normalizr": "^3.2.4",
     "query-string": "^6.0.0",
-    "reselect": "^3.0.1",
+    "reselect": "^4.0.0",
     "store2": "^2.7.0",
     "js-cookie": "^2.2.0",
     "sinon": "^5.0.0",
