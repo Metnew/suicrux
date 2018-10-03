@@ -2,7 +2,6 @@
  * @flow
  * @file
  */
-import 'babel-polyfill'
 import express from 'express'
 import fetch from 'isomorphic-fetch'
 import addMiddlewares from './middlewares'
