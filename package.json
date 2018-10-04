@@ -41,7 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "^6.1.0",
     "@commitlint/config-conventional": "^6.1.0",
-    "assets-webpack-plugin": "^3.5.1",
+    "assets-webpack-plugin": "^4.0.0",
     "autodll-webpack-plugin": "^0.3.9",
     "autoprefixer": "^8.0.0",
     "babel-cli": "^6.26.0",
