@@ -14,13 +14,13 @@
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.5",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "offline-plugin": "^4.9.0",
     "raven": "^2.4.1",
     "react": "^16.2.0",
     "react-async-bootstrapper": "^2.1.0",
     "react-async-component": "^1.0.2",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.2.1",
     "react-ga": "^2.4.1",
     "react-headroom": "^2.2.2",
     "react-helmet": "^5.2.0",
@@ -34,9 +34,10 @@
     "redux-promise-middleware": "^5.0.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",
-    "semantic-ui-react": "^0.80.0",
+    "semantic-ui-react": "^0.80.2",
     "serialize-javascript": "^1.4.0",
-    "styled-components": "^3.1.6"
+    "styled-components": "^3.1.6",
+    "snyk": "^1.117.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.0",
@@ -143,7 +144,9 @@
     "flow": "flow",
     "release": "standard-version",
     "prepush": "npm run lint:scripts",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": ">=8"
@@ -174,5 +177,6 @@
   "moduleRoots": [
     "./src/common",
     "./src"
-  ]
+  ],
+  "snyk": true
 }
