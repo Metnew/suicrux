@@ -111,7 +111,7 @@
     "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.1.0",
     "url-loader": "^0.6.2",
-    "webpack": "^3.11.0",
+    "webpack": "^4.28.0",
     "webpack-assets-manifest": "^1.0.0",
     "webpack-bundle-analyzer": "^2.10.0",
     "webpack-dev-server": "^2.11.1",
