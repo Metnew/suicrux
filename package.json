@@ -60,7 +60,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "6.26.0",
     "babel-runtime": "^6.26.0",
-    "caniuse-lite": "^1.0.30000809",
+    "caniuse-lite": "^1.0.30000928",
     "circular-dependency-plugin": "^4.4.0",
     "compression-webpack-plugin": "^1.1.7",
     "copy-webpack-plugin": "^4.4.1",
