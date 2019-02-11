@@ -39,7 +39,7 @@
     "styled-components": "^3.1.6"
   },
   "devDependencies": {
-    "@commitlint/cli": "^6.1.0",
+    "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^6.1.0",
     "assets-webpack-plugin": "^3.5.1",
     "autodll-webpack-plugin": "^0.3.9",
