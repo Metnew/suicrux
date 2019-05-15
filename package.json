@@ -73,7 +73,7 @@
     "eslint-config-standard": "^11.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-babel": "^4.1.2",
-    "eslint-plugin-flowtype": "^2.45.0",
+    "eslint-plugin-flowtype": "^3.9.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^6.0.0",
     "eslint-plugin-promise": "^3.6.0",
