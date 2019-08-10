@@ -61,7 +61,7 @@
     "babel-register": "6.26.0",
     "babel-runtime": "^6.26.0",
     "caniuse-lite": "^1.0.30000809",
-    "circular-dependency-plugin": "^4.4.0",
+    "circular-dependency-plugin": "^5.2.0",
     "compression-webpack-plugin": "^1.1.7",
     "copy-webpack-plugin": "^4.4.1",
     "cross-env": "^5.1.3",
