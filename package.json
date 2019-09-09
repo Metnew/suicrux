@@ -34,7 +34,7 @@
     "redux-promise-middleware": "^5.0.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",
-    "semantic-ui-react": "^0.80.0",
+    "semantic-ui-react": "^0.88.1",
     "serialize-javascript": "^1.4.0",
     "styled-components": "^3.1.6"
   },
