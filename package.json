@@ -81,7 +81,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.7",
-    "flow-bin": "^0.69.0",
+    "flow-bin": "^0.108.0",
     "husky": "^0.14.3",
     "jest": "^22.3.0",
     "jest-styled-components": "^5.0.0",
