@@ -43,7 +43,7 @@
     "@commitlint/config-conventional": "^6.1.0",
     "assets-webpack-plugin": "^3.5.1",
     "autodll-webpack-plugin": "^0.3.9",
-    "autoprefixer": "^8.0.0",
+    "autoprefixer": "^9.6.4",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
