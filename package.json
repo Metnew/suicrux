@@ -22,7 +22,7 @@
     "react-async-component": "^1.0.2",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
-    "react-headroom": "^2.2.2",
+    "react-headroom": "^3.0.0",
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
     "react-redux": "^5.0.7",
