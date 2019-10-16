@@ -6,7 +6,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
-    "chokidar": "^2.0.2",
+    "chokidar": "^3.2.2",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
