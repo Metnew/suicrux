@@ -90,7 +90,7 @@
     "node-sass": "^4.7.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "optimize-js-plugin": "0.0.4",
-    "postcss": "^6.0.19",
+    "postcss": "^7.0.20",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.1.0",
