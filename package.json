@@ -31,7 +31,7 @@
     "react-router-redux": "^5.0.0-alpha.8",
     "react-tree-walker": "^4.0.2",
     "redux": "^3.7.2",
-    "redux-promise-middleware": "^5.0.0",
+    "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",
     "semantic-ui-react": "^0.80.0",
