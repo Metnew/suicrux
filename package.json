@@ -128,7 +128,7 @@
     "store2": "^2.7.0",
     "js-cookie": "^2.2.0",
     "sinon": "^5.0.0",
-    "chalk": "^2.3.1"
+    "chalk": "^3.0.0"
   },
   "scripts": {
     "build": "npm run frontend_build && npm run server_build",
