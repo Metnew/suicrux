@@ -102,7 +102,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.5.1",
     "resolve-url-loader": "^2.2.1",
-    "rimraf": "^2.6.2",
+    "rimraf": "^3.0.2",
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.5.3",
     "standard-version": "^4.3.0",
