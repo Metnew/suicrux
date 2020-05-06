@@ -105,7 +105,7 @@
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.5.3",
-    "standard-version": "^4.3.0",
+    "standard-version": "^8.0.0",
     "start-server-webpack-plugin": "^2.2.1",
     "style-loader": "^0.20.2",
     "stylelint": "^9.0.0",
