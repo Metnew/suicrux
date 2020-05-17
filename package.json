@@ -108,7 +108,7 @@
     "standard-version": "^4.3.0",
     "start-server-webpack-plugin": "^2.2.1",
     "style-loader": "^0.20.2",
-    "stylelint": "^9.0.0",
+    "stylelint": "^13.4.0",
     "stylelint-config-standard": "^18.1.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.11.0",
