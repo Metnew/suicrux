@@ -1,0 +1,41 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        patched: '2022-10-08T17:16:42.729Z'
+  'npm:extend:20180424':
+    - chokidar > fsevents > node-pre-gyp > request > extend:
+        patched: '2022-10-08T17:16:42.729Z'
+  'npm:hoek:20180212':
+    - chokidar > fsevents > node-pre-gyp > hawk > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > hawk > boom > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > request > hawk > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > hawk > cryptiles > boom > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > request > hawk > boom > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > request > hawk > sntp > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+    - chokidar > fsevents > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2022-10-08T17:16:42.729Z'
+  SNYK-JS-LODASH-567746:
+    - semantic-ui-react > lodash:
+        patched: '2022-10-08T17:16:42.729Z'
+    - react-redux > lodash:
+        patched: '2022-10-08T17:16:42.729Z'
+    - redux > lodash:
+        patched: '2022-10-08T17:16:42.729Z'
+  'npm:stringstream:20180511':
+    - chokidar > fsevents > node-pre-gyp > request > stringstream:
+        patched: '2022-10-08T17:16:42.729Z'
+  'npm:tough-cookie:20170905':
+    - chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        patched: '2022-10-08T17:16:42.729Z'
